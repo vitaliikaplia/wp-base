@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wp-base\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-04 23:31+0200\n"
+"POT-Creation-Date: 2026-03-04 23:53+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vitalii Kaplia <vitalii.kaplia@gmail.com>\n"
 "Language-Team: Vitalii Kaplia <vitalii.kaplia@gmail.com>\n"
@@ -787,6 +787,14 @@ msgstr "Колір теми"
 #: core/includes/back/dashboard-options.php:532
 msgid "Set theme color for browsers that support it"
 msgstr "Встановити колір теми для браузерів, які його підтримують"
+
+#: core/includes/back/dashboard-pattern-preview.php:14
+msgid "Invalid pattern ID"
+msgstr "Недійсний ідентифікатор шаблону"
+
+#: core/includes/back/dashboard-pattern-preview.php:55
+msgid "Preview"
+msgstr "Перегляд"
 
 #: core/includes/back/dashboard-update-assets-version.php:16
 msgid "Update theme version"

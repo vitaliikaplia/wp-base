@@ -60,5 +60,40 @@
             }
         }
 
+        // pattern preview popup
+        $(document).on('click', '.pattern-preview-link', function(e){
+            e.preventDefault();
+            const url = $(this).data('url');
+
+            // cmd+click (mac) or ctrl+click (win) opens in new tab
+            if(e.metaKey || e.ctrlKey){
+                window.open(url, '_blank');
+                return;
+            }
+            const $bg = $('<div class="pattern-preview-popup-bg"></div>');
+            const $popup = $(
+                '<div class="pattern-preview-popup">' +
+                '<button class="close-pattern-preview" type="button">&times;</button>' +
+                '<iframe src="' + url + '"></iframe>' +
+                '</div>'
+            );
+            $('body').append($bg).append($popup);
+            $('body').css('overflow', 'hidden');
+
+            $bg.on('click', closePatternPreview);
+            $popup.find('.close-pattern-preview').on('click', closePatternPreview);
+
+            $(document).on('keydown.patternPreview', function(e){
+                if(e.key === 'Escape') closePatternPreview();
+            });
+
+            function closePatternPreview(){
+                $bg.remove();
+                $popup.remove();
+                $('body').css('overflow', '');
+                $(document).off('keydown.patternPreview');
+            }
+        });
+
     });
 })(jQuery);

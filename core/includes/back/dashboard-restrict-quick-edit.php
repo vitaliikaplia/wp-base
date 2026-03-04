@@ -5,6 +5,7 @@ if(!defined('ABSPATH')){exit;}
 function remove_quick_edit_cpt( $actions, $post ) {
     $post_types = array(
         'mail-log',
+        'patterns',
     );
 //    if(!get_option('allow_quick_edit_for_catalog_items')){
 //        $post_types[] = 'catalog';
@@ -24,3 +25,4 @@ function only_trash_bulk_action_for_mail_log( $bulk_actions ) {
     return $bulk_actions;
 }
 add_filter( 'bulk_actions-edit-mail-log', 'only_trash_bulk_action_for_mail_log' );
+add_filter( 'bulk_actions-edit-patterns', 'only_trash_bulk_action_for_mail_log' );
