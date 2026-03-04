@@ -2,7 +2,7 @@
 
 if(!defined('ABSPATH')){exit;}
 
-if(!get_option('disable_gutenberg_everywhere')){
+if(get_option('disable_gutenberg') !== 'everywhere'){
 
     /** custom blocks categories */
     function custom_block_categories( $categories, $post ) {
@@ -26,16 +26,16 @@ if(!get_option('disable_gutenberg_everywhere')){
     function get_custom_gutenberg_blocks_array(){
         return array(
             array(
-                "name" => "first-screen",
-                "label" => __( "First screen", TEXTDOMAIN ),
+                "name" => "hero",
+                "label" => __( "Hero", TEXTDOMAIN ),
                 "category" => "main",
                 'defaults' => array(
                     'field_5es3eaf348ca151aff27' => array('desktop_tablet','mobile')
                 )
             ),
             array(
-                "name" => "second-screen",
-                "label" => __( "Second screen", TEXTDOMAIN ),
+                "name" => "text",
+                "label" => __( "Text", TEXTDOMAIN ),
                 "category" => "main",
                 'defaults' => array(
                     'field_5es3eaf348ca151aff27' => array('desktop_tablet','mobile')

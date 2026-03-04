@@ -1,0 +1,28 @@
+{% extends "block-base.twig" %}
+
+{% block content %}
+
+    <div class="hero-section">
+        <div class="hero-inner">
+            {% if fields.subtitle %}
+            <span class="hero-subtitle">{{ fields.subtitle }}</span>
+            {% endif %}
+            {% if fields.title %}
+            <h1 class="hero-title">{{ fields.title }}</h1>
+            {% endif %}
+            {% if fields.description %}
+            <p class="hero-description">{{ fields.description }}</p>
+            {% endif %}
+            {% if fields.buttons %}
+            <div class="hero-actions">
+                {% for button in fields.buttons %}
+                <a href="{{ button.url|default('#') }}" class="btn {{ button.style|default('primary') }}"{% if button.target %} target="{{ button.target }}"{% endif %}>
+                    {{ button.text }}
+                </a>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,6 +1,6 @@
 {
     "key": "group_6264186c62ded",
-    "title": "Блок: Другий екран",
+    "title": "Блок: Text",
     "fields": [
         {
             "key": "field_65e0f0276c0e6",
@@ -21,9 +21,30 @@
             "endpoint": 0
         },
         {
-            "key": "field_6264186c6599a",
-            "label": "Текст",
-            "name": "text",
+            "key": "field_text_title",
+            "label": "Заголовок",
+            "name": "title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "allow_in_bindings": 1
+        },
+        {
+            "key": "field_text_content",
+            "label": "Контент",
+            "name": "content",
             "aria-label": "",
             "type": "wysiwyg",
             "instructions": "",
@@ -38,65 +59,8 @@
             "allow_in_bindings": 1,
             "tabs": "visual",
             "toolbar": "full",
-            "media_upload": 0,
+            "media_upload": 1,
             "delay": 0
-        },
-        {
-            "key": "field_6264186c659a2",
-            "label": "Фон обгортки",
-            "name": "wrapper_background",
-            "aria-label": "",
-            "type": "color_picker",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "#ef0a0a",
-            "enable_opacity": 0,
-            "return_format": "string",
-            "allow_in_bindings": 1
-        },
-        {
-            "key": "field_6264186c659a7",
-            "label": "Фон внутрішнього блоку",
-            "name": "inner_background",
-            "aria-label": "",
-            "type": "color_picker",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "#049804",
-            "enable_opacity": 0,
-            "return_format": "string",
-            "allow_in_bindings": 1
-        },
-        {
-            "key": "field_6264186c659ad",
-            "label": "Внутрішній текст",
-            "name": "inner_text",
-            "aria-label": "",
-            "type": "color_picker",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "#fff",
-            "enable_opacity": 0,
-            "return_format": "string",
-            "allow_in_bindings": 1
         }
     ],
     "location": [
@@ -104,7 +68,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/main-second-screen"
+                "value": "acf\/main-text"
             }
         ]
     ],
@@ -117,5 +81,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1758028041
+    "modified": 1772661754
 }

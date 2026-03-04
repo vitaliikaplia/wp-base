@@ -1,0 +1,90 @@
+@import "../../mixins";
+
+.main-hero{
+
+    .hero-section{
+        padding: 100px 40px 80px;
+        text-align: center;
+
+        .hero-inner{
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .hero-subtitle{
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #e94560;
+            margin-bottom: 20px;
+        }
+
+        .hero-title{
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1.1;
+            color: #1a1a2e;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+
+            @media (max-width: 768px) {
+                font-size: 34px;
+            }
+        }
+
+        .hero-description{
+            font-size: 18px;
+            line-height: 1.6;
+            color: #6c757d;
+            margin-bottom: 36px;
+            max-width: 560px;
+            margin-left: auto;
+            margin-right: auto;
+
+            @media (max-width: 768px) {
+                font-size: 16px;
+            }
+        }
+
+        .hero-actions{
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+
+            .btn{
+                display: inline-block;
+                padding: 14px 32px;
+                border-radius: 8px;
+                font-size: 15px;
+                font-weight: 600;
+                text-decoration: none;
+                transition: all .2s ease;
+
+                &.primary{
+                    background: #1a1a2e;
+                    color: #fff;
+
+                    &:hover{
+                        background: #16162b;
+                    }
+                }
+
+                &.secondary{
+                    background: #f0f0f0;
+                    color: #1a1a2e;
+
+                    &:hover{
+                        background: #e4e4e4;
+                    }
+                }
+            }
+        }
+
+        @media (max-width: 768px) {
+            padding: 60px 20px 50px;
+        }
+    }
+}

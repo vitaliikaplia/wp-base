@@ -1,6 +1,6 @@
 {
     "key": "group_61b8eba44d195",
-    "title": "Блок: Перший екран",
+    "title": "Блок: Hero",
     "fields": [
         {
             "key": "field_65e0f016dff07",
@@ -21,11 +21,11 @@
             "endpoint": 0
         },
         {
-            "key": "field_61b8ebc072ecc",
-            "label": "Текст",
-            "name": "text",
+            "key": "field_hero_subtitle",
+            "label": "Підзаголовок",
+            "name": "subtitle",
             "aria-label": "",
-            "type": "wysiwyg",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -35,18 +35,18 @@
                 "id": ""
             },
             "default_value": "",
-            "allow_in_bindings": 1,
-            "tabs": "visual",
-            "toolbar": "full",
-            "media_upload": 0,
-            "delay": 0
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "allow_in_bindings": 1
         },
         {
-            "key": "field_62164b9481e7e",
-            "label": "Фон обгортки",
-            "name": "wrapper_background",
+            "key": "field_hero_title",
+            "label": "Заголовок",
+            "name": "title",
             "aria-label": "",
-            "type": "color_picker",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -55,55 +55,19 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "#ef0a0a",
-            "enable_opacity": 0,
-            "return_format": "string",
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
             "allow_in_bindings": 1
         },
         {
-            "key": "field_62164ba681e7f",
-            "label": "Фон внутрішнього блоку",
-            "name": "inner_background",
+            "key": "field_hero_description",
+            "label": "Опис",
+            "name": "description",
             "aria-label": "",
-            "type": "color_picker",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "#049804",
-            "enable_opacity": 0,
-            "return_format": "string",
-            "allow_in_bindings": 1
-        },
-        {
-            "key": "field_62164bde81e80",
-            "label": "Внутрішній текст",
-            "name": "inner_text",
-            "aria-label": "",
-            "type": "color_picker",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "50",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "#fff",
-            "enable_opacity": 0,
-            "return_format": "string",
-            "allow_in_bindings": 1
-        },
-        {
-            "key": "field_674a5b82198fe",
-            "label": "Внутрішнє зображення",
-            "name": "inner_image",
-            "aria-label": "",
-            "type": "image",
+            "type": "textarea",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -112,17 +76,132 @@
                 "class": "",
                 "id": ""
             },
-            "return_format": "array",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "",
-            "allow_in_bindings": 0,
-            "preview_size": "medium"
+            "default_value": "",
+            "maxlength": "",
+            "rows": 4,
+            "placeholder": "",
+            "new_lines": "br",
+            "allow_in_bindings": 1
+        },
+        {
+            "key": "field_hero_buttons",
+            "label": "Кнопки",
+            "name": "buttons",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Додати кнопку",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_hero_button_text",
+                    "label": "Текст",
+                    "name": "text",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "allow_in_bindings": 1,
+                    "parent_repeater": "field_hero_buttons"
+                },
+                {
+                    "key": "field_hero_button_url",
+                    "label": "Посилання",
+                    "name": "url",
+                    "aria-label": "",
+                    "type": "url",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "allow_in_bindings": 1,
+                    "parent_repeater": "field_hero_buttons"
+                },
+                {
+                    "key": "field_hero_button_style",
+                    "label": "Стиль",
+                    "name": "style",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "primary": "Primary",
+                        "secondary": "Secondary"
+                    },
+                    "default_value": "primary",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "allow_in_bindings": 1,
+                    "parent_repeater": "field_hero_buttons"
+                },
+                {
+                    "key": "field_hero_button_target",
+                    "label": "Нова вкладка",
+                    "name": "target",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "20",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "": "Ні",
+                        "_blank": "Так"
+                    },
+                    "default_value": "",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "allow_in_bindings": 1,
+                    "parent_repeater": "field_hero_buttons"
+                }
+            ]
         }
     ],
     "location": [
@@ -130,7 +209,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/main-first-screen"
+                "value": "acf\/main-hero"
             }
         ]
     ],
@@ -143,5 +222,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1758028001
+    "modified": 1772661754
 }

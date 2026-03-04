@@ -1,0 +1,28 @@
+@import "../../mixins";
+
+.main-text{
+
+    .text-section{
+        padding: 80px 40px;
+
+        .text-inner{
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .text-title{
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 24px;
+
+            @media (max-width: 768px) {
+                font-size: 26px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            padding: 50px 20px;
+        }
+    }
+}
