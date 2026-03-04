@@ -1,107 +1,243 @@
 # WordPress Base Template
 
-This is a clean custom WordPress starter theme developed for building modern and fully customizable WordPress websites from scratch. It includes a clean structure, essential files, and integrations to kickstart your development process.
+A custom WordPress starter theme for building modern and fully customizable websites from scratch. Built with Timber/Twig templating, ACF Gutenberg blocks, and a comprehensive dashboard options framework.
 
-## Features
+## Requirements
 
-- **Fully integrated with Timber v2.3.0:** Use the power of Twig templating engine to build your WordPress theme.
-- **Custom Structure:** Organized into `assets`, `core`, and `views` directories for better maintainability.
-- **Composer Integration:** Manage dependencies with Composer (`composer.json` and `composer.lock` included).
-- **Prepros Config:** Ready for use with Prepros for compiling assets.
-- **Custom Templates:** Includes default WordPress template files (`404.php`, `archive.php`, `author.php`, `single.php`, etc.).
-- **Modern Design Preview:** Includes a `screenshot.png` for WordPress theme preview.
+- PHP 8.0+
+- WordPress 6.7+
+- [Advanced Custom Fields Pro](https://www.advancedcustomfields.com/pro/)
+- Composer
+- [Prepros](https://prepros.io/) (for SCSS/JS compilation)
 
-## Folder Structure
+## Installation
+
+```bash
+composer install
+```
+
+Activate the theme in WordPress admin, then configure settings under the custom dashboard options page.
+
+## Directory Structure
 
 ```
 wp-base/
-├── .gitignore
-├── 404.php
-├── archive.php
-├── author.php
+├── core/                          # Core theme logic
+│   ├── init.php                   # Constants, helpers, bootstrapping
+│   ├── gutenberg.php              # Block registration, categories, rendering
+│   ├── acf.php                    # ACF configuration
+│   ├── acf-json/                  # ACF field group JSON (auto-sync)
+│   ├── lang/                      # Translation files (.po/.mo)
+│   ├── vendor/                    # Composer dependencies
+│   └── includes/
+│       ├── back/                  # Admin: options, post types, taxonomies
+│       └── front/                 # Frontend: helpers, rendering
+├── assets/
+│   ├── scss/                      # SCSS source files
+│   │   ├── _variables.scss        # CSS custom properties
+│   │   ├── _mixins.scss           # Utility mixins
+│   │   ├── _reset.scss            # CSS reset
+│   │   ├── _extend.scss           # .typo, .btn, utility classes
+│   │   ├── style.scss             # Main entry point
+│   │   └── blocks/                # Block-specific styles
+│   │       ├── main/              # Main blocks (hero, text)
+│   │       └── logical/           # Logical blocks (pattern)
+│   ├── css/                       # Compiled & minified CSS
+│   ├── js/                        # JavaScript files
+│   └── block-preview/             # Block preview images for editor
+├── views/                         # Twig templates
+│   ├── block-base.twig            # Base block template (with wrapper)
+│   ├── block-simple-base.twig     # Simple block template (no wrapper)
+│   ├── blocks/                    # Block templates
+│   │   ├── main/                  # Main blocks (hero.twig, text.twig)
+│   │   └── logical/               # Logical blocks (pattern.twig)
+│   ├── overall/                   # Layout templates (header, footer, etc.)
+│   ├── dashboard/                 # Dashboard options field templates
+│   └── email/                     # Email templates
+├── functions.php                  # Theme setup & includes
 ├── composer.json
-├── composer.lock
-├── footer.php
-├── functions.php
-├── header.php
-├── index.php
-├── page.php
-├── prepros.config
-├── screenshot.png
-├── search.php
-├── single.php
-├── style.css
-├── assets/            # Assets like CSS, JS, and images
-├── core/              # Core theme functionalities
-├── views/             # Twig template parts
+├── prepros.config                 # Prepros build configuration
+└── style.css                      # Theme metadata
 ```
 
-## Features, tools and options
+## Gutenberg Block System
 
-- Header fields options
-- Footer fields options
-- Cookies popup
-- Favorite colors
-- WEBP image converter & big images resizer
+The theme uses ACF blocks with Timber/Twig rendering. Only registered custom blocks are allowed in the editor (whitelist approach).
+
+### Built-in Blocks
+
+| Block | Category | Description |
+|---|---|---|
+| `hero` | main | Hero section with subtitle, title, description, and action buttons |
+| `text` | main | Rich text content area with title and `.typo` formatting |
+| `pattern` | logical | Reusable pattern block (references a Pattern post) |
+
+### Block Categories
+
+| Slug | Title |
+|---|---|
+| `main` | Main blocks |
+| `logical` | Logical blocks |
+
+### Creating a New Block
+
+**Step 1.** Add block definition to `get_custom_gutenberg_blocks_array()` in `core/gutenberg.php`:
+
+```php
+array(
+    "name" => "my-block",
+    "label" => __("My Block", TEXTDOMAIN),
+    "category" => "main",
+    'defaults' => array(
+        'field_5es3eaf348ca151aff27' => array('desktop_tablet','mobile')
+    )
+),
+```
+
+**Step 2.** Create Twig template `views/blocks/main/my-block.twig`:
+
+```twig
+{% extends "block-base.twig" %}
+
+{% block content %}
+    {% if fields.title %}
+    <h2>{{ fields.title }}</h2>
+    {% endif %}
+{% endblock %}
+```
+
+Two base templates available:
+- `block-base.twig` — full wrapper with responsive options, spacing, background color, anchor
+- `block-simple-base.twig` — minimal wrapper (used by pattern block)
+
+**Step 3.** Create SCSS file `assets/scss/blocks/main/my-block.scss`:
+
+```scss
+@import "../../mixins";
+
+.main-my-block{
+    .customBlock{
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
+```
+
+CSS class naming convention: `.{category}-{block-name}`
+
+**Step 4.** Add Prepros config entry in `prepros.config` → `files` array:
+
+```json
+{
+    "file": "assets/scss/blocks/main/my-block.scss",
+    "config": {
+        "tasks": { "minify-css": { "enable": true } },
+        "customOutput": "assets/css/blocks/main/my-block.min.css"
+    }
+}
+```
+
+**Step 5.** Create ACF field group via WordPress admin → ACF → Field Groups. Set location rule to `Block` → `is equal to` → `acf/main-my-block`. ACF JSON auto-syncs to `core/acf-json/`.
+
+**Step 6.** *(Optional)* Add preview image at `assets/block-preview/main/my-block.png`.
+
+Block styles are loaded automatically on the frontend only when the block is present on the page (`has_block()` check).
+
+## Patterns System
+
+The theme includes a custom post type `patterns` with a taxonomy `pattern_categories` for reusable content blocks. Patterns can be:
+
+- Inserted via the **Pattern** Gutenberg block using `get_pattern()` helper
+- Registered as native WordPress block patterns (auto-registered from all `patterns` posts)
+
+When `parse_all_pages_blocks_as_gutenberg_patterns` option is enabled, all blocks from published pages are also registered as patterns.
+
+## Dashboard Options
+
+A custom options framework with support for multiple field types:
+
+| Field Type | Description |
+|---|---|
+| `text` | Text input |
+| `textarea` | Textarea |
+| `select` | Dropdown select |
+| `checkbox` | Checkbox toggle |
+| `color` | Color picker |
+| `code` | Code editor |
+| `media` | Media uploader |
+
+Features:
+- Conditional logic (show/hide fields based on other field values)
+- Tab-based grouping
+- Localization support (WPML compatible)
+
+## Features & Options
+
+### Content & Templating
+- Timber v2 with Twig templating engine
+- Custom Gutenberg blocks with ACF (hero, text, pattern)
+- Automatic block styles loading on frontend
+- Parse all pages as Gutenberg block patterns
+- `get_pattern()` helper for reusable templates
+- Rich text formatting with `.typo` class
+
+### Email
+- Enhanced mail sending logic with logging
+- Twig-based email templates
+- SMTP settings (host, port, auth, encryption)
+
+### Performance & Optimization
 - Timber HTML cache
-- HTML minify
-- Enhanced mail sending logic with logging and Twig templates for emails.
-- SMTP settings
-- Header & Footer html code editor
-- Maintenance mode feature
-- Custom Gutenberg blocks: easy to add new ACF blocks and block categories with custom fields and twig templates
-- A feature to parse all pages as Gutenberg blocks.
-- Automatic loading of block styles on the front end when a block is used.
-- `get_pattern()` helper function for easily including modular templates.
-- Custom options framework with different field types allows to create custom options pages and fields
-- Conditional logic for custom options fields.
-- Geolocation features
-- Disable all updates feature
-- Disable customizer feature
-- Disable src set feature
-- Remove default image sizes feature
-- Disable core privacy tools feature
-- CYR3LAT feature (transliteration of cyrillic characters in slugs and filenames)
-- Disable DNS prefetch feature
-- Disable Rest API for anonymous users feature
-- Disable WordPress Emojis feature
-- Disable Embeds feature
-- Disable default dashboard widgets feature
-- Customizable WordPress dashboard menu.
-- Hide admin top bar for all users on front-end feature
-- Disable default WordPress admin email verification feature
-- Disable comments feature for all post types
-- Delete child media files on parent post delete feature
-- Hide ACF from menu feature
-- Disable Gutenberg editor everywhere feature
-- Disable Gutenberg editor for Blog posts feature
-- Google maps API key option (for ACF)
-- Lorem ipsum posts generator tool
-- Localization ready (with provided `.po` and `.mo` files).
-- and more, and more...
+- HTML minification
+- WEBP image converter & big images resizer
 
-## Requires
+### Admin & Dashboard
+- Custom dashboard options framework with conditional logic
+- Customizable WordPress admin menu
+- Header & Footer HTML code editors
+- Favorite colors
+- Cookies popup settings
+- Maintenance mode
+- Lorem ipsum posts generator
 
-- PHP 8.0 or higher.
-- WordPress 6.7 or higher.
-- [Advanced Custom Fields Pro](https://www.advancedcustomfields.com/pro/)
-- Composer
-- [Prepros](https://prepros.io/) (to compile css and js files)
+### Security & Cleanup
+- Disable Gutenberg editor (for blog / everywhere)
+- Disable all updates
+- Disable customizer
+- Disable srcset
+- Remove default image sizes
+- Disable core privacy tools
+- Disable application passwords
+- CYR2LAT (transliteration of Cyrillic in slugs and filenames)
+- Disable DNS prefetch
+- Disable REST API for anonymous users
+- Disable WordPress emojis
+- Disable embeds
+- Disable default dashboard widgets
+- Hide admin top bar on frontend
+- Disable admin email verification
+- Disable comments for all post types
+- Delete child media on parent post delete
+- Hide ACF from admin menu
 
-## Getting Started
+### Integrations
+- Google Maps API key (for ACF)
+- Geolocation features (GeoIP2)
+- Localization ready (en, ru, uk translations)
 
-1. Open `functions.php` to configure theme-specific settings.
-2. Modify files under `views/` for template parts and layouts.
-3. Use the `assets/` directory to manage your CSS, JavaScript, and images.
-4. Replace `screenshot.png` with your custom theme preview image.
-5. And remember: **Code is Poetry**. 
+## Build Process
+
+This project uses [Prepros](https://prepros.io/) for asset compilation:
+
+- **SCSS** → minified CSS (`assets/scss/` → `assets/css/`)
+- **JS** → concatenated & minified (`assets/js/` → `assets/js/*.min.js`)
+
+Open the project folder in Prepros — it will detect `prepros.config` automatically.
 
 ## License
 
-This theme is licensed under the [GNU General Public License v2 or later](https://www.gnu.org/licenses/gpl-2.0.html). You are free to modify and redistribute this theme as long as you comply with the GPL.
+This theme is licensed under the [GNU General Public License v2 or later](https://www.gnu.org/licenses/gpl-2.0.html).
 
-## Contributions
+## Author
 
-Contributions are welcome! Feel free to fork this repository and submit a pull request with improvements or bug fixes.
-
-Author: [Vitalii Kaplia](https://vitaliikaplia.com/)
+[Vitalii Kaplia](https://vitaliikaplia.com/)
