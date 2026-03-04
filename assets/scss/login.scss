@@ -4,13 +4,13 @@
 @import "mixins";
 
 body.login {
-    background-color: #C551E7;
+    background-color: #ffffff;
 }
 
 .login #login h1 a {
-    background-image: url(../svg/icon-white.svg);
-    width: 144px;
-    height: 144px;
+    background-image: url(../svg/logo.svg);
+    width: 320px;
+    height: 68px;
     outline: none !important;
     border: none !important;
     color: transparent !important;
@@ -41,20 +41,20 @@ body.login {
         border: none !important;
         box-shadow: none !important;
         outline: none !important;
-        background-color: #C551E7;
+        background-color: #000000;
         &:hover {
             background-image: none;
             opacity: 0.8;
             border: none !important;
             box-shadow: none !important;
-            background-color: #C551E7;
+            background-color: #000000;
         }
         &:visited, &:active, &:focus {
             background-image: none;
             opacity: 1;
             border: none !important;
             box-shadow: none !important;
-            background-color: #C551E7;
+            background-color: #000000;
         }
     }
     .button{

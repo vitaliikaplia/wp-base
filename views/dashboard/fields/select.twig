@@ -1,0 +1,12 @@
+<label for="{{ name }}">
+    {% if val.options is iterable %}
+    <select class="custom-options-{{ val.type }}" name="{{ name }}" id="{{ name }}">
+        {% for o_key,o_val in val.options %}
+        <option value="{{ o_key }}"{% if o_key == value %} selected="selected"{% endif %}>{{ o_val }}</option>
+        {% endfor %}
+    </select>
+    {% endif %}
+    {% if description %}
+    <p class="description">{{ description }}</p>
+    {% endif %}
+</label>

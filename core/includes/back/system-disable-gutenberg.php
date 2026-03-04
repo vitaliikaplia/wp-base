@@ -2,8 +2,10 @@
 
 if(!defined('ABSPATH')){exit;}
 
+$disable_gutenberg = get_option('disable_gutenberg');
+
 /** disable gutenberg everywhere */
-if(get_option('disable_gutenberg_everywhere')){
+if($disable_gutenberg === 'everywhere'){
 	add_filter( 'use_block_editor_for_post_type', '__return_false', 100 );
 	remove_action( 'wp_enqueue_scripts', 'wp_common_block_scripts_and_styles' );
 	add_action( 'admin_init', function(){
@@ -13,7 +15,7 @@ if(get_option('disable_gutenberg_everywhere')){
 }
 
 /** disable gutenberg for blog archive and single pages by default */
-if(get_option('disable_gutenberg_for_blog')){
+if($disable_gutenberg === 'blog'){
     add_filter('use_block_editor_for_post_type', 'disable_gutenberg_for_blog', 10, 2);
     function disable_gutenberg_for_blog($current_status, $post_type){
         global $post;

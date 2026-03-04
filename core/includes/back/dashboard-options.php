@@ -238,10 +238,31 @@ function get_custom_options(){
                     ),
                 ),
                 array (
-                    'type'              => 'checkbox',
+                    'type'          => 'text',
+                    'name'          => 'smtp_from_email',
+                    'label'         => __("SMTP from Email", TEXTDOMAIN),
+                    'description'   => __("Email address that will be used as sender", TEXTDOMAIN),
+                    'conditional_logic' => array(
+                        'action' => 'show',
+                        'rules' => array(
+                            array(
+                                'field' => 'enable_custom_smtp_server',
+                                'operator' => '==',
+                                'value' => '1',
+                            ),
+                        ),
+                    ),
+                ),
+                array (
+                    'type'              => 'select',
                     'name'              => 'smtp_secure',
-                    'label'             => __("Secure SMTP connection", TEXTDOMAIN),
-                    'description'       => __("Use SSL for SMTP connection", TEXTDOMAIN),
+                    'label'             => __("Encryption", TEXTDOMAIN),
+                    'description'       => __("Select encryption type for SMTP connection", TEXTDOMAIN),
+                    'options'           => array(
+                        ''    => __("None", TEXTDOMAIN),
+                        'tls' => 'TLS',
+                        'ssl' => 'SSL',
+                    ),
                     'conditional_logic' => array(
                         'action' => 'show',
                         'rules' => array(
@@ -340,13 +361,40 @@ function get_custom_options(){
         'various'   =>  Array(
             'label' => __('Other options', TEXTDOMAIN),
             'title' => __('All other various options', TEXTDOMAIN),
-            'description' => __('In this section, you can enable or disable various options that affect the functionality of your website. You can disable updates, customizer, src set, default image sizes, core privacy tools, CYR3LAT transliteration, DNS prefetch, Rest API, Emojis, Embeds, dashboard widgets, admin top bar, admin email verification, comments, child media deletion, HTML cache, minify, ACF, Gutenberg editor, and specify the Google maps API key.', TEXTDOMAIN),
+            'description' => '',
             'fields' => Array(
                 array (
                     'type'          => 'checkbox',
                     'name'          => 'disable_all_updates',
                     'label'         => __("Disable all updates", TEXTDOMAIN),
                     'description'   => __("Disable plugins and WordPress core updates", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'select',
+                    'options'       => array (
+                        'disabled' => __('Disabled', TEXTDOMAIN),
+                        'basic'    => __('Basic — remove indentation and empty lines', TEXTDOMAIN),
+                        'full'     => __('Full — complete HTML minification', TEXTDOMAIN),
+                    ),
+                    'name'          => 'minify_mode',
+                    'label'         => __("HTML minification", TEXTDOMAIN),
+                    'description'   => __("Minify HTML output on frontend", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'minify_show_comment',
+                    'label'         => __("Show minification comment", TEXTDOMAIN),
+                    'description'   => __("Display HTML comment with compression stats at the end of the page", TEXTDOMAIN),
+                    'conditional_logic' => array(
+                        'action' => 'show',
+                        'rules' => array(
+                            array(
+                                'field' => 'minify_mode',
+                                'operator' => '==',
+                                'value' => 'full',
+                            ),
+                        ),
+                    ),
                 ),
                 array (
                     'type'          => 'checkbox',
@@ -440,30 +488,42 @@ function get_custom_options(){
                 ),
                 array (
                     'type'          => 'checkbox',
-                    'name'          => 'enable_minify',
-                    'label'         => __("Enable minify", TEXTDOMAIN),
-                    'description'   => __("Enable HTML minifier on frontend", TEXTDOMAIN),
-                ),
-                array (
-                    'type'          => 'checkbox',
                     'name'          => 'hide_acf',
                     'label'         => __("Hide ACF", TEXTDOMAIN),
                     'description'   => __("Hide Advanced Custom Fields from Dashboard", TEXTDOMAIN)
                 ),
                 array (
                     'type'          => 'checkbox',
-                    'name'          => 'disable_gutenberg_everywhere',
-                    'label'         => __("Disable Gutenberg editor everywhere", TEXTDOMAIN),
+                    'name'          => 'disable_application_passwords',
+                    'label'         => __("Disable application passwords", TEXTDOMAIN),
+                    'description'   => __("Disable WordPress application passwords used for REST API authentication and third-party integrations", TEXTDOMAIN),
                 ),
                 array (
-                    'type'          => 'checkbox',
-                    'name'          => 'disable_gutenberg_for_blog',
-                    'label'         => __("Disable Gutenberg editor for Blog", TEXTDOMAIN),
+                    'type'    => 'select',
+                    'name'    => 'disable_gutenberg',
+                    'label'   => __("Disable Gutenberg", TEXTDOMAIN),
+                    'description'   => __("Disable Gutenberg editor for posts and pages", TEXTDOMAIN),
+                    'options' => array(
+                        ''           => '—',
+                        'blog'       => __("For Blog", TEXTDOMAIN),
+                        'everywhere' => __("Everywhere", TEXTDOMAIN),
+                    ),
                 ),
                 array (
                     'type'          => 'checkbox',
                     'name'          => 'parse_all_pages_blocks_as_gutenberg_patterns',
-                    'label'         => __("Parse all pages blocks as Gutenberg patterns", TEXTDOMAIN),
+                    'label'         => __("Parse blocks", TEXTDOMAIN),
+                    'description'         => __("Parse all pages blocks as Gutenberg patterns", TEXTDOMAIN),
+                    'conditional_logic' => array(
+                        'action' => 'show',
+                        'rules' => array(
+                            array(
+                                'field' => 'disable_gutenberg',
+                                'operator' => '!=',
+                                'value' => 'everywhere',
+                            ),
+                        ),
+                    ),
                 ),
             ),
         ),

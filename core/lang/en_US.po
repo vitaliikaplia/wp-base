@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wp-base\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-04 21:07+0200\n"
+"POT-Creation-Date: 2026-03-04 23:14+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vitalii Kaplia <vitalii.kaplia@gmail.com>\n"
 "Language-Team: Vitalii Kaplia <vitalii.kaplia@gmail.com>\n"
@@ -127,6 +127,7 @@ msgid "No"
 msgstr ""
 
 #: core/includes/back/acf-field-nav-menu.php:112
+#: core/includes/back/dashboard-options.php:262
 #: core/includes/back/system-thumbnails.php:20
 #: core/includes/back/system-thumbnails.php:22
 msgid "None"
@@ -352,7 +353,7 @@ msgstr ""
 #: core/includes/back/dashboard-options.php:21
 #: core/includes/back/dashboard-options.php:124
 #: core/includes/back/dashboard-options.php:162
-#: core/includes/back/dashboard-options.php:291
+#: core/includes/back/dashboard-options.php:312
 msgid "Enable"
 msgstr ""
 
@@ -445,22 +446,30 @@ msgid "SMTP from name"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:243
-msgid "Secure SMTP connection"
+msgid "SMTP from Email"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:244
-msgid "Use SSL for SMTP connection"
+msgid "Email address that will be used as sender"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:259
-msgid "Custom code"
+msgid "Encryption"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:260
+msgid "Select encryption type for SMTP connection"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:280
+msgid "Custom code"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:281
 msgid "Custom HTML code for header and footer"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:261
+#: core/includes/back/dashboard-options.php:282
 msgid ""
 "In this section, you can add custom HTML code to the header and footer of "
 "your website. The custom code will be placed inside the header tag and "
@@ -468,251 +477,283 @@ msgid ""
 "scripts, styles, meta tags, and other elements to your website."
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:266
+#: core/includes/back/dashboard-options.php:287
 msgid "Header custom code"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:267
+#: core/includes/back/dashboard-options.php:288
 msgid "The custom code will be placed inside the header tag"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:272
+#: core/includes/back/dashboard-options.php:293
 msgid "After &#x3C;body&#x3E; custom code"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:273
+#: core/includes/back/dashboard-options.php:294
 msgid "The special code will be placed after the start of the body tag"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:278
+#: core/includes/back/dashboard-options.php:299
 msgid "Footer custom code"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:279
+#: core/includes/back/dashboard-options.php:300
 msgid "The special code will be placed before the end of the body tag"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:284
+#: core/includes/back/dashboard-options.php:305
 msgid "Maintenance"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:285
+#: core/includes/back/dashboard-options.php:306
 msgid "Maintenance mode for anonymous users"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:286
+#: core/includes/back/dashboard-options.php:307
 msgid ""
 "In this section, you can enable maintenance mode for anonymous users, "
 "customize the title and text that will be displayed on the maintenance page."
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:292
+#: core/includes/back/dashboard-options.php:313
 msgid "Enable maintenance mode for anonymous users"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:297
+#: core/includes/back/dashboard-options.php:318
 msgid "Title"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:298
+#: core/includes/back/dashboard-options.php:319
 msgid "Maintenance mode title for anonymous users"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:313
+#: core/includes/back/dashboard-options.php:334
 msgid "Text"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:314
+#: core/includes/back/dashboard-options.php:335
 msgid "Maintenance mode text for anonymous users"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:329
+#: core/includes/back/dashboard-options.php:350
 msgid "Integrations"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:330
+#: core/includes/back/dashboard-options.php:351
 msgid "Integrations with third-party services options"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:335
+#: core/includes/back/dashboard-options.php:356
 msgid "Google Maps API key"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:336
+#: core/includes/back/dashboard-options.php:357
 msgid "Google Cloud Console"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:341
+#: core/includes/back/dashboard-options.php:362
 msgid "Other options"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:342
+#: core/includes/back/dashboard-options.php:363
 msgid "All other various options"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:343
-msgid ""
-"In this section, you can enable or disable various options that affect the "
-"functionality of your website. You can disable updates, customizer, src set, "
-"default image sizes, core privacy tools, CYR3LAT transliteration, DNS "
-"prefetch, Rest API, Emojis, Embeds, dashboard widgets, admin top bar, admin "
-"email verification, comments, child media deletion, HTML cache, minify, ACF, "
-"Gutenberg editor, and specify the Google maps API key."
-msgstr ""
-
-#: core/includes/back/dashboard-options.php:348
+#: core/includes/back/dashboard-options.php:369
 msgid "Disable all updates"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:349
+#: core/includes/back/dashboard-options.php:370
 msgid "Disable plugins and WordPress core updates"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:354
-msgid "Disable customizer"
+#: core/includes/back/dashboard-options.php:375
+msgid "Disabled"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:355
-msgid "Disable WordPress customizer"
+#: core/includes/back/dashboard-options.php:376
+msgid "Basic — remove indentation and empty lines"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:360
-msgid "Disable src set"
+#: core/includes/back/dashboard-options.php:377
+msgid "Full — complete HTML minification"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:361
-msgid "Disable src set for images"
+#: core/includes/back/dashboard-options.php:380
+msgid "HTML minification"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:366
-msgid "Remove default image sizes"
+#: core/includes/back/dashboard-options.php:381
+msgid "Minify HTML output on frontend"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:367
-msgid "Remove default image sizes in WordPress"
+#: core/includes/back/dashboard-options.php:386
+msgid "Show minification comment"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:372
-msgid "Disable core privacy tools"
-msgstr ""
-
-#: core/includes/back/dashboard-options.php:373
-msgid "Disable default WordPress core privacy tools"
-msgstr ""
-
-#: core/includes/back/dashboard-options.php:378
-msgid "Enable CYR3LAT"
-msgstr ""
-
-#: core/includes/back/dashboard-options.php:379
-msgid "Enable CYR3LAT transliteration"
-msgstr ""
-
-#: core/includes/back/dashboard-options.php:384
-msgid "Disable DNS prefetch"
-msgstr ""
-
-#: core/includes/back/dashboard-options.php:385
-msgid "Disable DNS prefetch for external resources"
-msgstr ""
-
-#: core/includes/back/dashboard-options.php:390
-msgid "Disable Rest API"
-msgstr ""
-
-#: core/includes/back/dashboard-options.php:391
-msgid "Disable Rest API for anonymous users"
-msgstr ""
-
-#: core/includes/back/dashboard-options.php:396
-msgid "Disable Emojis"
-msgstr ""
-
-#: core/includes/back/dashboard-options.php:397
-msgid "Disable default WordPress Emojis"
+#: core/includes/back/dashboard-options.php:387
+msgid "Display HTML comment with compression stats at the end of the page"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:402
-msgid "Disable Embeds"
+msgid "Disable customizer"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:403
-msgid "Disable default WordPress Embeds"
+msgid "Disable WordPress customizer"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:408
-msgid "Disable dashboard widgets"
+msgid "Disable src set"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:409
-msgid "Disable default WordPress dashboard widgets"
+msgid "Disable src set for images"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:414
-msgid "Hide admin top bar"
+msgid "Remove default image sizes"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:415
-msgid "Hide admin top bar for all users on front-end"
+msgid "Remove default image sizes in WordPress"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:420
-msgid "Disable admin email verification"
+msgid "Disable core privacy tools"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:421
-msgid "Disable default WordPress admin email verification"
+msgid "Disable default WordPress core privacy tools"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:426
-msgid "Disable comments"
+msgid "Enable CYR3LAT"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:427
-msgid "Disable comments on all posts and pages"
+msgid "Enable CYR3LAT transliteration"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:432
-msgid "Delete child media"
+msgid "Disable DNS prefetch"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:433
-msgid "Delete child media when parent post is deleted"
+msgid "Disable DNS prefetch for external resources"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:438
-msgid "Enable HTML cache"
+msgid "Disable Rest API"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:439
-msgid "Enable HTML page cache for anonymous users"
+msgid "Disable Rest API for anonymous users"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:444
-msgid "Enable minify"
+msgid "Disable Emojis"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:445
-msgid "Enable HTML minifier on frontend"
+msgid "Disable default WordPress Emojis"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:450
-msgid "Hide ACF"
+msgid "Disable Embeds"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:451
-msgid "Hide Advanced Custom Fields from Dashboard"
+msgid "Disable default WordPress Embeds"
 msgstr ""
 
 #: core/includes/back/dashboard-options.php:456
-msgid "Disable Gutenberg editor everywhere"
+msgid "Disable dashboard widgets"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:461
-msgid "Disable Gutenberg editor for Blog"
+#: core/includes/back/dashboard-options.php:457
+msgid "Disable default WordPress dashboard widgets"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:466
+#: core/includes/back/dashboard-options.php:462
+msgid "Hide admin top bar"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:463
+msgid "Hide admin top bar for all users on front-end"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:468
+msgid "Disable admin email verification"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:469
+msgid "Disable default WordPress admin email verification"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:474
+msgid "Disable comments"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:475
+msgid "Disable comments on all posts and pages"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:480
+msgid "Delete child media"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:481
+msgid "Delete child media when parent post is deleted"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:486
+msgid "Enable HTML cache"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:487
+msgid "Enable HTML page cache for anonymous users"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:492
+msgid "Hide ACF"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:493
+msgid "Hide Advanced Custom Fields from Dashboard"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:498
+msgid "Disable application passwords"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:499
+msgid ""
+"Disable WordPress application passwords used for REST API authentication and "
+"third-party integrations"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:504
+msgid "Disable Gutenberg"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:505
+msgid "Disable Gutenberg editor for posts and pages"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:508
+msgid "For Blog"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:509
+msgid "Everywhere"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:515
+msgid "Parse blocks"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:516
 msgid "Parse all pages blocks as Gutenberg patterns"
 msgstr ""
 
@@ -812,15 +853,6 @@ msgstr ""
 
 #: core/includes/back/system-thumbnails.php:9
 msgid "Thumbnail"
-msgstr ""
-
-#: core/init.php:59
-msgid "Website under Maintenance"
-msgstr ""
-
-#: core/init.php:60
-msgid ""
-"We are performing scheduled maintenance. We will be back online shortly."
 msgstr ""
 
 #: core/init.php:171
