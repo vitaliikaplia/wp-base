@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wp-base\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-04 23:14+0200\n"
+"POT-Creation-Date: 2026-03-04 23:31+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vitalii Kaplia <vitalii.kaplia@gmail.com>\n"
 "Language-Team: Vitalii Kaplia <vitalii.kaplia@gmail.com>\n"
@@ -31,6 +31,7 @@ msgid "Header options updated"
 msgstr "Параметры шапки обновлены"
 
 #: core/acf.php:33 core/acf.php:41 core/acf.php:49
+#: core/includes/back/system-redirect-rules.php:57
 msgid "Update"
 msgstr "Обновить"
 
@@ -780,6 +781,14 @@ msgstr "Анализировать блоки"
 msgid "Parse all pages blocks as Gutenberg patterns"
 msgstr "Парсить все блоки страниц как Gutenber паттерны"
 
+#: core/includes/back/dashboard-options.php:531
+msgid "Theme color"
+msgstr "Цвет темы"
+
+#: core/includes/back/dashboard-options.php:532
+msgid "Set theme color for browsers that support it"
+msgstr "Установить цвет темы для браузеров, которые его поддерживают"
+
 #: core/includes/back/dashboard-update-assets-version.php:16
 msgid "Update theme version"
 msgstr "Обновить версию темы"
@@ -852,27 +861,86 @@ msgstr "Включение изображения из сообщения"
 msgid "Generate and attach a random featured image for each post"
 msgstr "Генерируйте и прикрепляйте случайное изображение для каждого сообщения"
 
-#: core/includes/back/system-redirect-rules.php:8
+#: core/includes/back/system-redirect-rules.php:10
+msgid "Save"
+msgstr "Сохранить"
+
+#: core/includes/back/system-redirect-rules.php:19
 msgid "Redirect Rules Options"
 msgstr "Параметры правил перенаправления"
 
-#: core/includes/back/system-redirect-rules.php:61
+#: core/includes/back/system-redirect-rules.php:31
+#: core/includes/back/system-redirect-rules.php:32
+#: core/includes/back/system-redirect-rules.php:34
+#: core/includes/back/system-redirect-rules.php:40
+msgid "Rule updated."
+msgstr "Правило обновлено."
+
+#: core/includes/back/system-redirect-rules.php:33
+msgid "Rule deleted."
+msgstr "Правило удалено."
+
+#: core/includes/back/system-redirect-rules.php:36
+msgid "Rule added."
+msgstr "Правило добавлено."
+
+#: core/includes/back/system-redirect-rules.php:37
+msgid "Rule saved."
+msgstr "Правило сохранено."
+
+#: core/includes/back/system-redirect-rules.php:38
+msgid "Rule submitted."
+msgstr "Правило представлено."
+
+#: core/includes/back/system-redirect-rules.php:39
+msgid "Rule scheduled."
+msgstr "Правило запланировано."
+
+#: core/includes/back/system-redirect-rules.php:52
+msgid "Move to Trash"
+msgstr "Переместить в корзину"
+
+#: core/includes/back/system-redirect-rules.php:57
+msgid "Add Rule"
+msgstr "Добавить правило"
+
+#: core/includes/back/system-redirect-rules.php:108
 msgid ""
 "Invalid redirect rule: Old URL and New URL must be different and not empty."
 msgstr ""
 "Неверное правило перенаправления: Старый URL и новый URL должны быть разными "
 "и не пустыми."
 
-#: core/includes/back/system-redirect-rules.php:80
+#: core/includes/back/system-redirect-rules.php:128
 msgid "Conflict detected: A redirect rule with this Old URL already exists."
 msgstr "Обнаружен конфликт: Правило перенаправления с этим URL уже существует."
 
-#: core/includes/back/system-redirect-rules.php:88
+#: core/includes/back/system-redirect-rules.php:136
 msgid ""
 "Invalid redirect rule: Old URL must contain the current WordPress domain."
 msgstr ""
 "Неверное правило перенаправления: Старый URL должен содержать текущий домен "
 "WordPress."
+
+#: core/includes/back/system-redirect-rules.php:243
+msgid "Actions"
+msgstr "Действия"
+
+#: core/includes/back/system-redirect-rules.php:244
+msgid "Redirect from"
+msgstr "Перенаправить с"
+
+#: core/includes/back/system-redirect-rules.php:245
+msgid "Redirect to"
+msgstr "Перенаправить"
+
+#: core/includes/back/system-redirect-rules.php:246
+msgid "Code"
+msgstr "Код"
+
+#: core/includes/back/system-redirect-rules.php:315
+msgid "Redirect Rules"
+msgstr "Правила перенаправления"
 
 #: core/includes/back/system-send-email.php:34
 msgid "Test"
@@ -906,13 +974,56 @@ msgstr "(yangi tab)"
 msgid "Remove Link"
 msgstr "Удалить ссылку"
 
-#: views/dashboard/redirects-meta.twig:2
-msgid "Old URL:"
-msgstr "Старый URL-адрес:"
-
 #: views/dashboard/redirects-meta.twig:10
-msgid "Code:"
-msgstr "Код:"
+#: views/dashboard/redirects-meta.twig:28
+msgid "Open URL in new tab"
+msgstr "Отрыть ссылку в новой вкладке"
+
+#: views/dashboard/redirects-meta.twig:12
+msgid "The URL that should be redirected. Must belong to this domain."
+msgstr ""
+"URL-адрес, который должен быть перенаправлен. Должен принадлежать этому "
+"домену."
+
+#: views/dashboard/redirects-meta.twig:30
+msgid "The destination URL. Can be internal or external."
+msgstr "URL-адрес назначения. Может быть внутренним или внешним."
+
+#: views/dashboard/redirects-meta.twig:37
+msgid "Redirect type"
+msgstr "Тип перенаправления"
+
+#: views/dashboard/redirects-meta.twig:43
+msgid "Permanent"
+msgstr "Постоянная"
+
+#: views/dashboard/redirects-meta.twig:48
+msgid "Temporary"
+msgstr "Временная"
+
+#: views/dashboard/redirects-widget.twig:2
+msgid "No redirect rules found."
+msgstr "Правила перенаправления не найдены."
+
+#: views/dashboard/redirects-widget.twig:3
+msgid "Add New Rule"
+msgstr "Добавить новое правило"
+
+#: views/dashboard/redirects-widget.twig:8
+msgid "From"
+msgstr "С"
+
+#: views/dashboard/redirects-widget.twig:9
+msgid "To"
+msgstr "Кому"
+
+#: views/dashboard/redirects-widget.twig:29
+msgid "View All"
+msgstr "Посмотреть все"
+
+#: views/dashboard/redirects-widget.twig:30
+msgid "Add New"
+msgstr "Добавить новый"
 
 #: views/email/base.twig:385
 msgid "Session information"
@@ -925,6 +1036,9 @@ msgstr "Пароль"
 #: views/password.twig:11
 msgid "Submit"
 msgstr "Отправить"
+
+#~ msgid "Old URL:"
+#~ msgstr "Старый URL-адрес:"
 
 #~ msgid "Disable Gutenberg editor everywhere"
 #~ msgstr "Отключите редактор Gutenberg везде"
@@ -1047,9 +1161,6 @@ msgstr "Отправить"
 #~ msgid "Username"
 #~ msgstr "Имя пользователя"
 
-#~ msgid "From name"
-#~ msgstr "Имя отправителя"
-
 #~ msgid "Secure"
 #~ msgstr "Безопасность"
 
@@ -1067,6 +1178,3 @@ msgstr "Отправить"
 
 #~ msgid "Your Phone"
 #~ msgstr "Ваш Телефон"
-
-#~ msgid "Options"
-#~ msgstr "Опции"

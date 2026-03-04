@@ -525,16 +525,18 @@ function get_custom_options(){
                         ),
                     ),
                 ),
+                array (
+                    'type'          => 'color',
+                    'name'          => 'theme_color',
+                    'label'         => __("Theme color", TEXTDOMAIN),
+                    'description'   => __("Set theme color for browsers that support it", TEXTDOMAIN),
+                ),
             ),
         ),
     );
 }
 
-global $pagenow;
-if(is_admin() && $pagenow == "options-general.php" && !empty($_GET['page'])){
-    require_once ABSPATH . "wp-includes/class-wp-editor.php";
-}
-
+// Add options pages
 add_action('admin_menu', function() {
     foreach (get_custom_options() as $key=>$value) {
         add_submenu_page(
@@ -551,9 +553,9 @@ add_action('admin_menu', function() {
                     echo '<p>'.$value['description'].'</p>';
                 }
                 settings_fields($key.'_settings');
-                echo Timber::compile( 'dashboard/options.twig', array(
-                    'options' => $value['fields'],
-                ));
+                $context = Timber::context();
+                $context['options'] = $value['fields'];
+                Timber::render( 'dashboard/options.twig', $context);
                 submit_button();
                 echo '</form>';
                 echo '</div>';
@@ -562,6 +564,7 @@ add_action('admin_menu', function() {
     }
 });
 
+// Register settings
 add_action('admin_init', function() {
     foreach (get_custom_options() as $key=>$value) {
         foreach ($value['fields'] as $field) {
@@ -573,6 +576,7 @@ add_action('admin_init', function() {
     }
 });
 
+// WPML integration for localized options
 if( defined('ICL_LANGUAGE_CODE' ) ){
     add_action( 'init', function() {
         foreach (get_custom_options() as $key=>$value) {
@@ -614,3 +618,37 @@ if( defined('ICL_LANGUAGE_CODE' ) ){
         return $pre_option;
     }, 10, 3);
 }
+
+/** options assets */
+function custom_options_assets(){
+    global $pagenow;
+    if($pagenow == "options-general.php" && !empty($_GET['page'])){
+        $custom_pages = array_keys(get_custom_options());
+        if(in_array($_GET['page'], $custom_pages)){
+            wp_register_script( 'custom-options', TEMPLATE_DIRECTORY_URL . 'assets/js/custom-options.min.js', '', ASSETS_VERSION, true);
+            wp_enqueue_script( 'custom-options' );
+            wp_enqueue_script('wplink');
+            wp_enqueue_style( 'editor-buttons' );
+            wp_enqueue_style( 'wp-color-picker' );
+            wp_enqueue_script( 'wp-color-picker' );
+            wp_register_style( 'custom-options', TEMPLATE_DIRECTORY_URL . 'assets/css/custom-options.min.css', array(), ASSETS_VERSION );
+            wp_enqueue_style( 'custom-options' );
+        }
+    }
+}
+add_action( 'admin_enqueue_scripts', 'custom_options_assets' );
+
+/** wplink dialog */
+function custom_options_wplink_dialog(){
+    global $pagenow;
+    if($pagenow == "options-general.php" && !empty($_GET['page'])){
+        $custom_pages = array_keys(get_custom_options());
+        if(in_array($_GET['page'], $custom_pages)){
+            if(!class_exists('_WP_Editors', false)){
+                require_once ABSPATH . 'wp-includes/class-wp-editor.php';
+            }
+            _WP_Editors::wp_link_dialog();
+        }
+    }
+}
+add_action( 'admin_footer', 'custom_options_wplink_dialog' );

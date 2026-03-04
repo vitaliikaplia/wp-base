@@ -14,15 +14,6 @@ function custom_dashboard_assets(){
     wp_register_script( 'custom-gutenberg', TEMPLATE_DIRECTORY_URL . 'assets/js/gutenberg.min.js', '', ASSETS_VERSION, true);
     wp_enqueue_script( 'custom-gutenberg' );
 
-    global $pagenow;
-
-    if($pagenow == "options-general.php" && !empty($_GET['page'])){
-        wp_register_script( 'custom-options', TEMPLATE_DIRECTORY_URL . 'assets/js/custom-options.min.js', '', ASSETS_VERSION, true);
-        wp_enqueue_script( 'custom-options' );
-        wp_enqueue_script('wplink');
-        wp_enqueue_style( 'editor-buttons' );
-    }
-
 }
 add_action( 'admin_enqueue_scripts', 'custom_dashboard_assets' );
 

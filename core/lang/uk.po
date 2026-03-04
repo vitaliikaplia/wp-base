@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wp-base\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-04 23:14+0200\n"
+"POT-Creation-Date: 2026-03-04 23:31+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vitalii Kaplia <vitalii.kaplia@gmail.com>\n"
 "Language-Team: Vitalii Kaplia <vitalii.kaplia@gmail.com>\n"
@@ -31,6 +31,7 @@ msgid "Header options updated"
 msgstr "Параметри шапки оновлено"
 
 #: core/acf.php:33 core/acf.php:41 core/acf.php:49
+#: core/includes/back/system-redirect-rules.php:57
 msgid "Update"
 msgstr "Оновити"
 
@@ -779,6 +780,14 @@ msgstr "Розбір блоків"
 msgid "Parse all pages blocks as Gutenberg patterns"
 msgstr "Парсити усі блоки сторінок як Гутенберг патерни"
 
+#: core/includes/back/dashboard-options.php:531
+msgid "Theme color"
+msgstr "Колір теми"
+
+#: core/includes/back/dashboard-options.php:532
+msgid "Set theme color for browsers that support it"
+msgstr "Встановити колір теми для браузерів, які його підтримують"
+
 #: core/includes/back/dashboard-update-assets-version.php:16
 msgid "Update theme version"
 msgstr "Оновити версію теми"
@@ -851,29 +860,88 @@ msgstr "Додати обкладинку посту"
 msgid "Generate and attach a random featured image for each post"
 msgstr "Створюйте та прикріплюйте випадкове зображення для кожного посту"
 
-#: core/includes/back/system-redirect-rules.php:8
+#: core/includes/back/system-redirect-rules.php:10
+msgid "Save"
+msgstr "Зберегти"
+
+#: core/includes/back/system-redirect-rules.php:19
 msgid "Redirect Rules Options"
 msgstr "Правила перенаправлення"
 
-#: core/includes/back/system-redirect-rules.php:61
+#: core/includes/back/system-redirect-rules.php:31
+#: core/includes/back/system-redirect-rules.php:32
+#: core/includes/back/system-redirect-rules.php:34
+#: core/includes/back/system-redirect-rules.php:40
+msgid "Rule updated."
+msgstr "Правило оновлено."
+
+#: core/includes/back/system-redirect-rules.php:33
+msgid "Rule deleted."
+msgstr "Правило видалено."
+
+#: core/includes/back/system-redirect-rules.php:36
+msgid "Rule added."
+msgstr "Правило додано."
+
+#: core/includes/back/system-redirect-rules.php:37
+msgid "Rule saved."
+msgstr "Правило збережено."
+
+#: core/includes/back/system-redirect-rules.php:38
+msgid "Rule submitted."
+msgstr "Правило подано."
+
+#: core/includes/back/system-redirect-rules.php:39
+msgid "Rule scheduled."
+msgstr "Правило заплановано."
+
+#: core/includes/back/system-redirect-rules.php:52
+msgid "Move to Trash"
+msgstr "Перемістити в кошик"
+
+#: core/includes/back/system-redirect-rules.php:57
+msgid "Add Rule"
+msgstr "Додати Правило"
+
+#: core/includes/back/system-redirect-rules.php:108
 msgid ""
 "Invalid redirect rule: Old URL and New URL must be different and not empty."
 msgstr ""
 "Неправильне правило перенаправлення: Стара URL-адреса та Нова URL-адреса "
 "повинні відрізнятися і не бути порожніми."
 
-#: core/includes/back/system-redirect-rules.php:80
+#: core/includes/back/system-redirect-rules.php:128
 msgid "Conflict detected: A redirect rule with this Old URL already exists."
 msgstr ""
 "Виявлено конфлікт: Правило перенаправлення з цією старою URL-адресою вже "
 "існує."
 
-#: core/includes/back/system-redirect-rules.php:88
+#: core/includes/back/system-redirect-rules.php:136
 msgid ""
 "Invalid redirect rule: Old URL must contain the current WordPress domain."
 msgstr ""
 "Неправильне правило перенаправлення: Стара URL-адреса повинна містити "
 "поточний домен WordPress."
+
+#: core/includes/back/system-redirect-rules.php:243
+msgid "Actions"
+msgstr "Дії"
+
+#: core/includes/back/system-redirect-rules.php:244
+msgid "Redirect from"
+msgstr "Перенаправити з"
+
+#: core/includes/back/system-redirect-rules.php:245
+msgid "Redirect to"
+msgstr "Перенаправлення на"
+
+#: core/includes/back/system-redirect-rules.php:246
+msgid "Code"
+msgstr "Код"
+
+#: core/includes/back/system-redirect-rules.php:315
+msgid "Redirect Rules"
+msgstr "Правила перенаправлення"
 
 #: core/includes/back/system-send-email.php:34
 msgid "Test"
@@ -907,13 +975,56 @@ msgstr "(нова вкладка)"
 msgid "Remove Link"
 msgstr "Видалити посилання"
 
-#: views/dashboard/redirects-meta.twig:2
-msgid "Old URL:"
-msgstr "Стара адреса:"
-
 #: views/dashboard/redirects-meta.twig:10
-msgid "Code:"
-msgstr "Код:"
+#: views/dashboard/redirects-meta.twig:28
+msgid "Open URL in new tab"
+msgstr "Відкрити URL у новій вкладці"
+
+#: views/dashboard/redirects-meta.twig:12
+msgid "The URL that should be redirected. Must belong to this domain."
+msgstr ""
+"URL-адреса, яка повинна бути перенаправлена. Повинна належати до цього "
+"домену."
+
+#: views/dashboard/redirects-meta.twig:30
+msgid "The destination URL. Can be internal or external."
+msgstr "URL-адреса призначення. Може бути внутрішньою або зовнішньою."
+
+#: views/dashboard/redirects-meta.twig:37
+msgid "Redirect type"
+msgstr "Тип перенаправлення"
+
+#: views/dashboard/redirects-meta.twig:43
+msgid "Permanent"
+msgstr "Постійний"
+
+#: views/dashboard/redirects-meta.twig:48
+msgid "Temporary"
+msgstr "Тимчасовий"
+
+#: views/dashboard/redirects-widget.twig:2
+msgid "No redirect rules found."
+msgstr "Не знайдено правил перенаправлення."
+
+#: views/dashboard/redirects-widget.twig:3
+msgid "Add New Rule"
+msgstr "Додати нове правило"
+
+#: views/dashboard/redirects-widget.twig:8
+msgid "From"
+msgstr "З"
+
+#: views/dashboard/redirects-widget.twig:9
+msgid "To"
+msgstr "До"
+
+#: views/dashboard/redirects-widget.twig:29
+msgid "View All"
+msgstr "Переглянути всі"
+
+#: views/dashboard/redirects-widget.twig:30
+msgid "Add New"
+msgstr "Додати нове"
 
 #: views/email/base.twig:385
 msgid "Session information"
@@ -926,6 +1037,9 @@ msgstr "Пароль"
 #: views/password.twig:11
 msgid "Submit"
 msgstr "Надіслати"
+
+#~ msgid "Old URL:"
+#~ msgstr "Стара адреса:"
 
 #~ msgid "Disable Gutenberg editor everywhere"
 #~ msgstr "Вимкніть редактор Gutenberg всюди"
@@ -1029,9 +1143,6 @@ msgstr "Надіслати"
 #~ msgid "Username"
 #~ msgstr "Ім'я користувача"
 
-#~ msgid "From name"
-#~ msgstr "Ім'я Від кого"
-
 #~ msgid "Secure"
 #~ msgstr "Захищено"
 
@@ -1049,6 +1160,3 @@ msgstr "Надіслати"
 
 #~ msgid "Your Phone"
 #~ msgstr "Ваш Телефон"
-
-#~ msgid "Options"
-#~ msgstr "Опції"

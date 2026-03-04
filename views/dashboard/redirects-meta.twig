@@ -1,19 +1,52 @@
-<p>
-    <label for="old_url">{{ __('Old URL:', TEXTDOMAIN) }}</label>
-    <input type="url" id="old_url" name="old_url" value="{{ old_url }}" style="width: 100%;" placeholder="{{ protocol }}://{{ BLOGINFO_JUST_DOMAIN }}/..." required>
-</p>
-<p>
-    <label for="new_url"><?php echo __('New URL:', TEXTDOMAIN); ?></label>
-    <input type="url" id="new_url" name="new_url" value="{{ new_url }}" style="width: 100%;" placeholder="{{ protocol }}://{{ BLOGINFO_JUST_DOMAIN }}/..." required>
-</p>
-<p>
-    <label>{{ __('Code:', TEXTDOMAIN) }}</label><br>
-    <label>
-        <input type="radio" name="code" value="301" {{ checked(code, '301')}} required>
-        301
-    </label>
-    <label>
-        <input type="radio" name="code" value="302" {{ checked(code, '302')}} required>
-        302
-    </label>
-</p>
+<div class="redirect-rules-form" data-home-url="{{ home_url }}">
+    <div class="redirect-rules-field">
+        <label for="old_url">
+            <span class="dashicons dashicons-editor-unlink"></span>
+            {{ __('Redirect from', TEXTDOMAIN) }}
+        </label>
+        <div class="redirect-rules-input-wrap">
+            <div class="redirect-rules-input-row">
+                <input type="url" id="old_url" name="old_url" value="{{ old_url }}" placeholder="{{ protocol }}://{{ BLOGINFO_JUST_DOMAIN }}/old-page/" required>
+                <a href="{{ old_url }}" target="_blank" class="redirect-rules-open-link{% if not old_url %} hidden{% endif %}" title="{{ __('Open URL in new tab', TEXTDOMAIN) }}"><span class="dashicons dashicons-external"></span></a>
+            </div>
+            <p class="description">{{ __('The URL that should be redirected. Must belong to this domain.', TEXTDOMAIN) }}</p>
+        </div>
+    </div>
+
+    <div class="redirect-rules-arrow">
+        <span class="dashicons dashicons-arrow-down-alt"></span>
+    </div>
+
+    <div class="redirect-rules-field">
+        <label for="new_url">
+            <span class="dashicons dashicons-admin-links"></span>
+            {{ __('Redirect to', TEXTDOMAIN) }}
+        </label>
+        <div class="redirect-rules-input-wrap">
+            <div class="redirect-rules-input-row">
+                <input type="url" id="new_url" name="new_url" value="{{ new_url }}" placeholder="{{ protocol }}://{{ BLOGINFO_JUST_DOMAIN }}/new-page/" required>
+                <a href="{{ new_url }}" target="_blank" class="redirect-rules-open-link{% if not new_url %} hidden{% endif %}" title="{{ __('Open URL in new tab', TEXTDOMAIN) }}"><span class="dashicons dashicons-external"></span></a>
+            </div>
+            <p class="description">{{ __('The destination URL. Can be internal or external.', TEXTDOMAIN) }}</p>
+        </div>
+    </div>
+
+    <div class="redirect-rules-code">
+        <label>
+            <span class="dashicons dashicons-randomize"></span>
+            {{ __('Redirect type', TEXTDOMAIN) }}
+        </label>
+        <div class="redirect-rules-code-options">
+            <label class="redirect-rules-code-option {% if code == '301' or not code %}active{% endif %}">
+                <input type="radio" name="code" value="301" {{ checked(code, '301') }} required>
+                <span class="redirect-rules-code-badge redirect-rules-code-301">301</span>
+                <span class="redirect-rules-code-label">{{ __('Permanent', TEXTDOMAIN) }}</span>
+            </label>
+            <label class="redirect-rules-code-option {% if code == '302' %}active{% endif %}">
+                <input type="radio" name="code" value="302" {{ checked(code, '302') }} required>
+                <span class="redirect-rules-code-badge redirect-rules-code-302">302</span>
+                <span class="redirect-rules-code-label">{{ __('Temporary', TEXTDOMAIN) }}</span>
+            </label>
+        </div>
+    </div>
+</div>

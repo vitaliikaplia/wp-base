@@ -1,0 +1,32 @@
+{% if rules is empty %}
+    <p style="color:#999;">{{ __('No redirect rules found.', TEXTDOMAIN) }}</p>
+    <p><a href="{{ add_new_url }}" class="button button-primary">{{ __('Add New Rule', TEXTDOMAIN) }}</a></p>
+{% else %}
+    <table class="redirect-rules-widget-table">
+        <thead>
+            <tr>
+                <th>{{ __('From', TEXTDOMAIN) }}</th>
+                <th>{{ __('To', TEXTDOMAIN) }}</th>
+                <th>{{ __('Code', TEXTDOMAIN) }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rule in rules %}
+                <tr>
+                    <td class="redirect-rules-widget-from">
+                        <a href="{{ rule.edit_url }}" title="{{ rule.old_display }}">{{ rule.old_display }}</a>
+                    </td>
+                    <td class="redirect-rules-widget-to" title="{{ rule.new_display }}">{{ rule.new_display }}</td>
+                    <td class="redirect-rules-widget-code">
+                        <span class="redirect-rules-code-badge {{ rule.code_class }}">{{ rule.code ?: '—' }}</span>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p class="redirect-rules-widget-footer">
+        <a href="{{ view_all_url }}" class="button">{{ __('View All', TEXTDOMAIN) }}</a>
+        <a href="{{ add_new_url }}" class="button button-primary">{{ __('Add New', TEXTDOMAIN) }}</a>
+    </p>
+{% endif %}

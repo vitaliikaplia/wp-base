@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wp-base\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-04 23:14+0200\n"
+"POT-Creation-Date: 2026-03-04 23:31+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vitalii Kaplia <vitalii.kaplia@gmail.com>\n"
 "Language-Team: Vitalii Kaplia <vitalii.kaplia@gmail.com>\n"
@@ -31,6 +31,7 @@ msgid "Header options updated"
 msgstr ""
 
 #: core/acf.php:33 core/acf.php:41 core/acf.php:49
+#: core/includes/back/system-redirect-rules.php:57
 msgid "Update"
 msgstr ""
 
@@ -757,6 +758,14 @@ msgstr ""
 msgid "Parse all pages blocks as Gutenberg patterns"
 msgstr ""
 
+#: core/includes/back/dashboard-options.php:531
+msgid "Theme color"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:532
+msgid "Set theme color for browsers that support it"
+msgstr ""
+
 #: core/includes/back/dashboard-update-assets-version.php:16
 msgid "Update theme version"
 msgstr ""
@@ -829,22 +838,81 @@ msgstr ""
 msgid "Generate and attach a random featured image for each post"
 msgstr ""
 
-#: core/includes/back/system-redirect-rules.php:8
+#: core/includes/back/system-redirect-rules.php:10
+msgid "Save"
+msgstr ""
+
+#: core/includes/back/system-redirect-rules.php:19
 msgid "Redirect Rules Options"
 msgstr ""
 
-#: core/includes/back/system-redirect-rules.php:61
+#: core/includes/back/system-redirect-rules.php:31
+#: core/includes/back/system-redirect-rules.php:32
+#: core/includes/back/system-redirect-rules.php:34
+#: core/includes/back/system-redirect-rules.php:40
+msgid "Rule updated."
+msgstr ""
+
+#: core/includes/back/system-redirect-rules.php:33
+msgid "Rule deleted."
+msgstr ""
+
+#: core/includes/back/system-redirect-rules.php:36
+msgid "Rule added."
+msgstr ""
+
+#: core/includes/back/system-redirect-rules.php:37
+msgid "Rule saved."
+msgstr ""
+
+#: core/includes/back/system-redirect-rules.php:38
+msgid "Rule submitted."
+msgstr ""
+
+#: core/includes/back/system-redirect-rules.php:39
+msgid "Rule scheduled."
+msgstr ""
+
+#: core/includes/back/system-redirect-rules.php:52
+msgid "Move to Trash"
+msgstr ""
+
+#: core/includes/back/system-redirect-rules.php:57
+msgid "Add Rule"
+msgstr ""
+
+#: core/includes/back/system-redirect-rules.php:108
 msgid ""
 "Invalid redirect rule: Old URL and New URL must be different and not empty."
 msgstr ""
 
-#: core/includes/back/system-redirect-rules.php:80
+#: core/includes/back/system-redirect-rules.php:128
 msgid "Conflict detected: A redirect rule with this Old URL already exists."
 msgstr ""
 
-#: core/includes/back/system-redirect-rules.php:88
+#: core/includes/back/system-redirect-rules.php:136
 msgid ""
 "Invalid redirect rule: Old URL must contain the current WordPress domain."
+msgstr ""
+
+#: core/includes/back/system-redirect-rules.php:243
+msgid "Actions"
+msgstr ""
+
+#: core/includes/back/system-redirect-rules.php:244
+msgid "Redirect from"
+msgstr ""
+
+#: core/includes/back/system-redirect-rules.php:245
+msgid "Redirect to"
+msgstr ""
+
+#: core/includes/back/system-redirect-rules.php:246
+msgid "Code"
+msgstr ""
+
+#: core/includes/back/system-redirect-rules.php:315
+msgid "Redirect Rules"
 msgstr ""
 
 #: core/includes/back/system-send-email.php:34
@@ -879,12 +947,53 @@ msgstr ""
 msgid "Remove Link"
 msgstr ""
 
-#: views/dashboard/redirects-meta.twig:2
-msgid "Old URL:"
+#: views/dashboard/redirects-meta.twig:10
+#: views/dashboard/redirects-meta.twig:28
+msgid "Open URL in new tab"
 msgstr ""
 
-#: views/dashboard/redirects-meta.twig:10
-msgid "Code:"
+#: views/dashboard/redirects-meta.twig:12
+msgid "The URL that should be redirected. Must belong to this domain."
+msgstr ""
+
+#: views/dashboard/redirects-meta.twig:30
+msgid "The destination URL. Can be internal or external."
+msgstr ""
+
+#: views/dashboard/redirects-meta.twig:37
+msgid "Redirect type"
+msgstr ""
+
+#: views/dashboard/redirects-meta.twig:43
+msgid "Permanent"
+msgstr ""
+
+#: views/dashboard/redirects-meta.twig:48
+msgid "Temporary"
+msgstr ""
+
+#: views/dashboard/redirects-widget.twig:2
+msgid "No redirect rules found."
+msgstr ""
+
+#: views/dashboard/redirects-widget.twig:3
+msgid "Add New Rule"
+msgstr ""
+
+#: views/dashboard/redirects-widget.twig:8
+msgid "From"
+msgstr ""
+
+#: views/dashboard/redirects-widget.twig:9
+msgid "To"
+msgstr ""
+
+#: views/dashboard/redirects-widget.twig:29
+msgid "View All"
+msgstr ""
+
+#: views/dashboard/redirects-widget.twig:30
+msgid "Add New"
 msgstr ""
 
 #: views/email/base.twig:385
