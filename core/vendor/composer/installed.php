@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
-        'name' => 'vitaliikaplia/blank',
+        'name' => 'vitaliikaplia/wp-base',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '07bc801f9ececb86eb07483ccbfeb1a91fcb42de',
+        'reference' => '12ce5964a6c39fff7f82780b66d5abdeb834b719',
         'type' => 'theme',
         'install_path' => __DIR__ . '/../../../',
         'aliases' => array(),
@@ -83,18 +83,18 @@
             'dev_requirement' => false,
         ),
         'twig/twig' => array(
-            'pretty_version' => 'v3.22.2',
-            'version' => '3.22.2.0',
-            'reference' => '946ddeafa3c9f4ce279d1f34051af041db0e16f2',
+            'pretty_version' => 'v3.23.0',
+            'version' => '3.23.0.0',
+            'reference' => 'a64dc5d2cc7d6cafb9347f6cd802d0d06d0351c9',
             'type' => 'library',
             'install_path' => __DIR__ . '/../twig/twig',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'vitaliikaplia/blank' => array(
+        'vitaliikaplia/wp-base' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '07bc801f9ececb86eb07483ccbfeb1a91fcb42de',
+            'reference' => '12ce5964a6c39fff7f82780b66d5abdeb834b719',
             'type' => 'theme',
             'install_path' => __DIR__ . '/../../../',
             'aliases' => array(),

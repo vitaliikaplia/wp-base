@@ -1,11 +1,11 @@
 {
-    "name": "vitaliikaplia/blank",
-    "description": "blank WordPress template",
+    "name": "vitaliikaplia/wp-base",
+    "description": "WordPress Base Template",
     "type": "theme",
     "license": "none",
     "autoload": {
         "psr-4": {
-            "Vitaliikaplia\\blank\\": "src/"
+            "VitaliiKaplia\\WpBase\\": "src/"
         }
     },
     "authors": [

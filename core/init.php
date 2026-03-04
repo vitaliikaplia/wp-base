@@ -3,7 +3,7 @@
 if(!defined('ABSPATH')){exit;}
 
 /** constants */
-define( 'TEXTDOMAIN', 'blank' );
+define( 'TEXTDOMAIN', 'wp-base' );
 define( 'DS', DIRECTORY_SEPARATOR );
 define( 'THEME_PATH', trailingslashit( get_template_directory() ) );
 define( 'CORE_PATH', THEME_PATH . 'core' );

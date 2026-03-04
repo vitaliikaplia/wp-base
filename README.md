@@ -1,4 +1,4 @@
-# Blank WordPress Template
+# WordPress Base Template
 
 This is a clean custom WordPress starter theme developed for building modern and fully customizable WordPress websites from scratch. It includes a clean structure, essential files, and integrations to kickstart your development process.
 
@@ -14,7 +14,7 @@ This is a clean custom WordPress starter theme developed for building modern and
 ## Folder Structure
 
 ```
-blank/
+wp-base/
 ├── .gitignore
 ├── 404.php
 ├── archive.php

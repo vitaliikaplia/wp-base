@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: blank\n"
+"Project-Id-Version: wp-base\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-05 04:00+0200\n"
+"POT-Creation-Date: 2026-03-04 21:08+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vitalii Kaplia <vitalii.kaplia@gmail.com>\n"
 "Language-Team: Vitalii Kaplia <vitalii.kaplia@gmail.com>\n"
@@ -19,7 +19,8 @@ msgstr ""
 "X-Poedit-SearchPath-0: core/lang\n"
 "X-Poedit-SearchPath-1: core\n"
 "X-Poedit-SearchPath-2: .\n"
-"X-Poedit-SearchPathExcluded-0: core/libs/timber\n"
+"X-Poedit-SearchPathExcluded-0: core/vendor\n"
+"X-Poedit-SearchPathExcluded-1: assets\n"
 
 #: core/acf.php:28 core/acf.php:29
 msgid "Header"
@@ -76,6 +77,64 @@ msgstr "Блок"
 #: core/gutenberg.php:297
 msgid "Block from"
 msgstr "Блок від"
+
+#: core/includes/back/acf-field-nav-menu.php:50
+msgid "Nav Menu"
+msgstr "Навігаційне меню"
+
+#: core/includes/back/acf-field-nav-menu.php:69
+msgid "Return Value"
+msgstr "Значення, що повертається"
+
+#: core/includes/back/acf-field-nav-menu.php:70
+msgid "Specify the returned value on front end"
+msgstr "Вкажіть значення, що повертається"
+
+#: core/includes/back/acf-field-nav-menu.php:75
+msgid "Nav Menu Object"
+msgstr "Об'єкт меню"
+
+#: core/includes/back/acf-field-nav-menu.php:76
+msgid "Nav Menu HTML"
+msgstr "HTML меню"
+
+#: core/includes/back/acf-field-nav-menu.php:77
+msgid "Nav Menu ID"
+msgstr "ID меню"
+
+#: core/includes/back/acf-field-nav-menu.php:78
+msgid "All"
+msgstr "Усі"
+
+#: core/includes/back/acf-field-nav-menu.php:84
+msgid "Menu Container"
+msgstr "Контейнер меню"
+
+#: core/includes/back/acf-field-nav-menu.php:85
+msgid "What to wrap the Menu's ul with (when returning HTML only)"
+msgstr "Обгортка для меню"
+
+#: core/includes/back/acf-field-nav-menu.php:93
+msgid "Allow Null?"
+msgstr "Дозволити порожнє значення?"
+
+#: core/includes/back/acf-field-nav-menu.php:98
+msgid "Yes"
+msgstr "Так"
+
+#: core/includes/back/acf-field-nav-menu.php:99
+msgid "No"
+msgstr "Ні"
+
+#: core/includes/back/acf-field-nav-menu.php:112
+#: core/includes/back/system-thumbnails.php:20
+#: core/includes/back/system-thumbnails.php:22
+msgid "None"
+msgstr "Немає"
+
+#: core/includes/back/acf-field-nav-menu.php:159
+msgid "Choose one"
+msgstr "Виберіть"
 
 #: core/includes/back/custom-post-types.php:6
 #: core/includes/back/custom-post-types.php:19
@@ -688,64 +747,6 @@ msgstr "Парсити усі блоки сторінок як Гутенбер�
 msgid "Update theme version"
 msgstr "Оновити версію теми"
 
-#: core/includes/back/system-acf-nav-menu-field.php:19
-msgid "Nav Menu"
-msgstr "Навігаційне меню"
-
-#: core/includes/back/system-acf-nav-menu-field.php:38
-msgid "Return Value"
-msgstr "Значення, що повертається"
-
-#: core/includes/back/system-acf-nav-menu-field.php:39
-msgid "Specify the returned value on front end"
-msgstr "Вкажіть значення, що повертається"
-
-#: core/includes/back/system-acf-nav-menu-field.php:44
-msgid "Nav Menu Object"
-msgstr "Об'єкт меню"
-
-#: core/includes/back/system-acf-nav-menu-field.php:45
-msgid "Nav Menu HTML"
-msgstr "HTML меню"
-
-#: core/includes/back/system-acf-nav-menu-field.php:46
-msgid "Nav Menu ID"
-msgstr "ID меню"
-
-#: core/includes/back/system-acf-nav-menu-field.php:47
-msgid "All"
-msgstr "Усі"
-
-#: core/includes/back/system-acf-nav-menu-field.php:53
-msgid "Menu Container"
-msgstr "Контейнер меню"
-
-#: core/includes/back/system-acf-nav-menu-field.php:54
-msgid "What to wrap the Menu's ul with (when returning HTML only)"
-msgstr "Обгортка для меню"
-
-#: core/includes/back/system-acf-nav-menu-field.php:62
-msgid "Allow Null?"
-msgstr "Дозволити порожнє значення?"
-
-#: core/includes/back/system-acf-nav-menu-field.php:67
-msgid "Yes"
-msgstr "Так"
-
-#: core/includes/back/system-acf-nav-menu-field.php:68
-msgid "No"
-msgstr "Ні"
-
-#: core/includes/back/system-acf-nav-menu-field.php:81
-#: core/includes/back/system-thumbnails.php:20
-#: core/includes/back/system-thumbnails.php:22
-msgid "None"
-msgstr "Немає"
-
-#: core/includes/back/system-acf-nav-menu-field.php:128
-msgid "Choose one"
-msgstr "Виберіть"
-
 #: core/includes/back/system-disable-customizer.php:109
 msgid "The Customizer is currently disabled."
 msgstr "Кастомайзер наразі вимкнено."
@@ -861,38 +862,6 @@ msgstr ""
 msgid "Please, install Advanced Custom Fields PRO version"
 msgstr "Будь ласка, встановіть PRO версію Advanced Custom Fields"
 
-#: core/vendor/timber/timber/src/Archives.php:188
-#, php-format
-msgid "%1$s %2$d"
-msgstr "%1$s %2$d"
-
-#: core/vendor/timber/timber/src/DateTimeHelper.php:84
-#, php-format
-msgid "%s ago"
-msgstr "%s тому"
-
-#: core/vendor/timber/timber/src/DateTimeHelper.php:89
-#, php-format
-msgid "%s from now"
-msgstr "%s відтепер"
-
-#: core/vendor/timber/timber/src/PagesMenu.php:84
-msgid "Pages"
-msgstr "Сторінки"
-
-#: core/vendor/timber/timber/src/Pagination.php:144
-msgid "&laquo; Previous"
-msgstr "&laquo; Назад"
-
-#: core/vendor/timber/timber/src/Pagination.php:145
-msgid "Next &raquo;"
-msgstr "Вперед &raquo;"
-
-#: core/vendor/timber/timber/src/Pagination.php:221
-#: core/vendor/timber/timber/src/TextHelper.php:47
-msgid "&hellip;"
-msgstr "&hellip;"
-
 #: views/blocks/logical/pattern.twig:8
 msgid "No pattern selected"
 msgstr "Патерн не обрано"
@@ -932,6 +901,30 @@ msgstr "Пароль"
 #: views/password.twig:11
 msgid "Submit"
 msgstr "Надіслати"
+
+#, php-format
+#~ msgid "%1$s %2$d"
+#~ msgstr "%1$s %2$d"
+
+#, php-format
+#~ msgid "%s ago"
+#~ msgstr "%s тому"
+
+#, php-format
+#~ msgid "%s from now"
+#~ msgstr "%s відтепер"
+
+#~ msgid "Pages"
+#~ msgstr "Сторінки"
+
+#~ msgid "&laquo; Previous"
+#~ msgstr "&laquo; Назад"
+
+#~ msgid "Next &raquo;"
+#~ msgstr "Вперед &raquo;"
+
+#~ msgid "&hellip;"
+#~ msgstr "&hellip;"
 
 #~ msgid "Google maps API key to integrate with Advanced Custom Fields"
 #~ msgstr "Ключ API карт Google для інтеграції з Advanced Custom Fields"
