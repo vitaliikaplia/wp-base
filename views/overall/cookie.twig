@@ -1,23 +1,26 @@
 {% if general_fields.cookie_popup.title and general_fields.cookie_popup.text and general_fields.cookie_popup.button_title %}
-<div class="cookiePopupBg"></div>
 <div class="cookiePopupWrapper">
     <div class="cookiePopup">
         {% if general_fields.cookie_popup.title %}
-        <p class="title">{{ general_fields.cookie_popup.title }}</p>
+        <p class="title">
+            <svg>
+                <use href="{{ svg_sprite }}#cookie-icon"></use>
+            </svg>
+            <span>{{ general_fields.cookie_popup.title }}</span>
+        </p>
         {% endif %}
         <div class="cls">
             {% if general_fields.cookie_popup.text %}
-            <div class="message typo">{{ general_fields.cookie_popup.text }}</div>
+            <div class="message">
+                <input type="checkbox" id="cookie_text_toggle" hidden>
+                <div class="toggledContent">
+                    <label class="button" for="cookie_text_toggle">{{ __('Tell me more about cookies', TEXTDOMAIN) }}</label>
+                    <div class="typo">{{ general_fields.cookie_popup.text }}</div>
+                </div>
+            </div>
             {% endif %}
             {% if general_fields.cookie_popup.button_title %}
-            <p class="overallButton primary">
-                <a href="#close" class="close">
-                    <span>{{ general_fields.cookie_popup.button_title }}</span>
-{#                    <svg>#}
-{#                        <use href="{{ svg_sprite }}#icon-button-ok"></use>#}
-{#                    </svg>#}
-                </a>
-            </p>
+            <button class="accept btn primary" type="button">{{ general_fields.cookie_popup.button_title }}</button>
             {% endif %}
         </div>
     </div>
