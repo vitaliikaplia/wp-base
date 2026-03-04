@@ -1,23 +1,125 @@
 /* gutenberg styles
 -------------------------------------------------------------- */
 
+// reset for gutenberg blocks
+.block-editor-writing-flow,
+.editor-styles-wrapper.wp-embed-responsive {
+    & > .block-editor-block-list__layout {
+        .wp-block:not(.block-list-appender) {
+            all: initial;
+            font-feature-settings: "pnum" on, "lnum" on;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+    }
+}
+
 @import "mixins";
 @import "fonts";
+@import "variables";
 @import "extend";
+
+/* fix gutenberg back button */
+.editor-header__back-button {
+    outline: none !important;
+    border: none !important;
+    background-color: #000;
+
+    &:active,
+    &:focus {
+        outline: none !important;
+        border: none !important;
+    }
+
+    *,
+    &.active,
+    &:hover,
+    &:focus {
+        outline: none !important;
+        border: none !important;
+    }
+
+    a {
+        &:before {
+            display: none !important;
+        }
+
+        & > div {
+            clip-path: none !important;
+            background-color: #000 !important;
+
+            img,
+            svg {
+                scale: 70%;
+                transition: all .35s;
+                background-color: #000 !important;
+            }
+        }
+
+        &:hover {
+            & > div {
+                clip-path: none !important;
+                background-color: #000;
+
+                img,
+                svg {
+                    scale: 80%;
+                    background-color: #000;
+                }
+            }
+        }
+    }
+
+    .edit-post-fullscreen-mode-close__back-icon.has-site-icon {
+        display: none !important;
+    }
+}
+
+/* change width of gutenberg sidebar */
+.is-gutenberg-sidebar-opened .admin-ui-navigable-region.interface-interface-skeleton__sidebar {
+    width: 500px !important;
+
+    .interface-complementary-area__fill {
+        width: 100% !important;
+
+        .interface-complementary-area.editor-sidebar {
+            width: 100% !important;
+        }
+    }
+}
+
+/* new gutenberg fixes */
+.editor-header .editor-header__center {
+    display: none !important;
+}
+
+.editor-list-view-sidebar {
+    .block-editor-tabbed-sidebar__tablist-and-close-button {
+        display: none !important;
+    }
+}
+
+.block-editor-inserter__main-area {
+    .block-editor-tabbed-sidebar__tablist-and-close-button {
+        .block-editor-tabbed-sidebar__tab:last-child {
+            display: none !important;
+        }
+    }
+}
 
 /* editor and blocks overall styles */
 .block-editor-writing-flow,
-.editor-styles-wrapper.wp-embed-responsive{
+.editor-styles-wrapper.wp-embed-responsive {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     width: 100%;
-    font-feature-settings: "pnum" on,"lnum" on;
+    font-feature-settings: "pnum" on, "lnum" on;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
 
     /* title area */
-    & > .edit-post-visual-editor__post-title-wrapper{
+    & > .edit-post-visual-editor__post-title-wrapper {
         padding: 0;
         margin: 0;
         background-color: #fff;
@@ -25,7 +127,7 @@
         box-sizing: border-box;
         width: 100%;
 
-        .wp-block{
+        .wp-block {
             width: 100%;
             max-width: 100%;
             margin: 0;
@@ -33,7 +135,7 @@
             border-bottom: solid 1px #E0E0E0;
         }
 
-        .editor-post-title__input{
+        .editor-post-title__input {
             padding: 18px 10px;
             margin: 0;
             font-size: 26px;
@@ -58,21 +160,21 @@
             line-height: 1.6;
             margin: 0 !important;
 
-            *{
+            * {
                 box-sizing: border-box;
             }
 
-            p{
-                margin-top: auto;
-                margin-block-start: 0;
-                margin-block-end: 0;
-                margin-inline-start: 0;
-                margin-inline-end: 0;
-            }
+            //p {
+            //    margin-top: auto;
+            //    margin-block-start: 0;
+            //    margin-block-end: 0;
+            //    margin-inline-start: 0;
+            //    margin-inline-end: 0;
+            //}
         }
 
         /* new box add button */
-        & > .block-list-appender{
+        & > .block-list-appender {
             width: 100% !important;
             text-align: center !important;
             padding: 0 !important;
@@ -81,7 +183,7 @@
             justify-content: center !important;
             align-items: center !important;
 
-            button{
+            button {
                 line-height: 1;
                 display: inline-block;
                 width: auto;
@@ -97,39 +199,39 @@
 }
 
 /* fix gutenberg title top margin */
-.editor-styles-wrapper .edit-post-visual-editor__post-title-wrapper{
+.editor-styles-wrapper .edit-post-visual-editor__post-title-wrapper {
     margin-top: 0 !important;
 }
 
 /* show device icons */
-.customBlockWrapper{
+.customBlockWrapper {
     .wp-admin &,
-    .block-editor-iframe__body &{
+    .block-editor-iframe__body & {
         display: block;
 
-        .blockInfo{
+        .blockInfo {
             position: absolute;
             z-index: 99999999;
             transform: translateZ(99999999px);
             top: 0;
             left: 0;
             display: flex;
-            background-color: rgba(black,.5);
+            background-color: rgba(black, .5);
             padding: 6px;
             color: #fff;
 
-            svg{
+            svg {
                 display: none;
                 width: 16px;
                 height: 16px;
                 margin-right: 6px;
 
-                &:last-child{
+                &:last-child {
                     margin-right: 0;
                 }
             }
 
-            span{
+            span {
                 color: #fff;
                 padding: 4px 4px 4px 0;
                 line-height: 1;
@@ -137,16 +239,17 @@
             }
         }
 
-        &.desktop_tablet{
-            .blockInfo{
-                svg.desktop{
+        &.desktop_tablet {
+            .blockInfo {
+                svg.desktop {
                     display: block;
                 }
             }
         }
-        &.mobile{
-            .blockInfo{
-                svg.mobile{
+
+        &.mobile {
+            .blockInfo {
+                svg.mobile {
                     display: block;
                 }
             }
@@ -155,7 +258,7 @@
 }
 
 /* block preview styles */
-.block-example{
+.block-example {
     background-color: #fff;
     aspect-ratio: 1/.7;
     font-size: 0;

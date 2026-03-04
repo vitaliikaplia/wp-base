@@ -43,19 +43,6 @@
     }
 }
 
-/* change width of gutenberg sidebar */
-.is-gutenberg-sidebar-opened .interface-navigable-region.interface-interface-skeleton__sidebar{
-    width: 500px !important;
-
-    .interface-complementary-area__fill{
-        width: 100% !important;
-
-        .interface-complementary-area.editor-sidebar{
-            width: 100% !important;
-        }
-    }
-}
-
 /* fix tiny mce editor fullscreen mode */
 body.mce-fullscreen{
     .interface-interface-skeleton__sidebar{
@@ -145,23 +132,6 @@ body.mce-fullscreen{
 }
 .no_label > .acf-label{
     display: none;
-}
-
-/* new gutenberg fixes */
-.editor-header .editor-header__center{
-    display: none !important;
-}
-.editor-list-view-sidebar{
-    .block-editor-tabbed-sidebar__tablist-and-close-button{
-        display: none !important;
-    }
-}
-.block-editor-inserter__main-area{
-    .block-editor-tabbed-sidebar__tablist-and-close-button{
-        .block-editor-tabbed-sidebar__tab:last-child{
-            display: none !important;
-        }
-    }
 }
 
 /* custom acf options pages */

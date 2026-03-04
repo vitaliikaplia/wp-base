@@ -1,0 +1,76 @@
+/* css variables
+-------------------------------------------------------------- */
+
+:root {
+
+    // colors
+    //--color-light-blue-gray: #F1F5F9;
+    //--color-light-blue-gray-rgb: 241, 245, 249;
+    //--color-white: #fff;
+    //--color-white-rgb: 255, 255, 255;
+    //--color-white-2: #C4CDD5;
+    //--color-white-2-rgb: 196, 205, 213;
+    //--color-white-3: #F3F6FA;
+    //--color-white-3-rgb: 243, 246, 250;
+    //--color-white-4: #EAEAF0;
+    //--color-white-4-rgb: 234, 234, 240;
+    //--color-black: #000;
+    //--color-black-rgb: 0, 0, 0;
+    //--color-light-grayish-blue: #f0f4f9;
+    //--color-light-grayish-blue-rgb: 240, 244, 249;
+    //--color-blue: #092648;
+    //--color-blue-rgb: 9, 38, 72;
+    //--color-blue-2: #08254A;
+    //--color-blue-2-rgb: 8, 37, 74;
+    //--color-blue-3: #B6D2EB;
+    //--color-blue-3-rgb: 182, 210, 235;
+    //--color-sand: #C6A667;
+    //--color-sand-rgb: 198, 166, 103;
+    //--color-red: #c66767;
+    //--color-red-rgb: 198, 103, 103;
+    //--color-sand-2: #D4BC8D;
+    //--color-sand-2-rgb: 212, 180, 141;
+    //--color-gray: #202A2C;
+    //--color-gray-rgb: 32, 42, 44;
+    //--color-gray-2: #2B2B2B;
+    //--color-gray-2-rgb: 43, 43, 43;
+    //--color-gray-3: #4F4F4F;
+    //--color-gray-3-rgb: 79, 79, 79;
+
+    // fonts
+    //--primary-font-family: Manrope, sans-serif;
+    //--secondary-font-family: Inter, sans-serif;
+
+    // block side padding
+    //--block-side-padding: 40px;
+    //@media (max-width: 1024px) {
+    //    --block-side-padding: 20px;
+    //}
+    //@media (max-width: 480px) {
+    //    --block-side-padding: 16px;
+    //}
+
+    // block left padding
+    //--block-left-padding: 104px;
+    //@media (max-width: 1024px) {
+    //    --block-left-padding: 0;
+    //}
+
+    // sizes
+    //--minimal-block-width: 1000px;
+    //--primary-block-width: 1227px;
+    //--secondary-block-width: 1214px;
+    //--third-block-width: 1326px;
+
+    // sticky
+    //--sticky-regular-top: 20px;
+    //--sticky-headroom--not-top: 148px;
+    //--sticky-headroom--not-top-medium: 168px;
+    //--sticky-headroom--not-top-tablet: 120px;
+
+    // misc
+    //--bg-gradient: linear-gradient(0deg, rgba(15, 23, 42, 0.5) -5.36%, rgba(15, 23, 42, 0) 101.65%);
+    //--transparent-bg: linear-gradient(120deg, #fff -5%, rgba(89, 164, 234, 0.05) 200%);
+    //--box-shadow: 0 6px 6px rgba(95, 150, 200, .2);
+
+}
