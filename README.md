@@ -4,7 +4,7 @@ A custom WordPress starter theme for building modern and fully customizable webs
 
 ## Requirements
 
-- PHP 8.0+
+- PHP 8.3+
 - WordPress 6.7+
 - [Advanced Custom Fields Pro](https://www.advancedcustomfields.com/pro/)
 - Composer
@@ -160,11 +160,17 @@ A custom options framework with support for multiple field types:
 |---|---|
 | `text` | Text input |
 | `textarea` | Textarea |
+| `number` | Number input |
+| `password` | Password input |
+| `range` | Range slider |
 | `select` | Dropdown select |
+| `select-multiple` | Multi-select dropdown |
 | `checkbox` | Checkbox toggle |
 | `color` | Color picker |
 | `code` | Code editor |
-| `media` | Media uploader |
+| `mce` | TinyMCE rich text editor |
+| `link` | URL link input with title |
+| `nav-menu` | Navigation menu selector |
 
 Features:
 - Conditional logic (show/hide fields based on other field values)
@@ -199,6 +205,13 @@ Features:
 - Cookies popup settings
 - Maintenance mode
 - Lorem ipsum posts generator
+
+### Redirect Rules
+- Custom post type for managing 301/302 URL redirects
+- Dashboard widget with latest rules overview
+- Duplicate and self-redirect detection
+- Transient caching for performance
+- Auto-publish on restore from trash (no draft state)
 
 ### Security & Cleanup
 - Disable Gutenberg editor (for blog / everywhere)
