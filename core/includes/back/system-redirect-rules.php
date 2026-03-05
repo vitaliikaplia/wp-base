@@ -174,6 +174,14 @@ add_action('wp_trash_post', 'clear_redirect_rules_cache', 10, 1);
 // Очищення кешу при відновленні поста з кошика
 add_action('untrash_post', 'clear_redirect_rules_cache', 10, 1);
 
+// При відновленні з кошика одразу публікувати
+add_filter('wp_untrash_post_status', function($new_status, $post_id) {
+    if (get_post_type($post_id) === 'redirect-rules') {
+        return 'publish';
+    }
+    return $new_status;
+}, 10, 2);
+
 // Очищення кешу при видаленні поста назавжди
 add_action('before_delete_post', 'clear_redirect_rules_cache', 10, 1);
 

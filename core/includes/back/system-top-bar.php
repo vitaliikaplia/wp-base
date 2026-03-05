@@ -22,7 +22,7 @@ if(get_option('hide_admin_top_bar')){
 	add_action( 'admin_print_styles-profile.php', 'global_profile_hide_admin_bar' );
 	add_action( 'admin_print_styles-user-edit.php', 'global_profile_hide_admin_bar' );
 	function global_profile_hide_admin_bar() {
-		echo '<style type="text/css">.show-admin-bar { display: none !important; }</style>';
+		echo '<style>.show-admin-bar { display: none !important; }</style>';
 		return;
 	}
 	add_filter( 'show_admin_bar', '__return_false' );

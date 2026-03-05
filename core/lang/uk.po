@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wp-base\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-04 23:53+0200\n"
+"POT-Creation-Date: 2026-03-05 17:47+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vitalii Kaplia <vitalii.kaplia@gmail.com>\n"
 "Language-Team: Vitalii Kaplia <vitalii.kaplia@gmail.com>\n"
@@ -60,12 +60,12 @@ msgid "Logical blocks"
 msgstr "Логічні блоки"
 
 #: core/gutenberg.php:30
-msgid "First screen"
-msgstr "Перший екран"
+msgid "Hero"
+msgstr "Герой"
 
-#: core/gutenberg.php:38
-msgid "Second screen"
-msgstr "Другий екран"
+#: core/gutenberg.php:38 core/includes/back/dashboard-options.php:334
+msgid "Text"
+msgstr "Текст"
 
 #: core/gutenberg.php:46 core/includes/back/custom-post-types.php:57
 msgid "Pattern"
@@ -545,10 +545,6 @@ msgstr "Заголовок"
 msgid "Maintenance mode title for anonymous users"
 msgstr "Заголовок режиму обслуговування для анонімних користувачів"
 
-#: core/includes/back/dashboard-options.php:334
-msgid "Text"
-msgstr "Текст"
-
 #: core/includes/back/dashboard-options.php:335
 msgid "Maintenance mode text for anonymous users"
 msgstr "Текст режиму обслуговування для анонімних користувачів"
@@ -971,17 +967,13 @@ msgstr "Патерн не обрано"
 msgid "Log ID"
 msgstr "Ідентифікатор журналу"
 
-#: views/dashboard/fields/link.twig:3
-msgid "Edit Link"
-msgstr "Редагувати посилання"
+#: views/dashboard/fields/link.twig:15
+msgid "Select link"
+msgstr "Оберіть посилання"
 
-#: views/dashboard/fields/link.twig:10
-msgid "(new tab)"
-msgstr "(нова вкладка)"
-
-#: views/dashboard/fields/link.twig:11
-msgid "Remove Link"
-msgstr "Видалити посилання"
+#: views/dashboard/fields/link.twig:17
+msgid "Remove"
+msgstr "Видалити"
 
 #: views/dashboard/redirects-meta.twig:10
 #: views/dashboard/redirects-meta.twig:28
@@ -1038,6 +1030,10 @@ msgstr "Додати нове"
 msgid "Session information"
 msgstr "Інформація про сеанс"
 
+#: views/overall/cookie.twig:17
+msgid "Tell me more about cookies"
+msgstr "Розкажіть мені більше про файли cookie"
+
 #: views/password.twig:10
 msgid "Password"
 msgstr "Пароль"
@@ -1045,6 +1041,21 @@ msgstr "Пароль"
 #: views/password.twig:11
 msgid "Submit"
 msgstr "Надіслати"
+
+#~ msgid "Link"
+#~ msgstr "Посилання"
+
+#~ msgid "Maintenance mode button link"
+#~ msgstr "Посилання на кнопку режиму обслуговування"
+
+#~ msgid "First screen"
+#~ msgstr "Перший екран"
+
+#~ msgid "Second screen"
+#~ msgstr "Другий екран"
+
+#~ msgid "(new tab)"
+#~ msgstr "(нова вкладка)"
 
 #~ msgid "Old URL:"
 #~ msgstr "Стара адреса:"
@@ -1120,9 +1131,6 @@ msgstr "Надіслати"
 
 #~ msgid "System tweaks"
 #~ msgstr "Системні налаштування"
-
-#~ msgid "Maintenance mode title"
-#~ msgstr "Заголовок режиму обслуговування"
 
 #~ msgid "Maintenance mode text"
 #~ msgstr "Текст режиму обслуговування"

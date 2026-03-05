@@ -149,45 +149,6 @@ body.mce-fullscreen{
     }
 }
 
-/* custom options pages */
-.linkPreview{
-    display: none;
-
-    &.show{
-        display: block;
-    }
-
-    & > *{
-        display: none;
-
-        &.show{
-            display: inline;
-        }
-    }
-
-    .title{
-        font-weight: 500;
-    }
-
-    .url{
-        color: #2782ad;
-    }
-
-    .target{
-        font-style: italic;
-    }
-}
-.custom-button-link-button{
-    &.hide{
-        display: none;
-    }
-}
-
-/* fix code field on custom options pages */
-.CodeMirror{
-    border: solid 1px #DDDDDD;
-}
-
 /* fix custom post type redirect rules */
 .post-type-redirect-rules{
     #acf_after_title-sortables{

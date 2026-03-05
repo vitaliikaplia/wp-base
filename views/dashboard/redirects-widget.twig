@@ -1,6 +1,8 @@
 {% if rules is empty %}
-    <p style="color:#999;">{{ __('No redirect rules found.', TEXTDOMAIN) }}</p>
-    <p><a href="{{ add_new_url }}" class="button button-primary">{{ __('Add New Rule', TEXTDOMAIN) }}</a></p>
+    <div style="padding: 15px 0; text-align: center;">
+        <p style="color:#999; margin: 0 0 12px;">{{ __('No redirect rules found.', TEXTDOMAIN) }}</p>
+        <a href="{{ add_new_url }}" class="button button-primary">{{ __('Add New Rule', TEXTDOMAIN) }}</a>
+    </div>
 {% else %}
     <table class="redirect-rules-widget-table">
         <thead>

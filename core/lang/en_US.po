@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wp-base\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-04 23:53+0200\n"
+"POT-Creation-Date: 2026-03-05 17:47+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Vitalii Kaplia <vitalii.kaplia@gmail.com>\n"
 "Language-Team: Vitalii Kaplia <vitalii.kaplia@gmail.com>\n"
@@ -60,11 +60,11 @@ msgid "Logical blocks"
 msgstr ""
 
 #: core/gutenberg.php:30
-msgid "First screen"
+msgid "Hero"
 msgstr ""
 
-#: core/gutenberg.php:38
-msgid "Second screen"
+#: core/gutenberg.php:38 core/includes/back/dashboard-options.php:334
+msgid "Text"
 msgstr ""
 
 #: core/gutenberg.php:46 core/includes/back/custom-post-types.php:57
@@ -528,10 +528,6 @@ msgstr ""
 msgid "Maintenance mode title for anonymous users"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:334
-msgid "Text"
-msgstr ""
-
 #: core/includes/back/dashboard-options.php:335
 msgid "Maintenance mode text for anonymous users"
 msgstr ""
@@ -943,16 +939,12 @@ msgstr ""
 msgid "Log ID"
 msgstr ""
 
-#: views/dashboard/fields/link.twig:3
-msgid "Edit Link"
+#: views/dashboard/fields/link.twig:15
+msgid "Select link"
 msgstr ""
 
-#: views/dashboard/fields/link.twig:10
-msgid "(new tab)"
-msgstr ""
-
-#: views/dashboard/fields/link.twig:11
-msgid "Remove Link"
+#: views/dashboard/fields/link.twig:17
+msgid "Remove"
 msgstr ""
 
 #: views/dashboard/redirects-meta.twig:10
@@ -1006,6 +998,10 @@ msgstr ""
 
 #: views/email/base.twig:385
 msgid "Session information"
+msgstr ""
+
+#: views/overall/cookie.twig:17
+msgid "Tell me more about cookies"
 msgstr ""
 
 #: views/password.twig:10

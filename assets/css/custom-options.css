@@ -1,0 +1,184 @@
+/* custom option pages styles
+-------------------------------------------------------------- */
+.CodeMirror {
+  border: solid 1px #DDDDDD;
+}
+
+.custom-link-field {
+  position: relative;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0;
+  max-width: 100%;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.custom-link-field .link-wrap {
+  display: none;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 0 10px;
+  min-width: 0;
+  max-width: 400px;
+  line-height: 1.4;
+  overflow: hidden;
+}
+.custom-link-field .link-wrap .link-title-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 3px;
+  min-width: 0;
+}
+.custom-link-field .link-wrap .link-title {
+  font-weight: 600;
+  color: #1d2327;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.custom-link-field .link-wrap .link-external-icon {
+  display: none;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+  color: #787c82;
+}
+.custom-link-field .link-wrap .link-url {
+  display: block;
+  font-size: 12px;
+  color: #2271b1;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.custom-link-field .link-wrap .link-url:hover {
+  color: #135e96;
+  text-decoration: underline;
+}
+.custom-link-field.has-target .link-external-icon {
+  display: block;
+}
+.custom-link-field .custom-link-button {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 5px;
+  height: 40px;
+  margin: 0;
+  padding: 0 12px;
+  border: 1px solid #8c8f94;
+  border-radius: 4px;
+  background: #f0f0f1;
+  color: #2c3338;
+  cursor: pointer;
+  -webkit-transition: background-color 0.1s ease;
+  transition: background-color 0.1s ease;
+}
+.custom-link-field .custom-link-button:hover, .custom-link-field .custom-link-button:focus {
+  background: #dcdcde;
+  color: #1d2327;
+}
+.custom-link-field .custom-link-button .dashicons {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  line-height: 1;
+}
+.custom-link-field .custom-link-remove {
+  display: none;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 36px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-left: 1px solid #8c8f94;
+  background: #f0f0f1;
+  color: #787c82;
+  cursor: pointer;
+  -webkit-transition: all 0.1s ease;
+  transition: all 0.1s ease;
+}
+.custom-link-field .custom-link-remove:hover, .custom-link-field .custom-link-remove:focus {
+  background: #d63638;
+  color: #fff;
+}
+.custom-link-field .custom-link-remove .dashicons {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  line-height: 1;
+}
+.custom-link-field.has-value {
+  min-width: 350px;
+  background: #fff;
+  border: 1px solid #8c8f94;
+}
+.custom-link-field.has-value .link-wrap {
+  display: block;
+}
+.custom-link-field.has-value .custom-link-button {
+  border: none;
+  border-left: 1px solid #8c8f94;
+  border-radius: 0;
+}
+.custom-link-field.has-value .custom-link-button .link-button-text {
+  display: none;
+}
+.custom-link-field.has-value .custom-link-remove {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.custom-color-field .wp-picker-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+.custom-color-field .wp-picker-container .wp-picker-input-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.custom-color-field .wp-picker-container .wp-picker-holder {
+  width: 100%;
+}
+.custom-color-field .description {
+  width: 100%;
+  margin-top: 5px;
+}

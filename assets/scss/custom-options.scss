@@ -1,0 +1,192 @@
+/* custom option pages styles
+-------------------------------------------------------------- */
+
+// fix code field on custom options pages
+.CodeMirror {
+    border: solid 1px #DDDDDD;
+}
+
+// link field
+.custom-link-field {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    max-width: 100%;
+
+    .description {
+        width: 100%;
+        margin-top: 5px;
+    }
+
+
+    .link-wrap {
+        display: none;
+        flex: 1;
+        padding: 0 10px;
+        min-width: 0;
+        max-width: 400px;
+        line-height: 1.4;
+        overflow: hidden;
+
+        .link-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            min-width: 0;
+        }
+
+        .link-title {
+            font-weight: 600;
+            color: #1d2327;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .link-external-icon {
+            display: none;
+            flex-shrink: 0;
+            font-size: 14px;
+            width: 14px;
+            height: 14px;
+            color: #787c82;
+        }
+
+        .link-url {
+            display: block;
+            font-size: 12px;
+            color: #2271b1;
+            text-decoration: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            &:hover {
+                color: #135e96;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    // State: has target _blank
+    &.has-target .link-external-icon {
+        display: block;
+    }
+
+    .custom-link-button {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        min-height: 40px;
+        margin: 0;
+        padding: 0 12px;
+        border: 1px solid #8c8f94;
+        border-radius: 4px;
+        background: #fff;
+        color: #2c3338;
+        cursor: pointer;
+        transition: background-color 0.1s ease;
+
+        &:hover,
+        &:focus {
+            background: #dcdcde;
+            color: #1d2327;
+        }
+
+        .dashicons {
+            font-size: 16px;
+            width: 16px;
+            height: 16px;
+            line-height: 1;
+        }
+    }
+
+    .custom-link-remove {
+        display: none;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        min-height: 40px;
+        margin: 0;
+        padding: 0;
+        border: none;
+        border-left: 1px solid #8c8f94;
+        background: #f0f0f1;
+        color: #787c82;
+        cursor: pointer;
+        transition: all 0.1s ease;
+
+        &:hover,
+        &:focus {
+            background: #d63638;
+            color: #fff;
+        }
+
+        .dashicons {
+            font-size: 20px;
+            width: 20px;
+            height: 20px;
+            line-height: 1;
+        }
+    }
+
+    // State: has value
+    &.has-value {
+        min-width: 350px;
+        align-items: stretch;
+
+        .link-wrap {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #fff;
+            border: 1px solid #8c8f94;
+            border-right: none;
+            border-radius: 4px 0 0 4px;
+            padding: 8px 14px;
+        }
+
+        .custom-link-button {
+            border: 1px solid #8c8f94;
+            border-right: none;
+            border-radius: 0;
+
+            .link-button-text {
+                display: none;
+            }
+        }
+
+        .custom-link-remove {
+            display: flex;
+            border: 1px solid #8c8f94;
+            border-radius: 0 4px 4px 0;
+        }
+    }
+}
+
+// color field
+.custom-color-field {
+    .wp-picker-container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+
+        .wp-picker-input-wrap {
+            display: flex;
+            align-items: center;
+        }
+
+        .wp-picker-holder {
+            width: 100%;
+        }
+    }
+
+    .description {
+        width: 100%;
+        margin-top: 5px;
+    }
+}
