@@ -206,15 +206,15 @@ if (class_exists('ACF')) {
                 return $menu_object;
             } elseif ( 'menu' == $field['save_format'] ) {
                 $menu_args = array(
-                    'menu' => $value,
-                    'container' => $field['container'],
-                    'menu_class'=> false,
-                    'menu_id'=> false,
-                    'echo' => false,
-                    'link_before' => '',
-                    'link_after' => '',
-                    'items_wrap' => '%3$s', // видаляємо обгортку ul
-                    'walker' => new Walker_Nav_Menu_No_Escape() // використовуємо кастомний walker
+                        'menu' => $value,
+                        'container' => $field['container'],
+                        'menu_class'=> false,
+                        'menu_id'=> false,
+                        'echo' => false,
+                        'link_before' => '',
+                        'link_after' => '',
+                        'items_wrap' => '%3$s', // видаляємо обгортку ul
+                        'walker' => new Walker_Nav_Menu_No_Escape() // використовуємо кастомний walker
                 );
 
                 $menu_html = wp_nav_menu($menu_args);
@@ -225,14 +225,14 @@ if (class_exists('ACF')) {
                 return $menu_html;
             } elseif ( 'all' == $field['save_format'] ) {
                 $menu_html = wp_nav_menu( array(
-                    'menu' => $value,
-                    'container' => $field['container'],
-                    'menu_class'=> false,
-                    'menu_id'=> false,
-                    'echo' => false,
-                    'link_before' => '',
-                    'link_after' => '',
-                    'walker' => new Walker_Nav_Menu_No_Escape() // використовуємо кастомний walker
+                        'menu' => $value,
+                        'container' => $field['container'],
+                        'menu_class'=> false,
+                        'menu_id'=> false,
+                        'echo' => false,
+                        'link_before' => '',
+                        'link_after' => '',
+                        'walker' => new Walker_Nav_Menu_No_Escape() // використовуємо кастомний walker
                 ) );
 
                 // Видаляємо зайві класи та обгортки
