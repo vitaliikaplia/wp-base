@@ -10,8 +10,8 @@ use Timber\Factory\PostFactory;
 use Timber\Factory\TermFactory;
 use Twig\DeprecatedCallableInfo;
 use Twig\Environment;
+use Twig\Error\RuntimeError;
 use Twig\Extension\CoreExtension;
-use Twig\Extension\EscaperExtension;
 use Twig\Runtime\EscaperRuntime;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -94,6 +94,13 @@ class Twig
             ],
             'get_comments' => [
                 'callable' => [Timber::class, 'get_comments'],
+            ],
+            'render_twig_block' => [
+                'callable' => function ($block_name, $filenames, $data = [], $expires = false, $cache_mode = Loader::CACHE_USE_DEFAULT) {
+                    // When called from Twig, use the default locations collection
+                    $caller = LocationManager::get_locations();
+                    Timber::render_twig_block($block_name, $filenames, $data, $caller, $expires, $cache_mode);
+                },
             ],
             'Post' => [
                 'callable' => function ($post_id) use ($post_factory) {
@@ -596,27 +603,11 @@ class Twig
      */
     public function add_timber_escapers($twig)
     {
-        $esc_url = fn (Environment $env, $string) => \esc_url($string);
-
-        $wp_kses_post = fn (Environment $env, $string) => \wp_kses_post($string);
-
-        $esc_html = fn (Environment $env, $string) => \esc_html($string);
-
-        $esc_js = fn (Environment $env, $string) => \esc_js($string);
-
-        if (\class_exists(EscaperRuntime::class)) {
-            $escaper_extension = $twig->getRuntime(EscaperRuntime::class);
-            $escaper_extension->setEscaper('esc_url', '\esc_url');
-            $escaper_extension->setEscaper('wp_kses_post', '\wp_kses_post');
-            $escaper_extension->setEscaper('esc_html', '\esc_html');
-            $escaper_extension->setEscaper('esc_js', '\esc_js');
-        } elseif ($twig->hasExtension(EscaperExtension::class)) {
-            $escaper_extension = $twig->getExtension(EscaperExtension::class);
-            $escaper_extension->setEscaper('esc_url', $esc_url);
-            $escaper_extension->setEscaper('wp_kses_post', $wp_kses_post);
-            $escaper_extension->setEscaper('esc_html', $esc_html);
-            $escaper_extension->setEscaper('esc_js', $esc_js);
-        }
+        $escaper_extension = $twig->getRuntime(EscaperRuntime::class);
+        $escaper_extension->setEscaper('esc_url', '\esc_url');
+        $escaper_extension->setEscaper('wp_kses_post', '\wp_kses_post');
+        $escaper_extension->setEscaper('esc_html', '\esc_html');
+        $escaper_extension->setEscaper('esc_js', '\esc_js');
 
         return $twig;
     }
@@ -629,7 +620,7 @@ class Twig
      *
      * @since 2.0.0
      *
-     * @throws \Twig\Error\RuntimeError
+     * @throws RuntimeError
      * @param Environment $twig Twig Environment.
      *
      * @return Environment

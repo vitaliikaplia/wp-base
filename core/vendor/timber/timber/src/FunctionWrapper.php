@@ -82,7 +82,7 @@ class FunctionWrapper implements Stringable
         $_arg = \reset($defaults);
 
         foreach ($args as $index => $arg) {
-            $defaults[$index] = \is_null($arg) ? $_arg : $arg;
+            $defaults[$index] = $arg ?? $_arg;
             $_arg = \next($defaults);
         }
 

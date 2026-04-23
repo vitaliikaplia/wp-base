@@ -12,6 +12,7 @@ use WP_Comment;
  * in the context of the comments on a post. However you can also fetch a comment directly using its
  * comment ID.
  *
+ * @phpstan-consistent-constructor
  * @api
  * @example
  * ```php
@@ -91,7 +92,20 @@ class Comment extends CoreEntity implements Stringable
     public $comment_ID;
 
     /**
-     * @var int
+     * ID of the post the comment is associated with.
+     *
+     * A numeric string, for compatibility reasons.
+     *
+     * @var string
+     */
+    public $comment_post_ID;
+
+    /**
+     * Parent comment ID.
+     *
+     * A numeric string, for compatibility reasons.
+     *
+     * @var string
      */
     public $comment_parent;
 
@@ -112,6 +126,50 @@ class Comment extends CoreEntity implements Stringable
      * @var string
      */
     public $comment_author;
+
+    /**
+     * Comment author URL.
+     *
+     * @var string
+     */
+    public $comment_author_url;
+
+    /**
+     * Comment author IP address (IPv4 format).
+     *
+     * @var string
+     */
+    public $comment_author_IP;
+
+    /**
+     * Comment GMT date in YYYY-MM-DD HH::MM:SS format.
+     *
+     * @var string
+     */
+    public $comment_date_gmt;
+
+    /**
+     * Comment karma count.
+     *
+     * A numeric string, for compatibility reasons.
+     *
+     * @var string
+     */
+    public $comment_karma;
+
+    /**
+     * Comment author HTTP user agent.
+     *
+     * @var string
+     */
+    public $comment_agent;
+
+    /**
+     * Comment type.
+     *
+     * @var string
+     */
+    public $comment_type;
 
     public $_depth = 0;
 
