@@ -1,0 +1,15 @@
+{% extends "block-base.twig" %}
+
+{% block content %}
+
+    <div class="iframe-section">
+        <div class="iframe-inner">
+            {% if fields.html_code %}
+                {{ fields.html_code|raw }}
+            {% elseif is_preview %}
+                <p class="iframe-empty">{{ __('HTML code is empty', TEXTDOMAIN) }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

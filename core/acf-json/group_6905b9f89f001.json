@@ -1,0 +1,64 @@
+{
+    "key": "group_6905b9f89f001",
+    "title": "Блок: iFrame",
+    "fields": [
+        {
+            "key": "field_6905b9f89f002",
+            "label": "Контент",
+            "name": "",
+            "aria-label": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
+            "key": "field_6905b9f89f003",
+            "label": "HTML-код",
+            "name": "html_code",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "rows": 8,
+            "placeholder": "<iframe src=\"...\"></iframe>",
+            "new_lines": "",
+            "allow_in_bindings": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/main-iframe"
+            }
+        ]
+    ],
+    "menu_order": 103,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1777419956
+}

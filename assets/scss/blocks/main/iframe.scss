@@ -1,0 +1,41 @@
+@import "../../mixins";
+
+.main-iframe{
+
+    .iframe-section{
+        padding: 80px 40px;
+
+        .iframe-inner{
+            max-width: 1200px;
+            margin: 0 auto;
+
+            iframe,
+            embed,
+            object,
+            video{
+                display: block;
+                max-width: 100%;
+                margin: 0 auto;
+            }
+        }
+
+        .iframe-empty{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 180px;
+            padding: 24px;
+            margin: 0;
+            font-size: 18px;
+            line-height: 1.4;
+            color: #6c757d;
+            text-align: center;
+            background-color: #f5f5f5;
+            border: 1px dashed #c8c8c8;
+        }
+
+        @media (max-width: 768px) {
+            padding: 50px 20px;
+        }
+    }
+}

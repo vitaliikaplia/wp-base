@@ -42,6 +42,14 @@ if(get_option('disable_gutenberg') !== 'everywhere'){
                 )
             ),
             array(
+                "name" => "iframe",
+                "label" => __( "iFrame", TEXTDOMAIN ),
+                "category" => "main",
+                'defaults' => array(
+                    'field_5es3eaf348ca151aff27' => array('desktop_tablet','mobile')
+                )
+            ),
+            array(
                 "name" => "pattern",
                 "label" => __( "Pattern", TEXTDOMAIN ),
                 "category" => "logical",
