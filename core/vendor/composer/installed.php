@@ -3,7 +3,7 @@
         'name' => 'vitaliikaplia/wp-base',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '72f69b2dbe152350288eb224c311aa7fa97249e5',
+        'reference' => '2645a4833de6df8fbf681307eca0daa13b2c7f04',
         'type' => 'theme',
         'install_path' => __DIR__ . '/../../../',
         'aliases' => array(),
@@ -94,7 +94,7 @@
         'vitaliikaplia/wp-base' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '72f69b2dbe152350288eb224c311aa7fa97249e5',
+            'reference' => '2645a4833de6df8fbf681307eca0daa13b2c7f04',
             'type' => 'theme',
             'install_path' => __DIR__ . '/../../../',
             'aliases' => array(),
