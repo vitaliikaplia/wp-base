@@ -1,6 +1,7 @@
 {
     "name": "vitaliikaplia/wp-base",
     "description": "WordPress Base Template",
+    "version": "1.0.0",
     "type": "theme",
     "license": "none",
     "autoload": {
@@ -21,7 +22,7 @@
     "config": {
         "vendor-dir": "core/vendor",
         "platform": {
-            "php": "8.4"
+            "php": "8.5"
         },
         "allow-plugins": {
             "composer/installers": true
