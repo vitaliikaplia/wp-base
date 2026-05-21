@@ -10,6 +10,10 @@ A custom WordPress starter theme for building modern and fully customizable webs
 - Composer
 - [Prepros](https://prepros.io/) (for SCSS/JS compilation)
 
+## WordPress 7 Readiness
+
+This starter theme is prepared for WordPress 7 and keeps the new core features configurable instead of disabling them by default. The dashboard options include fine-tuning controls for WP 7 frontend output, Font Library manager, image auto sizes, global styles, block support styles, and speculation rules.
+
 ## Installation
 
 ```bash
