@@ -685,6 +685,92 @@ msgid "Disable default WordPress Embeds"
 msgstr "Отключить Embeds"
 
 #: core/includes/back/dashboard-options.php:456
+msgid "Disable WordPress block library styles"
+msgstr "Отключить стили библиотеки блоков WordPress"
+
+#: core/includes/back/dashboard-options.php:457
+msgid ""
+"Remove default Gutenberg block library CSS from the frontend when the theme "
+"provides all required block styling."
+msgstr ""
+"Убрать стандартный CSS библиотеки блоков Gutenberg с фронтенда, когда тема "
+"сама предоставляет все нужные стили блоков."
+
+#: core/includes/back/dashboard-options.php:462
+msgid "Disable WordPress global styles"
+msgstr "Отключить глобальные стили WordPress"
+
+#: core/includes/back/dashboard-options.php:463
+msgid "Remove Gutenberg global, stored and classic theme styles from the frontend."
+msgstr ""
+"Убрать с фронтенда глобальные, сохранённые и classic theme стили Gutenberg."
+
+#: core/includes/back/dashboard-options.php:468
+msgid "Disable WordPress block support styles"
+msgstr "Отключить стили поддержки блоков WordPress"
+
+#: core/includes/back/dashboard-options.php:469
+msgid "Remove late core block support styles generated for layout, spacing and duotone support."
+msgstr ""
+"Убрать поздние стили поддержки core-блоков, которые генерируются для layout, "
+"отступов и duotone."
+
+#: core/includes/back/dashboard-options.php:474
+msgid "Disable WordPress Font Library output"
+msgstr "Отключить вывод WordPress Font Library"
+
+#: core/includes/back/dashboard-options.php:475
+msgid "Remove native frontend Font Library @font-face output when custom theme font CSS replaces it."
+msgstr ""
+"Убрать нативный фронтенд-вывод Font Library @font-face, когда его заменяет "
+"собственный CSS шрифтов темы."
+
+#: core/includes/back/dashboard-options.php:480
+msgid "Disable WordPress Font Library manager"
+msgstr "Отключить менеджер WordPress Font Library"
+
+#: core/includes/back/dashboard-options.php:481
+msgid ""
+"Hide and block the WordPress Font Library manager in admin, editor UI and "
+"REST API. This also disables native Font Library frontend output."
+msgstr ""
+"Скрыть и заблокировать менеджер WordPress Font Library в админке, интерфейсе "
+"редактора и REST API. Это также отключает нативный фронтенд-вывод Font Library."
+
+#: core/includes/back/dashboard-options.php:486
+msgid "Disable WordPress image auto sizes"
+msgstr "Отключить автоматические размеры изображений WordPress"
+
+#: core/includes/back/dashboard-options.php:487
+msgid "Remove WordPress image auto-sizes markup and helper CSS from the frontend."
+msgstr ""
+"Убрать с фронтенда WordPress-разметку image auto-sizes и вспомогательный CSS."
+
+#: core/includes/back/dashboard-options.php:492
+msgid "Disable WordPress speculation rules"
+msgstr "Отключить WordPress speculation rules"
+
+#: core/includes/back/dashboard-options.php:493
+msgid "Disable WordPress frontend prefetch/prerender speculation rules."
+msgstr "Отключить фронтенд-правила WordPress для prefetch/prerender."
+
+#: core/includes/back/system-disable-font-library.php:20
+msgid "Font Library is disabled."
+msgstr "Font Library отключена."
+
+#: core/includes/back/system-disable-font-library.php:21
+msgid "The WordPress Font Library manager is disabled by the theme settings."
+msgstr "Менеджер WordPress Font Library отключён в настройках темы."
+
+#: core/includes/back/system-disable-font-library.php:22
+msgid "Font Library disabled"
+msgstr "Font Library отключена"
+
+#: core/includes/back/system-disable-font-library.php:49
+msgid "The WordPress Font Library is disabled by the theme settings."
+msgstr "WordPress Font Library отключена в настройках темы."
+
+#: core/includes/back/dashboard-options.php:456
 msgid "Disable dashboard widgets"
 msgstr "Скрыть стандартные виджеты консоли"
 

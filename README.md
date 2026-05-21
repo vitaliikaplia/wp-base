@@ -226,6 +226,8 @@ Features:
 - Disable REST API for anonymous users
 - Disable WordPress emojis
 - Disable embeds
+- Fine-tune WordPress 7 frontend output: block library styles, global styles, block support styles, Font Library output, image auto sizes, and speculation rules
+- Disable WordPress 7 Font Library manager in admin, editor UI, REST API, and native font output
 - Disable default dashboard widgets
 - Hide admin top bar on frontend
 - Disable admin email verification

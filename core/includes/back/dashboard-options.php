@@ -452,6 +452,48 @@ function get_custom_options(){
                 ),
                 array (
                     'type'          => 'checkbox',
+                    'name'          => 'disable_wp_block_library_styles',
+                    'label'         => __("Disable WordPress block library styles", TEXTDOMAIN),
+                    'description'   => __("Remove default Gutenberg block library CSS from the frontend when the theme provides all required block styling.", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'disable_wp_global_styles',
+                    'label'         => __("Disable WordPress global styles", TEXTDOMAIN),
+                    'description'   => __("Remove Gutenberg global, stored and classic theme styles from the frontend.", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'disable_wp_core_block_supports',
+                    'label'         => __("Disable WordPress block support styles", TEXTDOMAIN),
+                    'description'   => __("Remove late core block support styles generated for layout, spacing and duotone support.", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'disable_wp_font_library_output',
+                    'label'         => __("Disable WordPress Font Library output", TEXTDOMAIN),
+                    'description'   => __("Remove native frontend Font Library @font-face output when custom theme font CSS replaces it.", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'disable_wp_font_library_manager',
+                    'label'         => __("Disable WordPress Font Library manager", TEXTDOMAIN),
+                    'description'   => __("Hide and block the WordPress Font Library manager in admin, editor UI and REST API. This also disables native Font Library frontend output.", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'disable_wp_image_auto_sizes',
+                    'label'         => __("Disable WordPress image auto sizes", TEXTDOMAIN),
+                    'description'   => __("Remove WordPress image auto-sizes markup and helper CSS from the frontend.", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'disable_wp_speculation_rules',
+                    'label'         => __("Disable WordPress speculation rules", TEXTDOMAIN),
+                    'description'   => __("Disable WordPress frontend prefetch/prerender speculation rules.", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
                     'name'          => 'hide_dashboard_widgets',
                     'label'         => __("Disable dashboard widgets", TEXTDOMAIN),
                     'description'   => __("Disable default WordPress dashboard widgets", TEXTDOMAIN),
