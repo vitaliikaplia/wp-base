@@ -17,10 +17,6 @@ class ComposerStaticInit5d223e7d552bb3d968fcbc0aac5b320c
     );
 
     public static $prefixLengthsPsr4 = array (
-        'V' =>
-        array (
-            'VitaliiKaplia\\WpBase\\' => 21,
-        ),
         'T' =>
         array (
             'Twig\\' => 5,
@@ -48,10 +44,6 @@ class ComposerStaticInit5d223e7d552bb3d968fcbc0aac5b320c
     );
 
     public static $prefixDirsPsr4 = array (
-        'VitaliiKaplia\\WpBase\\' =>
-        array (
-            0 => __DIR__ . '/../../..' . '/src',
-        ),
         'Twig\\' =>
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
