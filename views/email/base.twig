@@ -1,8 +1,11 @@
 <!doctype html>
-<html>
+<html style="color-scheme: light only; supported-color-schemes: light only;">
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="color-scheme" content="light only" />
+    <meta name="supported-color-schemes" content="light only" />
+    <meta name="x-apple-disable-message-reformatting" />
     <title>{{ subject }}</title>
     <style>
         /* -------------------------------------
@@ -10,6 +13,17 @@
         ------------------------------------- */
 
         /* All the styling goes here */
+
+        :root {
+            color-scheme: light only;
+            supported-color-schemes: light only;
+        }
+
+        html,
+        body {
+            color-scheme: light only;
+            supported-color-schemes: light only;
+        }
 
         img {
             border: none;
@@ -19,6 +33,8 @@
 
         body {
             background-color: #C551E7;
+            color-scheme: light only;
+            supported-color-schemes: light only;
             font-family: sans-serif;
             -webkit-font-smoothing: antialiased;
             font-size: 14px;
@@ -348,9 +364,32 @@
             }
         }
 
+        /* Force the light palette in dark-mode clients (prevents Gmail/iOS
+           auto-recoloring/inversion of the email) */
+        @media (prefers-color-scheme: dark) {
+            body,
+            .body,
+            .container {
+                background-color: #C551E7 !important;
+            }
+            .main {
+                background-color: #ffffff !important;
+            }
+            h1, h2, h3, h4, p, ul, ol {
+                color: #000000 !important;
+            }
+            a {
+                color: #C551E7 !important;
+            }
+            .header td, .header p, .header span, .header a,
+            .footer td, .footer p, .footer span, .footer a {
+                color: #ffffff !important;
+            }
+        }
+
     </style>
 </head>
-<body class="">
+<body class="" style="color-scheme: light only; supported-color-schemes: light only;">
 {#<span class="preheader">{{ preheader }}</span>#}
 <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
     <tr>
