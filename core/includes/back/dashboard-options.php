@@ -522,6 +522,16 @@ function get_custom_options(){
                 ),
                 array (
                     'type'          => 'text',
+                    'name'          => 'schema_org_email',
+                    'label'         => __("Organization email", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'text',
+                    'name'          => 'schema_org_phone',
+                    'label'         => __("Organization phone", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'text',
                     'name'          => 'schema_org_street',
                     'label'         => __("Street address", TEXTDOMAIN),
                 ),

@@ -1724,6 +1724,12 @@ msgstr "неизвестно"
 msgid "wp_mail reported an error."
 msgstr "wp_mail сообщил об ошибке."
 
+msgid "Organization email"
+msgstr "Email организации"
+
+msgid "Organization phone"
+msgstr "Телефон организации"
+
 #~ msgid "Link"
 #~ msgstr "Ссылка"
 

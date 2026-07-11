@@ -78,12 +78,20 @@ function get_schema_organization(){
         $org['image'] = array('@id' => home_url('/#logo'));
     }
 
-    if(!empty($general_fields['footer_email'])){
-        $org['email'] = sanitize_email($general_fields['footer_email']);
+    $email = schema_get_string_option('schema_org_email');
+    if(!$email && !empty($general_fields['footer_email'])){
+        $email = $general_fields['footer_email'];
+    }
+    if($email){
+        $org['email'] = sanitize_email($email);
     }
 
-    if(!empty($general_fields['footer_phone'])){
-        $org['telephone'] = sanitize_text_field($general_fields['footer_phone']);
+    $phone = schema_get_string_option('schema_org_phone');
+    if(!$phone && !empty($general_fields['footer_phone'])){
+        $phone = $general_fields['footer_phone'];
+    }
+    if($phone){
+        $org['telephone'] = sanitize_text_field($phone);
     }
 
     $address = get_schema_address($general_fields);

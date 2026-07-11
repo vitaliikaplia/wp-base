@@ -1707,3 +1707,9 @@ msgstr "unknown"
 
 msgid "wp_mail reported an error."
 msgstr "wp_mail reported an error."
+
+msgid "Organization email"
+msgstr "Organization email"
+
+msgid "Organization phone"
+msgstr "Organization phone"
