@@ -525,6 +525,24 @@ function get_custom_options(){
             'fields' => Array(
                 array (
                     'type'          => 'checkbox',
+                    'name'          => 'allow_m3u_ts_upload',
+                    'label'         => __("Allow .m3u / .m3u8 / .ts uploads", TEXTDOMAIN),
+                    'description'   => __("Permit HLS playlist and MPEG-TS segment uploads in the media library", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'disable_blog_tags',
+                    'label'         => __("Disable blog tags", TEXTDOMAIN),
+                    'description'   => __("Detach the post_tag taxonomy from posts (categories only)", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'disable_connectors_page',
+                    'label'         => __("Disable Connectors admin page", TEXTDOMAIN),
+                    'description'   => __("Hide and block the wp-admin Connectors settings page", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
                     'name'          => 'disable_all_updates',
                     'label'         => __("Disable all updates", TEXTDOMAIN),
                     'description'   => __("Disable plugins and WordPress core updates", TEXTDOMAIN),
