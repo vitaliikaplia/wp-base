@@ -4,7 +4,7 @@ if(!defined('ABSPATH')){exit;}
 
 // Remove the "Update" button from the post edit screen for custom post types
 function remove_update_post_widget_cpt() {
-    $custom_post_types = array('mail-log');
+    $custom_post_types = array('mail-log', 'sms-log');
     global $post_type;
     if(in_array($post_type, $custom_post_types)) {
         remove_meta_box('submitdiv', $post_type, 'side');
@@ -15,6 +15,7 @@ add_action('do_meta_boxes', 'remove_update_post_widget_cpt');
 // Set single column layout for custom post types
 function set_single_column_layout_cpt($columns) {
     $columns['mail-log'] = 1; // for your custom post type
+    $columns['sms-log'] = 1;
     return $columns;
 }
 add_filter('screen_layout_columns', 'set_single_column_layout_cpt');
@@ -22,6 +23,7 @@ function set_screen_layout_cpt($selected) {
     return 1; // Set the number of columns
 }
 add_filter('get_user_option_screen_layout_mail-log', 'set_screen_layout_cpt');
+add_filter('get_user_option_screen_layout_sms-log', 'set_screen_layout_cpt');
 
 // This function allows administrators to preview the content of a mail log entry
 function mail_log_preview(){

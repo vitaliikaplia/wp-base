@@ -390,6 +390,104 @@ function get_custom_options(){
                 array (
                     'type'          => 'tab_end',
                 ),
+                array (
+                    'type'          => 'tab_start',
+                    'name'          => 'sms',
+                    'label'         => __("SMS Services", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'select',
+                    'options'       => array (
+                        'sms_fly' => __('SMS-Fly', TEXTDOMAIN),
+                        'turbo_sms' => __('Turbo SMS', TEXTDOMAIN)
+                    ),
+                    'name'         => 'sms_service_provider',
+                    'label'         => __("SMS service provider", TEXTDOMAIN),
+                    'description'   => __("Select SMS service provider to integrate with SMS service", TEXTDOMAIN)
+                ),
+                array (
+                    'type'          => 'text',
+                    'name'          => 'sms_fly_username',
+                    'label'         => __("SMS-Fly username", TEXTDOMAIN),
+                    'description'   => __("SMS-Fly login to integrate with SMS-Fly service", TEXTDOMAIN) . ', <a href="https://sms-fly.ua/integration/api/" target="_blank">'.__('link', TEXTDOMAIN).'</a>',
+                    'conditional_logic' => array(
+                        'action' => 'show',
+                        'rules' => array(
+                            array(
+                                'field' => 'sms_service_provider',
+                                'operator' => '==',
+                                'value' => 'sms_fly',
+                            ),
+                        ),
+                    ),
+                ),
+                array (
+                    'type'          => 'password',
+                    'name'          => 'sms_fly_password',
+                    'label'         => __("SMS-Fly password", TEXTDOMAIN),
+                    'description'   => __("SMS-Fly password to integrate with SMS-Fly service", TEXTDOMAIN),
+                    'conditional_logic' => array(
+                        'action' => 'show',
+                        'rules' => array(
+                            array(
+                                'field' => 'sms_service_provider',
+                                'operator' => '==',
+                                'value' => 'sms_fly',
+                            ),
+                        ),
+                    ),
+                ),
+                array (
+                    'type'          => 'text',
+                    'name'          => 'sms_fly_alpha_name',
+                    'label'         => __("SMS-Fly alpha name", TEXTDOMAIN),
+                    'description'   => __("SMS-Fly alpha name what will be used as SMS sender", TEXTDOMAIN),
+                    'conditional_logic' => array(
+                        'action' => 'show',
+                        'rules' => array(
+                            array(
+                                'field' => 'sms_service_provider',
+                                'operator' => '==',
+                                'value' => 'sms_fly',
+                            ),
+                        ),
+                    ),
+                ),
+                array (
+                    'type'          => 'password',
+                    'name'          => 'turbo_sms_token',
+                    'label'         => __("Turbo SMS token", TEXTDOMAIN),
+                    'description'   => __("Turbo SMS token to integrate with Turbo SMS service", TEXTDOMAIN) . ', <a href="https://turbosms.ua/ua/route.html" target="_blank">'.__('link', TEXTDOMAIN).'</a>, <a href="https://turbosms.ua/ua/api.html" target="_blank">'.__('link', TEXTDOMAIN).'</a>',
+                    'conditional_logic' => array(
+                        'action' => 'show',
+                        'rules' => array(
+                            array(
+                                'field' => 'sms_service_provider',
+                                'operator' => '==',
+                                'value' => 'turbo_sms',
+                            ),
+                        ),
+                    ),
+                ),
+                array (
+                    'type'          => 'text',
+                    'name'          => 'turbo_sms_alpha_name',
+                    'label'         => __("Turbo SMS alpha name", TEXTDOMAIN),
+                    'description'   => __("Turbo SMS alpha name what will be used as SMS sender", TEXTDOMAIN),
+                    'conditional_logic' => array(
+                        'action' => 'show',
+                        'rules' => array(
+                            array(
+                                'field' => 'sms_service_provider',
+                                'operator' => '==',
+                                'value' => 'turbo_sms',
+                            ),
+                        ),
+                    ),
+                ),
+                array (
+                    'type'          => 'tab_end',
+                ),
             ),
         ),
         'cookie_popup'   =>  Array(

@@ -109,3 +109,42 @@ register_post_type('mail-log', array(
         )
     )
 );
+
+register_post_type('sms-log', array(
+        'label' => __('SMS log', TEXTDOMAIN),
+        'description' => '',
+        'public' => false,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'show_in_nav_menus' => false,
+        'capability_type' => 'post',
+        'map_meta_cap' => true,
+        'hierarchical' => false,
+        'rewrite' => array('slug' => '', 'with_front' => false),
+        'query_var' => true,
+        'has_archive' => false,
+        'exclude_from_search' => true,
+        'menu_position' => 89,
+        'menu_icon' => 'dashicons-format-status',
+        'supports' => false,
+        'capabilities' => array(
+            'create_posts' => false
+        ),
+        'labels' => array (
+            'name' => __('SMS log', TEXTDOMAIN),
+            'singular_name' => __('SMS log', TEXTDOMAIN),
+            'menu_name' => __('SMS log', TEXTDOMAIN),
+            'add_new' => __('Add', TEXTDOMAIN),
+            'add_new_item' => __('Add', TEXTDOMAIN),
+            'edit' => __('Edit', TEXTDOMAIN),
+            'edit_item' => __('Edit', TEXTDOMAIN),
+            'new_item' => __('New', TEXTDOMAIN),
+            'view' => __('View', TEXTDOMAIN),
+            'view_item' => __('View', TEXTDOMAIN),
+            'search_items' => __('Search for SMS logs', TEXTDOMAIN),
+            'not_found' => __('No SMS logs found', TEXTDOMAIN),
+            'not_found_in_trash' => __('No SMS logs found in trash', TEXTDOMAIN),
+            'parent' => __('Parent', TEXTDOMAIN),
+        )
+    )
+);
