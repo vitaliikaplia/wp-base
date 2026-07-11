@@ -134,21 +134,6 @@ body.mce-fullscreen{
     display: none;
 }
 
-/* custom acf options pages */
-#acf-group_634e9e74a9c0d,
-#acf-group_674a44baa578f{
-    padding: 0;
-
-    & > .inside{
-        padding: 0;
-
-        & > .acf-field{
-            padding: 0;
-            border: none !important;
-        }
-    }
-}
-
 /* fix custom post type redirect rules */
 .post-type-redirect-rules{
     #acf_after_title-sortables{
