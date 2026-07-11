@@ -1,20 +1,34 @@
 {# Test header — minimal chrome wired to the Header ACF options. Style per project. #}
 <header class="site-header">
     <div class="inner">
-        <a href="{{ site.url }}" class="site-logo">
-            {% if general_fields.header.logo %}{{ general_fields.header.logo | picture }}{% else %}{{ site.name }}{% endif %}
-        </a>
+        <div class="site-header-logo">
+            <a href="{{ site.url }}" class="site-logo">
+                {% if general_fields.header.logo %}{{ general_fields.header.logo | picture }}{% else %}{{ site.name }}{% endif %}
+            </a>
+        </div>
 
-        {% if general_fields.header.menu %}
         <nav class="site-nav">
+            {% if general_fields.header.menu %}
             {{ function('wp_nav_menu', { 'menu': general_fields.header.menu, 'container': false, 'echo': false }) }}
+            {% endif %}
         </nav>
-        {% endif %}
 
-        {% if general_fields.header.button.url %}
-        <a class="btn primary site-header-cta" href="{{ general_fields.header.button.url }}" target="{{ general_fields.header.button.target|default('_self') }}">
-            <span>{{ general_fields.header.button.title }}</span>
-        </a>
-        {% endif %}
+        <div class="site-header-actions">
+            {% if general_fields.footer_socials %}
+            <ul class="site-socials">
+                {% for s in general_fields.footer_socials %}
+                    {% if s.url %}
+                    <li><a href="{{ s.url }}" target="_blank" rel="noopener">{{ icon(s.icon) }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if general_fields.header.button.url %}
+            <a class="btn primary site-header-cta" href="{{ general_fields.header.button.url }}" target="{{ general_fields.header.button.target|default('_self') }}">
+                <span>{{ general_fields.header.button.title }}</span>
+            </a>
+            {% endif %}
+        </div>
     </div>
 </header>

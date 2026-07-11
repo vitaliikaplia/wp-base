@@ -1,13 +1,21 @@
 /* test site header (layout scaffold — restyle per project)
+   logo (left) · menu (centre) · socials + CTA (right)
 -------------------------------------------------------------- */
 .site-header {
     border-bottom: 1px solid #e5e5e5;
     padding: 16px 0;
 
     .inner {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
         align-items: center;
         gap: 24px;
+    }
+
+    .site-header-logo {
+        justify-self: start;
+        display: flex;
+        align-items: center;
     }
 
     .site-logo {
@@ -18,14 +26,20 @@
         text-decoration: none;
         color: inherit;
 
+        picture {
+            display: block;
+            line-height: 0;
+        }
+
         img {
+            display: block; /* drop the inline baseline gap so top/bottom padding stays even */
             max-height: 40px;
             width: auto;
         }
     }
 
     .site-nav {
-        flex: 1;
+        justify-self: center;
 
         ul {
             list-style: none;
@@ -33,7 +47,13 @@
             padding: 0;
             display: flex;
             flex-wrap: wrap;
+            align-items: center;
             gap: 20px;
+        }
+
+        li {
+            margin: 0;
+            list-style: none;
         }
 
         a {
@@ -46,26 +66,57 @@
         }
     }
 
-    .site-header-cta {
-        margin-left: auto;
+    .site-header-actions {
+        justify-self: end;
+        display: flex;
+        align-items: center;
+        gap: 16px;
     }
 
     @media (max-width: 768px) {
         .inner {
-            flex-wrap: wrap;
+            grid-template-columns: auto 1fr;
             gap: 12px;
         }
 
         .site-nav {
-            flex: 1 1 100%;
+            grid-column: 1 / -1;
+            order: 3;
+            justify-self: center;
 
             ul {
+                justify-content: center;
                 gap: 12px;
             }
         }
+    }
+}
 
-        .site-header-cta {
-            margin-left: 0;
+/* shared social-icon row (header + footer) */
+.site-socials {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    li {
+        margin: 0;
+        list-style: none;
+    }
+
+    a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        color: inherit;
+
+        svg {
+            width: 100%;
+            height: 100%;
         }
     }
 }
