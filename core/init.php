@@ -53,6 +53,9 @@ require_once CORE_PATH . DS . 'timber.php';
 /** acf */
 require_once CORE_PATH . DS . 'acf.php';
 
+/** encrypt-decrypt */
+require_once CORE_PATH . DS . 'encrypt-decrypt.php';
+
 /** theme activation */
 function activation_function( $oldname, $oldtheme=false ) {
 //    add_option('assets_version', '0.01');
