@@ -5,6 +5,11 @@
 @use "dashboard/icons";
 @use "plugins/select2.min";
 
+/* hide the WordPress 7 admin-bar command palette / search (⌘K) */
+#wp-admin-bar-command-palette {
+    display: none !important;
+}
+
 /* disable-welcome-and-tips */
 .wp-admin .components-popover.nux-dot-tip {
     display: none !important;
