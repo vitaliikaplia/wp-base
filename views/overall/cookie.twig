@@ -1,26 +1,31 @@
-{% if general_fields.cookie_popup.title and general_fields.cookie_popup.text and general_fields.cookie_popup.button_title %}
+{# Cookie consent popup content comes from the custom options framework. #}
+{% set cookie_title = get_option('cookie_popup_title') %}
+{% set cookie_text = get_option('cookie_popup_text') %}
+{% set cookie_button = get_option('cookie_popup_button_title') %}
+
+{% if cookie_title and cookie_text and cookie_button %}
 <div class="cookiePopupWrapper">
     <div class="cookiePopup">
-        {% if general_fields.cookie_popup.title %}
+        {% if cookie_title %}
         <p class="title">
             <svg>
                 <use href="{{ svg_sprite }}#cookie-icon"></use>
             </svg>
-            <span>{{ general_fields.cookie_popup.title }}</span>
+            <span>{{ cookie_title }}</span>
         </p>
         {% endif %}
         <div class="cls">
-            {% if general_fields.cookie_popup.text %}
+            {% if cookie_text %}
             <div class="message">
                 <input type="checkbox" id="cookie_text_toggle" hidden>
                 <div class="toggledContent">
                     <label class="button" for="cookie_text_toggle">{{ __('Tell me more about cookies', TEXTDOMAIN) }}</label>
-                    <div class="typo">{{ general_fields.cookie_popup.text }}</div>
+                    <div class="typo">{{ cookie_text }}</div>
                 </div>
             </div>
             {% endif %}
-            {% if general_fields.cookie_popup.button_title %}
-            <button class="accept btn primary" type="button">{{ general_fields.cookie_popup.button_title }}</button>
+            {% if cookie_button %}
+            <button class="accept btn primary" type="button">{{ cookie_button }}</button>
             {% endif %}
         </div>
     </div>

@@ -358,6 +358,34 @@ function get_custom_options(){
                 ),
             ),
         ),
+        'cookie_popup'   =>  Array(
+            'label' => __('Cookie popup', TEXTDOMAIN),
+            'title' => __('Cookie consent popup', TEXTDOMAIN),
+            'description' => __('In this section, you can configure the cookie consent popup. The popup is displayed only when the title, text and button are all filled in.', TEXTDOMAIN),
+            'fields' => Array(
+                array (
+                    'type'          => 'text',
+                    'name'          => 'cookie_popup_title',
+                    'label'         => __('Title', TEXTDOMAIN),
+                    'description'   => __('Cookie popup title', TEXTDOMAIN),
+                    'localize'      => true,
+                ),
+                array (
+                    'type'          => 'mce',
+                    'name'          => 'cookie_popup_text',
+                    'label'         => __('Text', TEXTDOMAIN),
+                    'description'   => __('Cookie popup text', TEXTDOMAIN),
+                    'localize'      => true,
+                ),
+                array (
+                    'type'          => 'text',
+                    'name'          => 'cookie_popup_button_title',
+                    'label'         => __('Button', TEXTDOMAIN),
+                    'description'   => __('Cookie popup button label', TEXTDOMAIN),
+                    'localize'      => true,
+                ),
+            ),
+        ),
         'various'   =>  Array(
             'label' => __('Other options', TEXTDOMAIN),
             'title' => __('All other various options', TEXTDOMAIN),
