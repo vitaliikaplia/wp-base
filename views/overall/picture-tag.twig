@@ -1,42 +1,28 @@
 {% if ext == 'svg' %}
-<img src="{{ picture_url }}"{% if picture_alt %} alt="{{ picture_alt }}"{% endif %} loading="lazy">
+    <img src="{{ picture_url }}"{% if picture_alt %} alt="{{ picture_alt }}"{% endif %} loading="{{ loading }}">
 {% else %}
-{% if webp_url %}
-<picture>
-    <source srcset="{{ webp_url|resize(600) }}" type="image/webp" media="(max-width: 600px)">
-    <source srcset="{{ webp_url|resize(1024) }}" type="image/webp" media="(min-width: 601px) and (max-width: 1200px)">
-    <source srcset="{{ webp_url }}" type="image/webp" media="(min-width: 1201px)">
-    <source srcset="{{ picture_url|resize(600) }}" type="{{ mime_type }}" media="(max-width: 600px)">
-    <source srcset="{{ picture_url|resize(1024) }}" type="{{ mime_type }}" media="(min-width: 601px) and (max-width: 1200px)">
-    <source srcset="{{ picture_url }}" type="{{ mime_type }}" media="(min-width: 1201px)">
-    <img srcset="
-    {{ picture_url|resize(480) }} 480w,
-    {{ picture_url|resize(768) }} 768w,
-    {{ picture_url|resize(1024) }} 1024w
-    "
-    sizes="(max-width: 480px) 100vw,
-    (max-width: 768px) 80vw,
-    100vw"
-    src="{{ picture_url }}"
-    width="{{ picture_w }}"
-    height="{{ picture_h }}"
-    {% if picture_alt %} alt="{{ picture_alt }}"{% endif %}
-    loading="lazy">
-</picture>
-{% else %}
-<img srcset="
-{{ picture_url|resize(480) }} 480w,
-{{ picture_url|resize(768) }} 768w,
-{{ picture_url|resize(1024) }} 1024w
-"
-sizes="(max-width: 480px) 100vw,
-(max-width: 768px) 80vw,
-100vw"
-src="{{ picture_url }}"
-width="{{ picture_w }}"
-height="{{ picture_h }}"
-{% if picture_alt %} alt="{{ picture_alt }}"{% endif %}
-loading="lazy"
->
-{% endif %}
+    {% if webp_url %}
+        <picture>
+            {% if size == 'full' %}
+                <source srcset="{{ webp_url }}" type="image/webp">
+            {% else %}
+                <source srcset="{{ webp_url|resize(size) }}" type="image/webp">
+            {% endif %}
+            {% if size == 'full' %}
+                <img src="{{ picture_url }}"{% if picture_alt %} alt="{{ picture_alt }}"{% endif %} width="{{ picture_w }}" height="{{ picture_h }}" loading="{{ loading }}">
+            {% else %}
+                {% set new_width = size %}
+                {% set new_height = ( new_width / picture_w ) * picture_h %}
+                <img src="{{ picture_url|resize(size) }}"{% if picture_alt %} alt="{{ picture_alt }}"{% endif %} width="{{ new_width }}" height="{{ new_height | ceil }}" loading="{{ loading }}">
+            {% endif %}
+        </picture>
+    {% else %}
+        {% if size == 'full' %}
+            <img src="{{ picture_url }}"{% if picture_alt %} alt="{{ picture_alt }}"{% endif %} width="{{ picture_w }}" height="{{ picture_h }}" loading="{{ loading }}">
+        {% else %}
+            {% set new_width = size %}
+            {% set new_height = ( new_width / picture_w ) * picture_h %}
+            <img src="{{ picture_url|resize(size) }}"{% if picture_alt %} alt="{{ picture_alt }}"{% endif %} width="{{ new_width }}" height="{{ new_height | ceil }}" loading="{{ loading }}">
+        {% endif %}
+    {% endif %}
 {% endif %}

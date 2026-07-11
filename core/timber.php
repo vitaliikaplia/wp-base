@@ -32,8 +32,30 @@ class StarterSite extends Site {
         $twig->addFilter( new \Twig\TwigFilter( 'pr', 'pr' ) );
         $twig->addFilter( new \Twig\TwigFilter( 'log', 'write_log' ) );
         $twig->addFunction( new \Twig\TwigFunction('get_pattern', 'get_pattern'));
-        $twig->addFilter( new \Twig\TwigFilter( 'picture', 'render_picture_tag' ) );
-        $twig->addFilter( new \Twig\TwigFilter( 'picture_src', 'render_picture_src' ) );
+        $placeholder = '';
+        $twig->addFilter( new \Twig\TwigFilter( 'picture', function($picture, $size = 'full') use ($placeholder) {
+            if (empty($picture)) return $placeholder;
+            return render_picture_tag($picture, $size);
+        }));
+        $twig->addFilter( new \Twig\TwigFilter( 'picture_eager', function($picture, $size = 'full') use ($placeholder) {
+            if (empty($picture)) return $placeholder;
+            return render_picture_tag($picture, $size, 'eager');
+        }));
+        $twig->addFilter( new \Twig\TwigFilter( 'picture_src', function($picture, $size = 'full') {
+            if (empty($picture)) return '';
+            return render_picture_src($picture, $size);
+        }));
+        $twig->addFilter( new \Twig\TwigFilter( 'svg', function($svg, $attributes = []) {
+            if (empty($svg)) return '';
+            return render_svg_tag($svg, $attributes);
+        }));
+        $twig->addFilter( new \Twig\TwigFilter( 'ceil', function($number) {
+            return ceil($number);
+        }));
+        $twig->addFunction( new \Twig\TwigFunction('picture', function($picture, $size = 'full') use ($placeholder) {
+            if (empty($picture)) return $placeholder;
+            return render_picture_tag($picture, $size);
+        }));
         $twig->addFunction( new \Twig\TwigFunction('get_option', 'get_option'));
         $twig->addFunction( new \Twig\TwigFunction('wp_editor', 'wp_editor'));
         $twig->addFunction( new \Twig\TwigFunction('checked', 'checked'));
