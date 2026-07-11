@@ -38,11 +38,10 @@ wp-base/
 │       └── front/                 # Frontend: helpers, rendering
 ├── assets/
 │   ├── scss/                      # SCSS source files
-│   │   ├── _variables.scss        # CSS custom properties
-│   │   ├── _mixins.scss           # Utility mixins
+│   │   ├── _variables.scss        # CSS custom-property color tokens
 │   │   ├── _reset.scss            # CSS reset
 │   │   ├── _extend.scss           # .typo, .btn, utility classes
-│   │   ├── style.scss             # Main entry point
+│   │   ├── style.scss             # Main entry point (@use partials)
 │   │   └── blocks/                # Block-specific styles
 │   │       ├── main/              # Main blocks (hero, text)
 │   │       └── logical/           # Logical blocks (pattern)
@@ -74,6 +73,7 @@ The theme uses ACF blocks with Timber/Twig rendering. Only registered custom blo
 |---|---|---|
 | `hero` | main | Hero section with subtitle, title, description, and action buttons |
 | `text` | main | Rich text content area with title and `.typo` formatting |
+| `iframe` | main | Embed / iframe content block |
 | `pattern` | logical | Reusable pattern block (references a Pattern post) |
 
 ### Block Categories
@@ -117,8 +117,6 @@ Two base templates available:
 **Step 3.** Create SCSS file `assets/scss/blocks/main/my-block.scss`:
 
 ```scss
-@import "../../mixins";
-
 .main-my-block{
     .customBlock{
         max-width: 1200px;
@@ -126,6 +124,8 @@ Two base templates available:
     }
 }
 ```
+
+Block SCSS needs no import — it only styles `.{category}-{block-name}` and is compiled standalone. (The theme uses Sass `@use`, not `@import`, and has no mixin layer.)
 
 CSS class naming convention: `.{category}-{block-name}`
 
@@ -184,64 +184,64 @@ Features:
 ## Features & Options
 
 ### Content & Templating
-- Timber v2 with Twig templating engine
-- Custom Gutenberg blocks with ACF (hero, text, pattern)
-- Automatic block styles loading on frontend
-- Parse all pages as Gutenberg block patterns
-- `get_pattern()` helper for reusable templates
-- Rich text formatting with `.typo` class
+- Timber v2 with Twig templating (Block API v3 ACF blocks: `hero`, `text`, `iframe`, `pattern`)
+- Per-block CSS auto-loaded on the frontend only when the block is present (`has_block()`)
+- Reusable patterns: `patterns` CPT + `get_pattern()` helper, optional page-blocks-as-patterns, patterns admin grid (live search + remembered view), WP 7 pattern-metadata stripping
+- Rich text with the `.typo` class
+- Timber render helpers exposed to Twig: `picture` / `picture_src` / `svg` filters and `picture()` / `icon()` functions (WEBP-aware `<picture>`, inline sanitized SVG)
 
-### Email
-- Enhanced mail sending logic with logging
-- Twig-based email templates
-- SMTP settings (host, port, auth, encryption)
+### Managed SVG icons
+- Admin icon manager (Appearance → Icons): browse the theme's default sprite and upload your own into `uploads`
+- `icon()` Twig helper + a custom `icon_select` ACF field that works inside the Gutenberg block inspector
+- Bundled social icons: Facebook, Instagram, TikTok, LinkedIn, X, YouTube, Telegram, WhatsApp, Threads, Pinterest, Viber
+
+### Custom ACF field types
+- `color_select` — pick from the theme color palette
+- `working_hours` — weekly opening-hours picker
+- `icon_select` — sprite icon picker
+- `nav_menu` — navigation menu selector
+
+### Colors
+- Theme palette parsed from the `--color-*` custom properties in `_variables.scss` and fed to the WordPress editor palette, the ACF color picker and the TinyMCE text-color grid (replaces the old ACF "favorite colors")
+
+### Communications
+- Email: Twig templates, logging (`mail-log`), SMTP settings, dark-mode-safe (light-locked) template
+- SMS: SMS-Fly / TurboSMS providers with logging (`sms-log`)
+- Telegram bot messaging
+- Phone helpers via libphonenumber (`fix_phone_format`, `nice_phone_format`, …)
+- "Send test" dashboard widget to verify Email / SMS / Telegram over AJAX
+
+### SEO & PWA
+- Schema.org JSON-LD `@graph` (Organization / WebSite / WebPage / Article), option-driven
+- Web manifest generation (icons, colors, short name / description) from the favicon system
+- Yoast SEO i18n breadcrumb / title fixes
+
+### Frontend
+- Outbound external-link interstitial (opt-in): `/?go=` "you are leaving" countdown page
+- Headroom.js hide-on-scroll sticky header
+- Cookie consent popup (configured in the options framework)
+- Test header / footer chrome wired to the Header / Footer ACF options
 
 ### Performance & Optimization
-- Timber HTML cache
-- HTML minification
-- WEBP image converter & big images resizer
+- Timber HTML cache, HTML minification, WEBP converter & big-image resizer
 
 ### Admin & Dashboard
-- Custom dashboard options framework with conditional logic
-- Customizable WordPress admin menu
-- Header & Footer HTML code editors
-- Favorite colors
-- Cookies popup settings
-- Maintenance mode
-- Lorem ipsum posts generator
+- Tabbed dashboard options framework with conditional logic + WPML localization
+- Customizable admin menu, header/footer code editors, maintenance mode, lorem-ipsum post generator
+- ACF field-group order column, WYSIWYG `delay=0`, encrypt/decrypt helper for connector secrets
+- Hides the WordPress 7 admin-bar command palette
 
 ### Redirect Rules
-- Custom post type for managing 301/302 URL redirects
-- Dashboard widget with latest rules overview
-- Duplicate and self-redirect detection
-- Transient caching for performance
-- Auto-publish on restore from trash (no draft state)
+- 301/302 URL redirect manager (`redirect-rules` CPT) with dashboard widget, duplicate/self-redirect detection, transient caching, and auto-publish on restore from trash
 
-### Security & Cleanup
-- Disable Gutenberg editor (for blog / everywhere)
-- Disable all updates
-- Disable customizer
-- Disable srcset
-- Remove default image sizes
-- Disable core privacy tools
-- Disable application passwords
-- CYR2LAT (transliteration of Cyrillic in slugs and filenames)
-- Disable DNS prefetch
-- Disable REST API for anonymous users
-- Disable WordPress emojis
-- Disable embeds
-- Fine-tune WordPress 7 frontend output: block library styles, global styles, block support styles, Font Library output, image auto sizes, and speculation rules
-- Disable WordPress 7 Font Library manager in admin, editor UI, REST API, and native font output
-- Disable default dashboard widgets
-- Hide admin top bar on frontend
-- Disable admin email verification
-- Disable comments for all post types
-- Delete child media on parent post delete
-- Hide ACF from admin menu
+### Security & Cleanup (option-gated toggles, grouped into tabs)
+- Disable: all updates, customizer, srcset, default image sizes, core privacy tools, application passwords, DNS prefetch, REST API for anonymous users, emojis, embeds, comments, blog tags, Connectors admin page
+- CYR2LAT transliteration; allow `.m3u/.m3u8/.ts` uploads; delete child media on parent delete; hide admin top bar / ACF; disable admin email verification; disable default dashboard widgets
+- WordPress 7 frontend tuning: block-library styles, global styles, block-support styles, Font Library output + manager, image auto-sizes, speculation rules
+- Disable Gutenberg (for blog / everywhere)
 
 ### Integrations
-- Google Maps API key (for ACF)
-- Geolocation features (GeoIP2)
+- Google Maps API key, Telegram / SMS credentials, geolocation (GeoIP2), hardened session/IP helpers
 - Localization ready (en, ru, uk translations)
 
 ## Build Process

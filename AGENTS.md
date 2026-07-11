@@ -55,7 +55,7 @@ Any operation that is **irreversible** or touches **many items at once** — bul
 
 ### Block categories
 
-- `main` — main content blocks (hero, text)
+- `main` — main content blocks (hero, text, iframe)
 - `logical` — logical/utility blocks (pattern)
 
 ### Creating a new block (checklist)
@@ -126,6 +126,27 @@ Registered in `core/includes/back/custom-post-types.php`:
 - `redirect-rules` — URL redirects (under Settings menu)
 - `patterns` — reusable content blocks
 - `mail-log` — email logging (read-only)
+- `sms-log` — SMS logging (read-only)
+
+## Custom ACF field types
+
+Registered from `core/includes/back/acf-field-*.php` (auto-loaded), usable in any field group / block:
+- `nav_menu` — navigation menu picker
+- `color_select` — pick a colour from the theme palette (parsed from `_variables.scss`); the picker binds via document-level delegation so it works in the Gutenberg block inspector
+- `working_hours` — weekly opening-hours picker (day keys `Mo`…`Su`)
+- `icon_select` — sprite-icon picker (theme + uploads managed icons)
+
+## Ported subsystems (where things live)
+
+- Managed SVG icons: `core/includes/back/dashboard-icons.php` + `core/includes/front/managed-icons.php` + `core/ajax/icons.php`; `icon()` / `managed_icon()` Twig helpers; theme sprite `assets/svg/sprite.svg` (read-only) + an uploads sprite. Admin page: Appearance → Icons.
+- Communications: `system-send-email.php` / `system-send-sms.php` (SMS-Fly, TurboSMS) / `system-telegram.php`, `core/includes/front/phone-functions.php` (libphonenumber), and the "Send test" widget (`dashboard-widget-send-test.php`). Logs: `mail-log` / `sms-log` CPTs.
+- SEO / PWA: `core/includes/front/schema.php` (JSON-LD, option-driven), `system-favicon.php` (icons + web manifest), `core/includes/front/wpseo-fix.php` (Yoast i18n).
+- Render helpers: `core/includes/front/render-picture-tag.php` (`picture`/`picture_src`) and `render-svg-tag.php` (`svg`), registered in `core/timber.php`.
+- External-link interstitial: `core/includes/front/external-links.php` (+ `views/external-link.twig`), opt-in.
+- Colours: `core/includes/back/system-color-presets.php` parses `--color-*` tokens → editor / ACF / TinyMCE palettes.
+- Misc helpers: `core/encrypt-decrypt.php` (openssl), `core/includes/back/acf-order-column.php`, `acf-wysiwyg-delay.php`.
+
+Prefix convention: new code is **unprefixed** (matches the base's existing global functions), not `insight_`/`skyta_`/`hw_`.
 
 ## SCSS Conventions
 
