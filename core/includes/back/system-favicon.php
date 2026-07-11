@@ -138,25 +138,78 @@ function generate_pwa_icons($old_value, $icon_id) {
         $image->destroy();
         $canvas->destroy();
 
-        generate_manifest_json();
+        generate_manifest_json(true);
     } catch (Exception $e) {
         // error_log('PWA Icons Error: ' . $e->getMessage());
     }
 }
 
-function generate_manifest_json()
+function manifest_get_string_option($name, $default = '')
 {
-    // Аналізуємо кольори іконки
+    $value = get_option($name);
+
+    if (is_string($value)) {
+        $value = trim($value);
+    }
+
+    return $value !== false && $value !== '' ? $value : $default;
+}
+
+function manifest_short_name($site_name)
+{
+    if (function_exists('mb_substr')) {
+        return mb_substr($site_name, 0, 12);
+    }
+
+    return substr($site_name, 0, 12);
+}
+
+function update_manifest_color_options($colors, $force = false)
+{
+    $GLOBALS['manifest_updating_options'] = true;
+
+    if ($force || !get_option('theme_color')) {
+        update_option('theme_color', $colors['theme']);
+    }
+
+    if ($force || !get_option('manifest_background_color')) {
+        update_option('manifest_background_color', $colors['background']);
+    }
+
+    if ($force || !get_option('mask_icon_color')) {
+        update_option('mask_icon_color', $colors['theme']);
+    }
+
+    unset($GLOBALS['manifest_updating_options']);
+}
+
+function generate_manifest_json($update_color_options = false)
+{
     $colors = analyze_icon_colors();
 
+    if ($update_color_options) {
+        update_manifest_color_options($colors, true);
+    }
+
+    $site_name = get_bloginfo('name');
+    $site_description = get_bloginfo('description');
+    $theme_color = manifest_get_string_option('theme_color', $colors['theme']);
+    $background_color = manifest_get_string_option('manifest_background_color', $colors['background']);
+
     $manifest = [
-        'name' => get_bloginfo('name'),
-        'short_name' => substr(get_bloginfo('name'), 0, 12),
+        'id' => home_url('/'),
+        'name' => $site_name,
+        'short_name' => manifest_get_string_option('manifest_short_name', manifest_short_name($site_name)),
+        'description' => manifest_get_string_option('manifest_description', $site_description),
+        'lang' => get_bloginfo('language'),
         'start_url' => home_url('/'),
+        'scope' => home_url('/'),
         'display' => 'standalone',
-        'background_color' => $colors['background'],
-        'theme_color' => $colors['theme'],
+        'display_override' => array('standalone', 'minimal-ui'),
+        'background_color' => $background_color,
+        'theme_color' => $theme_color,
         'orientation' => 'any',
+        'prefer_related_applications' => false,
         'icons' => [
             ['src' => home_url('/icon-192.png'), 'sizes' => '192x192', 'type' => 'image/png'],
             ['src' => home_url('/icon-512.png'), 'sizes' => '512x512', 'type' => 'image/png'],
@@ -164,8 +217,44 @@ function generate_manifest_json()
         ]
     ];
 
-    file_put_contents(ABSPATH . 'manifest.webmanifest', json_encode($manifest, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+    file_put_contents(ABSPATH . 'manifest.webmanifest', json_encode($manifest, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 }
+
+function manifest_option_names()
+{
+    return array(
+        'theme_color',
+        'mask_icon_color',
+        'manifest_background_color',
+        'manifest_short_name',
+        'manifest_description',
+    );
+}
+
+function regenerate_manifest_after_option_update($option)
+{
+    if (!empty($GLOBALS['manifest_updating_options'])) {
+        return;
+    }
+
+    if (!in_array($option, manifest_option_names(), true)) {
+        return;
+    }
+
+    if (!get_option('site_icon')) {
+        return;
+    }
+
+    generate_manifest_json();
+}
+
+add_action('updated_option', function($option, $old_value, $value) {
+    regenerate_manifest_after_option_update($option);
+}, 10, 3);
+
+add_action('added_option', function($option, $value) {
+    regenerate_manifest_after_option_update($option);
+}, 10, 2);
 
 function analyze_icon_colors() {
     $icon_path = ABSPATH . 'icon-512.png';
@@ -254,8 +343,6 @@ function analyze_icon_colors() {
 
         // error_log("PWA Colors detected - Theme: $theme_color, Background: $background_color");
 
-        update_option('theme_color', $theme_color);
-
         return [
             'background' => $background_color,
             'theme' => $theme_color
@@ -326,8 +413,10 @@ function delete_pwa_icons($old_value = null) {
         }
     }
 
-    // Видаляємо theme_color при видаленні іконок
+    // Видаляємо автоматично згенеровані кольори при видаленні іконок
     delete_option('theme_color');
+    delete_option('manifest_background_color');
+    delete_option('mask_icon_color');
 
     if (!empty($deleted)) {
         // error_log('PWA Icons deleted: ' . implode(', ', $deleted));

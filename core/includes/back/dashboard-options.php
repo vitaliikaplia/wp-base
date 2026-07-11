@@ -812,6 +812,24 @@ function get_custom_options(){
                     'label'         => __("Theme color", TEXTDOMAIN),
                     'description'   => __("Set theme color for browsers that support it", TEXTDOMAIN),
                 ),
+                array (
+                    'type'          => 'color',
+                    'name'          => 'manifest_background_color',
+                    'label'         => __("Web manifest background color", TEXTDOMAIN),
+                    'description'   => __("Splash-screen background for the installed PWA", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'text',
+                    'name'          => 'manifest_short_name',
+                    'label'         => __("Web manifest short name", TEXTDOMAIN),
+                    'description'   => __("Defaults to the first 12 characters of the site title", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'text',
+                    'name'          => 'manifest_description',
+                    'label'         => __("Web manifest description", TEXTDOMAIN),
+                    'description'   => __("Defaults to the site tagline", TEXTDOMAIN),
+                ),
             ),
         ),
     );
