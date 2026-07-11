@@ -351,10 +351,44 @@ function get_custom_options(){
             'title' => __('Integrations with third-party services options', TEXTDOMAIN),
             'fields' => Array(
                 array (
+                    'type'          => 'tab_start',
+                    'name'          => 'google',
+                    'label'         => __("Google Maps", TEXTDOMAIN),
+                ),
+                array (
                     'type'          => 'password',
                     'name'          => 'google_maps_api_key',
                     'label'         => __("Google Maps API key", TEXTDOMAIN),
                     'description'   => '<a href="https://console.cloud.google.com/apis/credentials" target="_blank">'.__('Google Cloud Console', TEXTDOMAIN).'</a>',
+                ),
+                array (
+                    'type'          => 'tab_end',
+                ),
+                array (
+                    'type'          => 'tab_start',
+                    'name'          => 'telegram_bot',
+                    'label'         => __("Telegram Bot", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'password',
+                    'name'          => 'telegram_token',
+                    'label'         => __("Telegram token", TEXTDOMAIN),
+                    'description'   => __("Telegram token to integrate with Telegram bot", TEXTDOMAIN) . ', <a href="https://core.telegram.org/bots#6-botfather" target="_blank">'.__('link', TEXTDOMAIN).'</a>',
+                ),
+                array (
+                    'type'          => 'text',
+                    'name'          => 'telegram_chat_id',
+                    'label'         => __("Telegram chat ID", TEXTDOMAIN),
+                    'description'   => __("Telegram chat ID to integrate with Telegram bot", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'text',
+                    'name'          => 'telegram_chat_thread_id',
+                    'label'         => __("Telegram chat thread ID", TEXTDOMAIN),
+                    'description'   => __("Optional message thread (topic) ID for forum-style group chats", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'tab_end',
                 ),
             ),
         ),
