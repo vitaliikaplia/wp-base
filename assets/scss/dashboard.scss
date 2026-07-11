@@ -139,6 +139,16 @@ body.mce-fullscreen{
     display: none;
 }
 
+/* constrain ACF image-field previews (e.g. logos) so they don't blow up */
+.acf-image-uploader.has-value{
+    img{
+        width: 100%;
+        max-width: 180px;
+        aspect-ratio: 1/1;
+        object-fit: contain;
+    }
+}
+
 /* fix custom post type redirect rules */
 .post-type-redirect-rules{
     #acf_after_title-sortables{
