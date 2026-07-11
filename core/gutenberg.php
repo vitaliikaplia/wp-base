@@ -73,6 +73,8 @@ if(get_option('disable_gutenberg') !== 'everywhere'){
                 'name'            => $block['category'] . '-' . $block['name'],
                 'title'           => $block['label'],
                 'render_callback' => 'block_render_callback',
+                'api_version'       => 3,
+                'acf_block_version' => 3,
                 'style'           => $block['category'] . '-' . $block['name'],
                 'mode' 			  => 'preview',
                 'category'        => $block['category'],
@@ -339,5 +341,61 @@ if(get_option('disable_gutenberg') !== 'everywhere'){
         }
         add_action('init', 'register_page_block_patterns');
     }
+
+    /**
+     * WP 7.0 pattern handling. Our patterns are only a shortcut to drop in
+     * ready-made, fully-editable blocks — never synced/overridable patterns.
+     * Opt out of content-only editing, and strip the metadata WP 7.0 tags
+     * pattern-inserted blocks with, so they persist and read as ordinary blocks.
+     * The editor-side gutenberg/strip-pattern-metadata.js does this live; these
+     * are the server-side backstop (also covers REST/programmatic saves).
+     */
+    function disable_content_only_for_unsynced_patterns($settings){
+        $settings['disableContentOnlyForUnsyncedPatterns'] = true;
+        return $settings;
+    }
+    add_filter('block_editor_settings_all', 'disable_content_only_for_unsynced_patterns');
+
+    function strip_pattern_metadata_blocks($blocks){
+        foreach($blocks as &$block){
+            if(isset($block['attrs']['metadata']['patternName'])){
+                unset(
+                    $block['attrs']['metadata']['patternName'],
+                    $block['attrs']['metadata']['categories'],
+                    $block['attrs']['metadata']['name']
+                );
+                if(empty($block['attrs']['metadata'])){
+                    unset($block['attrs']['metadata']);
+                }
+            }
+            if(!empty($block['innerBlocks'])){
+                $block['innerBlocks'] = strip_pattern_metadata_blocks($block['innerBlocks']);
+            }
+        }
+        unset($block);
+        return $blocks;
+    }
+
+    function strip_pattern_metadata_on_save($data){
+        if(empty($data['post_content']) || strpos($data['post_content'], 'patternName') === false){
+            return $data;
+        }
+        // WP usually passes SLASHED content here; some save paths pass it unslashed.
+        // Unslashing already-unslashed content corrupts ACF's \uXXXX escapes, so
+        // detect the real slash state (slashed block-attr JSON won't json_decode,
+        // so parse_blocks yields empty attrs) and only (un)slash when truly slashed.
+        $is_slashed = true;
+        foreach(parse_blocks($data['post_content']) as $candidate){
+            if(!empty($candidate['blockName']) && !empty($candidate['attrs'])){
+                $is_slashed = false;
+                break;
+            }
+        }
+        $content = $is_slashed ? wp_unslash($data['post_content']) : $data['post_content'];
+        $content = serialize_blocks(strip_pattern_metadata_blocks(parse_blocks($content)));
+        $data['post_content'] = $is_slashed ? wp_slash($content) : $content;
+        return $data;
+    }
+    add_filter('wp_insert_post_data', 'strip_pattern_metadata_on_save');
 
 }

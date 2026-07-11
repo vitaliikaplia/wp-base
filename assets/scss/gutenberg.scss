@@ -265,3 +265,9 @@
     align-items: center;
     justify-content: center;
 }
+
+/* new API — hide ACF's "open in expanded editor" button: block fields stay in
+   the (already widened) sidebar, no need to re-enter them in a popup panel */
+.acf-blocks-open-expanded-editor-btn {
+    display: none !important;
+}
