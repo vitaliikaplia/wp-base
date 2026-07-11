@@ -4,6 +4,17 @@
 
 WordPress Base Template (wp-base) — custom starter theme built with Timber/Twig, ACF Gutenberg blocks, and a custom dashboard options framework.
 
+## ⚠️ Destructive / bulk operations — pre-flight checklist (read before acting)
+
+Any operation that is **irreversible** or touches **many items at once** — bulk DB writes to post/pattern content, `wp_update_post` / `wp_insert_post` over multiple posts, mass file rewrites, deletes — MUST follow this, no exceptions:
+
+1. **Back up first.** Snapshot exactly what you are about to change (export the rows / copy the files). Patterns and posts written from the CLI get **no revisions** — there is **no undo** unless you make one.
+2. **Dry-run on ONE item** — apply the change to a single item, do **not** write, inspect the result.
+3. **Verify the RENDERED result, not a proxy.** Check what a human sees — `do_blocks()` output, the actual text/HTML — not "the structure is present" or "the field changed". Shallow verification is how corruption slips through.
+4. **Then apply**, and re-verify the rendered output across a sample afterwards.
+
+**Content writes specifically:** `wp_update_post` / `wp_insert_post` run `wp_unslash()` internally, so **always** pass `wp_slash(serialize_blocks(...))`. Skip it and the block-comment JSON escapes are stripped (`<`→`u003c`, `\r\n`→`rn`) and every WYSIWYG/HTML field is destroyed — silently for blocks with no escaped chars, visibly (raw `u003ch2…` / stray `rn`) for the rest. Also: call `kses_remove_filters()` in CLI scripts (no user → block comments get stripped) and preserve `post_author` (CLI writes default it to `0`).
+
 ## Tech Stack
 
 - PHP 8.3+, WordPress 6.7+
@@ -122,6 +133,7 @@ Registered in `core/includes/back/custom-post-types.php`:
 - Mobile breakpoint: `@media (max-width: 768px)`
 - Use hardcoded color values in block styles (CSS variables from `_variables.scss` are mostly commented out)
 - Button classes: `.btn`, `.btn.primary`, `.btn.secondary`
+- CSS units: prefer `px` and `%`; `vw`, `vh`, and `clamp()` are allowed for fluid sizing. Avoid `em`/`rem` unless explicitly required.
 
 ## Prepros Config
 
