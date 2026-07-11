@@ -1713,3 +1713,30 @@ msgstr "Organization email"
 
 msgid "Organization phone"
 msgstr "Organization phone"
+
+msgid "Performance"
+msgstr "Performance"
+
+msgid "Media"
+msgstr "Media"
+
+msgid "Security"
+msgstr "Security"
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "Content"
+msgstr "Content"
+
+msgid "Frontend"
+msgstr "Frontend"
+
+msgid "WordPress 7"
+msgstr "WordPress 7"
+
+msgid "Editor"
+msgstr "Editor"
+
+msgid "Manifest"
+msgstr "Manifest"

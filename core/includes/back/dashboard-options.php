@@ -589,34 +589,9 @@ function get_custom_options(){
             'description' => '',
             'fields' => Array(
                 array (
-                    'type'          => 'checkbox',
-                    'name'          => 'allow_m3u_ts_upload',
-                    'label'         => __("Allow .m3u / .m3u8 / .ts uploads", TEXTDOMAIN),
-                    'description'   => __("Permit HLS playlist and MPEG-TS segment uploads in the media library", TEXTDOMAIN),
-                ),
-                array (
-                    'type'          => 'checkbox',
-                    'name'          => 'disable_blog_tags',
-                    'label'         => __("Disable blog tags", TEXTDOMAIN),
-                    'description'   => __("Detach the post_tag taxonomy from posts (categories only)", TEXTDOMAIN),
-                ),
-                array (
-                    'type'          => 'checkbox',
-                    'name'          => 'disable_connectors_page',
-                    'label'         => __("Disable Connectors admin page", TEXTDOMAIN),
-                    'description'   => __("Hide and block the wp-admin Connectors settings page", TEXTDOMAIN),
-                ),
-                array (
-                    'type'          => 'checkbox',
-                    'name'          => 'enable_external_link_page',
-                    'label'         => __("External link interstitial", TEXTDOMAIN),
-                    'description'   => __("Route outbound links through a \"you are leaving\" countdown page", TEXTDOMAIN),
-                ),
-                array (
-                    'type'          => 'checkbox',
-                    'name'          => 'disable_all_updates',
-                    'label'         => __("Disable all updates", TEXTDOMAIN),
-                    'description'   => __("Disable plugins and WordPress core updates", TEXTDOMAIN),
+                    'type'          => 'tab_start',
+                    'name'          => 'tab_performance',
+                    'label'         => __("Performance", TEXTDOMAIN),
                 ),
                 array (
                     'type'          => 'select',
@@ -647,15 +622,23 @@ function get_custom_options(){
                 ),
                 array (
                     'type'          => 'checkbox',
-                    'name'          => 'disable_customizer',
-                    'label'         => __("Disable customizer", TEXTDOMAIN),
-                    'description'   => __("Disable WordPress customizer", TEXTDOMAIN),
+                    'name'          => 'enable_html_cache',
+                    'label'         => __("Enable HTML cache", TEXTDOMAIN),
+                    'description'   => __("Enable HTML page cache for anonymous users", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'tab_end',
+                ),
+                array (
+                    'type'          => 'tab_start',
+                    'name'          => 'tab_media',
+                    'label'         => __("Media", TEXTDOMAIN),
                 ),
                 array (
                     'type'          => 'checkbox',
-                    'name'          => 'disable_src_set',
-                    'label'         => __("Disable src set", TEXTDOMAIN),
-                    'description'   => __("Disable src set for images", TEXTDOMAIN),
+                    'name'          => 'allow_m3u_ts_upload',
+                    'label'         => __("Allow .m3u / .m3u8 / .ts uploads", TEXTDOMAIN),
+                    'description'   => __("Permit HLS playlist and MPEG-TS segment uploads in the media library", TEXTDOMAIN),
                 ),
                 array (
                     'type'          => 'checkbox',
@@ -665,9 +648,111 @@ function get_custom_options(){
                 ),
                 array (
                     'type'          => 'checkbox',
+                    'name'          => 'disable_src_set',
+                    'label'         => __("Disable src set", TEXTDOMAIN),
+                    'description'   => __("Disable src set for images", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'delete_child_media',
+                    'label'         => __("Delete child media", TEXTDOMAIN),
+                    'description'   => __("Delete child media when parent post is deleted", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'tab_end',
+                ),
+                array (
+                    'type'          => 'tab_start',
+                    'name'          => 'tab_security',
+                    'label'         => __("Security", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'disable_all_updates',
+                    'label'         => __("Disable all updates", TEXTDOMAIN),
+                    'description'   => __("Disable plugins and WordPress core updates", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'disable_rest_api',
+                    'label'         => __("Disable Rest API", TEXTDOMAIN),
+                    'description'   => __("Disable Rest API for anonymous users", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'disable_application_passwords',
+                    'label'         => __("Disable application passwords", TEXTDOMAIN),
+                    'description'   => __("Disable WordPress application passwords used for REST API authentication and third-party integrations", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
                     'name'          => 'disable_core_privacy_tools',
                     'label'         => __("Disable core privacy tools", TEXTDOMAIN),
                     'description'   => __("Disable default WordPress core privacy tools", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'disable_connectors_page',
+                    'label'         => __("Disable Connectors admin page", TEXTDOMAIN),
+                    'description'   => __("Hide and block the wp-admin Connectors settings page", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'tab_end',
+                ),
+                array (
+                    'type'          => 'tab_start',
+                    'name'          => 'tab_admin',
+                    'label'         => __("Admin", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'hide_dashboard_widgets',
+                    'label'         => __("Disable dashboard widgets", TEXTDOMAIN),
+                    'description'   => __("Disable default WordPress dashboard widgets", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'hide_admin_top_bar',
+                    'label'         => __("Hide admin top bar", TEXTDOMAIN),
+                    'description'   => __("Hide admin top bar for all users on front-end", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'hide_acf',
+                    'label'         => __("Hide ACF", TEXTDOMAIN),
+                    'description'   => __("Hide Advanced Custom Fields from Dashboard", TEXTDOMAIN)
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'disable_admin_email_verification',
+                    'label'         => __("Disable admin email verification", TEXTDOMAIN),
+                    'description'   => __("Disable default WordPress admin email verification", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'disable_customizer',
+                    'label'         => __("Disable customizer", TEXTDOMAIN),
+                    'description'   => __("Disable WordPress customizer", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'tab_end',
+                ),
+                array (
+                    'type'          => 'tab_start',
+                    'name'          => 'tab_content',
+                    'label'         => __("Content", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'disable_comments',
+                    'label'         => __("Disable comments", TEXTDOMAIN),
+                    'description'   => __("Disable comments on all posts and pages", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'disable_blog_tags',
+                    'label'         => __("Disable blog tags", TEXTDOMAIN),
+                    'description'   => __("Detach the post_tag taxonomy from posts (categories only)", TEXTDOMAIN),
                 ),
                 array (
                     'type'          => 'checkbox',
@@ -676,16 +761,24 @@ function get_custom_options(){
                     'description'   => __("Enable CYR3LAT transliteration", TEXTDOMAIN),
                 ),
                 array (
+                    'type'          => 'tab_end',
+                ),
+                array (
+                    'type'          => 'tab_start',
+                    'name'          => 'tab_frontend',
+                    'label'         => __("Frontend", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'enable_external_link_page',
+                    'label'         => __("External link interstitial", TEXTDOMAIN),
+                    'description'   => __("Route outbound links through a \"you are leaving\" countdown page", TEXTDOMAIN),
+                ),
+                array (
                     'type'          => 'checkbox',
                     'name'          => 'disable_dns_prefetch',
                     'label'         => __("Disable DNS prefetch", TEXTDOMAIN),
                     'description'   => __("Disable DNS prefetch for external resources", TEXTDOMAIN),
-                ),
-                array (
-                    'type'          => 'checkbox',
-                    'name'          => 'disable_rest_api',
-                    'label'         => __("Disable Rest API", TEXTDOMAIN),
-                    'description'   => __("Disable Rest API for anonymous users", TEXTDOMAIN),
                 ),
                 array (
                     'type'          => 'checkbox',
@@ -698,6 +791,14 @@ function get_custom_options(){
                     'name'          => 'disable_embeds',
                     'label'         => __("Disable Embeds", TEXTDOMAIN),
                     'description'   => __("Disable default WordPress Embeds", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'tab_end',
+                ),
+                array (
+                    'type'          => 'tab_start',
+                    'name'          => 'tab_wp7',
+                    'label'         => __("WordPress 7", TEXTDOMAIN),
                 ),
                 array (
                     'type'          => 'checkbox',
@@ -742,52 +843,12 @@ function get_custom_options(){
                     'description'   => __("Disable WordPress frontend prefetch/prerender speculation rules.", TEXTDOMAIN),
                 ),
                 array (
-                    'type'          => 'checkbox',
-                    'name'          => 'hide_dashboard_widgets',
-                    'label'         => __("Disable dashboard widgets", TEXTDOMAIN),
-                    'description'   => __("Disable default WordPress dashboard widgets", TEXTDOMAIN),
+                    'type'          => 'tab_end',
                 ),
                 array (
-                    'type'          => 'checkbox',
-                    'name'          => 'hide_admin_top_bar',
-                    'label'         => __("Hide admin top bar", TEXTDOMAIN),
-                    'description'   => __("Hide admin top bar for all users on front-end", TEXTDOMAIN),
-                ),
-                array (
-                    'type'          => 'checkbox',
-                    'name'          => 'disable_admin_email_verification',
-                    'label'         => __("Disable admin email verification", TEXTDOMAIN),
-                    'description'   => __("Disable default WordPress admin email verification", TEXTDOMAIN),
-                ),
-                array (
-                    'type'          => 'checkbox',
-                    'name'          => 'disable_comments',
-                    'label'         => __("Disable comments", TEXTDOMAIN),
-                    'description'   => __("Disable comments on all posts and pages", TEXTDOMAIN),
-                ),
-                array (
-                    'type'          => 'checkbox',
-                    'name'          => 'delete_child_media',
-                    'label'         => __("Delete child media", TEXTDOMAIN),
-                    'description'   => __("Delete child media when parent post is deleted", TEXTDOMAIN),
-                ),
-                array (
-                    'type'          => 'checkbox',
-                    'name'          => 'enable_html_cache',
-                    'label'         => __("Enable HTML cache", TEXTDOMAIN),
-                    'description'   => __("Enable HTML page cache for anonymous users", TEXTDOMAIN),
-                ),
-                array (
-                    'type'          => 'checkbox',
-                    'name'          => 'hide_acf',
-                    'label'         => __("Hide ACF", TEXTDOMAIN),
-                    'description'   => __("Hide Advanced Custom Fields from Dashboard", TEXTDOMAIN)
-                ),
-                array (
-                    'type'          => 'checkbox',
-                    'name'          => 'disable_application_passwords',
-                    'label'         => __("Disable application passwords", TEXTDOMAIN),
-                    'description'   => __("Disable WordPress application passwords used for REST API authentication and third-party integrations", TEXTDOMAIN),
+                    'type'          => 'tab_start',
+                    'name'          => 'tab_editor',
+                    'label'         => __("Editor", TEXTDOMAIN),
                 ),
                 array (
                     'type'    => 'select',
@@ -817,6 +878,14 @@ function get_custom_options(){
                     ),
                 ),
                 array (
+                    'type'          => 'tab_end',
+                ),
+                array (
+                    'type'          => 'tab_start',
+                    'name'          => 'tab_manifest',
+                    'label'         => __("Manifest", TEXTDOMAIN),
+                ),
+                array (
                     'type'          => 'color',
                     'name'          => 'theme_color',
                     'label'         => __("Theme color", TEXTDOMAIN),
@@ -839,6 +908,9 @@ function get_custom_options(){
                     'name'          => 'manifest_description',
                     'label'         => __("Web manifest description", TEXTDOMAIN),
                     'description'   => __("Defaults to the site tagline", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'tab_end',
                 ),
             ),
         ),

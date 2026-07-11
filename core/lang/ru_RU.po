@@ -1730,6 +1730,33 @@ msgstr "Email организации"
 msgid "Organization phone"
 msgstr "Телефон организации"
 
+msgid "Performance"
+msgstr "Производительность"
+
+msgid "Media"
+msgstr "Медиа"
+
+msgid "Security"
+msgstr "Безопасность"
+
+msgid "Admin"
+msgstr "Админка"
+
+msgid "Content"
+msgstr "Контент"
+
+msgid "Frontend"
+msgstr "Фронтенд"
+
+msgid "WordPress 7"
+msgstr "WordPress 7"
+
+msgid "Editor"
+msgstr "Редактор"
+
+msgid "Manifest"
+msgstr "Манифест"
+
 #~ msgid "Link"
 #~ msgstr "Ссылка"
 
