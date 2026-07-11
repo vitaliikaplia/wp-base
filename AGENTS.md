@@ -129,11 +129,12 @@ Registered in `core/includes/back/custom-post-types.php`:
 
 ## SCSS Conventions
 
-- Block SCSS imports: `@import "../../mixins";`
+- Pull partials in with `@use`, never `@import`. `@import` is reserved for genuinely external CSS (e.g. the web-font URL in `_fonts.scss`). `@use` rules must come before any other rule in a file (see `gutenberg.scss`).
+- No SCSS mixins. Use native CSS properties and let Prepros' autoprefixer add vendor prefixes; the legacy `_mixins.scss` prefix helpers were removed.
+- Block SCSS files need no import — each only styles `.{category}-{block-name}` and is compiled standalone by Prepros.
 - Mobile breakpoint: `@media (max-width: 768px)`
-- Use hardcoded color values in block styles (CSS variables from `_variables.scss` are mostly commented out)
-- Button classes: `.btn`, `.btn.primary`, `.btn.secondary`
 - CSS units: prefer `px` and `%`; `vw`, `vh`, and `clamp()` are allowed for fluid sizing. Avoid `em`/`rem` unless explicitly required.
+- Button classes: `.btn`, `.btn.primary`, `.btn.secondary`
 
 ## Prepros Config
 

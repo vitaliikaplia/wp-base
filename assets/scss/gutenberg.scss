@@ -1,6 +1,10 @@
 /* gutenberg styles
 -------------------------------------------------------------- */
 
+@use "fonts";
+@use "variables";
+@use "extend";
+
 // reset for gutenberg blocks
 .block-editor-writing-flow,
 .editor-styles-wrapper.wp-embed-responsive {
@@ -13,11 +17,6 @@
         }
     }
 }
-
-@import "mixins";
-@import "fonts";
-@import "variables";
-@import "extend";
 
 /* fix gutenberg back button */
 .editor-header__back-button {

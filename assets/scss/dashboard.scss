@@ -1,9 +1,8 @@
 /* dashboard custom styles
 -------------------------------------------------------------- */
 
-@import "mixins";
-@import "dashboard/redirect-rules";
-@import "plugins/select2.min";
+@use "dashboard/redirect-rules";
+@use "plugins/select2.min";
 
 /* disable-welcome-and-tips */
 .wp-admin .components-popover.nux-dot-tip {
@@ -52,7 +51,7 @@ body.mce-fullscreen{
     }
     .mce-fullscreen{
         z-index: 10000000000000;
-        @include transform(translateZ(10000000000000000px));
+        transform: translateZ(10000000000000000px);
     }
 }
 

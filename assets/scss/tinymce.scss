@@ -1,10 +1,9 @@
 /* tinymce editor styles
 -------------------------------------------------------------- */
 
-@import "mixins";
-@import "variables";
-@import "fonts";
-@import "extend";
+@use "fonts";
+@use "variables";
+@use "extend";
 
 html .mceContentBody {
     padding: 0 10px !important;

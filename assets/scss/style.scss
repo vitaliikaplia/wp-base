@@ -1,11 +1,10 @@
 /* let's go!
 -------------------------------------------------------------- */
 
-@import "mixins";
-@import "variables";
-@import "fonts";
-@import "reset";
-@import "animation";
-@import "wp";
-@import "extend";
-@import "main";
+@use "fonts";
+@use "variables";
+@use "reset";
+@use "animation";
+@use "wp";
+@use "extend";
+@use "main";
