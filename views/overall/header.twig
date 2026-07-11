@@ -1,0 +1,20 @@
+{# Test header — minimal chrome wired to the Header ACF options. Style per project. #}
+<header class="site-header">
+    <div class="inner">
+        <a href="{{ site.url }}" class="site-logo">
+            {% if general_fields.header.logo %}{{ general_fields.header.logo | picture }}{% else %}{{ site.name }}{% endif %}
+        </a>
+
+        {% if general_fields.header.menu %}
+        <nav class="site-nav">
+            {{ function('wp_nav_menu', { 'menu': general_fields.header.menu, 'container': false, 'echo': false }) }}
+        </nav>
+        {% endif %}
+
+        {% if general_fields.header.button.url %}
+        <a class="btn primary site-header-cta" href="{{ general_fields.header.button.url }}" target="{{ general_fields.header.button.target|default('_self') }}">
+            <span>{{ general_fields.header.button.title }}</span>
+        </a>
+        {% endif %}
+    </div>
+</header>

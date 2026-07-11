@@ -1,0 +1,12 @@
+{# Test footer — minimal chrome wired to the Footer ACF options. Style per project. #}
+<footer class="site-footer">
+    <div class="inner">
+        {% if general_fields.footer.menu.html %}
+        <nav class="site-footer-nav">{{ general_fields.footer.menu.html }}</nav>
+        {% endif %}
+
+        {% if general_fields.footer.copy_line %}
+        <p class="site-footer-copy">{{ general_fields.footer.copy_line }}</p>
+        {% endif %}
+    </div>
+</footer>
