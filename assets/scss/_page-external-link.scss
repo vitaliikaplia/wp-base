@@ -1,0 +1,50 @@
+/* external-link interstitial page (scaffold — style per project)
+-------------------------------------------------------------- */
+.page-external-link {
+    text-align: center;
+    padding: 80px 20px;
+
+    .countdown-circle {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 24px;
+
+        svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .track {
+            fill: none;
+            stroke: #eee;
+            stroke-width: 6;
+        }
+
+        .progress {
+            fill: none;
+            stroke: #000;
+            stroke-width: 6;
+        }
+
+        .countdown-number {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: 700;
+        }
+    }
+
+    .title {
+        margin-bottom: 12px;
+    }
+
+    .host {
+        margin-bottom: 24px;
+        word-break: break-all;
+    }
+}

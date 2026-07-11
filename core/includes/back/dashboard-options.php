@@ -543,6 +543,12 @@ function get_custom_options(){
                 ),
                 array (
                     'type'          => 'checkbox',
+                    'name'          => 'enable_external_link_page',
+                    'label'         => __("External link interstitial", TEXTDOMAIN),
+                    'description'   => __("Route outbound links through a \"you are leaving\" countdown page", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
                     'name'          => 'disable_all_updates',
                     'label'         => __("Disable all updates", TEXTDOMAIN),
                     'description'   => __("Disable plugins and WordPress core updates", TEXTDOMAIN),

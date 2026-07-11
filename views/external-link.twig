@@ -1,0 +1,44 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+<section class="page-external-link">
+    <div class="inner">
+        <div class="countdown-circle">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+                <circle class="track" cx="50" cy="50" r="45"/>
+                <circle class="progress" cx="50" cy="50" r="45"/>
+            </svg>
+            <span class="countdown-number">{{ redirect_seconds }}</span>
+        </div>
+        <h1 class="title">{{ __('You are leaving our website', TEXTDOMAIN) }}</h1>
+        <p class="text">
+            {{ __('You will be redirected to an external resource in', TEXTDOMAIN) }}
+            <strong class="countdown-text">{{ redirect_seconds }}</strong>
+            {{ __('sec.', TEXTDOMAIN) }}
+        </p>
+        <p class="host"><span>{{ redirect_host }}</span></p>
+        <a href="{{ redirect_url }}" class="btn primary external-link-go" data-seconds="{{ redirect_seconds }}">
+            <span>{{ __('Go now', TEXTDOMAIN) }}</span>
+        </a>
+    </div>
+</section>
+
+<script>
+(function(){
+    var link = document.querySelector('.external-link-go');
+    if(!link){ return; }
+    var seconds = parseInt(link.getAttribute('data-seconds'), 10) || 5;
+    var url = link.getAttribute('href');
+    var numEls = document.querySelectorAll('.countdown-number, .countdown-text');
+    var tick = function(){
+        seconds -= 1;
+        numEls.forEach(function(el){ el.textContent = seconds < 0 ? 0 : seconds; });
+        if(seconds <= 0){ window.location.href = url; return; }
+        window.setTimeout(tick, 1000);
+    };
+    window.setTimeout(tick, 1000);
+})();
+</script>
+
+{% endblock %}
