@@ -10,6 +10,15 @@ body{
     font-feature-settings: "pnum" on,"lnum" on;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* sticky footer — main grows so the footer is pushed to the bottom */
+main{
+    flex: 1 0 auto;
 }
 
 /* Cookie popup
