@@ -299,3 +299,123 @@ body.mce-fullscreen{
         }
     }
 }
+
+/* pattern grid view */
+.pattern-grid-toggle {
+    margin-left: 4px !important;
+}
+
+/* scoped under .wrap to outweigh WP core's input[type="search"] { min-height: 40px } */
+.wrap .pattern-grid-search {
+    box-sizing: border-box;
+    position: relative;
+    top: -3px; /* lift onto the same line as the .page-title-action buttons */
+    height: 32px;
+    min-height: 32px;
+    min-width: 240px;
+    margin-left: 4px;
+    padding: 0 12px;
+    font-size: 13px;
+    line-height: 2.30769231;
+    border-radius: 2px;
+    vertical-align: baseline;
+}
+
+.pattern-grid-view {
+    padding: 4px 0;
+}
+
+/* Stable masonry: fixed flex columns. JS drops each tile into one column and
+   never moves it again, so an iframe resizing on load only grows its own column
+   (natural masonry) instead of the browser reshuffling every tile across columns. */
+.pattern-grid-columns {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.pattern-grid-column {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.pattern-grid-item {
+    background: #fff;
+    overflow: hidden;
+    border: 1px solid #c3c4c7;
+    cursor: pointer;
+}
+
+.pattern-grid-item-title {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1d2327;
+    border-bottom: 1px solid #c3c4c7;
+}
+
+.pattern-grid-item-name {
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pattern-grid-item-edit {
+    flex-shrink: 0;
+    color: #787c82;
+    text-decoration: none;
+    font-size: 16px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+
+    &:hover {
+        color: #2271b1;
+    }
+}
+
+.pattern-grid-item-preview {
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    /* emulated breathing room inside the tile (8px top / 8px bottom) */
+    padding: 8px 0;
+
+    &.loading {
+        height: 140px;
+    }
+
+    &.loading::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        margin: -10px 0 0 -10px;
+        border: 2px solid #e0e0e0;
+        border-top-color: #2271b1;
+        border-radius: 50%;
+        animation: patternGridSpin 0.6s linear infinite;
+    }
+
+    iframe {
+        border: none;
+        display: block;
+        pointer-events: none;
+    }
+}
+
+@keyframes patternGridSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}

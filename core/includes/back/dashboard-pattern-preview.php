@@ -57,3 +57,55 @@ function patterns_row_actions($actions, $post){
     return $actions;
 }
 add_filter('post_row_actions', 'patterns_row_actions', 10, 2);
+
+// Inject pattern grid view data on the patterns list page (consumed by the
+// grid/list toggle + live search in assets/js/dashboard/document-ready.js)
+add_action('admin_footer-edit.php', function(){
+
+    $screen = get_current_screen();
+    if(!$screen || $screen->post_type !== 'patterns' || !current_user_can('edit_others_posts')){
+        return;
+    }
+
+    $patterns = get_posts([
+        'post_type'        => 'patterns',
+        'posts_per_page'   => -1,
+        'post_status'      => 'publish',
+        'suppress_filters' => false,
+        'orderby'          => 'title',
+        'order'            => 'ASC',
+        'fields'           => 'ids',
+    ]);
+
+    // The grid mirrors the list: show only patterns in the current admin language.
+    $current_lang = apply_filters('wpml_current_language', null);
+    if($current_lang){
+        $patterns = array_values(array_filter($patterns, function($id) use ($current_lang){
+            $details = apply_filters('wpml_post_language_details', null, $id);
+            return is_array($details) && isset($details['language_code']) && $details['language_code'] === $current_lang;
+        }));
+    }
+
+    $items = array_map(function($id){
+        return [
+            'id'    => $id,
+            'title' => html_entity_decode(get_the_title($id), ENT_QUOTES | ENT_HTML5, get_bloginfo('charset')),
+            'url'   => home_url('/?pattern-preview-id=' . $id),
+            'edit'  => get_edit_post_link($id, 'raw'),
+        ];
+    }, $patterns);
+
+    ?>
+    <script>
+        var patternGridData = {
+            patterns: <?php echo wp_json_encode($items); ?>,
+            i18n: {
+                gridView: '<?php echo esc_js(__('Display patterns as grid', TEXTDOMAIN)); ?>',
+                backToList: '<?php echo esc_js(__('Back to list', TEXTDOMAIN)); ?>',
+                edit: '<?php echo esc_js(__('Edit', TEXTDOMAIN)); ?>',
+                searchPlaceholder: '<?php echo esc_js(__('Search patterns', TEXTDOMAIN)); ?>'
+            }
+        };
+    </script>
+    <?php
+});
