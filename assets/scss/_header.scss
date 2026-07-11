@@ -1,0 +1,71 @@
+/* test site header (layout scaffold — restyle per project)
+-------------------------------------------------------------- */
+.site-header {
+    border-bottom: 1px solid #e5e5e5;
+    padding: 16px 0;
+
+    .inner {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .site-logo {
+        display: inline-flex;
+        align-items: center;
+        font-size: 18px;
+        font-weight: 700;
+        text-decoration: none;
+        color: inherit;
+
+        img {
+            max-height: 40px;
+            width: auto;
+        }
+    }
+
+    .site-nav {
+        flex: 1;
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .site-header-cta {
+        margin-left: auto;
+    }
+
+    @media (max-width: 768px) {
+        .inner {
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .site-nav {
+            flex: 1 1 100%;
+
+            ul {
+                gap: 12px;
+            }
+        }
+
+        .site-header-cta {
+            margin-left: 0;
+        }
+    }
+}

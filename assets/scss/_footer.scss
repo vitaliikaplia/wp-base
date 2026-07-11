@@ -1,0 +1,40 @@
+/* test site footer (layout scaffold — restyle per project)
+-------------------------------------------------------------- */
+.site-footer {
+    border-top: 1px solid #e5e5e5;
+    margin-top: 40px;
+    padding: 24px 0;
+
+    .inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .site-footer-nav {
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .site-footer-copy {
+        margin: 0;
+        color: #666;
+    }
+}

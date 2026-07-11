@@ -6,7 +6,7 @@
         {% endif %}
 
         {% if general_fields.footer.copy_line %}
-        <p class="site-footer-copy">{{ general_fields.footer.copy_line }}</p>
+        <p class="site-footer-copy">{{ general_fields.footer.copy_line | shortcodes }}</p>
         {% endif %}
     </div>
 </footer>
