@@ -11,15 +11,17 @@ function get_user_ip()
     }
     $client  = @$_SERVER['HTTP_CLIENT_IP'];
     $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
-    $remote  = $_SERVER['REMOTE_ADDR'];
+    $remote  = !empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
 
     if(filter_var($client, FILTER_VALIDATE_IP))
     {
         $ip = $client;
     }
-    elseif(filter_var($forward, FILTER_VALIDATE_IP))
+    elseif($forward)
     {
-        $ip = $forward;
+        $forwarded_ips = explode(',', $forward);
+        $forwarded_ip = trim($forwarded_ips[0]);
+        $ip = filter_var($forwarded_ip, FILTER_VALIDATE_IP) ? $forwarded_ip : $remote;
     }
     else
     {
@@ -30,7 +32,7 @@ function get_user_ip()
 }
 
 function get_platform_info() {
-    $u_agent = $_SERVER['HTTP_USER_AGENT'];
+    $u_agent = !empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
     $platform = 'Unknown';
 
     if (preg_match('/linux/i', $u_agent)) {
@@ -45,7 +47,7 @@ function get_platform_info() {
 }
 
 function get_browser_info() {
-    $u_agent = $_SERVER['HTTP_USER_AGENT'];
+    $u_agent = !empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
     $bname = 'Unknown';
 
     if (preg_match('/MSIE/i', $u_agent) && !preg_match('/Opera/i', $u_agent)) {
@@ -69,18 +71,28 @@ function get_ip_info($ipAddress = false){
 
     if($ipAddress){
 
-        if($ipAddress == "::1"){
-            return 'Localhost';
+        if(!filter_var($ipAddress, FILTER_VALIDATE_IP)){
+            return $ipAddress;
+        }
+
+        $is_public_ip = filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE);
+
+        if(!$is_public_ip){
+            return 'Localhost ('.$ipAddress.')';
         } else {
-            // Initialize the reader for country
-            $countryReader = new GeoIp2\Database\Reader(CORE_PATH . DS . 'geo' . DS . 'country.mmdb');
-            $countryRecord = $countryReader->country($ipAddress);
+            try {
+                // Initialize the reader for country
+                $countryReader = new GeoIp2\Database\Reader(CORE_PATH . DS . 'geo' . DS . 'country.mmdb');
+                $countryRecord = $countryReader->country($ipAddress);
 
-            // Initialize the reader for city
-            $cityReader = new GeoIp2\Database\Reader(CORE_PATH . DS . 'geo' . DS . 'city.mmdb');
-            $cityRecord = $cityReader->city($ipAddress);
+                // Initialize the reader for city
+                $cityReader = new GeoIp2\Database\Reader(CORE_PATH . DS . 'geo' . DS . 'city.mmdb');
+                $cityRecord = $cityReader->city($ipAddress);
 
-            return $countryRecord->country->name . ', ' . $cityRecord->mostSpecificSubdivision->name . ', ' . $cityRecord->city->name . ' ('.$ipAddress.')';
+                return $countryRecord->country->name . ', ' . $cityRecord->mostSpecificSubdivision->name . ', ' . $cityRecord->city->name . ' ('.$ipAddress.')';
+            } catch (\Throwable $e) {
+                return $ipAddress;
+            }
         }
 
     }
