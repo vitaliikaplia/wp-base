@@ -113,11 +113,11 @@
             "rows_per_page": 20,
             "sub_fields": [
                 {
-                    "key": "field_other_social_network",
-                    "label": "Соціальна мережа",
-                    "name": "network",
+                    "key": "field_other_social_icon",
+                    "label": "Іконка",
+                    "name": "icon",
                     "aria-label": "",
-                    "type": "select",
+                    "type": "icon_select",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -126,27 +126,6 @@
                         "class": "",
                         "id": ""
                     },
-                    "choices": {
-                        "facebook": "Facebook",
-                        "instagram": "Instagram",
-                        "tiktok": "TikTok",
-                        "linkedin": "LinkedIn",
-                        "x": "X",
-                        "youtube": "YouTube",
-                        "telegram": "Telegram",
-                        "whatsapp": "WhatsApp",
-                        "viber": "Viber",
-                        "threads": "Threads",
-                        "pinterest": "Pinterest"
-                    },
-                    "default_value": false,
-                    "return_format": "value",
-                    "multiple": 0,
-                    "allow_null": 0,
-                    "ui": 1,
-                    "ajax": 0,
-                    "placeholder": "",
-                    "allow_in_bindings": 0,
                     "parent_repeater": "field_other_socials"
                 },
                 {
@@ -222,5 +201,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1783734420
+    "modified": 1783735160
 }
