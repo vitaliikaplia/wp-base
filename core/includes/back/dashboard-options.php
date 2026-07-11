@@ -488,6 +488,61 @@ function get_custom_options(){
                 array (
                     'type'          => 'tab_end',
                 ),
+                array (
+                    'type'          => 'tab_start',
+                    'name'          => 'schema_org',
+                    'label'         => __("Schema.org (JSON-LD)", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'enable_schema_json_ld',
+                    'label'         => __("Enable JSON-LD", TEXTDOMAIN),
+                    'description'   => __("Output Organization / WebSite / WebPage / Article structured data in the head", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'text',
+                    'name'          => 'schema_org_name',
+                    'label'         => __("Organization name", TEXTDOMAIN),
+                    'description'   => __("Defaults to the site title", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'textarea',
+                    'name'          => 'schema_org_description',
+                    'label'         => __("Organization description", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'select',
+                    'options'       => array(
+                        'Organization'        => __('Organization', TEXTDOMAIN),
+                        'LocalBusiness'       => __('Local Business', TEXTDOMAIN),
+                        'ProfessionalService' => __('Professional Service', TEXTDOMAIN),
+                    ),
+                    'name'          => 'schema_org_type',
+                    'label'         => __("Organization type", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'text',
+                    'name'          => 'schema_org_street',
+                    'label'         => __("Street address", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'text',
+                    'name'          => 'schema_org_city',
+                    'label'         => __("City", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'text',
+                    'name'          => 'schema_org_postal_code',
+                    'label'         => __("Postal code", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'text',
+                    'name'          => 'schema_org_country',
+                    'label'         => __("Country code (e.g. UA)", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'tab_end',
+                ),
             ),
         ),
         'cookie_popup'   =>  Array(
