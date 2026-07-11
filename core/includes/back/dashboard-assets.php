@@ -11,6 +11,10 @@ function custom_dashboard_assets(){
     wp_register_script( 'custom-dashboard', TEMPLATE_DIRECTORY_URL . 'assets/js/dashboard.min.js', '', ASSETS_VERSION, true);
     wp_enqueue_script( 'custom-dashboard' );
 
+    if(function_exists('get_managed_icons_config')){
+        wp_localize_script( 'custom-dashboard', 'managedIcons', get_managed_icons_config() );
+    }
+
     wp_register_script( 'custom-gutenberg', TEMPLATE_DIRECTORY_URL . 'assets/js/gutenberg.min.js', '', ASSETS_VERSION, true);
     wp_enqueue_script( 'custom-gutenberg' );
 

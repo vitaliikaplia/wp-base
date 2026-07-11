@@ -61,6 +61,8 @@ class StarterSite extends Site {
         $twig->addFunction( new \Twig\TwigFunction('checked', 'checked'));
         $twig->addFunction( new \Twig\TwigFunction('get_user_ip', 'get_user_ip'));
         $twig->addFunction( new \Twig\TwigFunction('get_session_info', 'get_session_info'));
+        $twig->addFunction( new \Twig\TwigFunction('icon', 'render_managed_icon', array('is_safe' => array('html'))));
+        $twig->addFunction( new \Twig\TwigFunction('managed_icon', 'render_managed_icon', array('is_safe' => array('html'))));
         return $twig;
     }
 }

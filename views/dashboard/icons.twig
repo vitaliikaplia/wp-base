@@ -1,0 +1,122 @@
+<div class="wrap icons-page icons-manager">
+    <div class="icons-header">
+        <h1>{{ labels.title }}</h1>
+        <button type="button" class="page-title-action upload-icons">{{ labels.upload }}</button>
+        <button type="button" class="page-title-action bulk-delete-icons"{% if icons is empty %} hidden{% endif %}>{{ labels.bulk_delete }}</button>
+        <input type="file" class="icons-file-input" accept=".svg,image/svg+xml" hidden>
+    </div>
+    <div class="icons-notices"></div>
+
+    <div class="icons-bulk-actions" hidden>
+        <button type="button" class="button button-link-delete delete-selected-icons" disabled>{{ labels.delete_selected }}</button>
+        <button type="button" class="button cancel-bulk-selection">{{ labels.cancel_selection }}</button>
+    </div>
+
+    {% if icons is empty %}
+        <div class="notice notice-warning inline icons-empty">
+            <p>{{ labels.empty }}</p>
+        </div>
+    {% endif %}
+
+    <div class="icons-grid"{% if icons is empty %} hidden{% endif %} data-sprite-url="{{ sprite_url|e('html_attr') }}">
+        {% for icon in icons %}
+            <button
+                type="button"
+                class="icon-card{% if icon.locked %} is-locked{% endif %}"
+                data-icon-id="{{ icon.id|e('html_attr') }}"
+                data-icon-display-id="{{ icon.display_id|e('html_attr') }}"
+                data-icon-viewbox="{{ icon.viewBox|e('html_attr') }}"
+                {% if icon.locked %}data-icon-locked="1"{% endif %}
+            >
+                <span class="icon-card__preview">
+                    <svg aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet"{% if icon.viewBox %} viewBox="{{ icon.viewBox|e('html_attr') }}"{% endif %}>
+                        <use href="{{ (icon.sprite_url ~ '#' ~ icon.id)|e('html_attr') }}"></use>
+                    </svg>
+                </span>
+                <span class="icon-card__title">{{ icon.display_id }}</span>
+                {% if icon.locked %}
+                    <span class="icon-card__lock" title="{{ labels.read_only_hint|e('html_attr') }}">
+                        <span class="dashicons dashicons-lock" aria-hidden="true"></span>
+                        <span class="screen-reader-text">{{ labels.locked_badge }}</span>
+                    </span>
+                {% endif %}
+                <span class="icon-card__check" aria-hidden="true">
+                    <span class="dashicons dashicons-yes"></span>
+                </span>
+            </button>
+        {% endfor %}
+    </div>
+
+    <div class="icons-drop-overlay">
+        <div>
+            <span class="dashicons dashicons-upload" aria-hidden="true"></span>
+            <strong>{{ labels.upload }}</strong>
+        </div>
+    </div>
+
+    <div class="icon-modal" aria-hidden="true">
+        <div class="icon-modal__backdrop" data-icons-modal-close></div>
+        <div class="icon-modal__panel" role="dialog" aria-modal="true" aria-labelledby="icon-modal-title">
+            <button type="button" class="icon-modal__close" data-icons-modal-close aria-label="{{ labels.close|e('html_attr') }}">&times;</button>
+            <div class="icons-import-preview icon-modal__preview">
+                <span class="icons-import-preview__grid" aria-hidden="true"></span>
+                <span class="icons-import-preview__icon">
+                    <svg aria-hidden="true" focusable="false"></svg>
+                </span>
+            </div>
+            <h2 id="icon-modal-title">{{ labels.edit }}</h2>
+            <label for="icon-id">{{ labels.icon_id }}</label>
+            <input type="text" id="icon-id" class="regular-text" autocomplete="off">
+            <p class="description">{{ labels.description }}</p>
+            <p class="icon-modal__readonly notice notice-info inline">{{ labels.read_only_hint }}</p>
+            <div class="icons-import-options icon-modal__options">
+                <label>
+                    <input type="checkbox" class="icon-edit-fit-viewbox">
+                    {{ labels.fit_viewbox }}
+                </label>
+                <label>
+                    <input type="checkbox" class="icon-edit-current-color">
+                    {{ labels.current_color }}
+                </label>
+            </div>
+            <div class="icon-modal__actions">
+                <button type="button" class="button button-primary save-icon-id">{{ labels.save }}</button>
+                <button type="button" class="button download-icon">{{ labels.download }}</button>
+                <button type="button" class="button button-link-delete delete-icon" aria-label="{{ labels.delete|e('html_attr') }}" title="{{ labels.delete|e('html_attr') }}">
+                    <span class="dashicons dashicons-trash" aria-hidden="true"></span>
+                    <span class="screen-reader-text">{{ labels.delete }}</span>
+                </button>
+            </div>
+            <p class="icon-modal__message" aria-live="polite"></p>
+        </div>
+    </div>
+
+    <div class="icons-import-modal" aria-hidden="true">
+        <div class="icon-modal__backdrop" data-icons-import-modal-close></div>
+        <div class="icon-modal__panel" role="dialog" aria-modal="true" aria-labelledby="icons-import-title">
+            <button type="button" class="icon-modal__close" data-icons-import-modal-close aria-label="{{ labels.close|e('html_attr') }}">&times;</button>
+            <h2 id="icons-import-title">{{ labels.import_title }}</h2>
+            <div class="icons-import-preview" hidden>
+                <span class="icons-import-preview__grid" aria-hidden="true"></span>
+                <span class="icons-import-preview__icon"></span>
+            </div>
+            <div class="icons-import-options" hidden>
+                <label>
+                    <input type="checkbox" class="icon-fit-viewbox" checked>
+                    {{ labels.fit_viewbox }}
+                </label>
+                <label>
+                    <input type="checkbox" class="icon-current-color">
+                    {{ labels.current_color }}
+                </label>
+            </div>
+            <p class="icons-import-summary"></p>
+            <p class="icons-import-invalid"></p>
+            <div class="icon-modal__actions">
+                <button type="button" class="button button-primary confirm-icons-import">{{ labels.continue_import }}</button>
+                <button type="button" class="button" data-icons-import-modal-close>{{ labels.cancel }}</button>
+            </div>
+            <p class="icons-import-message icon-modal__message" aria-live="polite"></p>
+        </div>
+    </div>
+</div>
