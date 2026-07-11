@@ -699,7 +699,8 @@ msgid "Disable WordPress global styles"
 msgstr "Вимкнути глобальні стилі WordPress"
 
 #: core/includes/back/dashboard-options.php:463
-msgid "Remove Gutenberg global, stored and classic theme styles from the frontend."
+msgid ""
+"Remove Gutenberg global, stored and classic theme styles from the frontend."
 msgstr ""
 "Прибрати з фронтенду глобальні, збережені та classic theme стилі Gutenberg."
 
@@ -708,7 +709,9 @@ msgid "Disable WordPress block support styles"
 msgstr "Вимкнути стилі підтримки блоків WordPress"
 
 #: core/includes/back/dashboard-options.php:469
-msgid "Remove late core block support styles generated for layout, spacing and duotone support."
+msgid ""
+"Remove late core block support styles generated for layout, spacing and "
+"duotone support."
 msgstr ""
 "Прибрати пізні стилі підтримки core-блоків, які генеруються для layout, "
 "відступів і duotone."
@@ -718,7 +721,9 @@ msgid "Disable WordPress Font Library output"
 msgstr "Вимкнути вивід WordPress Font Library"
 
 #: core/includes/back/dashboard-options.php:475
-msgid "Remove native frontend Font Library @font-face output when custom theme font CSS replaces it."
+msgid ""
+"Remove native frontend Font Library @font-face output when custom theme font "
+"CSS replaces it."
 msgstr ""
 "Прибрати нативний фронтенд-вивід Font Library @font-face, коли його замінює "
 "власний CSS шрифтів теми."
@@ -740,7 +745,8 @@ msgid "Disable WordPress image auto sizes"
 msgstr "Вимкнути автоматичні розміри зображень WordPress"
 
 #: core/includes/back/dashboard-options.php:487
-msgid "Remove WordPress image auto-sizes markup and helper CSS from the frontend."
+msgid ""
+"Remove WordPress image auto-sizes markup and helper CSS from the frontend."
 msgstr ""
 "Прибрати з фронтенду WordPress-розмітку image auto-sizes і допоміжний CSS."
 
@@ -1127,6 +1133,596 @@ msgstr "Пароль"
 #: views/password.twig:11
 msgid "Submit"
 msgstr "Надіслати"
+
+msgid "%s icons have invalid names and will be skipped."
+msgstr "%s іконок мають некоректні назви та будуть пропущені."
+
+msgid "Allow .m3u / .m3u8 / .ts uploads"
+msgstr "Дозволити завантаження .m3u / .m3u8 / .ts"
+
+msgid "Archives"
+msgstr "Архіви"
+
+msgid "Archives for"
+msgstr "Архіви за"
+
+msgid "Back to list"
+msgstr "Назад до списку"
+
+msgid "Bulk delete"
+msgstr "Масове видалення"
+
+msgid "Button"
+msgstr "Кнопка"
+
+msgid "Cancel"
+msgstr "Скасувати"
+
+msgid "Cancel selection"
+msgstr "Скасувати вибір"
+
+msgid "Choose an icon first."
+msgstr "Спершу оберіть іконку."
+
+msgid "Choose selected icon"
+msgstr "Обрати вибрану іконку"
+
+msgid "City"
+msgstr "Місто"
+
+msgid "Clear"
+msgstr "Очистити"
+
+msgid "Close"
+msgstr "Закрити"
+
+msgid "Color Select"
+msgstr "Вибір кольору"
+
+msgid "Confirm delete"
+msgstr "Підтвердити видалення"
+
+msgid "Continue import"
+msgstr "Продовжити імпорт"
+
+msgid "Convert fills to currentColor"
+msgstr "Перетворити заливки на currentColor"
+
+msgid "Cookie consent popup"
+msgstr "Кукі-попап згоди"
+
+msgid "Cookie popup"
+msgstr "Кукі-попап"
+
+msgid "Cookie popup button label"
+msgstr "Напис кнопки кукі-попапу"
+
+msgid "Cookie popup text"
+msgstr "Текст кукі-попапу"
+
+msgid "Cookie popup title"
+msgstr "Заголовок кукі-попапу"
+
+msgid "Could not reach the server."
+msgstr "Не вдалося зв'язатися із сервером."
+
+msgid "Country code (e.g. UA)"
+msgstr "Код країни (напр. UA)"
+
+msgid "Default"
+msgstr "За замовчуванням"
+
+msgid "Default icons are read-only and cannot be changed."
+msgstr ""
+"Іконки за замовчуванням доступні лише для читання і не можуть бути змінені."
+
+msgid "Default icons are read-only and cannot be deleted."
+msgstr ""
+"Іконки за замовчуванням доступні лише для читання і не можуть бути видалені."
+
+msgid "Defaults to the first 12 characters of the site title"
+msgstr "За замовчуванням — перші 12 символів назви сайту"
+
+msgid "Defaults to the site tagline"
+msgstr "За замовчуванням — короткий опис сайту"
+
+msgid "Defaults to the site title"
+msgstr "За замовчуванням — назва сайту"
+
+msgid "Delete"
+msgstr "Видалити"
+
+msgid "Delete Permanently"
+msgstr "Видалити назавжди"
+
+msgid "Delete selected"
+msgstr "Видалити вибране"
+
+msgid "Delete selected (%s)"
+msgstr "Видалити вибране (%s)"
+
+msgid "Detach the post_tag taxonomy from posts (categories only)"
+msgstr "Від'єднати таксономію post_tag від записів (лише категорії)"
+
+msgid "Disable Connectors admin page"
+msgstr "Вимкнути сторінку Connectors в адмінці"
+
+msgid "Disable blog tags"
+msgstr "Вимкнути мітки блогу"
+
+msgid "Disabled page"
+msgstr "Вимкнена сторінка"
+
+msgid "Dismiss this notice."
+msgstr "Закрити це сповіщення."
+
+msgid "Display patterns as grid"
+msgstr "Показувати патерни сіткою"
+
+msgid "Download SVG"
+msgstr "Завантажити SVG"
+
+msgid "Edit icon"
+msgstr "Редагувати іконку"
+
+msgid "Edit selected icon"
+msgstr "Редагувати вибрану іконку"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Enable JSON-LD"
+msgstr "Увімкнути JSON-LD"
+
+msgid "Error 404: Page not found"
+msgstr "Помилка 404: Сторінку не знайдено"
+
+msgid "External link interstitial"
+msgstr "Проміжна сторінка зовнішнього посилання"
+
+msgid "Fit artwork to viewBox bounds"
+msgstr "Вписати зображення в межі viewBox"
+
+msgid "Fri"
+msgstr "Пт"
+
+msgid "Go now"
+msgstr "Перейти зараз"
+
+msgid "Google Maps"
+msgstr "Google Maps"
+
+msgid "HTML code is empty"
+msgstr "HTML-код порожній"
+
+msgid "Hide and block the wp-admin Connectors settings page"
+msgstr "Приховати та заблокувати сторінку налаштувань Connectors у wp-admin"
+
+msgid "Home"
+msgstr "Головна"
+
+msgid "Icon"
+msgstr "Іконка"
+
+msgid "Icon \"%s\" already exists and will be skipped."
+msgstr "Іконка \"%s\" вже існує і буде пропущена."
+
+msgid "Icon Select"
+msgstr "Вибір іконки"
+
+msgid "Icon deleted."
+msgstr "Іконку видалено."
+
+msgid "Icon name"
+msgstr "Назва іконки"
+
+msgid "Icon name already exists."
+msgstr "Іконка з такою назвою вже існує."
+
+msgid "Icon name cannot be empty."
+msgstr "Назва іконки не може бути порожньою."
+
+msgid "Icon name was not updated."
+msgstr "Назву іконки не оновлено."
+
+msgid "Icon updated."
+msgstr "Іконку оновлено."
+
+msgid "Icon was not deleted."
+msgstr "Іконку не видалено."
+
+msgid "Icon was not found in the sprite."
+msgstr "Іконку не знайдено у спрайті."
+
+msgid "Icons"
+msgstr "Іконки"
+
+msgid "Import SVG file"
+msgstr "Імпортувати SVG-файл"
+
+msgid ""
+"In this section, you can configure the cookie consent popup. The popup is "
+"displayed only when the title, text and button are all filled in."
+msgstr ""
+"У цьому розділі ви можете налаштувати кукі-попап згоди. Попап відображається "
+"лише тоді, коли заповнені заголовок, текст і кнопка."
+
+msgid "Invalid email address."
+msgstr "Некоректна email-адреса."
+
+msgid "Local Business"
+msgstr "Local Business"
+
+msgid "Message"
+msgstr "Повідомлення"
+
+msgid "Message delivered to the configured chat."
+msgstr "Повідомлення доставлено до налаштованого чату."
+
+msgid "Message is required."
+msgstr "Повідомлення є обов'язковим."
+
+msgid "Missing icon: %s"
+msgstr "Відсутня іконка: %s"
+
+msgid "Mon"
+msgstr "Пн"
+
+msgid "No SMS logs found"
+msgstr "Логів SMS не знайдено"
+
+msgid "No SMS logs found in trash"
+msgstr "Логів SMS у кошику не знайдено"
+
+msgid "No SMS provider is configured."
+msgstr "Провайдера SMS не налаштовано."
+
+msgid "No icons found in the sprite yet."
+msgstr "У спрайті ще немає іконок."
+
+msgid "No icons selected."
+msgstr "Іконок не вибрано."
+
+msgid "No new icons can be imported from this SVG file."
+msgstr "З цього SVG-файлу не можна імпортувати жодної нової іконки."
+
+msgid "Only SVG files are allowed."
+msgstr "Дозволені лише SVG-файли."
+
+msgid "Only valid SVG files are allowed."
+msgstr "Дозволені лише коректні SVG-файли."
+
+msgid "Optional message thread (topic) ID for forum-style group chats"
+msgstr ""
+"Необов'язковий ID гілки повідомлень (теми) для групових чатів у стилі форуму"
+
+msgid "Organization"
+msgstr "Organization"
+
+msgid "Organization description"
+msgstr "Опис організації"
+
+msgid "Organization name"
+msgstr "Назва організації"
+
+msgid "Organization type"
+msgstr "Тип організації"
+
+msgid ""
+"Output Organization / WebSite / WebPage / Article structured data in the head"
+msgstr ""
+"Виводити структуровані дані Organization / WebSite / WebPage / Article у head"
+
+msgid "Page not found"
+msgstr "Сторінку не знайдено"
+
+msgid "Permission denied"
+msgstr "Доступ заборонено"
+
+msgid "Permit HLS playlist and MPEG-TS segment uploads in the media library"
+msgstr ""
+"Дозволити завантаження HLS-плейлистів та сегментів MPEG-TS у медіабібліотеку"
+
+msgid "Phone and message are required."
+msgstr "Телефон і повідомлення є обов'язковими."
+
+msgid "Pick an icon"
+msgstr "Оберіть іконку"
+
+msgid "Pick another icon"
+msgstr "Оберіть іншу іконку"
+
+msgid "Postal code"
+msgstr "Поштовий індекс"
+
+msgid "Professional Service"
+msgstr "Professional Service"
+
+msgid "Recipient email"
+msgstr "Email отримувача"
+
+msgid "Remove selected icon"
+msgstr "Прибрати вибрану іконку"
+
+msgid "Request sent via %s — see the SMS log."
+msgstr "Запит надіслано через %s — див. лог SMS."
+
+msgid "Restore"
+msgstr "Відновити"
+
+msgid "Route outbound links through a \"you are leaving\" countdown page"
+msgstr ""
+"Направляти зовнішні посилання через сторінку зворотного відліку \"ви "
+"залишаєте сайт\""
+
+msgid "SMS"
+msgstr "SMS"
+
+msgid "SMS Alpha Name"
+msgstr "Альфа-ім'я SMS"
+
+msgid "SMS Fly"
+msgstr "SMS Fly"
+
+msgid "SMS Services"
+msgstr "SMS-сервіси"
+
+msgid "SMS alpha name"
+msgstr "Альфа-ім'я SMS"
+
+msgid "SMS log"
+msgstr "Лог SMS"
+
+msgid "SMS log information"
+msgstr "Інформація логу SMS"
+
+msgid "SMS log information response"
+msgstr "Відповідь з інформацією логу SMS"
+
+msgid "SMS service provider"
+msgstr "Провайдер SMS-сервісу"
+
+msgid "SMS-Fly"
+msgstr "SMS-Fly"
+
+msgid "SMS-Fly alpha name"
+msgstr "Альфа-ім'я SMS-Fly"
+
+msgid "SMS-Fly alpha name what will be used as SMS sender"
+msgstr "Альфа-ім'я SMS-Fly, яке використовуватиметься як відправник SMS"
+
+msgid "SMS-Fly login to integrate with SMS-Fly service"
+msgstr "Логін SMS-Fly для інтеграції із сервісом SMS-Fly"
+
+msgid "SMS-Fly password"
+msgstr "Пароль SMS-Fly"
+
+msgid "SMS-Fly password to integrate with SMS-Fly service"
+msgstr "Пароль SMS-Fly для інтеграції із сервісом SMS-Fly"
+
+msgid "SMS-Fly username"
+msgstr "Ім'я користувача SMS-Fly"
+
+msgid "SVG file could not be imported."
+msgstr "Не вдалося імпортувати SVG-файл."
+
+msgid "SVG file could not be read."
+msgstr "Не вдалося прочитати SVG-файл."
+
+msgid "SVG file is empty."
+msgstr "SVG-файл порожній."
+
+msgid "SVG file is too large."
+msgstr "SVG-файл завеликий."
+
+msgid "SVG icon could not be downloaded."
+msgstr "Не вдалося завантажити SVG-іконку."
+
+msgid "SVG icon imported."
+msgstr "SVG-іконку імпортовано."
+
+msgid "SVG sprite could not be read."
+msgstr "Не вдалося прочитати SVG-спрайт."
+
+msgid "SVG sprite could not be saved."
+msgstr "Не вдалося зберегти SVG-спрайт."
+
+msgid "SVG sprite imported."
+msgstr "SVG-спрайт імпортовано."
+
+msgid "SVG sprite is not writable."
+msgstr "SVG-спрайт недоступний для запису."
+
+msgid "Sat"
+msgstr "Сб"
+
+msgid "Schema.org (JSON-LD)"
+msgstr "Schema.org (JSON-LD)"
+
+msgid "Search for SMS logs"
+msgstr "Пошук логів SMS"
+
+msgid "Search patterns"
+msgstr "Пошук патернів"
+
+msgid "Search results for: %s"
+msgstr "Результати пошуку за запитом: %s"
+
+msgid "Select SMS service provider to integrate with SMS service"
+msgstr "Оберіть провайдера SMS-сервісу для інтеграції із SMS-сервісом"
+
+msgid "Select icon"
+msgstr "Обрати іконку"
+
+msgid "Selected icons deleted."
+msgstr "Вибрані іконки видалено."
+
+msgid "Selected icons were not deleted."
+msgstr "Вибрані іконки не видалено."
+
+msgid "Selected icons were not found in the sprite."
+msgstr "Вибраних іконок не знайдено у спрайті."
+
+msgid "Send test SMS"
+msgstr "Надіслати тестове SMS"
+
+msgid "Send test Telegram"
+msgstr "Надіслати тестовий Telegram"
+
+msgid "Send test email"
+msgstr "Надіслати тестовий email"
+
+msgid "Send test — Email / SMS / Telegram"
+msgstr "Тестове надсилання — Email / SMS / Telegram"
+
+msgid "Sent to %s — see the Mail log."
+msgstr "Надіслано до %s — див. лог пошти."
+
+msgid "Sent with"
+msgstr "Надіслано через"
+
+msgid "Splash-screen background for the installed PWA"
+msgstr "Фон заставки для встановленого PWA"
+
+msgid "Street address"
+msgstr "Вулиця та номер будинку"
+
+msgid "Sun"
+msgstr "Нд"
+
+msgid "Telegram"
+msgstr "Telegram"
+
+msgid "Telegram API rejected the message."
+msgstr "API Telegram відхилив повідомлення."
+
+msgid "Telegram Bot"
+msgstr "Telegram-бот"
+
+msgid "Telegram bot is not configured."
+msgstr "Telegram-бот не налаштований."
+
+msgid "Telegram chat ID"
+msgstr "ID чату Telegram"
+
+msgid "Telegram chat ID to integrate with Telegram bot"
+msgstr "ID чату Telegram для інтеграції з Telegram-ботом"
+
+msgid "Telegram chat thread ID"
+msgstr "ID гілки чату Telegram"
+
+msgid "Telegram token"
+msgstr "Токен Telegram"
+
+msgid "Telegram token to integrate with Telegram bot"
+msgstr "Токен Telegram для інтеграції з Telegram-ботом"
+
+msgid "Test SMS from the website"
+msgstr "Тестове SMS із сайту"
+
+msgid "Test message from the website"
+msgstr "Тестове повідомлення із сайту"
+
+msgid "The provider returned an empty response."
+msgstr "Провайдер повернув порожню відповідь."
+
+msgid "This SVG icon does not contain visible artwork."
+msgstr "Ця SVG-іконка не містить видимого зображення."
+
+msgid "This SVG icon will be imported as \"%s\"."
+msgstr "Ця SVG-іконка буде імпортована як \"%s\"."
+
+msgid "This admin page is disabled."
+msgstr "Ця сторінка адмінки вимкнена."
+
+msgid ""
+"This is a default theme icon. It is read-only — you can download it, but not "
+"rename or delete it."
+msgstr ""
+"Це іконка теми за замовчуванням. Вона доступна лише для читання — ви можете "
+"її завантажити, але не можете перейменувати чи видалити."
+
+msgid "This name is used as the icon identifier."
+msgstr "Ця назва використовується як ідентифікатор іконки."
+
+msgid ""
+"This sprite contains %1$s icons. %2$s will be added and %3$s skipped because "
+"of name conflicts."
+msgstr ""
+"Цей спрайт містить %1$s іконок. %2$s буде додано, а %3$s пропущено через "
+"конфлікти назв."
+
+msgid "Thu"
+msgstr "Чт"
+
+msgid "Trash"
+msgstr "Кошик"
+
+msgid "Tue"
+msgstr "Вт"
+
+msgid "Turbo SMS"
+msgstr "Turbo SMS"
+
+msgid "Turbo SMS alpha name"
+msgstr "Альфа-ім'я Turbo SMS"
+
+msgid "Turbo SMS alpha name what will be used as SMS sender"
+msgstr "Альфа-ім'я Turbo SMS, яке використовуватиметься як відправник SMS"
+
+msgid "Turbo SMS token"
+msgstr "Токен Turbo SMS"
+
+msgid "Turbo SMS token to integrate with Turbo SMS service"
+msgstr "Токен Turbo SMS для інтеграції із сервісом Turbo SMS"
+
+msgid "Unknown channel."
+msgstr "Невідомий канал."
+
+msgid "Upload"
+msgstr "Завантажити"
+
+msgid "Web manifest background color"
+msgstr "Колір фону веб-маніфесту"
+
+msgid "Web manifest description"
+msgstr "Опис веб-маніфесту"
+
+msgid "Web manifest short name"
+msgstr "Коротка назва веб-маніфесту"
+
+msgid "Wed"
+msgstr "Ср"
+
+msgid "Working Hours"
+msgstr "Робочі години"
+
+msgid "You are leaving our website"
+msgstr "Ви залишаєте наш сайт"
+
+msgid "You are not allowed to manage icons."
+msgstr "Ви не маєте дозволу керувати іконками."
+
+msgid "You searched for"
+msgstr "Ви шукали"
+
+msgid "You will be redirected to an external resource in"
+msgstr "Ви будете перенаправлені на зовнішній ресурс через"
+
+msgid "iFrame"
+msgstr "iFrame"
+
+msgid "link"
+msgstr "посилання"
+
+msgid "sec."
+msgstr "сек."
+
+msgid "unknown"
+msgstr "невідомо"
+
+msgid "wp_mail reported an error."
+msgstr "wp_mail повідомив про помилку."
 
 #~ msgid "Link"
 #~ msgstr "Посилання"

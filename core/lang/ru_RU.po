@@ -701,7 +701,8 @@ msgid "Disable WordPress global styles"
 msgstr "Отключить глобальные стили WordPress"
 
 #: core/includes/back/dashboard-options.php:463
-msgid "Remove Gutenberg global, stored and classic theme styles from the frontend."
+msgid ""
+"Remove Gutenberg global, stored and classic theme styles from the frontend."
 msgstr ""
 "Убрать с фронтенда глобальные, сохранённые и classic theme стили Gutenberg."
 
@@ -710,7 +711,9 @@ msgid "Disable WordPress block support styles"
 msgstr "Отключить стили поддержки блоков WordPress"
 
 #: core/includes/back/dashboard-options.php:469
-msgid "Remove late core block support styles generated for layout, spacing and duotone support."
+msgid ""
+"Remove late core block support styles generated for layout, spacing and "
+"duotone support."
 msgstr ""
 "Убрать поздние стили поддержки core-блоков, которые генерируются для layout, "
 "отступов и duotone."
@@ -720,7 +723,9 @@ msgid "Disable WordPress Font Library output"
 msgstr "Отключить вывод WordPress Font Library"
 
 #: core/includes/back/dashboard-options.php:475
-msgid "Remove native frontend Font Library @font-face output when custom theme font CSS replaces it."
+msgid ""
+"Remove native frontend Font Library @font-face output when custom theme font "
+"CSS replaces it."
 msgstr ""
 "Убрать нативный фронтенд-вывод Font Library @font-face, когда его заменяет "
 "собственный CSS шрифтов темы."
@@ -735,14 +740,16 @@ msgid ""
 "REST API. This also disables native Font Library frontend output."
 msgstr ""
 "Скрыть и заблокировать менеджер WordPress Font Library в админке, интерфейсе "
-"редактора и REST API. Это также отключает нативный фронтенд-вывод Font Library."
+"редактора и REST API. Это также отключает нативный фронтенд-вывод Font "
+"Library."
 
 #: core/includes/back/dashboard-options.php:486
 msgid "Disable WordPress image auto sizes"
 msgstr "Отключить автоматические размеры изображений WordPress"
 
 #: core/includes/back/dashboard-options.php:487
-msgid "Remove WordPress image auto-sizes markup and helper CSS from the frontend."
+msgid ""
+"Remove WordPress image auto-sizes markup and helper CSS from the frontend."
 msgstr ""
 "Убрать с фронтенда WordPress-разметку image auto-sizes и вспомогательный CSS."
 
@@ -1126,6 +1133,596 @@ msgstr "Пароль"
 #: views/password.twig:11
 msgid "Submit"
 msgstr "Отправить"
+
+msgid "%s icons have invalid names and will be skipped."
+msgstr "%s значков имеют недопустимые имена и будут пропущены."
+
+msgid "Allow .m3u / .m3u8 / .ts uploads"
+msgstr "Разрешить загрузку .m3u / .m3u8 / .ts"
+
+msgid "Archives"
+msgstr "Архивы"
+
+msgid "Archives for"
+msgstr "Архивы за"
+
+msgid "Back to list"
+msgstr "Назад к списку"
+
+msgid "Bulk delete"
+msgstr "Массовое удаление"
+
+msgid "Button"
+msgstr "Кнопка"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Cancel selection"
+msgstr "Отменить выбор"
+
+msgid "Choose an icon first."
+msgstr "Сначала выберите значок."
+
+msgid "Choose selected icon"
+msgstr "Выбрать указанный значок"
+
+msgid "City"
+msgstr "Город"
+
+msgid "Clear"
+msgstr "Очистить"
+
+msgid "Close"
+msgstr "Закрыть"
+
+msgid "Color Select"
+msgstr "Выбор цвета"
+
+msgid "Confirm delete"
+msgstr "Подтвердить удаление"
+
+msgid "Continue import"
+msgstr "Продолжить импорт"
+
+msgid "Convert fills to currentColor"
+msgstr "Преобразовать заливки в currentColor"
+
+msgid "Cookie consent popup"
+msgstr "Всплывающее окно согласия на cookie"
+
+msgid "Cookie popup"
+msgstr "Всплывающее окно cookie"
+
+msgid "Cookie popup button label"
+msgstr "Подпись кнопки всплывающего окна cookie"
+
+msgid "Cookie popup text"
+msgstr "Текст всплывающего окна cookie"
+
+msgid "Cookie popup title"
+msgstr "Заголовок всплывающего окна cookie"
+
+msgid "Could not reach the server."
+msgstr "Не удалось связаться с сервером."
+
+msgid "Country code (e.g. UA)"
+msgstr "Код страны (например, UA)"
+
+msgid "Default"
+msgstr "По умолчанию"
+
+msgid "Default icons are read-only and cannot be changed."
+msgstr ""
+"Стандартные значки доступны только для чтения и не могут быть изменены."
+
+msgid "Default icons are read-only and cannot be deleted."
+msgstr "Стандартные значки доступны только для чтения и не могут быть удалены."
+
+msgid "Defaults to the first 12 characters of the site title"
+msgstr "По умолчанию используются первые 12 символов названия сайта"
+
+msgid "Defaults to the site tagline"
+msgstr "По умолчанию используется краткое описание сайта"
+
+msgid "Defaults to the site title"
+msgstr "По умолчанию используется название сайта"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Delete Permanently"
+msgstr "Удалить навсегда"
+
+msgid "Delete selected"
+msgstr "Удалить выбранные"
+
+msgid "Delete selected (%s)"
+msgstr "Удалить выбранные (%s)"
+
+msgid "Detach the post_tag taxonomy from posts (categories only)"
+msgstr "Отвязать таксономию post_tag от записей (только рубрики)"
+
+msgid "Disable Connectors admin page"
+msgstr "Отключить страницу Connectors в админке"
+
+msgid "Disable blog tags"
+msgstr "Отключить метки блога"
+
+msgid "Disabled page"
+msgstr "Отключённая страница"
+
+msgid "Dismiss this notice."
+msgstr "Скрыть это уведомление."
+
+msgid "Display patterns as grid"
+msgstr "Отображать паттерны сеткой"
+
+msgid "Download SVG"
+msgstr "Скачать SVG"
+
+msgid "Edit icon"
+msgstr "Редактировать значок"
+
+msgid "Edit selected icon"
+msgstr "Редактировать выбранный значок"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Enable JSON-LD"
+msgstr "Включить JSON-LD"
+
+msgid "Error 404: Page not found"
+msgstr "Ошибка 404: страница не найдена"
+
+msgid "External link interstitial"
+msgstr "Промежуточная страница для внешних ссылок"
+
+msgid "Fit artwork to viewBox bounds"
+msgstr "Вписать изображение в границы viewBox"
+
+msgid "Fri"
+msgstr "Пт"
+
+msgid "Go now"
+msgstr "Перейти сейчас"
+
+msgid "Google Maps"
+msgstr "Google Maps"
+
+msgid "HTML code is empty"
+msgstr "HTML-код пуст"
+
+msgid "Hide and block the wp-admin Connectors settings page"
+msgstr "Скрыть и заблокировать страницу настроек Connectors в wp-admin"
+
+msgid "Home"
+msgstr "Главная"
+
+msgid "Icon"
+msgstr "Значок"
+
+msgid "Icon \"%s\" already exists and will be skipped."
+msgstr "Значок «%s» уже существует и будет пропущен."
+
+msgid "Icon Select"
+msgstr "Выбор значка"
+
+msgid "Icon deleted."
+msgstr "Значок удалён."
+
+msgid "Icon name"
+msgstr "Имя значка"
+
+msgid "Icon name already exists."
+msgstr "Имя значка уже существует."
+
+msgid "Icon name cannot be empty."
+msgstr "Имя значка не может быть пустым."
+
+msgid "Icon name was not updated."
+msgstr "Имя значка не обновлено."
+
+msgid "Icon updated."
+msgstr "Значок обновлён."
+
+msgid "Icon was not deleted."
+msgstr "Значок не удалён."
+
+msgid "Icon was not found in the sprite."
+msgstr "Значок не найден в спрайте."
+
+msgid "Icons"
+msgstr "Значки"
+
+msgid "Import SVG file"
+msgstr "Импортировать файл SVG"
+
+msgid ""
+"In this section, you can configure the cookie consent popup. The popup is "
+"displayed only when the title, text and button are all filled in."
+msgstr ""
+"В этом разделе вы можете настроить всплывающее окно согласия на cookie. Окно "
+"отображается только тогда, когда заполнены заголовок, текст и кнопка."
+
+msgid "Invalid email address."
+msgstr "Недопустимый адрес email."
+
+msgid "Local Business"
+msgstr "Local Business"
+
+msgid "Message"
+msgstr "Сообщение"
+
+msgid "Message delivered to the configured chat."
+msgstr "Сообщение доставлено в настроенный чат."
+
+msgid "Message is required."
+msgstr "Требуется указать сообщение."
+
+msgid "Missing icon: %s"
+msgstr "Отсутствует значок: %s"
+
+msgid "Mon"
+msgstr "Пн"
+
+msgid "No SMS logs found"
+msgstr "Журналы SMS не найдены"
+
+msgid "No SMS logs found in trash"
+msgstr "Журналы SMS в корзине не найдены"
+
+msgid "No SMS provider is configured."
+msgstr "Провайдер SMS не настроен."
+
+msgid "No icons found in the sprite yet."
+msgstr "В спрайте пока нет значков."
+
+msgid "No icons selected."
+msgstr "Значки не выбраны."
+
+msgid "No new icons can be imported from this SVG file."
+msgstr "Из этого файла SVG нельзя импортировать новые значки."
+
+msgid "Only SVG files are allowed."
+msgstr "Разрешены только файлы SVG."
+
+msgid "Only valid SVG files are allowed."
+msgstr "Разрешены только корректные файлы SVG."
+
+msgid "Optional message thread (topic) ID for forum-style group chats"
+msgstr ""
+"Необязательный ID ветки сообщений (темы) для групповых чатов в стиле форума"
+
+msgid "Organization"
+msgstr "Organization"
+
+msgid "Organization description"
+msgstr "Описание организации"
+
+msgid "Organization name"
+msgstr "Название организации"
+
+msgid "Organization type"
+msgstr "Тип организации"
+
+msgid ""
+"Output Organization / WebSite / WebPage / Article structured data in the head"
+msgstr ""
+"Выводить структурированные данные Organization / WebSite / WebPage / Article "
+"в head"
+
+msgid "Page not found"
+msgstr "Страница не найдена"
+
+msgid "Permission denied"
+msgstr "Доступ запрещён"
+
+msgid "Permit HLS playlist and MPEG-TS segment uploads in the media library"
+msgstr ""
+"Разрешить загрузку плейлистов HLS и сегментов MPEG-TS в медиабиблиотеку"
+
+msgid "Phone and message are required."
+msgstr "Требуется указать телефон и сообщение."
+
+msgid "Pick an icon"
+msgstr "Выберите значок"
+
+msgid "Pick another icon"
+msgstr "Выберите другой значок"
+
+msgid "Postal code"
+msgstr "Почтовый индекс"
+
+msgid "Professional Service"
+msgstr "Professional Service"
+
+msgid "Recipient email"
+msgstr "Email получателя"
+
+msgid "Remove selected icon"
+msgstr "Удалить выбранный значок"
+
+msgid "Request sent via %s — see the SMS log."
+msgstr "Запрос отправлен через %s — см. журнал SMS."
+
+msgid "Restore"
+msgstr "Восстановить"
+
+msgid "Route outbound links through a \"you are leaving\" countdown page"
+msgstr ""
+"Направлять внешние ссылки через страницу обратного отсчёта «вы покидаете "
+"сайт»"
+
+msgid "SMS"
+msgstr "SMS"
+
+msgid "SMS Alpha Name"
+msgstr "Альфа-имя SMS"
+
+msgid "SMS Fly"
+msgstr "SMS Fly"
+
+msgid "SMS Services"
+msgstr "SMS-сервисы"
+
+msgid "SMS alpha name"
+msgstr "Альфа-имя SMS"
+
+msgid "SMS log"
+msgstr "Журнал SMS"
+
+msgid "SMS log information"
+msgstr "Сведения журнала SMS"
+
+msgid "SMS log information response"
+msgstr "Ответ со сведениями журнала SMS"
+
+msgid "SMS service provider"
+msgstr "Провайдер SMS-сервиса"
+
+msgid "SMS-Fly"
+msgstr "SMS-Fly"
+
+msgid "SMS-Fly alpha name"
+msgstr "Альфа-имя SMS-Fly"
+
+msgid "SMS-Fly alpha name what will be used as SMS sender"
+msgstr "Альфа-имя SMS-Fly, которое будет использоваться как отправитель SMS"
+
+msgid "SMS-Fly login to integrate with SMS-Fly service"
+msgstr "Логин SMS-Fly для интеграции с сервисом SMS-Fly"
+
+msgid "SMS-Fly password"
+msgstr "Пароль SMS-Fly"
+
+msgid "SMS-Fly password to integrate with SMS-Fly service"
+msgstr "Пароль SMS-Fly для интеграции с сервисом SMS-Fly"
+
+msgid "SMS-Fly username"
+msgstr "Имя пользователя SMS-Fly"
+
+msgid "SVG file could not be imported."
+msgstr "Не удалось импортировать файл SVG."
+
+msgid "SVG file could not be read."
+msgstr "Не удалось прочитать файл SVG."
+
+msgid "SVG file is empty."
+msgstr "Файл SVG пуст."
+
+msgid "SVG file is too large."
+msgstr "Файл SVG слишком большой."
+
+msgid "SVG icon could not be downloaded."
+msgstr "Не удалось скачать значок SVG."
+
+msgid "SVG icon imported."
+msgstr "Значок SVG импортирован."
+
+msgid "SVG sprite could not be read."
+msgstr "Не удалось прочитать спрайт SVG."
+
+msgid "SVG sprite could not be saved."
+msgstr "Не удалось сохранить спрайт SVG."
+
+msgid "SVG sprite imported."
+msgstr "Спрайт SVG импортирован."
+
+msgid "SVG sprite is not writable."
+msgstr "Спрайт SVG недоступен для записи."
+
+msgid "Sat"
+msgstr "Сб"
+
+msgid "Schema.org (JSON-LD)"
+msgstr "Schema.org (JSON-LD)"
+
+msgid "Search for SMS logs"
+msgstr "Поиск журналов SMS"
+
+msgid "Search patterns"
+msgstr "Поиск паттернов"
+
+msgid "Search results for: %s"
+msgstr "Результаты поиска по запросу: %s"
+
+msgid "Select SMS service provider to integrate with SMS service"
+msgstr "Выберите провайдера SMS-сервиса для интеграции с SMS-сервисом"
+
+msgid "Select icon"
+msgstr "Выбрать значок"
+
+msgid "Selected icons deleted."
+msgstr "Выбранные значки удалены."
+
+msgid "Selected icons were not deleted."
+msgstr "Выбранные значки не удалены."
+
+msgid "Selected icons were not found in the sprite."
+msgstr "Выбранные значки не найдены в спрайте."
+
+msgid "Send test SMS"
+msgstr "Отправить тестовое SMS"
+
+msgid "Send test Telegram"
+msgstr "Отправить тестовое сообщение в Telegram"
+
+msgid "Send test email"
+msgstr "Отправить тестовое письмо"
+
+msgid "Send test — Email / SMS / Telegram"
+msgstr "Тестовая отправка — Email / SMS / Telegram"
+
+msgid "Sent to %s — see the Mail log."
+msgstr "Отправлено на %s — см. журнал писем."
+
+msgid "Sent with"
+msgstr "Отправлено через"
+
+msgid "Splash-screen background for the installed PWA"
+msgstr "Фон заставки установленного PWA"
+
+msgid "Street address"
+msgstr "Улица и дом"
+
+msgid "Sun"
+msgstr "Вс"
+
+msgid "Telegram"
+msgstr "Telegram"
+
+msgid "Telegram API rejected the message."
+msgstr "Telegram API отклонил сообщение."
+
+msgid "Telegram Bot"
+msgstr "Telegram-бот"
+
+msgid "Telegram bot is not configured."
+msgstr "Telegram-бот не настроен."
+
+msgid "Telegram chat ID"
+msgstr "ID чата Telegram"
+
+msgid "Telegram chat ID to integrate with Telegram bot"
+msgstr "ID чата Telegram для интеграции с Telegram-ботом"
+
+msgid "Telegram chat thread ID"
+msgstr "ID ветки чата Telegram"
+
+msgid "Telegram token"
+msgstr "Токен Telegram"
+
+msgid "Telegram token to integrate with Telegram bot"
+msgstr "Токен Telegram для интеграции с Telegram-ботом"
+
+msgid "Test SMS from the website"
+msgstr "Тестовое SMS с сайта"
+
+msgid "Test message from the website"
+msgstr "Тестовое сообщение с сайта"
+
+msgid "The provider returned an empty response."
+msgstr "Провайдер вернул пустой ответ."
+
+msgid "This SVG icon does not contain visible artwork."
+msgstr "Этот значок SVG не содержит видимого изображения."
+
+msgid "This SVG icon will be imported as \"%s\"."
+msgstr "Этот значок SVG будет импортирован как «%s»."
+
+msgid "This admin page is disabled."
+msgstr "Эта страница админки отключена."
+
+msgid ""
+"This is a default theme icon. It is read-only — you can download it, but not "
+"rename or delete it."
+msgstr ""
+"Это стандартный значок темы. Он доступен только для чтения — вы можете его "
+"скачать, но не можете переименовать или удалить."
+
+msgid "This name is used as the icon identifier."
+msgstr "Это имя используется как идентификатор значка."
+
+msgid ""
+"This sprite contains %1$s icons. %2$s will be added and %3$s skipped because "
+"of name conflicts."
+msgstr ""
+"Этот спрайт содержит %1$s значков. %2$s будет добавлено и %3$s пропущено из-"
+"за конфликтов имён."
+
+msgid "Thu"
+msgstr "Чт"
+
+msgid "Trash"
+msgstr "Корзина"
+
+msgid "Tue"
+msgstr "Вт"
+
+msgid "Turbo SMS"
+msgstr "Turbo SMS"
+
+msgid "Turbo SMS alpha name"
+msgstr "Альфа-имя Turbo SMS"
+
+msgid "Turbo SMS alpha name what will be used as SMS sender"
+msgstr "Альфа-имя Turbo SMS, которое будет использоваться как отправитель SMS"
+
+msgid "Turbo SMS token"
+msgstr "Токен Turbo SMS"
+
+msgid "Turbo SMS token to integrate with Turbo SMS service"
+msgstr "Токен Turbo SMS для интеграции с сервисом Turbo SMS"
+
+msgid "Unknown channel."
+msgstr "Неизвестный канал."
+
+msgid "Upload"
+msgstr "Загрузить"
+
+msgid "Web manifest background color"
+msgstr "Цвет фона веб-манифеста"
+
+msgid "Web manifest description"
+msgstr "Описание веб-манифеста"
+
+msgid "Web manifest short name"
+msgstr "Краткое имя веб-манифеста"
+
+msgid "Wed"
+msgstr "Ср"
+
+msgid "Working Hours"
+msgstr "Часы работы"
+
+msgid "You are leaving our website"
+msgstr "Вы покидаете наш сайт"
+
+msgid "You are not allowed to manage icons."
+msgstr "Вам не разрешено управлять значками."
+
+msgid "You searched for"
+msgstr "Вы искали"
+
+msgid "You will be redirected to an external resource in"
+msgstr "Вы будете перенаправлены на внешний ресурс через"
+
+msgid "iFrame"
+msgstr "iFrame"
+
+msgid "link"
+msgstr "ссылка"
+
+msgid "sec."
+msgstr "сек."
+
+msgid "unknown"
+msgstr "неизвестно"
+
+msgid "wp_mail reported an error."
+msgstr "wp_mail сообщил об ошибке."
 
 #~ msgid "Link"
 #~ msgstr "Ссылка"

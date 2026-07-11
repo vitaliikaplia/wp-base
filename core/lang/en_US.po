@@ -337,7 +337,6 @@ msgstr ""
 msgid "Resize and optimize media while upload"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:11
 msgid ""
 "In this section, you can enable resizing and optimization of images while "
 "uploading them to the media library. You can specify the formats that will "
@@ -346,6 +345,12 @@ msgid ""
 "of images to the WEBP format, which is a modern image format that provides "
 "better compression and quality compared to other formats."
 msgstr ""
+"In this section, you can enable resizing and optimization of images while "
+"uploading them to the media library. You can specify the formats that will "
+"be resized, set the width and height of the resized images, and adjust the "
+"quality of the resized images. Additionally, you can enable the conversion "
+"of images to the WEBP format, which is a modern image format that provides "
+"better compression and quality compared to other formats."
 
 #: core/includes/back/dashboard-options.php:16
 msgid "Resizing at upload"
@@ -415,12 +420,14 @@ msgstr ""
 msgid "Configure custom SMTP server"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:157
 msgid ""
 "In this section, you can configure a custom SMTP server to send emails from "
 "your website. You can specify the SMTP host, port, username, password, and "
 "from name. Additionally, you can enable a secure SMTP connection using SSL."
 msgstr ""
+"In this section, you can configure a custom SMTP server to send emails from "
+"your website. You can specify the SMTP host, port, username, password, and "
+"from name. Additionally, you can enable a secure SMTP connection using SSL."
 
 #: core/includes/back/dashboard-options.php:163
 msgid "Enable custom SMTP server"
@@ -470,13 +477,16 @@ msgstr ""
 msgid "Custom HTML code for header and footer"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:282
 msgid ""
 "In this section, you can add custom HTML code to the header and footer of "
 "your website. The custom code will be placed inside the header tag and "
 "before the end of the body tag. You can use this feature to add custom "
 "scripts, styles, meta tags, and other elements to your website."
 msgstr ""
+"In this section, you can add custom HTML code to the header and footer of "
+"your website. The custom code will be placed inside the header tag and "
+"before the end of the body tag. You can use this feature to add custom "
+"scripts, styles, meta tags, and other elements to your website."
 
 #: core/includes/back/dashboard-options.php:287
 msgid "Header custom code"
@@ -510,11 +520,12 @@ msgstr ""
 msgid "Maintenance mode for anonymous users"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:307
 msgid ""
 "In this section, you can enable maintenance mode for anonymous users, "
 "customize the title and text that will be displayed on the maintenance page."
 msgstr ""
+"In this section, you can enable maintenance mode for anonymous users, "
+"customize the title and text that will be displayed on the maintenance page."
 
 #: core/includes/back/dashboard-options.php:313
 msgid "Enable maintenance mode for anonymous users"
@@ -681,24 +692,34 @@ msgid "Disable WordPress global styles"
 msgstr "Disable WordPress global styles"
 
 #: core/includes/back/dashboard-options.php:463
-msgid "Remove Gutenberg global, stored and classic theme styles from the frontend."
-msgstr "Remove Gutenberg global, stored and classic theme styles from the frontend."
+msgid ""
+"Remove Gutenberg global, stored and classic theme styles from the frontend."
+msgstr ""
+"Remove Gutenberg global, stored and classic theme styles from the frontend."
 
 #: core/includes/back/dashboard-options.php:468
 msgid "Disable WordPress block support styles"
 msgstr "Disable WordPress block support styles"
 
 #: core/includes/back/dashboard-options.php:469
-msgid "Remove late core block support styles generated for layout, spacing and duotone support."
-msgstr "Remove late core block support styles generated for layout, spacing and duotone support."
+msgid ""
+"Remove late core block support styles generated for layout, spacing and "
+"duotone support."
+msgstr ""
+"Remove late core block support styles generated for layout, spacing and "
+"duotone support."
 
 #: core/includes/back/dashboard-options.php:474
 msgid "Disable WordPress Font Library output"
 msgstr "Disable WordPress Font Library output"
 
 #: core/includes/back/dashboard-options.php:475
-msgid "Remove native frontend Font Library @font-face output when custom theme font CSS replaces it."
-msgstr "Remove native frontend Font Library @font-face output when custom theme font CSS replaces it."
+msgid ""
+"Remove native frontend Font Library @font-face output when custom theme font "
+"CSS replaces it."
+msgstr ""
+"Remove native frontend Font Library @font-face output when custom theme font "
+"CSS replaces it."
 
 #: core/includes/back/dashboard-options.php:480
 msgid "Disable WordPress Font Library manager"
@@ -717,8 +738,10 @@ msgid "Disable WordPress image auto sizes"
 msgstr "Disable WordPress image auto sizes"
 
 #: core/includes/back/dashboard-options.php:487
-msgid "Remove WordPress image auto-sizes markup and helper CSS from the frontend."
-msgstr "Remove WordPress image auto-sizes markup and helper CSS from the frontend."
+msgid ""
+"Remove WordPress image auto-sizes markup and helper CSS from the frontend."
+msgstr ""
+"Remove WordPress image auto-sizes markup and helper CSS from the frontend."
 
 #: core/includes/back/dashboard-options.php:492
 msgid "Disable WordPress speculation rules"
@@ -804,11 +827,12 @@ msgstr ""
 msgid "Disable application passwords"
 msgstr ""
 
-#: core/includes/back/dashboard-options.php:499
 msgid ""
 "Disable WordPress application passwords used for REST API authentication and "
 "third-party integrations"
 msgstr ""
+"Disable WordPress application passwords used for REST API authentication and "
+"third-party integrations"
 
 #: core/includes/back/dashboard-options.php:504
 msgid "Disable Gutenberg"
@@ -965,19 +989,19 @@ msgstr ""
 msgid "Add Rule"
 msgstr ""
 
-#: core/includes/back/system-redirect-rules.php:108
 msgid ""
 "Invalid redirect rule: Old URL and New URL must be different and not empty."
 msgstr ""
+"Invalid redirect rule: Old URL and New URL must be different and not empty."
 
 #: core/includes/back/system-redirect-rules.php:128
 msgid "Conflict detected: A redirect rule with this Old URL already exists."
 msgstr ""
 
-#: core/includes/back/system-redirect-rules.php:136
 msgid ""
 "Invalid redirect rule: Old URL must contain the current WordPress domain."
 msgstr ""
+"Invalid redirect rule: Old URL must contain the current WordPress domain."
 
 #: core/includes/back/system-redirect-rules.php:243
 msgid "Actions"
@@ -1091,3 +1115,595 @@ msgstr ""
 #: views/password.twig:11
 msgid "Submit"
 msgstr ""
+
+msgid "%s icons have invalid names and will be skipped."
+msgstr "%s icons have invalid names and will be skipped."
+
+msgid "Allow .m3u / .m3u8 / .ts uploads"
+msgstr "Allow .m3u / .m3u8 / .ts uploads"
+
+msgid "Archives"
+msgstr "Archives"
+
+msgid "Archives for"
+msgstr "Archives for"
+
+msgid "Back to list"
+msgstr "Back to list"
+
+msgid "Bulk delete"
+msgstr "Bulk delete"
+
+msgid "Button"
+msgstr "Button"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Cancel selection"
+msgstr "Cancel selection"
+
+msgid "Choose an icon first."
+msgstr "Choose an icon first."
+
+msgid "Choose selected icon"
+msgstr "Choose selected icon"
+
+msgid "City"
+msgstr "City"
+
+msgid "Clear"
+msgstr "Clear"
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Color Select"
+msgstr "Color Select"
+
+msgid "Confirm delete"
+msgstr "Confirm delete"
+
+msgid "Continue import"
+msgstr "Continue import"
+
+msgid "Convert fills to currentColor"
+msgstr "Convert fills to currentColor"
+
+msgid "Cookie consent popup"
+msgstr "Cookie consent popup"
+
+msgid "Cookie popup"
+msgstr "Cookie popup"
+
+msgid "Cookie popup button label"
+msgstr "Cookie popup button label"
+
+msgid "Cookie popup text"
+msgstr "Cookie popup text"
+
+msgid "Cookie popup title"
+msgstr "Cookie popup title"
+
+msgid "Could not reach the server."
+msgstr "Could not reach the server."
+
+msgid "Country code (e.g. UA)"
+msgstr "Country code (e.g. UA)"
+
+msgid "Default"
+msgstr "Default"
+
+msgid "Default icons are read-only and cannot be changed."
+msgstr "Default icons are read-only and cannot be changed."
+
+msgid "Default icons are read-only and cannot be deleted."
+msgstr "Default icons are read-only and cannot be deleted."
+
+msgid "Defaults to the first 12 characters of the site title"
+msgstr "Defaults to the first 12 characters of the site title"
+
+msgid "Defaults to the site tagline"
+msgstr "Defaults to the site tagline"
+
+msgid "Defaults to the site title"
+msgstr "Defaults to the site title"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Delete Permanently"
+msgstr "Delete Permanently"
+
+msgid "Delete selected"
+msgstr "Delete selected"
+
+msgid "Delete selected (%s)"
+msgstr "Delete selected (%s)"
+
+msgid "Detach the post_tag taxonomy from posts (categories only)"
+msgstr "Detach the post_tag taxonomy from posts (categories only)"
+
+msgid "Disable Connectors admin page"
+msgstr "Disable Connectors admin page"
+
+msgid "Disable blog tags"
+msgstr "Disable blog tags"
+
+msgid "Disabled page"
+msgstr "Disabled page"
+
+msgid "Dismiss this notice."
+msgstr "Dismiss this notice."
+
+msgid "Display patterns as grid"
+msgstr "Display patterns as grid"
+
+msgid "Download SVG"
+msgstr "Download SVG"
+
+msgid "Edit icon"
+msgstr "Edit icon"
+
+msgid "Edit selected icon"
+msgstr "Edit selected icon"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Enable JSON-LD"
+msgstr "Enable JSON-LD"
+
+msgid "Error 404: Page not found"
+msgstr "Error 404: Page not found"
+
+msgid "External link interstitial"
+msgstr "External link interstitial"
+
+msgid "Fit artwork to viewBox bounds"
+msgstr "Fit artwork to viewBox bounds"
+
+msgid "Fri"
+msgstr "Fri"
+
+msgid "Go now"
+msgstr "Go now"
+
+msgid "Google Maps"
+msgstr "Google Maps"
+
+msgid "HTML code is empty"
+msgstr "HTML code is empty"
+
+msgid "Hide and block the wp-admin Connectors settings page"
+msgstr "Hide and block the wp-admin Connectors settings page"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Icon"
+msgstr "Icon"
+
+msgid "Icon \"%s\" already exists and will be skipped."
+msgstr "Icon \"%s\" already exists and will be skipped."
+
+msgid "Icon Select"
+msgstr "Icon Select"
+
+msgid "Icon deleted."
+msgstr "Icon deleted."
+
+msgid "Icon name"
+msgstr "Icon name"
+
+msgid "Icon name already exists."
+msgstr "Icon name already exists."
+
+msgid "Icon name cannot be empty."
+msgstr "Icon name cannot be empty."
+
+msgid "Icon name was not updated."
+msgstr "Icon name was not updated."
+
+msgid "Icon updated."
+msgstr "Icon updated."
+
+msgid "Icon was not deleted."
+msgstr "Icon was not deleted."
+
+msgid "Icon was not found in the sprite."
+msgstr "Icon was not found in the sprite."
+
+msgid "Icons"
+msgstr "Icons"
+
+msgid "Import SVG file"
+msgstr "Import SVG file"
+
+msgid ""
+"In this section, you can configure the cookie consent popup. The popup is "
+"displayed only when the title, text and button are all filled in."
+msgstr ""
+"In this section, you can configure the cookie consent popup. The popup is "
+"displayed only when the title, text and button are all filled in."
+
+msgid "Invalid email address."
+msgstr "Invalid email address."
+
+msgid "Local Business"
+msgstr "Local Business"
+
+msgid "Message"
+msgstr "Message"
+
+msgid "Message delivered to the configured chat."
+msgstr "Message delivered to the configured chat."
+
+msgid "Message is required."
+msgstr "Message is required."
+
+msgid "Missing icon: %s"
+msgstr "Missing icon: %s"
+
+msgid "Mon"
+msgstr "Mon"
+
+msgid "No SMS logs found"
+msgstr "No SMS logs found"
+
+msgid "No SMS logs found in trash"
+msgstr "No SMS logs found in trash"
+
+msgid "No SMS provider is configured."
+msgstr "No SMS provider is configured."
+
+msgid "No icons found in the sprite yet."
+msgstr "No icons found in the sprite yet."
+
+msgid "No icons selected."
+msgstr "No icons selected."
+
+msgid "No new icons can be imported from this SVG file."
+msgstr "No new icons can be imported from this SVG file."
+
+msgid "Only SVG files are allowed."
+msgstr "Only SVG files are allowed."
+
+msgid "Only valid SVG files are allowed."
+msgstr "Only valid SVG files are allowed."
+
+msgid "Optional message thread (topic) ID for forum-style group chats"
+msgstr "Optional message thread (topic) ID for forum-style group chats"
+
+msgid "Organization"
+msgstr "Organization"
+
+msgid "Organization description"
+msgstr "Organization description"
+
+msgid "Organization name"
+msgstr "Organization name"
+
+msgid "Organization type"
+msgstr "Organization type"
+
+msgid ""
+"Output Organization / WebSite / WebPage / Article structured data in the head"
+msgstr ""
+"Output Organization / WebSite / WebPage / Article structured data in the head"
+
+msgid "Page not found"
+msgstr "Page not found"
+
+msgid "Permission denied"
+msgstr "Permission denied"
+
+msgid "Permit HLS playlist and MPEG-TS segment uploads in the media library"
+msgstr "Permit HLS playlist and MPEG-TS segment uploads in the media library"
+
+msgid "Phone and message are required."
+msgstr "Phone and message are required."
+
+msgid "Pick an icon"
+msgstr "Pick an icon"
+
+msgid "Pick another icon"
+msgstr "Pick another icon"
+
+msgid "Postal code"
+msgstr "Postal code"
+
+msgid "Professional Service"
+msgstr "Professional Service"
+
+msgid "Recipient email"
+msgstr "Recipient email"
+
+msgid "Remove selected icon"
+msgstr "Remove selected icon"
+
+msgid "Request sent via %s — see the SMS log."
+msgstr "Request sent via %s — see the SMS log."
+
+msgid "Restore"
+msgstr "Restore"
+
+msgid "Route outbound links through a \"you are leaving\" countdown page"
+msgstr "Route outbound links through a \"you are leaving\" countdown page"
+
+msgid "SMS"
+msgstr "SMS"
+
+msgid "SMS Alpha Name"
+msgstr "SMS Alpha Name"
+
+msgid "SMS Fly"
+msgstr "SMS Fly"
+
+msgid "SMS Services"
+msgstr "SMS Services"
+
+msgid "SMS alpha name"
+msgstr "SMS alpha name"
+
+msgid "SMS log"
+msgstr "SMS log"
+
+msgid "SMS log information"
+msgstr "SMS log information"
+
+msgid "SMS log information response"
+msgstr "SMS log information response"
+
+msgid "SMS service provider"
+msgstr "SMS service provider"
+
+msgid "SMS-Fly"
+msgstr "SMS-Fly"
+
+msgid "SMS-Fly alpha name"
+msgstr "SMS-Fly alpha name"
+
+msgid "SMS-Fly alpha name what will be used as SMS sender"
+msgstr "SMS-Fly alpha name what will be used as SMS sender"
+
+msgid "SMS-Fly login to integrate with SMS-Fly service"
+msgstr "SMS-Fly login to integrate with SMS-Fly service"
+
+msgid "SMS-Fly password"
+msgstr "SMS-Fly password"
+
+msgid "SMS-Fly password to integrate with SMS-Fly service"
+msgstr "SMS-Fly password to integrate with SMS-Fly service"
+
+msgid "SMS-Fly username"
+msgstr "SMS-Fly username"
+
+msgid "SVG file could not be imported."
+msgstr "SVG file could not be imported."
+
+msgid "SVG file could not be read."
+msgstr "SVG file could not be read."
+
+msgid "SVG file is empty."
+msgstr "SVG file is empty."
+
+msgid "SVG file is too large."
+msgstr "SVG file is too large."
+
+msgid "SVG icon could not be downloaded."
+msgstr "SVG icon could not be downloaded."
+
+msgid "SVG icon imported."
+msgstr "SVG icon imported."
+
+msgid "SVG sprite could not be read."
+msgstr "SVG sprite could not be read."
+
+msgid "SVG sprite could not be saved."
+msgstr "SVG sprite could not be saved."
+
+msgid "SVG sprite imported."
+msgstr "SVG sprite imported."
+
+msgid "SVG sprite is not writable."
+msgstr "SVG sprite is not writable."
+
+msgid "Sat"
+msgstr "Sat"
+
+msgid "Schema.org (JSON-LD)"
+msgstr "Schema.org (JSON-LD)"
+
+msgid "Search for SMS logs"
+msgstr "Search for SMS logs"
+
+msgid "Search patterns"
+msgstr "Search patterns"
+
+msgid "Search results for: %s"
+msgstr "Search results for: %s"
+
+msgid "Select SMS service provider to integrate with SMS service"
+msgstr "Select SMS service provider to integrate with SMS service"
+
+msgid "Select icon"
+msgstr "Select icon"
+
+msgid "Selected icons deleted."
+msgstr "Selected icons deleted."
+
+msgid "Selected icons were not deleted."
+msgstr "Selected icons were not deleted."
+
+msgid "Selected icons were not found in the sprite."
+msgstr "Selected icons were not found in the sprite."
+
+msgid "Send test SMS"
+msgstr "Send test SMS"
+
+msgid "Send test Telegram"
+msgstr "Send test Telegram"
+
+msgid "Send test email"
+msgstr "Send test email"
+
+msgid "Send test — Email / SMS / Telegram"
+msgstr "Send test — Email / SMS / Telegram"
+
+msgid "Sent to %s — see the Mail log."
+msgstr "Sent to %s — see the Mail log."
+
+msgid "Sent with"
+msgstr "Sent with"
+
+msgid "Splash-screen background for the installed PWA"
+msgstr "Splash-screen background for the installed PWA"
+
+msgid "Street address"
+msgstr "Street address"
+
+msgid "Sun"
+msgstr "Sun"
+
+msgid "Telegram"
+msgstr "Telegram"
+
+msgid "Telegram API rejected the message."
+msgstr "Telegram API rejected the message."
+
+msgid "Telegram Bot"
+msgstr "Telegram Bot"
+
+msgid "Telegram bot is not configured."
+msgstr "Telegram bot is not configured."
+
+msgid "Telegram chat ID"
+msgstr "Telegram chat ID"
+
+msgid "Telegram chat ID to integrate with Telegram bot"
+msgstr "Telegram chat ID to integrate with Telegram bot"
+
+msgid "Telegram chat thread ID"
+msgstr "Telegram chat thread ID"
+
+msgid "Telegram token"
+msgstr "Telegram token"
+
+msgid "Telegram token to integrate with Telegram bot"
+msgstr "Telegram token to integrate with Telegram bot"
+
+msgid "Test SMS from the website"
+msgstr "Test SMS from the website"
+
+msgid "Test message from the website"
+msgstr "Test message from the website"
+
+msgid "The provider returned an empty response."
+msgstr "The provider returned an empty response."
+
+msgid "This SVG icon does not contain visible artwork."
+msgstr "This SVG icon does not contain visible artwork."
+
+msgid "This SVG icon will be imported as \"%s\"."
+msgstr "This SVG icon will be imported as \"%s\"."
+
+msgid "This admin page is disabled."
+msgstr "This admin page is disabled."
+
+msgid ""
+"This is a default theme icon. It is read-only — you can download it, but not "
+"rename or delete it."
+msgstr ""
+"This is a default theme icon. It is read-only — you can download it, but not "
+"rename or delete it."
+
+msgid "This name is used as the icon identifier."
+msgstr "This name is used as the icon identifier."
+
+msgid ""
+"This sprite contains %1$s icons. %2$s will be added and %3$s skipped because "
+"of name conflicts."
+msgstr ""
+"This sprite contains %1$s icons. %2$s will be added and %3$s skipped because "
+"of name conflicts."
+
+msgid "Thu"
+msgstr "Thu"
+
+msgid "Trash"
+msgstr "Trash"
+
+msgid "Tue"
+msgstr "Tue"
+
+msgid "Turbo SMS"
+msgstr "Turbo SMS"
+
+msgid "Turbo SMS alpha name"
+msgstr "Turbo SMS alpha name"
+
+msgid "Turbo SMS alpha name what will be used as SMS sender"
+msgstr "Turbo SMS alpha name what will be used as SMS sender"
+
+msgid "Turbo SMS token"
+msgstr "Turbo SMS token"
+
+msgid "Turbo SMS token to integrate with Turbo SMS service"
+msgstr "Turbo SMS token to integrate with Turbo SMS service"
+
+msgid "Unknown channel."
+msgstr "Unknown channel."
+
+msgid "Upload"
+msgstr "Upload"
+
+msgid ""
+"We are performing scheduled maintenance. We will be back online shortly."
+msgstr ""
+"We are performing scheduled maintenance. We will be back online shortly."
+
+msgid "Web manifest background color"
+msgstr "Web manifest background color"
+
+msgid "Web manifest description"
+msgstr "Web manifest description"
+
+msgid "Web manifest short name"
+msgstr "Web manifest short name"
+
+msgid "Website under Maintenance"
+msgstr "Website under Maintenance"
+
+msgid "Wed"
+msgstr "Wed"
+
+msgid "Working Hours"
+msgstr "Working Hours"
+
+msgid "You are leaving our website"
+msgstr "You are leaving our website"
+
+msgid "You are not allowed to manage icons."
+msgstr "You are not allowed to manage icons."
+
+msgid "You searched for"
+msgstr "You searched for"
+
+msgid "You will be redirected to an external resource in"
+msgstr "You will be redirected to an external resource in"
+
+msgid "iFrame"
+msgstr "iFrame"
+
+msgid "link"
+msgstr "link"
+
+msgid "sec."
+msgstr "sec."
+
+msgid "unknown"
+msgstr "unknown"
+
+msgid "wp_mail reported an error."
+msgstr "wp_mail reported an error."
