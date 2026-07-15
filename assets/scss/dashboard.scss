@@ -5,6 +5,14 @@
 @use "dashboard/icons";
 @use "plugins/select2.min";
 
+/* Fix Fresh Admin Color Scheme */
+.admin-color-fresh {
+    --wp-admin-theme-color: #2271b1;
+    --wp-admin-theme-color--rgb: 34, 113, 177;
+    --wp-admin-theme-color-darker-10: #1d5f95;
+    --wp-admin-theme-color-darker-20: #134e74;
+}
+
 /* hide the WordPress 7 admin-bar command palette / search (⌘K) */
 #wp-admin-bar-command-palette {
     display: none !important;
