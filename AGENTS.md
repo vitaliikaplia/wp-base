@@ -62,7 +62,7 @@ Any operation that is **irreversible** or touches **many items at once** — bul
 
 1. Add to `get_custom_gutenberg_blocks_array()` in `core/gutenberg.php`
 2. Create Twig template extending `block-base.twig` (or `block-simple-base.twig` for minimal)
-3. Create SCSS file with `@import "../../mixins";`
+3. Create SCSS file with no imports; style only the block wrapper selector `.{category}-{blockname}`
 4. Add Prepros config entry in `prepros.config` → `files` array
 5. Create/modify ACF JSON field group in `core/acf-json/` with location `acf/{category}-{blockname}`
 6. Optionally add preview image
@@ -79,8 +79,8 @@ Frontend: styles load only when block is present (`has_block()` check). Editor: 
 
 - Labels must be in **Ukrainian** (Підзаголовок, Заголовок, Опис, Кнопки, etc.)
 - After modifying, update the `modified` timestamp: `date +%s`
-- Field key format: `field_[hex]`
-- Field name format: `field_{context}_{property}` (e.g. `field_hero_title`)
+- Field key format: `field_[hex]`; some legacy groups still use descriptive keys like `field_hero_title`
+- Field `name` values are the actual template-facing keys in `fields` (e.g. `title`, `content`, `html_code`); use context prefixes only when needed to avoid collisions
 - Location rule: `"param": "block", "value": "acf/main-hero"`
 
 ## Dashboard Options Framework

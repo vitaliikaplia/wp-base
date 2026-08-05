@@ -7,7 +7,7 @@ A custom WordPress starter theme for building modern and fully customizable webs
 - PHP 8.3+
 - WordPress 6.7+
 - [Advanced Custom Fields Pro](https://www.advancedcustomfields.com/pro/)
-- Composer
+- Composer (installs Timber, GeoIP2 and libphonenumber into `core/vendor/`)
 - [Prepros](https://prepros.io/) (for SCSS/JS compilation)
 
 ## WordPress 7 Readiness
@@ -38,12 +38,15 @@ wp-base/
 │       └── front/                 # Frontend: helpers, rendering
 ├── assets/
 │   ├── scss/                      # SCSS source files
+│   │   ├── _fonts.scss            # Web-font import
 │   │   ├── _variables.scss        # CSS custom-property color tokens
 │   │   ├── _reset.scss            # CSS reset
 │   │   ├── _extend.scss           # .typo, .btn, utility classes
+│   │   ├── _header.scss           # Header styles
+│   │   ├── _footer.scss           # Footer styles
 │   │   ├── style.scss             # Main entry point (@use partials)
 │   │   └── blocks/                # Block-specific styles
-│   │       ├── main/              # Main blocks (hero, text)
+│   │       ├── main/              # Main blocks (hero, text, iframe)
 │   │       └── logical/           # Logical blocks (pattern)
 │   ├── css/                       # Compiled & minified CSS
 │   ├── js/                        # JavaScript files
@@ -52,7 +55,7 @@ wp-base/
 │   ├── block-base.twig            # Base block template (with wrapper)
 │   ├── block-simple-base.twig     # Simple block template (no wrapper)
 │   ├── blocks/                    # Block templates
-│   │   ├── main/                  # Main blocks (hero.twig, text.twig)
+│   │   ├── main/                  # Main blocks (hero.twig, text.twig, iframe.twig)
 │   │   └── logical/               # Logical blocks (pattern.twig)
 │   ├── overall/                   # Layout templates (header, footer, etc.)
 │   ├── dashboard/                 # Dashboard options field templates
@@ -73,7 +76,7 @@ The theme uses ACF blocks with Timber/Twig rendering. Only registered custom blo
 |---|---|---|
 | `hero` | main | Hero section with subtitle, title, description, and action buttons |
 | `text` | main | Rich text content area with title and `.typo` formatting |
-| `iframe` | main | Embed / iframe content block |
+| `iframe` | main | Embed / iframe block that renders textarea-provided HTML via Twig `raw` output |
 | `pattern` | logical | Reusable pattern block (references a Pattern post) |
 
 ### Block Categories
@@ -143,6 +146,8 @@ CSS class naming convention: `.{category}-{block-name}`
 
 **Step 5.** Create ACF field group via WordPress admin → ACF → Field Groups. Set location rule to `Block` → `is equal to` → `acf/main-my-block`. ACF JSON auto-syncs to `core/acf-json/`.
 
+ACF JSON labels should be Ukrainian, the `modified` value should be refreshed with `date +%s`, and field keys should use the `field_[hex]` format for new groups. Field `name` values are the keys consumed in Twig through `fields`.
+
 **Step 6.** *(Optional)* Add preview image at `assets/block-preview/main/my-block.png`.
 
 Block styles are loaded automatically on the frontend only when the block is present on the page (`has_block()` check).
@@ -186,6 +191,7 @@ Features:
 ### Content & Templating
 - Timber v2 with Twig templating (Block API v3 ACF blocks: `hero`, `text`, `iframe`, `pattern`)
 - Per-block CSS auto-loaded on the frontend only when the block is present (`has_block()`)
+- `iframe` block uses a textarea ACF field (`html_code`) and intentionally renders trusted editor-provided HTML with `|raw`
 - Reusable patterns: `patterns` CPT + `get_pattern()` helper, optional page-blocks-as-patterns, patterns admin grid (live search + remembered view), WP 7 pattern-metadata stripping
 - Rich text with the `.typo` class
 - Timber render helpers exposed to Twig: `picture` / `picture_src` / `svg` filters and `picture()` / `icon()` functions (WEBP-aware `<picture>`, inline sanitized SVG)
@@ -255,7 +261,7 @@ Open the project folder in Prepros — it will detect `prepros.config` automatic
 
 ## License
 
-This theme is licensed under the [GNU General Public License v2 or later](https://www.gnu.org/licenses/gpl-2.0.html).
+No public license is declared for this starter theme (`composer.json` uses `"license": "none"`).
 
 ## Author
 
