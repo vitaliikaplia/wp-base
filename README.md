@@ -27,31 +27,50 @@ Activate the theme in WordPress admin, then configure settings under the custom 
 ```
 wp-base/
 ├── core/                          # Core theme logic
-│   ├── init.php                   # Constants, helpers, bootstrapping
+│   ├── init.php                   # Constants, helpers, bootstrapping (auto-loads includes/, cache/, ajax/)
+│   ├── timber.php                 # Timber/Twig setup + custom Twig filters & functions
 │   ├── gutenberg.php              # Block registration, categories, rendering
 │   ├── acf.php                    # ACF configuration
+│   ├── encrypt-decrypt.php        # OpenSSL encrypt/decrypt helper for connector secrets
 │   ├── acf-json/                  # ACF field group JSON (auto-sync)
-│   ├── lang/                      # Translation files (.po/.mo)
+│   ├── ajax/                      # AJAX endpoints (auto-loaded)
+│   ├── cache/                     # Timber HTML cache (auto-loaded)
+│   ├── geo/                       # GeoIP2 database
+│   ├── lang/                      # Translation files (.po/.mo — en, ru, uk)
 │   ├── vendor/                    # Composer dependencies
 │   └── includes/
-│       ├── back/                  # Admin: options, post types, taxonomies
+│       ├── back/                  # Admin: options, CPTs, taxonomies, system features
 │       └── front/                 # Frontend: helpers, rendering
 ├── assets/
-│   ├── scss/                      # SCSS source files
+│   ├── scss/                      # SCSS source files (@use, no @import except fonts)
+│   │   ├── style.scss             # Frontend entry point (@use partials below)
+│   │   ├── _main.scss             # Body/main layout, sticky footer, cookie popup, .inner
 │   │   ├── _fonts.scss            # Web-font import
-│   │   ├── _variables.scss        # CSS custom-property color tokens
+│   │   ├── _variables.scss        # CSS custom-property color tokens (--color-*)
 │   │   ├── _reset.scss            # CSS reset
+│   │   ├── _animation.scss        # Keyframes / animation helpers
+│   │   ├── _wp.scss               # WordPress core-markup styles
 │   │   ├── _extend.scss           # .typo, .btn, utility classes
-│   │   ├── _header.scss           # Header styles
-│   │   ├── _footer.scss           # Footer styles
-│   │   ├── style.scss             # Main entry point (@use partials)
-│   │   └── blocks/                # Block-specific styles
+│   │   ├── _header.scss           # Header chrome (logo · centered menu · socials grid)
+│   │   ├── _footer.scss           # Footer chrome (socials · menu · copyright grid)
+│   │   ├── _page-404.scss         # 404 page
+│   │   ├── _page-password.scss    # Password-protected page
+│   │   ├── _page-external-link.scss  # External-link interstitial
+│   │   ├── dashboard.scss         # Standalone entry: admin dashboard styles
+│   │   ├── gutenberg.scss         # Standalone entry: block-editor styles
+│   │   ├── login.scss             # Standalone entry: wp-login page
+│   │   ├── tinymce.scss           # Standalone entry: classic editor
+│   │   ├── custom-options.scss    # Standalone entry: options-framework UI
+│   │   └── blocks/                # Per-block styles (compiled standalone)
 │   │       ├── main/              # Main blocks (hero, text, iframe)
 │   │       └── logical/           # Logical blocks (pattern)
 │   ├── css/                       # Compiled & minified CSS
 │   ├── js/                        # JavaScript files
 │   └── block-preview/             # Block preview images for editor
 ├── views/                         # Twig templates
+│   ├── base.twig                  # Root layout (base-clean.twig = chrome-less variant)
+│   ├── index.twig / page.twig / single.twig / author.twig / blog.twig  # Template hierarchy
+│   ├── 404.twig / password.twig / external-link.twig                   # Utility pages
 │   ├── block-base.twig            # Base block template (with wrapper)
 │   ├── block-simple-base.twig     # Simple block template (no wrapper)
 │   ├── blocks/                    # Block templates
@@ -226,7 +245,7 @@ Features:
 - Outbound external-link interstitial (opt-in): `/?go=` "you are leaving" countdown page
 - Headroom.js hide-on-scroll sticky header
 - Cookie consent popup (configured in the options framework)
-- Test header / footer chrome wired to the Header / Footer ACF options
+- Test header / footer chrome wired to the Header / Footer ACF options: a 3-column grid (logo · centered menu · socials + CTA) with a sticky footer (body flex column, `main` grows to push the footer down)
 
 ### Performance & Optimization
 - Timber HTML cache, HTML minification, WEBP converter & big-image resizer
