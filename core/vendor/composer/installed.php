@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'composer/ca-bundle' => array(
-            'pretty_version' => '1.5.12',
-            'version' => '1.5.12.0',
-            'reference' => '00a2f4201641d5c53f7fc0195e6c8d9fcc321a78',
+            'pretty_version' => '1.5.13',
+            'version' => '1.5.13.0',
+            'reference' => 'c008272789979f709f7fcb32c2ecf1d2db5e84e5',
             'type' => 'library',
             'install_path' => __DIR__ . '/./ca-bundle',
             'aliases' => array(),
@@ -29,9 +29,9 @@
             'dev_requirement' => false,
         ),
         'giggsey/libphonenumber-for-php' => array(
-            'pretty_version' => '9.0.34',
-            'version' => '9.0.34.0',
-            'reference' => '4dfd6bc0eb0ed3166e77595a905bd83c8fe29f3e',
+            'pretty_version' => '9.0.36',
+            'version' => '9.0.36.0',
+            'reference' => '66434ecf051386a54a54c18c7853aeb85dfb7a1e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../giggsey/libphonenumber-for-php',
             'aliases' => array(),
@@ -40,7 +40,7 @@
         'giggsey/libphonenumber-for-php-lite' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '9.0.34',
+                0 => '9.0.36',
             ),
         ),
         'giggsey/locale' => array(

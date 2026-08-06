@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "php": "^8.3",
+        "php": "8.5",
         "timber/timber": "^2.0",
         "geoip2/geoip2": "^2.13",
         "giggsey/libphonenumber-for-php": "^9.0"
@@ -19,7 +19,7 @@
     "config": {
         "vendor-dir": "core/vendor",
         "platform": {
-            "php": "8.3"
+            "php": "8.5"
         },
         "allow-plugins": {
             "composer/installers": true
