@@ -402,8 +402,18 @@
                     <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                         <tr>
                             <td class="content-block">
+                                {#
+                                   Email clients need an absolute URL, so this uses the icon the
+                                   theme's own favicon system generates from the WordPress site
+                                   icon (Settings → General). No external host, so it keeps working
+                                   in every fork. Falls back to the site name when no icon is set.
+                                #}
                                 <a href="{{ BLOGINFO_URL }}" target="_blank">
-                                    <img src="https://wp-base.kaplia.pro/icon-white.png" width="110" style="width: 110px; height: auto; margin-bottom: 8px;" alt="{{ BLOGINFO_NAME }}">
+                                    {% if get_option('site_icon') %}
+                                    <img src="{{ (BLOGINFO_URL ~ '/apple-touch-icon.png?ver=' ~ assets)|esc_url }}" width="110" style="width: 110px; height: auto; margin-bottom: 8px;" alt="{{ BLOGINFO_NAME|esc_attr }}">
+                                    {% else %}
+                                    <span class="email-logo-text">{{ BLOGINFO_NAME|esc_html }}</span>
+                                    {% endif %}
                                 </a>
                             </td>
                         </tr>
