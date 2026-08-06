@@ -1740,3 +1740,67 @@ msgstr "Editor"
 
 msgid "Manifest"
 msgstr "Manifest"
+
+#: core/includes/back/acf-order-column.php:21 core/includes/back/acf-order-column.php:27
+msgid "Order"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:411
+msgid "SMS-Fly API key"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:412
+msgid ""
+"SMS-Fly REST API v2 key. Generate it in your SMS-Fly account — the old "
+"username/password XML gateway is no longer used"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:686
+msgid "Allow SVG uploads"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:687
+msgid ""
+"An SVG is a script-capable document. Every upload is sanitized (scripts, "
+"event handlers and javascript: URIs are stripped) and files that cannot "
+"be cleaned are rejected — but only enable this when the editors are "
+"trusted."
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:692
+msgid "Trust proxy IP headers"
+msgstr ""
+
+#: core/includes/back/dashboard-options.php:693
+msgid ""
+"Read the visitor IP from CF-Connecting-IP / X-Forwarded-For. Enable only "
+"behind Cloudflare or another reverse proxy — otherwise any visitor can "
+"spoof their IP in logs and geolocation."
+msgstr ""
+
+#: core/includes/back/system-allow-svg.php:32
+msgid "The SVG file could not be read."
+msgstr ""
+
+#: core/includes/back/system-allow-svg.php:38
+msgid ""
+"This SVG could not be sanitized and was rejected. Re-export it as a plain "
+"SVG, without scripts or embedded documents."
+msgstr ""
+
+#: core/includes/back/system-generate-blog-posts.php:58
+msgid "Error generating post %d: could not reach loripsum.net"
+msgstr ""
+
+#: core/includes/back/system-redirect-rules.php:124
+msgid ""
+"The rule was saved as a draft and is not active. Fix the URLs and publish "
+"it again."
+msgstr ""
+
+#: core/ajax/icons.php:100
+#, php-format
+msgid "%s icon deleted."
+msgid_plural "%s icons deleted."
+msgstr[0] ""
+msgstr[1] ""

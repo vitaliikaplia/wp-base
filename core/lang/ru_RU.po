@@ -1757,6 +1757,83 @@ msgstr "Редактор"
 msgid "Manifest"
 msgstr "Манифест"
 
+#: core/includes/back/acf-order-column.php:21 core/includes/back/acf-order-column.php:27
+msgid "Order"
+msgstr "Порядок"
+
+#: core/includes/back/dashboard-options.php:411
+msgid "SMS-Fly API key"
+msgstr "API-ключ SMS-Fly"
+
+#: core/includes/back/dashboard-options.php:412
+msgid ""
+"SMS-Fly REST API v2 key. Generate it in your SMS-Fly account — the old "
+"username/password XML gateway is no longer used"
+msgstr ""
+"Ключ SMS-Fly REST API v2. Сгенерируйте его в кабинете SMS-Fly — старый "
+"XML-шлюз с логином и паролем больше не используется"
+
+#: core/includes/back/dashboard-options.php:686
+msgid "Allow SVG uploads"
+msgstr "Разрешить загрузку SVG"
+
+#: core/includes/back/dashboard-options.php:687
+msgid ""
+"An SVG is a script-capable document. Every upload is sanitized (scripts, "
+"event handlers and javascript: URIs are stripped) and files that cannot "
+"be cleaned are rejected — but only enable this when the editors are "
+"trusted."
+msgstr ""
+"SVG — это документ, умеющий выполнять скрипты. Каждая загрузка очищается "
+"(скрипты, обработчики событий и javascript:-ссылки вырезаются), а файлы, "
+"которые очистить не удалось, отклоняются — но включайте это только если "
+"доверяете редакторам."
+
+#: core/includes/back/dashboard-options.php:692
+msgid "Trust proxy IP headers"
+msgstr "Доверять прокси-заголовкам с IP"
+
+#: core/includes/back/dashboard-options.php:693
+msgid ""
+"Read the visitor IP from CF-Connecting-IP / X-Forwarded-For. Enable only "
+"behind Cloudflare or another reverse proxy — otherwise any visitor can "
+"spoof their IP in logs and geolocation."
+msgstr ""
+"Читать IP посетителя из CF-Connecting-IP / X-Forwarded-For. Включайте "
+"только за Cloudflare или другим обратным прокси — иначе любой посетитель "
+"сможет подделать свой IP в логах и геолокации."
+
+#: core/includes/back/system-allow-svg.php:32
+msgid "The SVG file could not be read."
+msgstr "Не удалось прочитать SVG-файл."
+
+#: core/includes/back/system-allow-svg.php:38
+msgid ""
+"This SVG could not be sanitized and was rejected. Re-export it as a plain "
+"SVG, without scripts or embedded documents."
+msgstr ""
+"Этот SVG не удалось очистить, поэтому он отклонён. Пересохраните его как "
+"обычный SVG — без скриптов и встроенных документов."
+
+#: core/includes/back/system-generate-blog-posts.php:58
+msgid "Error generating post %d: could not reach loripsum.net"
+msgstr "Ошибка создания записи %d: не удалось соединиться с loripsum.net"
+
+#: core/includes/back/system-redirect-rules.php:124
+msgid ""
+"The rule was saved as a draft and is not active. Fix the URLs and publish "
+"it again."
+msgstr ""
+"Правило сохранено как черновик и не действует. Исправьте URL и "
+"опубликуйте его снова."
+
+#: core/ajax/icons.php:100
+#, php-format
+msgid "%s icon deleted."
+msgid_plural "%s icons deleted."
+msgstr[0] "%s иконка удалена."
+msgstr[1] "%s иконки удалены."
+msgstr[2] "%s иконок удалено."
 #~ msgid "Link"
 #~ msgstr "Ссылка"
 
