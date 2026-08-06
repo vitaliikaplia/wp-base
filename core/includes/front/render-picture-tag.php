@@ -6,25 +6,26 @@ use Timber\ImageHelper;
 
 /** html filter to render picture tag from timber image object */
 function render_picture_tag($picture, $size = 'full', $loading = 'lazy', $alt = null) {
+    // The attachment is used as given: WP-LOC already resolves frontend image
+    // lookups to the current-language record, and alt text is per-language on
+    // purpose. Only `webp_url` — written once by the converter at upload time —
+    // falls back to the default-language sibling (see theme_attachment_meta()).
     if(is_array($picture)) {
         $picture_id = $picture['ID'];
-        $original_id = apply_filters('wpml_object_id', $picture_id, 'attachment', true, apply_filters('wpml_default_language', null));
-        $webp_url = get_post_meta($original_id, 'webp_url', true);
-        $picture_url = wp_get_attachment_image_url($original_id, 'full');
-        $picture_alt = get_post_meta($original_id, '_wp_attachment_image_alt', true);
         $picture_w = $picture['width'];
         $picture_h = $picture['height'];
-        $mime_type = get_post_mime_type($original_id);
     } elseif(is_object($picture)) {
         $picture_id = $picture->id;
-        $original_id = apply_filters('wpml_object_id', $picture_id, 'attachment', true, apply_filters('wpml_default_language', null));
         $picture_w = $picture->width;
         $picture_h = $picture->height;
-        $webp_url = get_post_meta($original_id, 'webp_url', true);
-        $picture_url = wp_get_attachment_image_url($original_id, 'full');
-        $picture_alt = get_post_meta($original_id, '_wp_attachment_image_alt', true);
-        $mime_type = get_post_mime_type($original_id);
+    } else {
+        return '';
     }
+
+    $webp_url = theme_attachment_meta($picture_id, 'webp_url');
+    $picture_url = wp_get_attachment_image_url($picture_id, 'full');
+    $picture_alt = get_post_meta($picture_id, '_wp_attachment_image_alt', true);
+    $mime_type = get_post_mime_type($picture_id);
     if($alt !== null){
         $picture_alt = $alt;
     }

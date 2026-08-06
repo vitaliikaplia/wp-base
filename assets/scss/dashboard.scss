@@ -23,36 +23,31 @@
     display: none !important;
 }
 
-/* hide wpml translation priority options */
-#icl_translation_priority_dropdown,#icl_how_to_translate_link,.icl_subsubsub,.otgs-notice {
-    display: none !important;
-}
+/* WP-LOC admin-bar language switcher.
+   The plugin renders raw <img> flags and ships no admin-bar CSS of its own,
+   so the sizing/alignment lives here. */
+#wp-admin-bar-wp_loc_lang_switcher{
 
-/* fix wpml dashboard language switcher */
-#wp-admin-bar-WPML_ALS{
     .ab-item{
-        font-size: 0 !important;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
 
-        span,
-        .ab-sub-wrapper{
-            font-size: 13px !important;
-        }
+    img{
+        display: block;
+        width: 16px;
+        height: auto;
+        max-height: 12px;
+        border-radius: 2px;
+        object-fit: cover;
     }
 
     .ab-sub-wrapper{
 
         .ab-item{
-            font-size: 13px !important;
-            min-width: 37px !important;
+            min-width: 120px;
         }
-    }
-
-    .otgs-ico-help{
-        display: none;
-    }
-
-    #wp-admin-bar-WPML_ALS_all{
-        display: none !important;
     }
 }
 

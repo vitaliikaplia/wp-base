@@ -13,6 +13,7 @@ define( 'ADMIN_AJAX_URL', admin_url('admin-ajax.php') );
 define( 'BLOGINFO_NAME', get_bloginfo('name') );
 define( 'BLOGINFO_URL', get_bloginfo('url') );
 define( 'TIMBER_VIEWS', 'views' );
+define( 'JQUERY_VERSION', '3.7.1' ); // bundled assets/js/jquery.min.js — bump both together
 define( 'IMG_TEMPLATE_DIRECTORY_URL', TEMPLATE_DIRECTORY_URL . 'assets/img' );
 define( 'ASSETS_VERSION', get_option('assets_version') );
 define( 'SVG_SPRITE_URL', TEMPLATE_DIRECTORY_URL . 'assets/svg/sprite.svg?ver=' . ASSETS_VERSION );
@@ -20,21 +21,30 @@ $parsed_url = parse_url(BLOGINFO_URL );
 define( 'BLOGINFO_JUST_DOMAIN', $parsed_url['host'] );
 define( 'TRANSIENTS_TIME', 48 * HOUR_IN_SECONDS );
 
-/** multilingual constants + wpml */
-if( defined('ICL_LANGUAGE_CODE' ) ){
-	define( 'BLOGINFO_LANGUAGE', ICL_LANGUAGE_CODE );
-	define( 'LANG_SUFFIX', "_" . ICL_LANGUAGE_CODE );
-    define( 'ICL_DONT_LOAD_NAVIGATION_CSS', 1 );
-    define( 'ICL_DONT_LOAD_LANGUAGE_SELECTOR_CSS', 1 );
-    define( 'ICL_DONT_LOAD_LANGUAGES_JS', 1 );
-	define( 'PAGE_ON_FRONT', icl_object_id( get_option('page_on_front'), 'page', false, BLOGINFO_LANGUAGE ) );
-	define( 'PAGE_FOR_POSTS', icl_object_id( get_option('page_for_posts'), 'page', false, BLOGINFO_LANGUAGE ) );
+/**
+ * Multilingual constants — WP-LOC.
+ *
+ * WP-LOC localizes `page_on_front` / `page_for_posts` itself through
+ * `pre_option_*` filters, so a plain get_option() already returns the ID for the
+ * current language and no per-language lookup is needed here.
+ *
+ * LANG_SUFFIX only ever namespaces this theme's transients, so it uses the URL
+ * slug (`_ua`) and falls back to the WordPress locale on single-language sites.
+ * It is deliberately not used to build option names — WP-LOC owns that, and it
+ * resolves both the slug and the compatible code suffix.
+ *
+ * The plugin is loaded on `plugins_loaded`, before the theme, so these helpers
+ * are already available here.
+ */
+if( function_exists('wp_loc_get_current_lang') ){
+	define( 'BLOGINFO_LANGUAGE', wp_loc_get_current_locale() );
+	define( 'LANG_SUFFIX', "_" . wp_loc_get_current_lang() );
 } else {
 	define( 'BLOGINFO_LANGUAGE', get_locale() );
 	define( 'LANG_SUFFIX', "_" . BLOGINFO_LANGUAGE );
-	define( 'PAGE_ON_FRONT', get_option('page_on_front') );
-	define( 'PAGE_FOR_POSTS', get_option('page_for_posts') );
 }
+define( 'PAGE_ON_FRONT', get_option('page_on_front') );
+define( 'PAGE_FOR_POSTS', get_option('page_for_posts') );
 
 /** template author information */
 $currentTheme = wp_get_theme();

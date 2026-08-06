@@ -159,15 +159,25 @@ if (class_exists('ACF')) {
                 $nav_menus[''] = ' - ' . __("Choose one", TEXTDOMAIN) . ' - ';
             }
 
+            // On a multilingual site show only the menus belonging to the language
+            // being edited. WP-LOC's own acf/load_field/type=nav_menu filter works on
+            // $field['choices'], which this field does not use, so the list is
+            // filtered here. Menus with no registered language (created before the
+            // plugin, or on a single-language site) always stay visible.
+            $context_language = theme_is_multilingual() ? theme_context_language() : '';
+
             foreach ( $navs as $nav ) {
-                if(defined('ICL_LANGUAGE_CODE')){
-                    $language_code = apply_filters( 'wpml_element_language_code', null, array( 'element_id'=> (int)$nav->term_id, 'element_type'=> 'nav_menu' ) );
-                    if(ICL_LANGUAGE_CODE == $language_code){
-                        $nav_menus[ $nav->term_id ] = $nav->name;
+
+                if ( $context_language ) {
+                    $menu_language = theme_term_language( (int) $nav->term_id, 'nav_menu' );
+
+                    if ( $menu_language && $menu_language !== $context_language ) {
+                        continue;
                     }
-                } else {
-                    $nav_menus[ $nav->term_id ] = $nav->name;
                 }
+
+                $nav_menus[ $nav->term_id ] = $nav->name;
+
             }
 
             return $nav_menus;

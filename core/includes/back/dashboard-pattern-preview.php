@@ -35,7 +35,7 @@ function pattern_preview(){
         <?php echo $content; ?>
     </main>
     <?php wp_footer(); ?>
-    <script src="<?php echo TEMPLATE_DIRECTORY_URL . 'assets/js/jquery.min.js?ver=3.4.1'; ?>"></script>
+    <script src="<?php echo esc_url(TEMPLATE_DIRECTORY_URL . 'assets/js/jquery.min.js?ver=' . JQUERY_VERSION); ?>"></script>
     <script src="<?php echo TEMPLATE_DIRECTORY_URL . 'assets/js/plugins.min.js?ver=' . ASSETS_VERSION; ?>"></script>
     <script src="<?php echo TEMPLATE_DIRECTORY_URL . 'assets/js/custom.min.js?ver=' . ASSETS_VERSION; ?>"></script>
 
@@ -78,11 +78,14 @@ add_action('admin_footer-edit.php', function(){
     ]);
 
     // The grid mirrors the list: show only patterns in the current admin language.
-    $current_lang = apply_filters('wpml_current_language', null);
-    if($current_lang){
-        $patterns = array_values(array_filter($patterns, function($id) use ($current_lang){
-            $details = apply_filters('wpml_post_language_details', null, $id);
-            return is_array($details) && isset($details['language_code']) && $details['language_code'] === $current_lang;
+    // Patterns with no registered language stay visible so a single-language site
+    // (or content predating WP-LOC) is not filtered down to nothing.
+    if(theme_is_multilingual()){
+        $context_language = theme_context_language();
+
+        $patterns = array_values(array_filter($patterns, function($id) use ($context_language){
+            $language = theme_post_language($id);
+            return !$language || $language === $context_language;
         }));
     }
 

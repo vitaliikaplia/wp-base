@@ -50,22 +50,32 @@ add_filter('wpseo_breadcrumb_links', function($links){
 
 /**
  * Open Graph locale for the current language: Yoast returns a raw code ("uk"),
- * while the OG format needs a full locale ("uk_UA"). WPML-aware, falls back to
- * the WordPress locale.
+ * while the OG format needs a full locale ("uk_UA"). Reads the language from
+ * WP-LOC when it is active, otherwise from the WordPress locale.
+ *
+ * theme_current_locale() already returns a locale, so the map only has to cover
+ * the short forms WP-LOC uses as slugs (`ua`) and codes (`uk`).
  */
 add_filter('wpseo_og_locale', function($locale){
     $map = array(
         'uk' => 'uk_UA',
+        'ua' => 'uk_UA',
         'ru' => 'ru_RU',
         'en' => 'en_US',
     );
 
-    $lang = apply_filters('wpml_current_language', null);
-    if(!$lang){
-        $lang = substr((string) get_locale(), 0, 2);
+    $language = function_exists('theme_current_locale') ? theme_current_locale() : get_locale();
+
+    if(isset($map[$language])){
+        return $map[$language];
     }
 
-    return $map[$lang] ?? $locale;
+    // A full locale ("uk_UA", "en_US") can be used as-is.
+    if(strpos($language, '_') !== false){
+        return $language;
+    }
+
+    return $map[substr((string) $language, 0, 2)] ?? $locale;
 }, 999);
 
 /**

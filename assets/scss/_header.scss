@@ -73,6 +73,46 @@
         gap: 16px;
     }
 
+    /* WP-LOC language switcher (layout scaffold — restyle per project) */
+    .site-languages {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        li {
+            margin: 0;
+            list-style: none;
+        }
+
+        a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            color: inherit;
+            opacity: 0.65;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+
+        img {
+            display: block;
+            width: 16px;
+            height: auto;
+            border-radius: 2px;
+        }
+
+        .is-active a {
+            opacity: 1;
+            font-weight: 700;
+        }
+    }
+
     @media (max-width: 768px) {
         .inner {
             grid-template-columns: auto 1fr;

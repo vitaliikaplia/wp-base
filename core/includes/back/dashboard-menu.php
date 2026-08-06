@@ -18,7 +18,6 @@ if(is_admin()){
 //		remove_menu_page( 'plugins.php' );                //Plugins
 //		remove_menu_page( 'options-general.php' );        //Settings
 //		remove_submenu_page( 'tools.php', 'site-health.php' );
-//		remove_menu_page( 'sitepress-multilingual-cms/menu/languages.php');
 //        remove_submenu_page('options-general.php', 'options-media.php');
 //        remove_submenu_page('options-general.php', 'options-writing.php');
 //        remove_submenu_page( 'tools.php', 'site-health.php' );

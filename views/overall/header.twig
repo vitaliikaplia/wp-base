@@ -1,32 +1,49 @@
 {# Test header — minimal chrome wired to the Header ACF options. Style per project. #}
+{# Autoescaping is off (Timber default) — anything going into an attribute is escaped by hand. #}
 <header class="site-header">
     <div class="inner">
         <div class="site-header-logo">
-            <a href="{{ site.url }}" class="site-logo">
-                {% if general_fields.header.logo %}{{ general_fields.header.logo | picture }}{% else %}{{ site.name }}{% endif %}
+            <a href="{{ site.url|esc_url }}" class="site-logo">
+                {% if general_fields.header.logo %}{{ general_fields.header.logo | picture_eager }}{% else %}{{ site.name|esc_html }}{% endif %}
             </a>
         </div>
 
         <nav class="site-nav">
             {% if general_fields.header.menu %}
-            {{ function('wp_nav_menu', { 'menu': general_fields.header.menu, 'container': false, 'echo': false }) }}
+            <ul class="site-menu">
+                {{ function('wp_nav_menu', { 'menu': general_fields.header.menu, 'container': false, 'echo': false }) }}
+            </ul>
             {% endif %}
         </nav>
 
         <div class="site-header-actions">
+            {# Language switcher — WP-LOC. Renders nothing on a single-language site. #}
+            {% if languages %}
+            <ul class="site-languages">
+                {% for language in languages %}
+                <li class="site-language{{ language.active ? ' is-active' : '' }}">
+                    <a href="{{ language.url|esc_url }}" lang="{{ language.locale|esc_attr }}" hreflang="{{ language.locale|esc_attr }}"{{ language.active ? ' aria-current="true"' : '' }}>
+                        {% if language.flag %}<img src="{{ language.flag|esc_url }}" alt="" width="16" height="12" loading="lazy">{% endif %}
+                        <span>{{ language.name|esc_html }}</span>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
             {% if general_fields.footer_socials %}
             <ul class="site-socials">
                 {% for s in general_fields.footer_socials %}
                     {% if s.url %}
-                    <li><a href="{{ s.url }}" target="_blank" rel="noopener">{{ icon(s.icon) }}</a></li>
+                    <li><a href="{{ s.url|esc_url }}" target="_blank" rel="noopener">{{ icon(s.icon) }}</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
             {% endif %}
 
             {% if general_fields.header.button.url %}
-            <a class="btn primary site-header-cta" href="{{ general_fields.header.button.url }}" target="{{ general_fields.header.button.target|default('_self') }}">
-                <span>{{ general_fields.header.button.title }}</span>
+            <a class="btn primary site-header-cta" href="{{ general_fields.header.button.url|esc_url }}" target="{{ general_fields.header.button.target|default('_self')|esc_attr }}">
+                <span>{{ general_fields.header.button.title|esc_html }}</span>
             </a>
             {% endif %}
         </div>

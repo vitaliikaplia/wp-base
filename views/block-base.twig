@@ -7,8 +7,8 @@ customBlockWrapper
 {% block wrapper_classes %}{% endblock %}
 {{ fields.responsive_options | join(' ') }}
 "
-id="{{ block.id }}"
-{% if fields.anchor %} data-anchor="{{ fields.anchor }}"{% endif %}
+id="{{ block.id|esc_attr }}"
+{% if fields.anchor %} data-anchor="{{ fields.anchor|esc_attr }}"{% endif %}
 {% block wrapper_tag_params %}{% endblock %}
 >
 {% if is_preview %}
@@ -47,49 +47,49 @@ fields.bg_color_desktop_tablet or fields.bg_color_mobile
 <style>
 {% if fields.margin_bottom_desktop_tablet %}
 #{{ block.id }}{
-margin-bottom: {{ fields.margin_bottom_desktop_tablet }}px;
+margin-bottom: {{ fields.margin_bottom_desktop_tablet|round }}px;
 }
 {% endif %}
 {% if fields.margin_bottom_mobile %}
 @media (max-width: 768px) {
 #{{ block.id }}{
-margin-bottom: {{ fields.margin_bottom_mobile }}px;
+margin-bottom: {{ fields.margin_bottom_mobile|round }}px;
 }
 }
 {% endif %}
 {% if fields.padding_top_desktop_tablet %}
 #{{ block.id }} .customBlock{
-padding-top: {{ fields.padding_top_desktop_tablet }}px;
+padding-top: {{ fields.padding_top_desktop_tablet|round }}px;
 }
 {% endif %}
 {% if fields.padding_top_mobile %}
 @media (max-width: 768px) {
 #{{ block.id }} .customBlock{
-padding-top: {{ fields.padding_top_mobile }}px;
+padding-top: {{ fields.padding_top_mobile|round }}px;
 }
 }
 {% endif %}
 {% if fields.padding_bottom_desktop_tablet %}
 #{{ block.id }} .customBlock{
-padding-bottom: {{ fields.padding_bottom_desktop_tablet }}px;
+padding-bottom: {{ fields.padding_bottom_desktop_tablet|round }}px;
 }
 {% endif %}
 {% if fields.padding_bottom_mobile %}
 @media (max-width: 768px) {
 #{{ block.id }} .customBlock{
-padding-bottom: {{ fields.padding_bottom_mobile }}px;
+padding-bottom: {{ fields.padding_bottom_mobile|round }}px;
 }
 }
 {% endif %}
 {% if fields.bg_color_desktop_tablet %}
 #{{ block.id }}{
-background-color: {{ fields.bg_color_desktop_tablet }};
+background-color: {{ fields.bg_color_desktop_tablet|css_value }};
 }
 {% endif %}
 {% if fields.bg_color_mobile %}
 @media (max-width: 768px) {
 #{{ block.id }}{
-background-color: {{ fields.bg_color_mobile }};
+background-color: {{ fields.bg_color_mobile|css_value }};
 }
 }
 {% endif %}
@@ -98,7 +98,7 @@ background-color: {{ fields.bg_color_mobile }};
 {% else %}
 {% if block_example %}
 <div class="block-example">
-<img src="{{ block_example }}" style="max-width: 100%;height: auto;padding: 0;margin: 0;font-size: 0;">
+<img src="{{ block_example|esc_url }}" style="max-width: 100%;height: auto;padding: 0;margin: 0;font-size: 0;">
 </div>
 {% endif %}
 {% endif %}
