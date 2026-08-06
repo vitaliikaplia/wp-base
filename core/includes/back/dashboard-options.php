@@ -406,26 +406,10 @@ function get_custom_options(){
                     'description'   => __("Select SMS service provider to integrate with SMS service", TEXTDOMAIN)
                 ),
                 array (
-                    'type'          => 'text',
-                    'name'          => 'sms_fly_username',
-                    'label'         => __("SMS-Fly username", TEXTDOMAIN),
-                    'description'   => __("SMS-Fly login to integrate with SMS-Fly service", TEXTDOMAIN) . ', <a href="https://sms-fly.ua/integration/api/" target="_blank">'.__('link', TEXTDOMAIN).'</a>',
-                    'conditional_logic' => array(
-                        'action' => 'show',
-                        'rules' => array(
-                            array(
-                                'field' => 'sms_service_provider',
-                                'operator' => '==',
-                                'value' => 'sms_fly',
-                            ),
-                        ),
-                    ),
-                ),
-                array (
                     'type'          => 'password',
-                    'name'          => 'sms_fly_password',
-                    'label'         => __("SMS-Fly password", TEXTDOMAIN),
-                    'description'   => __("SMS-Fly password to integrate with SMS-Fly service", TEXTDOMAIN),
+                    'name'          => 'sms_fly_api_key',
+                    'label'         => __("SMS-Fly API key", TEXTDOMAIN),
+                    'description'   => __("SMS-Fly REST API v2 key. Generate it in your SMS-Fly account — the old username/password XML gateway is no longer used", TEXTDOMAIN) . ', <a href="https://sms-fly.ua/integration/api/" target="_blank">'.__('link', TEXTDOMAIN).'</a>',
                     'conditional_logic' => array(
                         'action' => 'show',
                         'rules' => array(
@@ -697,6 +681,18 @@ function get_custom_options(){
                     'description'   => __("Hide and block the wp-admin Connectors settings page", TEXTDOMAIN),
                 ),
                 array (
+                    'type'          => 'checkbox',
+                    'name'          => 'allow_svg_upload',
+                    'label'         => __("Allow SVG uploads", TEXTDOMAIN),
+                    'description'   => __("An SVG is a script-capable document. Every upload is sanitized (scripts, event handlers and javascript: URIs are stripped) and files that cannot be cleaned are rejected — but only enable this when the editors are trusted.", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'trust_proxy_headers',
+                    'label'         => __("Trust proxy IP headers", TEXTDOMAIN),
+                    'description'   => __("Read the visitor IP from CF-Connecting-IP / X-Forwarded-For. Enable only behind Cloudflare or another reverse proxy — otherwise any visitor can spoof their IP in logs and geolocation.", TEXTDOMAIN),
+                ),
+                array (
                     'type'          => 'tab_end',
                 ),
                 array (
@@ -945,6 +941,59 @@ add_action('admin_menu', function() {
     }
 });
 
+/**
+ * Per-type sanitize callback for a custom option.
+ *
+ * `code` and `mce` are deliberately left raw — those fields exist to hold
+ * custom HTML/JS (header/footer snippets, maintenance and cookie copy) and
+ * filtering them would defeat the feature. Everything else is normalised, so a
+ * stray tag in an alpha-name or a schema field cannot reach the page unescaped.
+ */
+function custom_option_sanitize_callback($field){
+
+    switch($field['type']){
+
+        case 'code':
+        case 'mce':
+            return null; // stored verbatim
+
+        case 'checkbox':
+            return function($value){ return empty($value) ? '' : '1'; };
+
+        case 'number':
+        case 'range':
+            return function($value){
+                return is_numeric($value) ? $value + 0 : '';
+            };
+
+        case 'select-multiple':
+            return function($value){
+                return is_array($value) ? array_map('sanitize_text_field', $value) : array();
+            };
+
+        case 'link':
+            return function($value){
+                if(!is_array($value)){
+                    return array();
+                }
+
+                return array(
+                    'url'    => isset($value['url']) ? esc_url_raw($value['url']) : '',
+                    'title'  => isset($value['title']) ? sanitize_text_field($value['title']) : '',
+                    'target' => (isset($value['target']) && $value['target'] === '_blank') ? '_blank' : '',
+                );
+            };
+
+        case 'textarea':
+            return 'sanitize_textarea_field';
+
+        default:
+            return 'sanitize_text_field';
+
+    }
+
+}
+
 // Register settings
 add_action('admin_init', function() {
     foreach (get_custom_options() as $key=>$value) {
@@ -952,53 +1001,32 @@ add_action('admin_init', function() {
             if($field['type'] == 'tab_start' || $field['type'] == 'tab_end'){
                 continue;
             }
-            register_setting($key.'_settings', $field['name']);
+
+            $args = array();
+            $sanitize_callback = custom_option_sanitize_callback($field);
+
+            if($sanitize_callback !== null){
+                $args['sanitize_callback'] = $sanitize_callback;
+            }
+
+            register_setting($key.'_settings', $field['name'], $args);
         }
     }
 });
 
-// WPML integration for localized options
-if( defined('ICL_LANGUAGE_CODE' ) ){
-    add_action( 'init', function() {
-        foreach (get_custom_options() as $key=>$value) {
-            foreach ($value['fields'] as $field) {
-                if (isset($field['localize']) && $field['localize']) {
-                    do_action( 'wpml_multilingual_options', $field['name'] );
-                }
-            }
-        }
-    });
-    do_action( 'wpml_multilingual_options', 'blogname' );
-    do_action( 'wpml_multilingual_options', 'blogdescription' );
-    add_filter('pre_option', function($pre_option, $option, $default) {
-        if ((defined('REST_REQUEST') && REST_REQUEST) || is_admin() || $pre_option !== false) {
-            return $pre_option;
-        }
-
-        global $sitepress, $wpdb;
-
-        if (!$sitepress) {
-            return $pre_option;
-        }
-
-        $current_lang = $sitepress->get_current_language();
-        $default_lang = $sitepress->get_default_language();
-
-        if ($current_lang !== $default_lang) {
-            $localized_option = $option . '_' . $current_lang;
-            $localized_value = $wpdb->get_var($wpdb->prepare(
-                "SELECT option_value FROM {$wpdb->options} WHERE option_name = %s LIMIT 1",
-                $localized_option
-            ));
-
-            if ($localized_value !== null) {
-                return maybe_unserialize($localized_value);
-            }
-        }
-
-        return $pre_option;
-    }, 10, 3);
-}
+/**
+ * Localized options are handled by WP-LOC.
+ *
+ * Fields flagged `'localize' => true` are registered as multilingual in
+ * system-multilingual.php; WP-LOC then stores and reads them per language
+ * through its own `pre_option_*` filters, on the frontend, in frontend AJAX and
+ * on custom settings pages alike.
+ *
+ * The theme used to run its own `pre_option` filter here, querying wp_options
+ * directly via $sitepress and $wpdb. That is now dead weight — it duplicated
+ * WP-LOC's option layer, ran an uncached query on every option read, and only
+ * ever resolved one of the two suffix forms WP-LOC supports (`_uk` vs `_ua`).
+ */
 
 /** options assets */
 function custom_options_assets(){

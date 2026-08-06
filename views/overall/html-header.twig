@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {% set theme_color = get_option('theme_color') %}
     {% if theme_color %}
-    <meta name="theme-color" content="{{ theme_color }}" />
+    <meta name="theme-color" content="{{ theme_color|esc_attr }}" />
     {% endif %}
     <meta name="color-scheme" content="light" />
     <link rel="preconnect" href="https://fonts.googleapis.com">

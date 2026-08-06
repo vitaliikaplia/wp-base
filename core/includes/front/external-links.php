@@ -78,6 +78,16 @@ if(get_option('enable_external_link_page')){
             exit;
         }
 
+        // Only web links may pass through the interstitial. esc_url_raw() keeps
+        // everything in wp_allowed_protocols() (mailto:, ftp:, feed: …), and
+        // this page is a public redirector — narrowing it to http/https stops it
+        // being reused to launder links into other schemes.
+        $scheme = strtolower((string) wp_parse_url($url, PHP_URL_SCHEME));
+        if(!in_array($scheme, array('http', 'https'), true)){
+            wp_safe_redirect(home_url());
+            exit;
+        }
+
         // Never interstitial our own host — redirect straight through
         $site_host = wp_parse_url(home_url(), PHP_URL_HOST);
         $link_host = wp_parse_url($url, PHP_URL_HOST);

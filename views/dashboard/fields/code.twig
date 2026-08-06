@@ -1,5 +1,5 @@
 <label for="{{ name }}">
-    <textarea name="{{ name }}" id="{{ name }}" rows="4" class="large-text custom-options-{{ val.type }}">{{ value }}</textarea>
+    <textarea name="{{ name }}" id="{{ name }}" rows="4" class="large-text custom-options-{{ val.type }}">{{ value|esc_html }}</textarea>
     {% if description %}
     <p class="description">{{ description }}</p>
     {% endif %}

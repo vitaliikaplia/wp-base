@@ -24,14 +24,23 @@ function telegram_bot($message, $thread_id = null, $chat_id = null, $parse_mode 
         if (!empty($thread_id)) {
             $params['message_thread_id'] = $thread_id;
         }
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
-        $result = curl_exec($ch);
-        curl_close($ch);
-        return json_decode($result, true);
+
+        // WP HTTP API rather than raw curl: bounded timeout (a stalled Telegram
+        // API must not hold the page open) and certificate verification on.
+        $response = wp_remote_post($url, array(
+            'timeout'   => 15,
+            'sslverify' => true,
+            'body'      => $params,
+        ));
+
+        if (is_wp_error($response)) {
+            return array(
+                'ok' => false,
+                'description' => $response->get_error_message(),
+            );
+        }
+
+        return json_decode(wp_remote_retrieve_body($response), true);
     }
     return false;
 }

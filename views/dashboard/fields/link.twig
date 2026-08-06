@@ -1,14 +1,14 @@
 <div class="custom-link-field{% if value.url %} has-value{% endif %}{% if value.target == '_blank' %} has-target{% endif %}">
     <input type="text" id="{{ name }}_html" style="display: none;" />
-    <input type="hidden" name="{{ name }}[url]" id="{{ name }}_url" value="{{ value.url }}">
-    <input type="hidden" name="{{ name }}[title]" id="{{ name }}_title" value="{{ value.title }}">
-    <input type="hidden" name="{{ name }}[target]" id="{{ name }}_target" value="{{ value.target }}">
+    <input type="hidden" name="{{ name }}[url]" id="{{ name }}_url" value="{{ value.url|esc_url }}">
+    <input type="hidden" name="{{ name }}[title]" id="{{ name }}_title" value="{{ value.title|esc_attr }}">
+    <input type="hidden" name="{{ name }}[target]" id="{{ name }}_target" value="{{ value.target|esc_attr }}">
     <div class="link-wrap">
         <div class="link-title-wrap">
-            <span class="link-title">{{ value.title ?: value.url }}</span>
+            <span class="link-title">{{ (value.title ?: value.url)|esc_html }}</span>
             <span class="dashicons dashicons-external link-external-icon"></span>
         </div>
-        <a href="{{ value.url }}" class="link-url" target="_blank">{{ value.url }}</a>
+        <a href="{{ value.url|esc_url }}" class="link-url" target="_blank">{{ value.url|esc_html }}</a>
     </div>
     <button type="button" class="button custom-link-button" id="{{ name }}">
         <span class="dashicons dashicons-admin-links"></span>

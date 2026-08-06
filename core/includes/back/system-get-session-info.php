@@ -2,33 +2,60 @@
 
 if(!defined('ABSPATH')){exit;}
 
+/**
+ * Чи можна довіряти проксі-заголовкам з IP відвідувача.
+ *
+ * Вмикається опцією "Trust proxy IP headers" або константою TRUST_PROXY_HEADERS
+ * у wp-config.php (константа має пріоритет).
+ */
+function trust_proxy_headers()
+{
+    if (defined('TRUST_PROXY_HEADERS')) {
+        return (bool) TRUST_PROXY_HEADERS;
+    }
+
+    return (bool) get_option('trust_proxy_headers');
+}
+
+/**
+ * IP відвідувача.
+ *
+ * REMOTE_ADDR — єдине значення, яке клієнт не може підробити. CF-Connecting-IP,
+ * X-Forwarded-For і Client-IP — звичайні заголовки запиту: за Cloudflare вони
+ * достовірні, а без проксі їх задає сам відвідувач. Тому вони читаються лише
+ * коли довіру до проксі увімкнено явно — інакше будь-хто підставляє собі
+ * довільний IP у логах, геолокації та обмеженнях за IP.
+ */
 function get_user_ip()
 {
-    // Get real visitor IP behind CloudFlare network
-    if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
-        $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
-        $_SERVER['HTTP_CLIENT_IP'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
-    }
-    $client  = @$_SERVER['HTTP_CLIENT_IP'];
-    $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
-    $remote  = !empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
+    $remote = !empty($_SERVER['REMOTE_ADDR']) && filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP)
+        ? $_SERVER['REMOTE_ADDR']
+        : '';
 
-    if(filter_var($client, FILTER_VALIDATE_IP))
-    {
-        $ip = $client;
-    }
-    elseif($forward)
-    {
-        $forwarded_ips = explode(',', $forward);
-        $forwarded_ip = trim($forwarded_ips[0]);
-        $ip = filter_var($forwarded_ip, FILTER_VALIDATE_IP) ? $forwarded_ip : $remote;
-    }
-    else
-    {
-        $ip = $remote;
+    if (!trust_proxy_headers()) {
+        return $remote;
     }
 
-    return $ip;
+    // Cloudflare перезаписує цей заголовок на кожному запиті — тож він головний
+    if (!empty($_SERVER['HTTP_CF_CONNECTING_IP']) && filter_var($_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP)) {
+        return $_SERVER['HTTP_CF_CONNECTING_IP'];
+    }
+
+    if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        foreach (explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']) as $forwarded_ip) {
+            $forwarded_ip = trim($forwarded_ip);
+
+            if (filter_var($forwarded_ip, FILTER_VALIDATE_IP)) {
+                return $forwarded_ip;
+            }
+        }
+    }
+
+    if (!empty($_SERVER['HTTP_CLIENT_IP']) && filter_var($_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP)) {
+        return $_SERVER['HTTP_CLIENT_IP'];
+    }
+
+    return $remote;
 }
 
 function get_platform_info() {

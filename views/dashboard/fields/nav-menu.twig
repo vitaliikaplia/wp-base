@@ -2,7 +2,7 @@
     {% set menus = wp_get_nav_menus() %}
     {% for menu in menus %}
     <option value="{{ menu.term_id }}"{% if menu.term_id == get_option(val.name) %} selected{% endif %}>
-        {{ menu.name }}
+        {{ menu.name|esc_html }}
     </option>
     {% endfor %}
 </select>

@@ -3,7 +3,7 @@
         class="custom-options-{{ val.type }}"
         name="{{ name }}"
         id="{{ name }}"
-        value="{{ value }}"
+        value="{{ value|esc_attr }}"
         min="{{ val.tweaks.min }}"
         max="{{ val.tweaks.max }}"
         step="{{ val.tweaks.step }}"
@@ -11,7 +11,7 @@
     <input
         type="number"
         class="val_{{ name }}_display"
-        value="{{ value }}"
+        value="{{ value|esc_attr }}"
         min="{{ val.tweaks.min }}"
         max="{{ val.tweaks.max }}"
         step="{{ val.tweaks.step }}"

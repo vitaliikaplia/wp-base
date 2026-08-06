@@ -19,6 +19,9 @@ if(is_admin()){
 	}
 	add_action( 'wp_before_admin_bar_render', 'dashboard_header_add_theme_update_button' );
 	function update_assets_version_header() {
+		if(!current_user_can('manage_options')){
+			return;
+		}
 		?>
 		<style>
 			.update_assets_version a:before{
@@ -39,7 +42,8 @@ if(is_admin()){
                             dataType: "json",
                             cache: false,
                             data: {
-                                action: "update_assets_version"
+                                action: "update_assets_version",
+                                nonce: "<?php echo esc_js(wp_create_nonce('update_assets_version')); ?>"
                             },
                             beforeSend: function() {
                                 thisbutton.addClass("working");
@@ -58,15 +62,29 @@ if(is_admin()){
 	<?php }
 	add_action('admin_head', 'update_assets_version_header');
 
+	/**
+	 * Bump the cache-busting asset version.
+	 *
+	 * Capability + nonce are mandatory: this writes a site option and resets the
+	 * object cache and OPcache, so leaving it open to any logged-in user is both
+	 * a CSRF target and a cheap denial-of-service lever.
+	 */
 	function update_assets_version_function() {
-		$new_assets_version = ASSETS_VERSION + 0.01;
-		$new_assets_version = round($new_assets_version, 2);
+
+		if(!current_user_can('manage_options')){
+			wp_send_json_error(array('message' => __('Permission denied', TEXTDOMAIN)), 403);
+		}
+
+		check_ajax_referer('update_assets_version', 'nonce');
+
+		$new_assets_version = round((float) ASSETS_VERSION + 0.01, 2);
 		update_option('assets_version', $new_assets_version);
-		$toJson['new_assets_version'] = $new_assets_version;
-		echo json_encode($toJson);
+
         if (function_exists('wp_cache_flush')) { wp_cache_flush(); }
         if (function_exists('opcache_reset')) { opcache_reset(); }
-		exit;
+
+		wp_send_json(array('new_assets_version' => $new_assets_version));
+
 	}
 	add_action( 'wp_ajax_update_assets_version', 'update_assets_version_function' );
 

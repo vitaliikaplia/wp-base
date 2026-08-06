@@ -19,9 +19,10 @@ function render_svg_tag( $svg, $attributes = [] ) {
         return '';
     }
 
-    // 2. Створюємо унікальний ключ кешу, що враховує додаткові атрибути
+    // 2. Створюємо унікальний ключ кешу, що враховує додаткові атрибути.
+    //    Суфікс версії інвалідовує кеш, зібраний до появи санітайзера.
     $attributes_key = ! empty( $attributes ) ? '_' . md5( json_encode( $attributes ) ) : '';
-    $cache_key      = 'svg_' . $svg['id'] . $attributes_key;
+    $cache_key      = 'svg2_' . $svg['id'] . $attributes_key;
 
     // 3. Перевіряємо кеш
     $cached_svg = get_transient( $cache_key );
@@ -35,9 +36,15 @@ function render_svg_tag( $svg, $attributes = [] ) {
         return '';
     }
 
-    // 5. Читаємо вміст файлу та проводимо базову санітизацію (видаляємо теги <script>)
+    // 5. Читаємо вміст файлу та повністю санітизуємо його.
+    //    Файли, завантажені до появи санітайзера, теж проходять через цю перевірку,
+    //    тому невідчищений SVG ніколи не потрапляє inline у сторінку.
     $svg_content = file_get_contents( $path );
-    $svg_content = preg_replace( '/<script\b[^>]*>(.*?)<\/script>/is', '', $svg_content );
+    $svg_content = sanitize_svg_markup( $svg_content );
+
+    if ( $svg_content === false ) {
+        return '';
+    }
 
     // 6. Додаємо атрибути до тегу <svg>
     if ( ! empty( $attributes ) ) {

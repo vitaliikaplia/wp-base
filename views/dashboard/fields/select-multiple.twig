@@ -2,7 +2,7 @@
     {% if val.options is iterable %}
     <select class="custom-options-{{ val.type }}" name="{{ name }}[]" id="{{ name }}" multiple>
         {% for o_key,o_val in val.options %}
-        <option value="{{ o_key }}"{% if o_key in value %} selected="selected"{% endif %}>{{ o_val }}</option>
+        <option value="{{ o_key|esc_attr }}"{% if o_key in value %} selected="selected"{% endif %}>{{ o_val|esc_html }}</option>
         {% endfor %}
     </select>
     {% endif %}

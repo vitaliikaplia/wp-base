@@ -14,11 +14,19 @@ function write_log( $data ) {
 }
 
 /**
- * Custom print_r function
+ * Custom print_r function.
+ *
+ * Debug-only: it is also exposed to Twig as the |pr filter, so without this
+ * guard a stray {{ something|pr }} left in a template would dump internals —
+ * potentially including option values and user data — onto a live page.
+ * The dumped value is escaped so it cannot close the textarea and inject markup.
  */
 function pr($var){
+    if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
+        return;
+    }
     echo "<textarea style='position: fixed; border: none; padding: 10px; opacity: 1; bottom:0; left:0; z-index:999999999; display: block; width: 100%;height: 20%;overflow: auto; resize: none; background-color:#4b4b4b; color: #fff; border-top: solid 2px black;' onclick='$(this).select(); console.clear(); console.log($(this).val())'>";
-    print_r($var);
+    echo esc_html( print_r( $var, true ) );
     echo "</textarea>";
 }
 

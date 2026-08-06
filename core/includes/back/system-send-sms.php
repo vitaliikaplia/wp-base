@@ -7,92 +7,109 @@ if(!defined('ABSPATH')){exit;}
  * (sms_service_provider: sms_fly | turbo_sms). The recipient is normalized to
  * E164 via fix_phone_format(). Every attempt is logged as an sms-log post.
  * Returns the raw provider response, or false when not configured / invalid.
+ *
+ * Both providers go over HTTPS through the WP HTTP API, with certificate
+ * verification on and a bounded timeout — a stalled SMS gateway must not hold
+ * the page request open.
  */
 function send_sms($recipient, $message){
 
-    if($recipient && $message && ($sms_service_provider = get_option('sms_service_provider')) ){
+    if(!$recipient || !$message || !($sms_service_provider = get_option('sms_service_provider'))){
+        return false;
+    }
 
-        $recipient = fix_phone_format(trim(htmlspecialchars($recipient, ENT_QUOTES, 'UTF-8')));
-        if(!$recipient){
-            return false;
+    $recipient = fix_phone_format(trim(htmlspecialchars($recipient, ENT_QUOTES, 'UTF-8')));
+
+    if(!$recipient){
+        return false;
+    }
+
+    $response = '';
+    $sms_alpha_name = '';
+
+    if($sms_service_provider == 'sms_fly'){
+
+        $sms_alpha_name = get_option('sms_fly_alpha_name');
+        $sms_fly_api_key = get_option('sms_fly_api_key');
+
+        if($sms_fly_api_key && $sms_alpha_name){
+            $response = send_sms_request(
+                'https://sms-fly.ua/api/v2/api.php',
+                array(
+                    'auth'   => array('key' => $sms_fly_api_key),
+                    'action' => 'SENDMESSAGE',
+                    'data'   => array(
+                        'recipient' => $recipient,
+                        'channels'  => array('sms'),
+                        'sms'       => array(
+                            'source' => $sms_alpha_name,
+                            'ttl'    => 60,
+                            'text'   => $message,
+                        ),
+                    ),
+                )
+            );
         }
 
-        $response = '';
-        $sms_alpha_name = '';
+    } elseif($sms_service_provider == 'turbo_sms'){
 
-        if ( $sms_service_provider == 'sms_fly' && ($sms_username = get_option('sms_fly_username')) && ($sms_password = get_option('sms_fly_password')) && ($sms_alpha_name = get_option('sms_fly_alpha_name')) ){
+        $sms_alpha_name = get_option('turbo_sms_alpha_name');
+        $turbo_sms_token = get_option('turbo_sms_token');
 
-            $text = iconv('utf-8', 'utf-8', htmlspecialchars($message));
-            $description = iconv('utf-8', 'utf-8', htmlspecialchars('Website notifications'));
-            $start_time = 'AUTO';
-            $end_time = 'AUTO';
-            $rate = 1;
-            $lifetime = 4;
-
-            $myXML 	 = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
-            $myXML 	.= "<request>";
-            $myXML 	.= "<operation>SENDSMS</operation>";
-            $myXML 	.= '		<message start_time="'.$start_time.'" end_time="'.$end_time.'" lifetime="'.$lifetime.'" rate="'.$rate.'" desc="'.$description.'" source="'.$sms_alpha_name.'">'."\n";
-            $myXML 	.= "		<body>".$text."</body>";
-            $myXML 	.= "		<recipient>".$recipient."</recipient>";
-            $myXML 	.=  "</message>";
-            $myXML 	.= "</request>";
-
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_USERPWD , $sms_username.':'.$sms_password);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_URL, 'http://sms-fly.com/api/api.php');
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: text/xml", "Accept: text/xml"));
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $myXML);
-            $response = curl_exec($ch);
-            curl_close($ch);
-
-        } elseif ( $sms_service_provider == 'turbo_sms' && ($turbo_sms_token = get_option('turbo_sms_token')) && ($sms_alpha_name = get_option('turbo_sms_alpha_name')) ){
-
-            $url = 'https://api.turbosms.ua/message/send.json';
-
-            $data = [
-                'recipients' => [$recipient],
-                'sms' => [
-                    'sender' => $sms_alpha_name,
-                    'text' => $message
-                ]
-            ];
-
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, [
-                'Content-Type: application/json',
-                'Authorization: Bearer ' . $turbo_sms_token
-            ]);
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-
-            $response = curl_exec($ch);
-
-            curl_close($ch);
-
+        if($turbo_sms_token && $sms_alpha_name){
+            $response = send_sms_request(
+                'https://api.turbosms.ua/message/send.json',
+                array(
+                    'recipients' => array($recipient),
+                    'sms' => array(
+                        'sender' => $sms_alpha_name,
+                        'text'   => $message,
+                    ),
+                ),
+                array('Authorization' => 'Bearer ' . $turbo_sms_token)
+            );
         }
 
-        $sms_post = array(
-            'post_type' => 'sms-log',
-            'post_title' => $message,
-            'post_content' => '',
-            'post_status' => 'publish'
-        );
-        $log_id = wp_insert_post( $sms_post );
+    }
+
+    $sms_post = array(
+        'post_type' => 'sms-log',
+        'post_title' => $message,
+        'post_content' => '',
+        'post_status' => 'publish'
+    );
+    $log_id = wp_insert_post( $sms_post );
+
+    if($log_id && !is_wp_error($log_id)){
         update_post_meta( $log_id, 'recipient', $recipient);
         update_post_meta( $log_id, 'sent_with', $sms_service_provider);
         update_post_meta( $log_id, 'sms_alpha_name', $sms_alpha_name);
         update_post_meta( $log_id, 'response', $response);
-
-        return $response;
-
     }
 
-    return false;
+    return $response;
+
+}
+
+/**
+ * POST a JSON body to an SMS gateway and return the raw response body.
+ * Returns a readable error string instead of throwing, so it can be logged
+ * and shown in the "Send test" widget.
+ */
+function send_sms_request($url, $body, $headers = array()){
+
+    $response = wp_remote_post($url, array(
+        'timeout'     => 15,
+        'sslverify'   => true,
+        'headers'     => array_merge(array('Content-Type' => 'application/json'), $headers),
+        'body'        => wp_json_encode($body),
+        'data_format' => 'body',
+    ));
+
+    if(is_wp_error($response)){
+        return $response->get_error_message();
+    }
+
+    return wp_remote_retrieve_body($response);
 
 }

@@ -1,4 +1,5 @@
 {# Test footer — minimal chrome wired to the Footer ACF options. Style per project. #}
+{# Autoescaping is off (Timber default) — anything going into an attribute is escaped by hand. #}
 <footer class="site-footer">
     <div class="inner">
         <div class="site-footer-socials">
@@ -6,7 +7,7 @@
             <ul class="site-socials">
                 {% for s in general_fields.footer_socials %}
                     {% if s.url %}
-                    <li><a href="{{ s.url }}" target="_blank" rel="noopener">{{ icon(s.icon) }}</a></li>
+                    <li><a href="{{ s.url|esc_url }}" target="_blank" rel="noopener">{{ icon(s.icon) }}</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
@@ -14,7 +15,11 @@
         </div>
 
         <nav class="site-footer-nav">
-            {% if general_fields.footer.menu.html %}{{ general_fields.footer.menu.html }}{% endif %}
+            {% if general_fields.footer.menu.html %}
+            <ul class="site-menu">
+                {{ general_fields.footer.menu.html }}
+            </ul>
+            {% endif %}
         </nav>
 
         <div class="site-footer-copy-wrap">

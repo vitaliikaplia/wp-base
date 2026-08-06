@@ -964,29 +964,47 @@ function apply_current_color_to_icon($node, $inherited_fill = '', $inherited_str
 
 }
 
+/**
+ * Clean a node that is about to be written into the managed sprite.
+ *
+ * Delegates to the shared sanitizer in core/includes/back/svg-sanitizer.php so imported
+ * symbols, uploaded SVGs and inline-rendered attachments all enforce the same
+ * rules (blocked elements, event handlers, URI schemes, SMIL href retargeting).
+ * The node itself is checked here; sanitize_svg_node() handles its subtree.
+ */
 function sanitize_imported_svg_node($node){
 
     if($node->nodeType === XML_ELEMENT_NODE){
-        $blocked_tags = array('script', 'foreignobject', 'iframe', 'object', 'embed');
 
-        if(in_array(strtolower($node->nodeName), $blocked_tags, true)){
+        $tag = strtolower($node->localName ? $node->localName : $node->nodeName);
+
+        if(in_array($tag, svg_blocked_elements(), true) && $node->parentNode){
             $node->parentNode->removeChild($node);
             return;
         }
 
         foreach(iterator_to_array($node->attributes) as $attribute){
             $name = strtolower($attribute->nodeName);
-            $value = trim($attribute->nodeValue);
+            $value = $attribute->nodeValue;
 
-            if(strpos($name, 'on') === 0 || (($name === 'href' || $name === 'xlink:href') && stripos($value, 'javascript:') === 0)){
+            if(strpos($name, 'on') === 0){
+                $node->removeAttributeNode($attribute);
+                continue;
+            }
+
+            if($name === 'style' && svg_style_is_dangerous($value)){
+                $node->removeAttributeNode($attribute);
+                continue;
+            }
+
+            if(in_array($name, svg_uri_attributes(), true) && !svg_is_safe_uri_value($value)){
                 $node->removeAttributeNode($attribute);
             }
         }
+
     }
 
-    foreach(iterator_to_array($node->childNodes) as $child){
-        sanitize_imported_svg_node($child);
-    }
+    sanitize_svg_node($node);
 
 }
 

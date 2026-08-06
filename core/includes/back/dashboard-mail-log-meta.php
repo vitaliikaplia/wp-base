@@ -38,8 +38,16 @@ function mail_log_preview(){
             wp_die(__('Invalid mail log ID', TEXTDOMAIN));
         }
 
-        $mail_html = $post->post_content;
-        echo $mail_html;
+        // A logged email body can contain whatever a visitor typed into a form,
+        // so it is untrusted markup rendered inside an authenticated session.
+        // Serve it as an inert document: no scripts, no sniffing, no framing
+        // by anyone but us. The meta box additionally loads it sandboxed.
+        header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
+        header('X-Content-Type-Options: nosniff');
+        header("Content-Security-Policy: sandbox; default-src 'none'; img-src * data:; style-src 'unsafe-inline'; font-src *");
+        header('X-Robots-Tag: noindex, nofollow');
+
+        echo $post->post_content;
 
         exit;
 
@@ -82,9 +90,12 @@ function add_custom_email_log_meta_box_2() {
 }
 add_action('add_meta_boxes', 'add_custom_email_log_meta_box_2');
 
-// Render the email preview in an iframe
+// Render the email preview in an iframe.
+// sandbox="" (empty value = every restriction on) keeps the logged markup from
+// running scripts or touching the admin session it is displayed in.
 function email_log_preview_custom($post) {
-    echo '<iframe class="mailPreview" style="width: 100%;" src="/?secret-mail-log-preview=true&mail-log-id='.$post->ID.'"></iframe>';
+    $preview_url = home_url('/?secret-mail-log-preview=true&mail-log-id=' . (int) $post->ID);
+    echo '<iframe class="mailPreview" style="width: 100%;" sandbox="" referrerpolicy="no-referrer" src="' . esc_url($preview_url) . '"></iframe>';
 }
 
 // Add custom columns to the mail log post type in the admin dashboard

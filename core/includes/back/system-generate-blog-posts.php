@@ -31,6 +31,20 @@ function rp_generate_title_from_content($content) {
     return $title;
 }
 
+// Завантаження зовнішнього ресурсу через WP HTTP API (таймаут + обробка помилок,
+// на відміну від file_get_contents, який вішає запит і мовчки падає без allow_url_fopen)
+function rp_fetch_remote_body($url) {
+    $response = wp_remote_get($url, array('timeout' => 15));
+
+    if(is_wp_error($response) || wp_remote_retrieve_response_code($response) !== 200){
+        return false;
+    }
+
+    $body = wp_remote_retrieve_body($response);
+
+    return $body !== '' ? $body : false;
+}
+
 // Функція генерації постів
 function generate_random_posts($count, $paragraphs, $with_image) {
     $generated = 0;
@@ -38,10 +52,16 @@ function generate_random_posts($count, $paragraphs, $with_image) {
 
     for ($i = 1; $i <= $count; $i++) {
         try {
-            $lorem_ipsum = file_get_contents("https://loripsum.net/api/{$paragraphs}");
+            $lorem_ipsum = rp_fetch_remote_body("https://loripsum.net/api/{$paragraphs}");
 
+            if($lorem_ipsum === false){
+                $errors[] = sprintf(__('Error generating post %d: could not reach loripsum.net', TEXTDOMAIN), $i);
+                continue;
+            }
+
+            $lorem_ipsum_image = false;
             if($with_image) {
-                $lorem_ipsum_image = file_get_contents('https://picsum.photos/1024/768');
+                $lorem_ipsum_image = rp_fetch_remote_body('https://picsum.photos/1024/768');
             }
 
             $post_title = rp_generate_title_from_content($lorem_ipsum);
@@ -100,8 +120,17 @@ function rp_generator_page() {
     $message = '';
 
     if(isset($_POST['generate_posts'])) {
-        $count = intval($_POST['post_count']);
-        $paragraphs = intval($_POST['paragraphs']);
+        // Без цих двох перевірок сторінку можна викликати міжсайтовим POST-запитом
+        check_admin_referer('rp_generate_posts', 'rp_generator_nonce');
+
+        if(!current_user_can('manage_options')){
+            wp_die(__('Permission denied', TEXTDOMAIN));
+        }
+
+        // Обмеження max= в розмітці — лише підказка браузеру; справжній ліміт тут,
+        // інакше один POST із count=100000 кладе сайт на сотні зовнішніх запитів
+        $count = min(100, max(0, intval($_POST['post_count'] ?? 0)));
+        $paragraphs = min(50, max(0, intval($_POST['paragraphs'] ?? 0)));
         $with_image = isset($_POST['with_image']) ? true : false;
 
         if($count > 0 && $paragraphs > 0) {
@@ -117,7 +146,7 @@ function rp_generator_page() {
                 $message .= sprintf(
                     '<p>%s<br>%s</p>',
                     __('Errors occurred:', TEXTDOMAIN),
-                    implode("<br>", $result['errors'])
+                    implode("<br>", array_map('esc_html', $result['errors']))
                 );
             }
             $message .= '</div>';
@@ -130,6 +159,7 @@ function rp_generator_page() {
         <?php echo $message; ?>
 
         <form method="post" class="form-table">
+            <?php wp_nonce_field('rp_generate_posts', 'rp_generator_nonce'); ?>
             <table class="form-table">
                 <tr>
                     <th scope="row">
