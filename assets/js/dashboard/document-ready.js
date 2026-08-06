@@ -76,7 +76,7 @@
 
             const filterGrid = function () {
                 if (!$gridContainer) { return; }
-                const query = $.trim($gridSearch.val()).toLowerCase();
+                const query = ($gridSearch.val() || '').trim().toLowerCase();
                 $gridContainer.find('.pattern-grid-item').each(function () {
                     const name = $(this).find('.pattern-grid-item-name').text().toLowerCase();
                     $(this).toggle(query === '' || name.indexOf(query) !== -1);
