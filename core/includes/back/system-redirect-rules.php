@@ -48,7 +48,7 @@ function render_redirect_rules_submit_metabox($post) {
     <div class="submitbox" id="submitpost">
         <div style="padding: 10px 0; display: flex; align-items: center; justify-content: space-between;">
             <?php if (!$is_new) : ?>
-                <a class="submitdelete deletion" href="<?php echo get_delete_post_link($post->ID); ?>">
+                <a class="submitdelete deletion" href="<?php echo esc_url(get_delete_post_link($post->ID)); ?>">
                     <?php _e('Move to Trash', TEXTDOMAIN); ?>
                 </a>
             <?php else : ?>
@@ -78,6 +78,53 @@ function clear_redirect_rules_cache() {
     delete_transient('redirect_rules' . LANG_SUFFIX);
 }
 
+/**
+ * Reject an invalid rule without destroying it.
+ *
+ * This used to call wp_delete_post($post_id, true) and wp_die() — so a typo
+ * while editing an existing rule permanently deleted that rule, with no
+ * revision and no undo. Now the submitted values are kept, the rule is parked
+ * as a draft (drafts are never served, get_redirect_rules() only reads
+ * published posts) and the reason is shown as an admin notice.
+ */
+function reject_redirect_rule($post_id, $message, $old_url = '', $new_url = '', $code = 301) {
+
+    set_transient('redirect_rules_error_' . $post_id, $message, MINUTE_IN_SECONDS);
+
+    // Keep what the user typed so the form comes back populated
+    update_post_meta($post_id, 'old_url', $old_url);
+    update_post_meta($post_id, 'new_url', $new_url);
+    update_post_meta($post_id, 'code', $code ?: 301);
+
+    remove_action('save_post', 'save_redirect_rules');
+    wp_update_post(array('ID' => $post_id, 'post_status' => 'draft'));
+    add_action('save_post', 'save_redirect_rules');
+
+    clear_redirect_rules_cache();
+
+}
+
+/** Surface the rejection reason on the edit screen. */
+add_action('admin_notices', function() {
+
+    $screen = get_current_screen();
+
+    if(!$screen || $screen->post_type !== 'redirect-rules'){
+        return;
+    }
+
+    $post_id = isset($_GET['post']) ? absint($_GET['post']) : 0;
+
+    if(!$post_id || !($message = get_transient('redirect_rules_error_' . $post_id))){
+        return;
+    }
+
+    delete_transient('redirect_rules_error_' . $post_id);
+
+    echo '<div class="notice notice-error"><p>' . esc_html($message) . '</p><p>' . esc_html__('The rule was saved as a draft and is not active. Fix the URLs and publish it again.', TEXTDOMAIN) . '</p></div>';
+
+});
+
 add_action('save_post', 'save_redirect_rules');
 function save_redirect_rules($post_id) {
     if (!isset($_POST['redirect_rules_nonce']) || !wp_verify_nonce($_POST['redirect_rules_nonce'], 'redirect_rules_metabox')) {
@@ -102,16 +149,14 @@ function save_redirect_rules($post_id) {
     $code = absint($_POST['code']);
 
     if (!$old_url || !$new_url || $old_url === $new_url_fixed) {
-        if (get_post($post_id)) {
-            wp_delete_post($post_id, true);
-        }
-        wp_die(__('Invalid redirect rule: Old URL and New URL must be different and not empty.', TEXTDOMAIN));
+        reject_redirect_rule($post_id, __('Invalid redirect rule: Old URL and New URL must be different and not empty.', TEXTDOMAIN), $old_url, $new_url, $code);
+        return;
     }
 
     $existing_rules = new WP_Query([
         'post_type' => 'redirect-rules',
         'post__not_in' => [$post_id],
-        'suppress_filters' => false, // Allow WPML to filter by current language
+        'suppress_filters' => false, // Let the multilingual plugin filter by current language
         'meta_query' => [
             [
                 'key' => 'old_url',
@@ -122,19 +167,16 @@ function save_redirect_rules($post_id) {
     ]);
 
     if ($existing_rules->found_posts > 0) {
-        if (get_post($post_id)) {
-            wp_delete_post($post_id, true);
-        }
-        wp_die(__('Conflict detected: A redirect rule with this Old URL already exists.', TEXTDOMAIN));
+        reject_redirect_rule($post_id, __('Conflict detected: A redirect rule with this Old URL already exists.', TEXTDOMAIN), $old_url, $new_url, $code);
+        return;
     }
 
-    // check if old url contains current wordpress domain, if not - wp_die
     if (strpos($old_url, BLOGINFO_JUST_DOMAIN) === false) {
-        if (get_post($post_id)) {
-            wp_delete_post($post_id, true);
-        }
-        wp_die(__('Invalid redirect rule: Old URL must contain the current WordPress domain.', TEXTDOMAIN));
+        reject_redirect_rule($post_id, __('Invalid redirect rule: Old URL must contain the current WordPress domain.', TEXTDOMAIN), $old_url, $new_url, $code);
+        return;
     }
+
+    delete_transient('redirect_rules_error_' . $post_id);
 
     update_post_meta($post_id, 'old_url', $old_url);
     update_post_meta($post_id, 'new_url', $new_url);
@@ -192,7 +234,7 @@ function get_redirect_rules(){
         $redirect_posts = get_posts([
             'post_type' => 'redirect-rules',
             'numberposts' => -1,
-            'suppress_filters' => false // Allow WPML to filter by current language
+            'suppress_filters' => false // Let the multilingual plugin filter by current language
         ]);
         $redirect_rules = [];
         if(!empty($redirect_posts)){
@@ -253,7 +295,7 @@ function redirect_rules_columns($columns) {
     $new['redirect_to']   = __('Redirect to', TEXTDOMAIN);
     $new['redirect_code']  = __('Code', TEXTDOMAIN);
 
-    // keep WPML and other columns
+    // keep multilingual-plugin and other columns
     foreach ($columns as $key => $val) {
         if ( ! in_array($key, array('cb', 'title', 'date'), true) ) {
             $new[$key] = $val;

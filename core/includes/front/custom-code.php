@@ -8,7 +8,7 @@ function frontend_custom_header(){
 		echo $custom_header_code . "\n";
 	}
 }
-add_filter('wp_head', 'frontend_custom_header');
+add_action('wp_head', 'frontend_custom_header');
 
 /** footer custom code */
 function frontend_custom_footer(){

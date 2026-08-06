@@ -101,6 +101,10 @@ if(
             foreach($matches as $token){
                 $tag = (isset($token['tag'])) ? strtolower($token['tag']) : null;
                 $content = $token[0];
+                // Reset per token: previously $strip leaked from the previous
+                // iteration (and was undefined on the first one, which is a
+                // PHP 8 warning on every minified page render).
+                $strip = false;
 
                 if(is_null($tag)){
                     if(!empty($token['script'])){
@@ -171,13 +175,9 @@ if(
 
         protected function flhm_removeWhiteSpace($str)
         {
-            $str = str_replace("\t", ' ', $str);
-            $str = str_replace("\n", ' ', $str);
-            $str = str_replace("\r", ' ', $str);
-            while(stristr($str, '  ')){
-                $str = str_replace('  ', ' ', $str);
-            }
-            return $str;
+            // One pass instead of the old str_replace loop, which rescanned the
+            // whole string on every iteration — quadratic on large pages.
+            return preg_replace('/[\t\r\n ]+/', ' ', $str);
         }
     }
 
