@@ -4,6 +4,9 @@
    sensible fallback has to declare the same number as `'default'` here, or the
    fallback is silently replaced by ~50 the moment someone saves the tab.
 
+   The default must also be REACHABLE by the slider — on-step and inside
+   min/max. See the note on the mirror input below for what happens otherwise.
+
    The test is against '' only: get_option() gives false for an unset option
    (false == '' in PHP), while a deliberate 0 or '0' is a real value and is kept. #}
 {% set field_value = (value == '') ? (val.default ?? '') : value %}
@@ -17,13 +20,27 @@
         max="{{ val.tweaks.max }}"
         step="{{ val.tweaks.step }}"
     />
+    {# The number box is a DISPLAY MIRROR of the slider: it carries no `name`,
+       posts nothing, and the range beside it is the value that actually saves.
+       It still takes part in HTML5 constraint validation though, and that once
+       broke the whole page: with min="2" step="2" only even numbers validate, so
+       a stored odd value made the box fail stepMismatch and the browser refused
+       to submit the FORM — silently, because the box sits on an inactive tab
+       where it is display:none and cannot be focused to show the message
+       ("An invalid form control with name='' is not focusable"). Every setting
+       on the page stopped saving because of a control that saves nothing.
+
+       step="any" keeps the box out of that: the range still enforces the real
+       stepping, and re-syncs the box from itself on blur. min/max stay for the
+       spinner bounds — they can only bite while the field is visible, where the
+       browser can actually show the user what is wrong. #}
     <input
         type="number"
         class="val_{{ name }}_display"
         value="{{ field_value|esc_attr }}"
         min="{{ val.tweaks.min }}"
         max="{{ val.tweaks.max }}"
-        step="{{ val.tweaks.step }}"
+        step="any"
     > <span class="suffix">{{ val.tweaks.suffix }}</span>
     {% if description %}
     <p class="description">{{ description }}</p>

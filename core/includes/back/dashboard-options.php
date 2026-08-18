@@ -207,7 +207,7 @@ function get_custom_options(){
                 array (
                     'type'          => 'range',
                     'name'          => 'avif_convert_quality_graphics',
-                    'default'       => '55',
+                    'default'       => '56',
                     'tweaks'        => array(
                         'min' => '2',
                         'max' => '100',
@@ -215,7 +215,7 @@ function get_custom_options(){
                         'suffix' => '%',
                     ),
                     'label'         => __("AVIF quality for graphics (PNG, GIF)", TEXTDOMAIN),
-                    'description'   => __("Screenshots and flat graphics stay sharp at a lower setting. Defaults to 55 when left empty.", TEXTDOMAIN),
+                    'description'   => __("Screenshots and flat graphics stay sharp at a lower setting. Defaults to 56 when left empty.", TEXTDOMAIN),
                     'conditional_logic' => array(
                         'action' => 'show',
                         'rules' => array(

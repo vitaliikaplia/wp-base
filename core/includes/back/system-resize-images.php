@@ -179,7 +179,7 @@ function avif_quality_for($mime_type){
         return $quality;
     }
 
-    return $is_graphics ? 55 : 60;
+    return $is_graphics ? 56 : 60;
 
 }
 
