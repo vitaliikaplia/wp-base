@@ -40,6 +40,7 @@ The theme targets **WP-LOC**. WPML support was removed completely; do not reintr
 | `theme_default_language()` | the no-prefix language |
 | `theme_languages()` | switcher entries; empty on single-language sites |
 | `theme_translated_post_id()` / `theme_translated_id()` | resolve an ID into another language |
+| `theme_translated_ids()` / `theme_attachment_ids()` | every language sibling of an element, for writing a value that belongs to the FILE rather than to the translation |
 | `theme_post_language()` / `theme_term_language()` | which language an object belongs to |
 | `theme_attachment_meta()` | attachment meta with a default-language fallback |
 | `theme_switch_language()` / `theme_restore_language()` | background/transactional rendering in another language |
@@ -50,6 +51,7 @@ Rules that are easy to get wrong:
 - **`LANG_SUFFIX` is for transients only.** It namespaces this theme's cache keys (`general_fields_ua`). Any new per-language cache must include it.
 - **Do not re-implement localized options.** Flag the field `'localize' => true`; `system-multilingual.php` registers it via `wp_loc_multilingual_options` on `init`. The theme previously ran its own `pre_option` + `$wpdb` filter — that was removed as duplicate work, do not bring it back.
 - **Every helper must degrade.** The theme is a starter and most projects are single-language, so helpers return sensible single-language values with no plugin installed. Keep new helpers guarded the same way; call sites should not need `function_exists()`.
+- **Meta that describes the FILE goes on every sibling.** WP-LOC gives each language its own attachment record over one physical file, so `webp_url` / `avif_url` are not per-language values. Write them through `set_shadow_image_meta()`, which fans out over `theme_attachment_ids()`; read them through `theme_attachment_meta()`. Writing only the uploaded record leaves every other language serving the heavy original while the shadow sits unused on disk.
 - **Objects with no registered language stay visible.** When filtering an admin list by language, treat "no language" as "show it" — otherwise single-language sites and pre-WP-LOC content vanish.
 - **Do not duplicate the plugin.** hreflang, `<html lang>`, canonical URLs, query filtering, routing and the admin-bar switcher are WP-LOC's job.
 - WP-LOC's ACF `nav_menu` filter works on `$field['choices']`. The theme's own `nav_menu` field builds its list in `render_field()`, so it filters by language itself — if you rework that field, keep the filter.
@@ -98,7 +100,7 @@ No `.pot` file is kept in the repo; generate it in a temp directory when needed.
 ## Key Constants (core/init.php)
 
 - `TEXTDOMAIN` = `'wp-base'` — always use this for translations: `__("Label", TEXTDOMAIN)`
-- `LANG_SUFFIX` — current language slug prefixed with `_` (e.g. `"_ua"`), or the WP locale with no plugin. **Transient namespacing only** — never build option names with it, see [Multilingual](#multilingual--wp-loc)
+- `LANG_SUFFIX` — current language slug prefixed with `_` (e.g. `"_ua"`), or the WP locale with no plugin. **Transient namespacing only** — never build option names with it, see [Multilingual](#multilingual--wp-loc-only)
 - `BLOGINFO_LANGUAGE` — current language as a WP locale (`uk`, `en_US`)
 - `PAGE_ON_FRONT` / `PAGE_FOR_POSTS` — plain `get_option()`; WP-LOC localizes both itself
 - `TIMBER_VIEWS` = `'views'`
@@ -241,7 +243,7 @@ Frontend: styles load only when block is present (`has_block()` check). Editor: 
     'title' => __('Title', TEXTDOMAIN),
     'fields' => [
         [
-            'type'  => 'text|textarea|number|password|range|select|select-multiple|checkbox|color|code|mce|link|nav-menu',
+            'type'  => 'text|textarea|number|password|range|select|select-multiple|checkbox|color|code|mce|link|nav-menu|regenerate_images',
             'name'  => 'option_name',
             'label' => __('Label', TEXTDOMAIN),
         ],
@@ -252,6 +254,14 @@ Frontend: styles load only when block is present (`has_block()` check). Editor: 
 ### Tabs
 
 Use `tab_start` / `tab_end` fields to group options into tabs.
+
+### Defaults
+
+A `range` field must declare `'default' => '60'` whenever its PHP side has a fallback. A range input always posts a value: rendered with an empty `value` the browser parks the thumb at the midpoint of min/max, so the first save of that tab writes ~50 over whatever the PHP fallback was. The template only substitutes the default when nothing is stored — a deliberate `0` survives.
+
+### Action fields
+
+`regenerate_images` is not a setting — it renders a button and stores nothing. It is skipped when settings are registered (alongside `tab_start` / `tab_end`), so it never creates an option. Its `name` picks the format: `regenerate_webp` / `regenerate_avif`.
 
 ### Conditional logic
 
@@ -290,12 +300,36 @@ Registered from `core/includes/back/acf-field-*.php` (auto-loaded), usable in an
 - Communications: `system-send-email.php` / `system-send-sms.php` (SMS-Fly REST API v2, TurboSMS) / `system-telegram.php`, `core/includes/front/phone-functions.php` (libphonenumber), and the "Send test" widget (`dashboard-widget-send-test.php`). Logs: `mail-log` / `sms-log` CPTs. There is no `?send_test_email=1` trigger any more — use the widget.
 - SEO / PWA: `core/includes/front/schema.php` (JSON-LD, option-driven), `system-favicon.php` (icons + web manifest), `core/includes/front/wpseo-fix.php` (Yoast i18n).
 - Render helpers: `core/includes/front/render-picture-tag.php` (`picture`/`picture_eager`/`picture_src`) and `render-svg-tag.php` (`svg`), registered in `core/timber.php`.
+- Shadow images (WEBP / AVIF): `core/includes/back/system-resize-images.php` converts on upload and `core/ajax/regenerate-images.php` re-encodes the library in batches from the options page. See [Shadow images](#shadow-images--webp--avif).
 - External-link interstitial: `core/includes/front/external-links.php` (+ `views/external-link.twig`), opt-in, `http`/`https` targets only.
 - Colours: `core/includes/back/system-color-presets.php` parses `--color-*` tokens → editor / ACF / TinyMCE palettes.
 - Multilingual: `core/includes/back/system-multilingual.php` (WP-LOC helpers, localized-option registration, language switching); switcher markup in `views/overall/header.twig` + `_header.scss`; WP-LOC admin-bar switcher styling in `dashboard.scss`.
 - Misc helpers: `core/encrypt-decrypt.php` (openssl), `core/includes/back/acf-order-column.php`, `acf-wysiwyg-delay.php`.
 
 Prefix convention: new code is **unprefixed** (matches the base's existing global functions), not `insight_`/`skyta_`/`hw_`.
+
+## Shadow images — WEBP / AVIF
+
+Each original keeps optional shadow copies beside it, named `{filename}-{ext}.{webp|avif}` so `photo.png` and `photo.jpg` never collide. Both formats are option-gated, independent of each other, and off by default.
+
+| Option | Meaning |
+|---|---|
+| `enable_webp_convert` / `enable_avif_convert` | the two toggles; either, both or neither |
+| `webp_convert_quality` | WEBP quality (fallback 90) |
+| `avif_convert_quality_photo` | AVIF quality for JPEG sources (fallback 60) |
+| `avif_convert_quality_graphics` | AVIF quality for PNG / GIF sources (fallback 55) |
+
+Per attachment the converters store `webp_path` / `webp_url` and `avif_path` / `avif_url`. Read them with `theme_attachment_meta()`, never with a bare `get_post_meta()`.
+
+- **Ladder order is AVIF, then WEBP, then `<img>`.** The browser takes the first `<source>` type it understands and never looks further, so whatever AVIF points at is what every modern browser downloads. Both `picture-tag.twig` and the `the_content` wrapper in `system-resize-images.php` follow this order.
+- **`| picture_src` stays WEBP on purpose.** It returns a bare URL for CSS backgrounds, `og:image` and hand-written `src` — contexts with no fallback rung — so the URL has to be one every browser can decode. Use `| picture` wherever markup allows.
+- **Two Imagick quality setters, always.** WEBP reads `setImageCompressionQuality()` and ignores `setCompressionQuality()`; AVIF is the other way round. Drop the second and every AVIF quality produces a byte-identical file — measured here: 80 741 B at both q40 and q80, against 24 972 B / 439 478 B once both setters are called. `set_image_encoder_quality()` calls both; never bypass it.
+- **AVIF quality is split photo/graphics.** Flat graphics compress roughly twice as hard as photographs at the same visual fidelity, so one number would have to be set for the worst case. Defaults: 60 photo, 55 graphics — declared both as the PHP fallback in `avif_quality_for()` and as the field's `'default'`, which have to stay in step (see [Defaults](#defaults)).
+- **The theme's AVIF quality also governs resized derivatives** through a `wp_editor_set_quality` filter. Without it WordPress cuts them at its own default of 82, and since AVIF is the first rung that is the difference between the ladder helping and hurting — on one 768px cut, 2 920 B at q55 versus WEBP's 3 224 B, but 4 829 B at q82 versus 4 312 B. WEBP derivatives are deliberately left on WordPress's default so existing projects do not silently re-cut.
+- **The AVIF rung is dropped when a resized AVIF could not be produced.** `ImageHelper::_operate()` returns the source URL unchanged on failure, and whether Imagick can resize AVIF is a property of the server build — so `render_picture_tag()` compares the result against the input and omits the rung rather than advertising a full-size file where a cut-down one was asked for.
+- **Known limitation:** a resized derivative is cut from the shadow, not from the original, so it is encoded twice. Full-size AVIF measures 46–58 % lighter than WEBP; at resized widths the two are roughly level. Fixing it means cutting every width from the original, which is a larger change than this subsystem.
+- **Regeneration runs in batches** of 10 attachments per request (`regenerate_images_batch_size` filter), so a large library never hits `max_execution_time`. On a multilingual site it converts only the default-language record of each file and skips the duplicates — one file, one encode — while the meta write still covers every sibling.
+- **Meta is written to every language sibling** — see [Multilingual](#multilingual--wp-loc-only).
 
 ## SCSS Conventions
 

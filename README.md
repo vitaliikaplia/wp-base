@@ -10,6 +10,7 @@ Live demo: [wp-base.kaplia.top](https://wp-base.kaplia.top/)
 - WordPress 6.7+
 - [Advanced Custom Fields Pro](https://www.advancedcustomfields.com/pro/)
 - Composer (installs Timber, GeoIP2 and libphonenumber into `core/vendor/`)
+- **Imagick** — only for the WEBP / AVIF converters; each format needs its delegate compiled in (`magick -list format` should show `WEBP rw+` / `AVIF rw+`). Everything else works without it.
 - Mini Prepros — PhpStorm plugin for SCSS/JS compilation (see [Build Process](#build-process))
 - **WP-LOC** — for multilingual projects only (see [Multilingual](#multilingual--wp-loc)); single-language sites need nothing
 
@@ -224,9 +225,11 @@ A custom options framework with support for multiple field types:
 | `mce` | TinyMCE rich text editor | **raw** (holds custom HTML by design) |
 | `link` | URL link input with title | url / title / target |
 | `nav-menu` | Navigation menu selector | sanitized text |
+| `regenerate_images` | Button that re-encodes the WEBP / AVIF shadows | — (an action, stores nothing) |
 
 Features:
 - Conditional logic (show/hide fields based on other field values)
+- `'default' => '60'` on a `range` field — the value the slider renders with before anything is stored (a range input always posts a value, so without it the first save writes the midpoint of min/max)
 - Tab-based grouping
 - Localization support via WP-LOC (see [Multilingual](#multilingual--wp-loc))
 - Per-type sanitization on save (`custom_option_sanitize_callback()`); `code` and `mce` are intentionally exempt
@@ -267,6 +270,7 @@ WP-LOC keeps the URL slug separate from the database/API language code. Ukrainia
 | `theme_translated_id($id, $element_type, $lang = null)` | same for any WP-LOC element type (`post_attachment`, `tax_category`, …) |
 | `theme_post_language($id)` / `theme_term_language($id, $tax)` | the language an object belongs to |
 | `theme_attachment_meta($id, $key)` | attachment meta, falling back to the default-language sibling |
+| `theme_translated_ids($id, $element_type)` / `theme_attachment_ids($id)` | every language sibling, for writing a value that belongs to the file rather than to the translation |
 | `theme_switch_language($lang)` / `theme_restore_language($prev)` | temporarily switch language + WP locale for background work |
 
 ### What the theme wires up
@@ -276,7 +280,7 @@ WP-LOC keeps the URL slug separate from the database/API language code. Ukrainia
 - **Per-language caching** — `LANG_SUFFIX` namespaces every theme transient (`general_fields_ua`, `redirect_rules_en`, …). It is deliberately *not* used to build option names; WP-LOC owns that and resolves both suffix forms.
 - **Language-scoped admin UI** — the `nav_menu` ACF field and the patterns grid only list content in the language being edited. Objects with no registered language stay visible, so single-language sites are never filtered down to nothing.
 - **Transactional email in the recipient's language** — `send_email(['language' => 'en', …])` switches language and locale around template rendering, then restores.
-- **Attachments** — images are used as given (WP-LOC resolves frontend lookups to the current-language record, and alt text is per-language on purpose); only `webp_url`, written once at upload, falls back to the default-language sibling.
+- **Attachments** — images are used as given (WP-LOC resolves frontend lookups to the current-language record, and alt text is per-language on purpose). The shadow URLs are the exception: `webp_url` / `avif_url` describe the physical file, which every language shares, so they are written onto all sibling records at once (`set_shadow_image_meta()`) and read with a default-language fallback (`theme_attachment_meta()`).
 - **Yoast OG locale** reads the current language from WP-LOC.
 
 hreflang tags, `<html lang="">`, canonical URLs and query filtering are the plugin's job — the theme does not duplicate them.
@@ -308,7 +312,7 @@ Added by this theme in `core/timber.php`:
 
 | Filter | Purpose |
 |---|---|
-| `picture` / `picture_eager` / `picture_src` | WEBP-aware `<picture>` markup (`picture_eager` skips lazy-loading, for above-the-fold images) |
+| `picture` / `picture_eager` / `picture_src` | AVIF/WEBP-aware `<picture>` markup (`picture_eager` skips lazy-loading, for above-the-fold images; `picture_src` returns a bare WEBP URL for contexts with no fallback rung, such as CSS backgrounds) |
 | `svg` | Inline, sanitized SVG from an ACF image field |
 | `css_value` | Guard for values interpolated into an inline `<style>` |
 | `ceil` | Round up |
@@ -359,7 +363,9 @@ Timber already provides the WordPress escapers — `esc_url`, `esc_attr`, `esc_h
 - Test header / footer chrome wired to the Header / Footer ACF options: a 3-column grid (logo · centered menu · socials + CTA) with a sticky footer (body flex column, `main` grows to push the footer down)
 
 ### Performance & Optimization
-- Timber HTML cache, HTML minification, WEBP converter & big-image resizer
+- Timber HTML cache, HTML minification, big-image resizer
+- **Shadow images — WEBP and AVIF.** Each upload optionally gets a `{name}-{ext}.webp` and/or `{name}-{ext}.avif` copy beside the original, served through a `<picture>` ladder that offers AVIF first, WEBP second and the original last. Both formats are independent toggles, off by default, with their own quality settings — AVIF split into a photo and a graphics setting because flat graphics compress about twice as hard. Measured on this theme's own images, full-size AVIF comes out 46–58 % lighter than the WEBP of the same file.
+- **Regenerate from the options page.** Changing a quality slider does nothing on its own — the files are already on disk. *Settings → Images* has a **Regenerate all images** button on each format's tab that re-encodes the whole library in batches over AJAX, with a progress bar and a per-file error list. Requires Imagick with the matching delegate (`magick -list format` should show `WEBP rw+` / `AVIF rw+`).
 
 ### Admin & Dashboard
 - Tabbed dashboard options framework with conditional logic + WP-LOC localization
