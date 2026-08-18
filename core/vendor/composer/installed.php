@@ -29,9 +29,9 @@
             'dev_requirement' => false,
         ),
         'giggsey/libphonenumber-for-php' => array(
-            'pretty_version' => '9.0.36',
-            'version' => '9.0.36.0',
-            'reference' => '66434ecf051386a54a54c18c7853aeb85dfb7a1e',
+            'pretty_version' => '9.0.37',
+            'version' => '9.0.37.0',
+            'reference' => '1469be46ee71678270987d925b34e6bc1c440af9',
             'type' => 'library',
             'install_path' => __DIR__ . '/../giggsey/libphonenumber-for-php',
             'aliases' => array(),
@@ -40,7 +40,7 @@
         'giggsey/libphonenumber-for-php-lite' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => '9.0.36',
+                0 => '9.0.37',
             ),
         ),
         'giggsey/locale' => array(
