@@ -1849,8 +1849,8 @@ msgstr "Фотографіям потрібне вище значення, що�
 msgid "AVIF quality for graphics (PNG, GIF)"
 msgstr "Якість AVIF для графіки (PNG, GIF)"
 
-msgid "Screenshots and flat graphics stay sharp at a lower setting. Defaults to 55 when left empty."
-msgstr "Скріншоти та пласка графіка лишаються чіткими й на нижчому значенні. Якщо не задано — 55."
+msgid "Screenshots and flat graphics stay sharp at a lower setting. Defaults to 56 when left empty."
+msgstr "Скріншоти та пласка графіка лишаються чіткими й на нижчому значенні. Якщо не задано — 56."
 
 msgid "Regenerate WEBP"
 msgstr "Перегенерувати WEBP"

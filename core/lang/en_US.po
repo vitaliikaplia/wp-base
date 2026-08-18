@@ -1820,7 +1820,7 @@ msgstr ""
 msgid "AVIF quality for graphics (PNG, GIF)"
 msgstr ""
 
-msgid "Screenshots and flat graphics stay sharp at a lower setting. Defaults to 55 when left empty."
+msgid "Screenshots and flat graphics stay sharp at a lower setting. Defaults to 56 when left empty."
 msgstr ""
 
 msgid "Regenerate WEBP"
