@@ -259,6 +259,8 @@ Use `tab_start` / `tab_end` fields to group options into tabs.
 
 A `range` field must declare `'default' => '60'` whenever its PHP side has a fallback. A range input always posts a value: rendered with an empty `value` the browser parks the thumb at the midpoint of min/max, so the first save of that tab writes ~50 over whatever the PHP fallback was. The template only substitutes the default when nothing is stored — a deliberate `0` survives.
 
+**The default must be reachable by the slider** — on-step and inside min/max. With the usual `min="2" step="2"` that means an even number. An off-step default (`55`) fails HTML5 `stepMismatch` in the field's number box, and because that box sits on an inactive tab where it is `display:none`, the browser cannot focus it to report the problem: the whole options page just stops saving, with only `An invalid form control with name='' is not focusable` in the console. The number box now carries `step="any"` so it can never block a submit again, but a default the slider cannot reach is still wrong — it renders a value the user cannot reproduce by dragging.
+
 ### Action fields
 
 `regenerate_images` is not a setting — it renders a button and stores nothing. It is skipped when settings are registered (alongside `tab_start` / `tab_end`), so it never creates an option. Its `name` picks the format: `regenerate_webp` / `regenerate_avif`.
@@ -317,14 +319,14 @@ Each original keeps optional shadow copies beside it, named `{filename}-{ext}.{w
 | `enable_webp_convert` / `enable_avif_convert` | the two toggles; either, both or neither |
 | `webp_convert_quality` | WEBP quality (fallback 90) |
 | `avif_convert_quality_photo` | AVIF quality for JPEG sources (fallback 60) |
-| `avif_convert_quality_graphics` | AVIF quality for PNG / GIF sources (fallback 55) |
+| `avif_convert_quality_graphics` | AVIF quality for PNG / GIF sources (fallback 56) |
 
 Per attachment the converters store `webp_path` / `webp_url` and `avif_path` / `avif_url`. Read them with `theme_attachment_meta()`, never with a bare `get_post_meta()`.
 
 - **Ladder order is AVIF, then WEBP, then `<img>`.** The browser takes the first `<source>` type it understands and never looks further, so whatever AVIF points at is what every modern browser downloads. Both `picture-tag.twig` and the `the_content` wrapper in `system-resize-images.php` follow this order.
 - **`| picture_src` stays WEBP on purpose.** It returns a bare URL for CSS backgrounds, `og:image` and hand-written `src` — contexts with no fallback rung — so the URL has to be one every browser can decode. Use `| picture` wherever markup allows.
 - **Two Imagick quality setters, always.** WEBP reads `setImageCompressionQuality()` and ignores `setCompressionQuality()`; AVIF is the other way round. Drop the second and every AVIF quality produces a byte-identical file — measured here: 80 741 B at both q40 and q80, against 24 972 B / 439 478 B once both setters are called. `set_image_encoder_quality()` calls both; never bypass it.
-- **AVIF quality is split photo/graphics.** Flat graphics compress roughly twice as hard as photographs at the same visual fidelity, so one number would have to be set for the worst case. Defaults: 60 photo, 55 graphics — declared both as the PHP fallback in `avif_quality_for()` and as the field's `'default'`, which have to stay in step (see [Defaults](#defaults)).
+- **AVIF quality is split photo/graphics.** Flat graphics compress roughly twice as hard as photographs at the same visual fidelity, so one number would have to be set for the worst case. Defaults: 60 photo, 56 graphics — declared both as the PHP fallback in `avif_quality_for()` and as the field's `'default'`, which have to stay in step (see [Defaults](#defaults)).
 - **The theme's AVIF quality also governs resized derivatives** through a `wp_editor_set_quality` filter. Without it WordPress cuts them at its own default of 82, and since AVIF is the first rung that is the difference between the ladder helping and hurting — on one 768px cut, 2 920 B at q55 versus WEBP's 3 224 B, but 4 829 B at q82 versus 4 312 B. WEBP derivatives are deliberately left on WordPress's default so existing projects do not silently re-cut.
 - **The AVIF rung is dropped when a resized AVIF could not be produced.** `ImageHelper::_operate()` returns the source URL unchanged on failure, and whether Imagick can resize AVIF is a property of the server build — so `render_picture_tag()` compares the result against the input and omits the rung rather than advertising a full-size file where a cut-down one was asked for.
 - **Known limitation:** a resized derivative is cut from the shadow, not from the original, so it is encoded twice. Full-size AVIF measures 46–58 % lighter than WEBP; at resized widths the two are roughly level. Fixing it means cutting every width from the original, which is a larger change than this subsystem.
