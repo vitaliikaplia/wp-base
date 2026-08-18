@@ -1834,6 +1834,75 @@ msgid_plural "%s icons deleted."
 msgstr[0] "%s иконка удалена."
 msgstr[1] "%s иконки удалены."
 msgstr[2] "%s иконок удалено."
+msgid "AVIF convert"
+msgstr "AVIF конвертация"
+
+msgid "Enable AVIF convert. AVIF is offered before WEBP; browsers that do not support it fall back automatically."
+msgstr "Включить конвертацию AVIF. AVIF предлагается браузеру раньше WEBP; те, что его не поддерживают, автоматически берут следующий формат."
+
+msgid "AVIF quality for photos (JPEG)"
+msgstr "Качество AVIF для фотографий (JPEG)"
+
+msgid "Photographs need a higher setting to stay below the WEBP of the same image. Defaults to 60 when left empty."
+msgstr "Фотографиям нужно более высокое значение, чтобы файл оставался легче WEBP того же изображения. Если не задано — 60."
+
+msgid "AVIF quality for graphics (PNG, GIF)"
+msgstr "Качество AVIF для графики (PNG, GIF)"
+
+msgid "Screenshots and flat graphics stay sharp at a lower setting. Defaults to 55 when left empty."
+msgstr "Скриншоты и плоская графика остаются чёткими и при более низком значении. Если не задано — 55."
+
+msgid "Regenerate WEBP"
+msgstr "Перегенерировать WEBP"
+
+msgid "Regenerate AVIF"
+msgstr "Перегенерировать AVIF"
+
+msgid "Rebuilds the WEBP copy of every original image with the quality set above. Existing files are overwritten."
+msgstr "Пересоздаёт WEBP-копию каждого оригинального изображения с качеством, заданным выше. Существующие файлы перезаписываются."
+
+msgid "Rebuilds the AVIF copy of every original image with the qualities set above. Existing files are overwritten."
+msgstr "Пересоздаёт AVIF-копию каждого оригинального изображения с качествами, заданными выше. Существующие файлы перезаписываются."
+
+msgid "Regenerate all images"
+msgstr "Перегенерировать все изображения"
+
+msgid "This will overwrite existing files. Continue?"
+msgstr "Существующие файлы будут перезаписаны. Продолжить?"
+
+msgid "Regeneration failed."
+msgstr "Не удалось перегенерировать."
+
+msgid "You are not allowed to regenerate images."
+msgstr "У вас нет прав перегенерировать изображения."
+
+msgid "Unknown image format."
+msgstr "Неизвестный формат изображения."
+
+msgid "This image format is disabled in the settings."
+msgstr "Этот формат изображений отключён в настройках."
+
+msgid "Imagick is not available on this server."
+msgstr "Imagick недоступен на этом сервере."
+
+msgid "Source file is missing."
+msgstr "Исходный файл отсутствует."
+
+msgid "Empty result."
+msgstr "Пустой результат."
+
+msgid "converted"
+msgstr "сконвертировано"
+
+msgid "skipped"
+msgstr "пропущено"
+
+msgid "Done"
+msgstr "Готово"
+
+msgid "In this section, you can enable resizing and optimization of images while uploading them to the media library. You can specify the formats that will be resized, set the width and height of the resized images, and adjust the quality of the resized images. Additionally, you can enable the conversion of images to the WEBP and AVIF formats, which are modern image formats that provide better compression and quality compared to other formats. Both are optional and independent of each other; AVIF is offered to the browser first and WEBP second."
+msgstr "В этом разделе можно включить изменение размера и оптимизацию изображений при загрузке в медиабиблиотеку. Вы можете указать форматы, которые будут изменены, задать ширину и высоту, а также настроить качество. Кроме того, можно включить конвертацию изображений в форматы WEBP и AVIF — современные форматы, дающие лучшее сжатие и качество по сравнению с другими. Оба опциональны и независимы друг от друга; браузеру AVIF предлагается первым, WEBP — вторым."
+
 #~ msgid "Link"
 #~ msgstr "Ссылка"
 

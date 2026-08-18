@@ -1804,3 +1804,72 @@ msgid "%s icon deleted."
 msgid_plural "%s icons deleted."
 msgstr[0] ""
 msgstr[1] ""
+
+msgid "AVIF convert"
+msgstr ""
+
+msgid "Enable AVIF convert. AVIF is offered before WEBP; browsers that do not support it fall back automatically."
+msgstr ""
+
+msgid "AVIF quality for photos (JPEG)"
+msgstr ""
+
+msgid "Photographs need a higher setting to stay below the WEBP of the same image. Defaults to 60 when left empty."
+msgstr ""
+
+msgid "AVIF quality for graphics (PNG, GIF)"
+msgstr ""
+
+msgid "Screenshots and flat graphics stay sharp at a lower setting. Defaults to 55 when left empty."
+msgstr ""
+
+msgid "Regenerate WEBP"
+msgstr ""
+
+msgid "Regenerate AVIF"
+msgstr ""
+
+msgid "Rebuilds the WEBP copy of every original image with the quality set above. Existing files are overwritten."
+msgstr ""
+
+msgid "Rebuilds the AVIF copy of every original image with the qualities set above. Existing files are overwritten."
+msgstr ""
+
+msgid "Regenerate all images"
+msgstr ""
+
+msgid "This will overwrite existing files. Continue?"
+msgstr ""
+
+msgid "Regeneration failed."
+msgstr ""
+
+msgid "You are not allowed to regenerate images."
+msgstr ""
+
+msgid "Unknown image format."
+msgstr ""
+
+msgid "This image format is disabled in the settings."
+msgstr ""
+
+msgid "Imagick is not available on this server."
+msgstr ""
+
+msgid "Source file is missing."
+msgstr ""
+
+msgid "Empty result."
+msgstr ""
+
+msgid "converted"
+msgstr ""
+
+msgid "skipped"
+msgstr ""
+
+msgid "Done"
+msgstr ""
+
+msgid "In this section, you can enable resizing and optimization of images while uploading them to the media library. You can specify the formats that will be resized, set the width and height of the resized images, and adjust the quality of the resized images. Additionally, you can enable the conversion of images to the WEBP and AVIF formats, which are modern image formats that provide better compression and quality compared to other formats. Both are optional and independent of each other; AVIF is offered to the browser first and WEBP second."
+msgstr ""
