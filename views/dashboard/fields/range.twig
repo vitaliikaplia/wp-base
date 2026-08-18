@@ -1,9 +1,18 @@
+{# A range input always posts a value, even when nothing was ever stored — with
+   an empty `value` the browser parks the thumb at the midpoint of min/max, and
+   the first save of the page writes THAT. So a field whose PHP side has a
+   sensible fallback has to declare the same number as `'default'` here, or the
+   fallback is silently replaced by ~50 the moment someone saves the tab.
+
+   The test is against '' only: get_option() gives false for an unset option
+   (false == '' in PHP), while a deliberate 0 or '0' is a real value and is kept. #}
+{% set field_value = (value == '') ? (val.default ?? '') : value %}
 <label for="{{ name }}">
     <input type="range"
         class="custom-options-{{ val.type }}"
         name="{{ name }}"
         id="{{ name }}"
-        value="{{ value|esc_attr }}"
+        value="{{ field_value|esc_attr }}"
         min="{{ val.tweaks.min }}"
         max="{{ val.tweaks.max }}"
         step="{{ val.tweaks.step }}"
@@ -11,7 +20,7 @@
     <input
         type="number"
         class="val_{{ name }}_display"
-        value="{{ value|esc_attr }}"
+        value="{{ field_value|esc_attr }}"
         min="{{ val.tweaks.min }}"
         max="{{ val.tweaks.max }}"
         step="{{ val.tweaks.step }}"

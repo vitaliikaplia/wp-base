@@ -1,0 +1,20 @@
+{# Shadow-image regeneration tool.
+
+   Not a setting — it stores nothing. The quality comes from the sliders above it
+   on the same tab: change, save, press, and the whole library is re-encoded.
+
+   The format goes into data-format and decides which AJAX pass runs.
+   Autoescaping is off (Timber default), so attributes are escaped by hand. #}
+<div class="regenerateImages" data-format="{{ name|replace({'regenerate_': ''})|esc_attr }}">
+    <button type="button" class="button button-secondary regenerateImages-start">
+        {{ __('Regenerate all images', TEXTDOMAIN)|esc_html }}
+    </button>
+    <div class="regenerateImages-progress" hidden>
+        <div class="regenerateImages-bar"><span></span></div>
+        <p class="regenerateImages-status" role="status" aria-live="polite"></p>
+    </div>
+    <ul class="regenerateImages-errors" hidden></ul>
+</div>
+{% if description %}
+<p class="description">{{ description }}</p>
+{% endif %}

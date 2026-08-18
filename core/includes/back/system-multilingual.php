@@ -168,6 +168,71 @@ function theme_translated_post_id($post_id, $language = null){
 
 }
 
+/**
+ * Every language sibling of an element, including the one passed in.
+ *
+ * WP-LOC gives each language its own record joined by a `trid`, so a value that
+ * belongs to the FILE rather than to the translation — the theme's `webp_url` /
+ * `avif_url` shadows, which are one physical file shared by every language —
+ * has to be written to all of them at once. Reading falls back to the default
+ * language (theme_attachment_meta()), but writing cannot rely on that: the
+ * fallback only covers the sibling that happens to be the original.
+ *
+ * Returns just the given ID when the site is single-language or the element is
+ * not registered, so callers can always foreach over the result.
+ *
+ * @param int    $element_id
+ * @param string $element_type WP-LOC element type, e.g. `post_attachment`.
+ * @return int[]
+ */
+function theme_translated_ids($element_id, $element_type){
+
+    $element_id = (int) $element_id;
+
+    if(!$element_id){
+        return array();
+    }
+
+    if(!theme_is_multilingual()){
+        return array($element_id);
+    }
+
+    $db = WP_LOC::instance()->db;
+    $trid = $db->get_trid($element_id, $element_type);
+
+    if(!$trid){
+        return array($element_id);
+    }
+
+    $ids = array($element_id);
+
+    foreach($db->get_element_translations($trid, $element_type) as $translation){
+        if(!empty($translation->element_id)){
+            $ids[] = (int) $translation->element_id;
+        }
+    }
+
+    return array_values(array_unique($ids));
+
+}
+
+/** Every language sibling of an attachment, including the one passed in. */
+function theme_attachment_ids($attachment_id){
+
+    $attachment_id = (int) $attachment_id;
+
+    if(!$attachment_id){
+        return array();
+    }
+
+    if(!theme_is_multilingual()){
+        return array($attachment_id);
+    }
+
+    return theme_translated_ids($attachment_id, WP_LOC_DB::post_element_type('attachment'));
+
+}
+
 /** The language a given post belongs to, or '' when it is not registered. */
 function theme_post_language($post_id){
 

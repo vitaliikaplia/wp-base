@@ -190,3 +190,52 @@
         margin-top: 5px;
     }
 }
+
+// shadow-image regeneration tool
+.regenerateImages {
+
+    &-progress {
+        margin-top: 12px;
+        max-width: 480px;
+    }
+
+    &-bar {
+        height: 8px;
+        border-radius: 4px;
+        background: #e0e0e0;
+        overflow: hidden;
+
+        span {
+            display: block;
+            width: 0;
+            height: 100%;
+            border-radius: 4px;
+            background: var(--wp-admin-theme-color, #2271b1);
+            transition: width .2s linear;
+        }
+    }
+
+    &-status {
+        margin: 8px 0 0;
+        color: #50575e;
+        font-variant-numeric: tabular-nums; // so the digits stop jumping on every step
+    }
+
+    &-errors {
+        margin: 10px 0 0;
+        padding: 10px 12px;
+        max-width: 480px;
+        max-height: 180px;
+        overflow-y: auto;
+        border-left: 3px solid #d63638;
+        background: #fcf0f1;
+        list-style: none;
+
+        li {
+            margin: 0 0 4px;
+            color: #8a2424;
+            font-size: 12px;
+            word-break: break-word;
+        }
+    }
+}

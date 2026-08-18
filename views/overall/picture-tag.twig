@@ -1,12 +1,25 @@
+{# Format ladder: the browser takes the FIRST <source> type it understands and
+   never looks at the rest, so AVIF goes above WEBP and the plain <img> stays as
+   the last resort. width/height live on the <img> — they are what holds the
+   layout while the file loads, and a <source> does not carry them.
+
+   `avif_src` is resolved in render_picture_tag(): it is empty whenever a resized
+   AVIF could not be produced, so the ladder never offers a full-size file where
+   a cut-down one was asked for. #}
 {% if ext == 'svg' %}
     <img src="{{ picture_url }}"{% if picture_alt %} alt="{{ picture_alt }}"{% endif %} loading="{{ loading }}">
 {% else %}
-    {% if webp_url %}
+    {% if avif_src or webp_url %}
         <picture>
-            {% if size == 'full' %}
-                <source srcset="{{ webp_url }}" type="image/webp">
-            {% else %}
-                <source srcset="{{ webp_url|resize(size) }}" type="image/webp">
+            {% if avif_src %}
+                <source srcset="{{ avif_src }}" type="image/avif">
+            {% endif %}
+            {% if webp_url %}
+                {% if size == 'full' %}
+                    <source srcset="{{ webp_url }}" type="image/webp">
+                {% else %}
+                    <source srcset="{{ webp_url|resize(size) }}" type="image/webp">
+                {% endif %}
             {% endif %}
             {% if size == 'full' %}
                 <img src="{{ picture_url }}"{% if picture_alt %} alt="{{ picture_alt }}"{% endif %} width="{{ picture_w }}" height="{{ picture_h }}" loading="{{ loading }}">

@@ -168,6 +168,122 @@
             });
         }
 
+        /**
+         * regenerate webp / avif shadow images
+         *
+         * The pass runs in batches: each request converts a handful of
+         * attachments and answers with the offset to continue from. That keeps
+         * every request inside max_execution_time on a large library and lets
+         * the bar show real progress instead of the page seeming to hang.
+         */
+        if($('.regenerateImages').length){
+            $('.regenerateImages').each(function(){
+
+                const wrap = $(this);
+                const format = wrap.attr('data-format');
+                const startBtn = wrap.find('.regenerateImages-start');
+                const progress = wrap.find('.regenerateImages-progress');
+                const bar = wrap.find('.regenerateImages-bar span');
+                const status = wrap.find('.regenerateImages-status');
+                const errorList = wrap.find('.regenerateImages-errors');
+
+                const t = (key, fallback) => {
+                    return (typeof regenerateImages !== 'undefined' && regenerateImages.i18n && regenerateImages.i18n[key])
+                        ? regenerateImages.i18n[key]
+                        : fallback;
+                };
+
+                startBtn.on('click', function(){
+
+                    if(typeof regenerateImages === 'undefined'){
+                        return;
+                    }
+
+                    // Overwriting the existing files cannot be undone, so ask.
+                    if(!window.confirm(t('confirm', 'This will overwrite existing files. Continue?'))){
+                        return;
+                    }
+
+                    startBtn.prop('disabled', true);
+                    progress.prop('hidden', false);
+                    errorList.prop('hidden', true).empty();
+                    bar.css('width', '0%');
+
+                    let converted = 0;
+                    let skipped = 0;
+                    let bytes = 0;
+                    const errors = [];
+
+                    const step = (offset) => {
+                        $.ajax({
+                            type: 'POST',
+                            url: regenerateImages.ajaxUrl,
+                            dataType: 'json',
+                            data: {
+                                action: 'regenerate_images',
+                                nonce: regenerateImages.nonce,
+                                format: format,
+                                offset: offset
+                            }
+                        }).done(function(response){
+
+                            if(!response || !response.success){
+                                const message = (response && response.data && response.data.message)
+                                    ? response.data.message
+                                    : t('failed', 'Regeneration failed.');
+                                status.text(message);
+                                startBtn.prop('disabled', false);
+                                return;
+                            }
+
+                            const d = response.data;
+                            converted += d.converted;
+                            skipped += d.skipped;
+                            bytes += d.bytes;
+                            if(d.errors && d.errors.length){
+                                errors.push.apply(errors, d.errors);
+                            }
+
+                            const percent = d.total ? Math.min(100, Math.round((d.offset / d.total) * 100)) : 100;
+                            bar.css('width', percent + '%');
+                            status.text(
+                                percent + '% — ' + d.offset + ' / ' + d.total +
+                                ' · ' + t('converted', 'converted') + ': ' + converted +
+                                ' · ' + (bytes / 1048576).toFixed(1) + ' MB'
+                            );
+
+                            if(d.done){
+                                let summary = t('done', 'Done') + ': ' + converted +
+                                    ' · ' + (bytes / 1048576).toFixed(1) + ' MB';
+                                if(skipped){
+                                    summary += ' · ' + t('skipped', 'skipped') + ': ' + skipped;
+                                }
+                                status.text(summary);
+                                if(errors.length){
+                                    errorList.prop('hidden', false);
+                                    errors.forEach(function(message){
+                                        errorList.append($('<li></li>').text(message));
+                                    });
+                                }
+                                startBtn.prop('disabled', false);
+                                return;
+                            }
+
+                            step(d.offset);
+
+                        }).fail(function(){
+                            status.text(t('failed', 'Regeneration failed.'));
+                            startBtn.prop('disabled', false);
+                        });
+                    };
+
+                    step(0);
+
+                });
+
+            });
+        }
+
     });
 })(jQuery);
 

@@ -8,7 +8,7 @@ function get_custom_options(){
         'images'   =>  Array(
             'label' => __('Images', TEXTDOMAIN),
             'title' => __('Resize and optimize media while upload', TEXTDOMAIN),
-            'description' => __('In this section, you can enable resizing and optimization of images while uploading them to the media library. You can specify the formats that will be resized, set the width and height of the resized images, and adjust the quality of the resized images. Additionally, you can enable the conversion of images to the WEBP format, which is a modern image format that provides better compression and quality compared to other formats.', TEXTDOMAIN),
+            'description' => __('In this section, you can enable resizing and optimization of images while uploading them to the media library. You can specify the formats that will be resized, set the width and height of the resized images, and adjust the quality of the resized images. Additionally, you can enable the conversion of images to the WEBP and AVIF formats, which are modern image formats that provide better compression and quality compared to other formats. Both are optional and independent of each other; AVIF is offered to the browser first and WEBP second.', TEXTDOMAIN),
             'fields' => Array(
                 array (
                     'type'          => 'tab_start',
@@ -127,6 +127,7 @@ function get_custom_options(){
                 array (
                     'type'          => 'range',
                     'name'          => 'webp_convert_quality',
+                    'default'       => '90',
                     'tweaks'        => array(
                         'min' => '2',
                         'max' => '100',
@@ -140,6 +141,102 @@ function get_custom_options(){
                         'rules' => array(
                             array(
                                 'field' => 'enable_webp_convert',
+                                'operator' => '==',
+                                'value' => '1',
+                            ),
+                        ),
+                    ),
+                ),
+                array (
+                    'type'          => 'regenerate_images',
+                    'name'          => 'regenerate_webp',
+                    'label'         => __("Regenerate WEBP", TEXTDOMAIN),
+                    'description'   => __("Rebuilds the WEBP copy of every original image with the quality set above. Existing files are overwritten.", TEXTDOMAIN),
+                    'conditional_logic' => array(
+                        'action' => 'show',
+                        'rules' => array(
+                            array(
+                                'field' => 'enable_webp_convert',
+                                'operator' => '==',
+                                'value' => '1',
+                            ),
+                        ),
+                    ),
+                ),
+                array (
+                    'type'          => 'tab_end',
+                ),
+                array (
+                    'type'          => 'tab_start',
+                    'name'          => 'avif_convert',
+                    'label'         => __("AVIF convert", TEXTDOMAIN),
+                ),
+                array (
+                    'type'          => 'checkbox',
+                    'name'          => 'enable_avif_convert',
+                    'label'         => __("Enable", TEXTDOMAIN),
+                    'description'   => __("Enable AVIF convert. AVIF is offered before WEBP; browsers that do not support it fall back automatically.", TEXTDOMAIN)
+                ),
+                // Two qualities rather than one: at the same visual fidelity flat
+                // graphics and screenshots compress about twice as hard as
+                // photographs, so a shared number would have to be set for the
+                // worst case and would give away the difference on everything else.
+                array (
+                    'type'          => 'range',
+                    'name'          => 'avif_convert_quality_photo',
+                    'default'       => '60',
+                    'tweaks'        => array(
+                        'min' => '2',
+                        'max' => '100',
+                        'step' => '2',
+                        'suffix' => '%',
+                    ),
+                    'label'         => __("AVIF quality for photos (JPEG)", TEXTDOMAIN),
+                    'description'   => __("Photographs need a higher setting to stay below the WEBP of the same image. Defaults to 60 when left empty.", TEXTDOMAIN),
+                    'conditional_logic' => array(
+                        'action' => 'show',
+                        'rules' => array(
+                            array(
+                                'field' => 'enable_avif_convert',
+                                'operator' => '==',
+                                'value' => '1',
+                            ),
+                        ),
+                    ),
+                ),
+                array (
+                    'type'          => 'range',
+                    'name'          => 'avif_convert_quality_graphics',
+                    'default'       => '55',
+                    'tweaks'        => array(
+                        'min' => '2',
+                        'max' => '100',
+                        'step' => '2',
+                        'suffix' => '%',
+                    ),
+                    'label'         => __("AVIF quality for graphics (PNG, GIF)", TEXTDOMAIN),
+                    'description'   => __("Screenshots and flat graphics stay sharp at a lower setting. Defaults to 55 when left empty.", TEXTDOMAIN),
+                    'conditional_logic' => array(
+                        'action' => 'show',
+                        'rules' => array(
+                            array(
+                                'field' => 'enable_avif_convert',
+                                'operator' => '==',
+                                'value' => '1',
+                            ),
+                        ),
+                    ),
+                ),
+                array (
+                    'type'          => 'regenerate_images',
+                    'name'          => 'regenerate_avif',
+                    'label'         => __("Regenerate AVIF", TEXTDOMAIN),
+                    'description'   => __("Rebuilds the AVIF copy of every original image with the qualities set above. Existing files are overwritten.", TEXTDOMAIN),
+                    'conditional_logic' => array(
+                        'action' => 'show',
+                        'rules' => array(
+                            array(
+                                'field' => 'enable_avif_convert',
                                 'operator' => '==',
                                 'value' => '1',
                             ),
@@ -998,7 +1095,9 @@ function custom_option_sanitize_callback($field){
 add_action('admin_init', function() {
     foreach (get_custom_options() as $key=>$value) {
         foreach ($value['fields'] as $field) {
-            if($field['type'] == 'tab_start' || $field['type'] == 'tab_end'){
+            // Layout markers and the regeneration button are not settings —
+            // registering them would create empty options that nothing reads.
+            if(in_array($field['type'], array('tab_start', 'tab_end', 'regenerate_images'), true)){
                 continue;
             }
 
@@ -1035,6 +1134,20 @@ function custom_options_assets(){
         $custom_pages = array_keys(get_custom_options());
         if(in_array($_GET['page'], $custom_pages)){
             wp_register_script( 'custom-options', TEMPLATE_DIRECTORY_URL . 'assets/js/custom-options.min.js', '', ASSETS_VERSION, true);
+            // Shadow-image regeneration: its own nonce and its own strings —
+            // the tool is a plain script, not a template, so nothing else can
+            // translate them for it.
+            wp_localize_script('custom-options', 'regenerateImages', array(
+                'ajaxUrl' => ADMIN_AJAX_URL,
+                'nonce'   => wp_create_nonce('regenerate_images'),
+                'i18n'    => array(
+                    'confirm'   => __('This will overwrite existing files. Continue?', TEXTDOMAIN),
+                    'converted' => __('converted', TEXTDOMAIN),
+                    'skipped'   => __('skipped', TEXTDOMAIN),
+                    'done'      => __('Done', TEXTDOMAIN),
+                    'failed'    => __('Regeneration failed.', TEXTDOMAIN),
+                ),
+            ));
             wp_enqueue_script( 'custom-options' );
             wp_enqueue_script('wplink');
             wp_enqueue_style( 'editor-buttons' );
