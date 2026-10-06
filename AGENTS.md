@@ -4,6 +4,15 @@
 
 WordPress Base Template (wp-base) — custom starter theme built with Timber/Twig, ACF Gutenberg blocks, and a custom dashboard options framework. Public demo: https://wp-base.kaplia.top/
 
+### Scope — this repo is wp-base itself
+
+Every project theme starts as a copy of wp-base and then lives in its own repository. Work here is about the starter, not about those forks: do not inspect, diff or report on a fork's code or git state unless the user names it in the request.
+
+When the user does ask for a fix to land in wp-base **and** a fork, the two are sequential, not parallel:
+
+1. Fix and verify wp-base, report, and **stop**. Do not diff the fork first.
+2. Port to the fork only when told to, and port **code only**. Language catalogs count as code when a msgid changed, otherwise the fork shows the English source string. Each fork keeps its own docs, so never copy wp-base's AGENTS.md / README text into it. Leave the fork's unrelated uncommitted changes out of any commit.
+
 ## ⚠️ Destructive / bulk operations — pre-flight checklist (read before acting)
 
 Any operation that is **irreversible** or touches **many items at once** — bulk DB writes to post/pattern content, `wp_update_post` / `wp_insert_post` over multiple posts, mass file rewrites, deletes — MUST follow this, no exceptions:
