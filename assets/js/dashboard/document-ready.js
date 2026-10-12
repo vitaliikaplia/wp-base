@@ -4,18 +4,97 @@
 (function ($) {
     $(document).ready(function () {
 
-        // mail preview iframe height adjustment
-        if ($('.inside .mailPreview').length) {
-            $('.inside .mailPreview').on('load', function () {
-                try {
-                    var iframe = $(this)[0]; // DOM-елемент
-                    var contentHeight = iframe.contentWindow.document.body.scrollHeight;
-                    $(this).height(contentHeight);
-                } catch (e) {
-                    console.warn('Не вдалося отримати висоту iframe (можливо, інший домен).');
+        // Email HTML stays script-free; only this trusted parent reads its size.
+        document.querySelectorAll('.inside .mailPreview').forEach(function (iframe) {
+            var previewDocument;
+            var contentObserver;
+            var pendingFrame = 0;
+            var lastWidth = 0;
+
+            function resizePreview() {
+                pendingFrame = 0;
+                if (!previewDocument || !previewDocument.body || iframe.offsetWidth === 0) {
+                    return;
                 }
-            });
-        }
+
+                // Keep the outer page's scrollbar/width stable while measuring.
+                var container = iframe.parentElement;
+                var minHeight = container.style.getPropertyValue('min-height');
+                var minHeightPriority = container.style.getPropertyPriority('min-height');
+                container.style.setProperty('min-height', Math.ceil(container.getBoundingClientRect().height) + 'px');
+
+                // Reset first so a formerly tall email can shrink after reflow.
+                iframe.style.height = '0px';
+                var body = previewDocument.body;
+                var root = previewDocument.documentElement;
+                var height = Math.ceil(Math.max(
+                    body.scrollHeight, body.offsetHeight,
+                    root.scrollHeight, root.offsetHeight
+                ));
+                iframe.style.height = Math.max(1, height) + 'px';
+                if (minHeight) {
+                    container.style.setProperty('min-height', minHeight, minHeightPriority);
+                } else {
+                    container.style.removeProperty('min-height');
+                }
+            }
+
+            function scheduleResize() {
+                if (!pendingFrame) {
+                    pendingFrame = window.requestAnimationFrame(resizePreview);
+                }
+            }
+
+            function connectPreview() {
+                if (contentObserver) {
+                    contentObserver.disconnect();
+                }
+                if (previewDocument) {
+                    previewDocument.removeEventListener('load', scheduleResize, true);
+                    previewDocument.removeEventListener('error', scheduleResize, true);
+                    if (previewDocument.fonts) {
+                        previewDocument.fonts.removeEventListener('loadingdone', scheduleResize);
+                    }
+                }
+                previewDocument = null;
+                try {
+                    previewDocument = iframe.contentDocument;
+                    if (!previewDocument || !previewDocument.body) {
+                        return;
+                    }
+                    // Capture image load/error events, which do not bubble.
+                    previewDocument.addEventListener('load', scheduleResize, true);
+                    previewDocument.addEventListener('error', scheduleResize, true);
+                    if (window.ResizeObserver) {
+                        contentObserver = new ResizeObserver(scheduleResize);
+                        contentObserver.observe(previewDocument.body);
+                    }
+                    if (previewDocument.fonts) {
+                        previewDocument.fonts.ready.then(scheduleResize);
+                        previewDocument.fonts.addEventListener('loadingdone', scheduleResize);
+                    }
+                    scheduleResize();
+                } catch (error) {
+                    // Keep the browser's scrollable fallback if the frame leaves our origin.
+                    previewDocument = null;
+                }
+            }
+
+            iframe.addEventListener('load', connectPreview);
+            window.addEventListener('resize', scheduleResize);
+            if (window.ResizeObserver) {
+                new ResizeObserver(function () {
+                    var width = iframe.offsetWidth;
+                    // Height changes caused by our own measurement must not loop.
+                    if (width !== lastWidth) {
+                        lastWidth = width;
+                        scheduleResize();
+                    }
+                }).observe(iframe);
+            }
+            // Handles an iframe that finished loading before document-ready.
+            connectPreview();
+        });
 
         // remove yoast settings from profile page
         if ($('body').hasClass('profile-php')) {

@@ -40,11 +40,13 @@ function mail_log_preview(){
 
         // A logged email body can contain whatever a visitor typed into a form,
         // so it is untrusted markup rendered inside an authenticated session.
-        // Serve it as an inert document: no scripts, no sniffing, no framing
-        // by anyone but us. The meta box additionally loads it sandboxed.
+        // Same-origin access lets the trusted parent measure the inert DOM.
+        // Both sandbox layers still forbid scripts, forms and popup windows.
+        nocache_headers();
         header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
         header('X-Content-Type-Options: nosniff');
-        header("Content-Security-Policy: sandbox; default-src 'none'; img-src * data:; style-src 'unsafe-inline'; font-src *");
+        header('Referrer-Policy: no-referrer');
+        header("Content-Security-Policy: sandbox allow-same-origin; default-src 'none'; script-src 'none'; img-src * data:; style-src 'unsafe-inline'; font-src *; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'self'");
         header('X-Robots-Tag: noindex, nofollow');
 
         echo $post->post_content;
@@ -91,11 +93,11 @@ function add_custom_email_log_meta_box_2() {
 add_action('add_meta_boxes', 'add_custom_email_log_meta_box_2');
 
 // Render the email preview in an iframe.
-// sandbox="" (empty value = every restriction on) keeps the logged markup from
-// running scripts or touching the admin session it is displayed in.
+// The parent may measure the document, but no allow-scripts permission is given.
+// Keep the response CSP sandbox as well: logged markup is never trusted code.
 function email_log_preview_custom($post) {
-    $preview_url = home_url('/?secret-mail-log-preview=true&mail-log-id=' . (int) $post->ID);
-    echo '<iframe class="mailPreview" style="width: 100%;" sandbox="" referrerpolicy="no-referrer" src="' . esc_url($preview_url) . '"></iframe>';
+    $preview_url = admin_url('admin-post.php?secret-mail-log-preview=true&mail-log-id=' . (int) $post->ID);
+    echo '<iframe class="mailPreview" style="width: 100%; border: 0;" title="' . esc_attr(__('Email preview', TEXTDOMAIN)) . '" sandbox="allow-same-origin" referrerpolicy="no-referrer" src="' . esc_url($preview_url) . '"></iframe>';
 }
 
 // Add custom columns to the mail log post type in the admin dashboard
