@@ -325,6 +325,10 @@ msgstr "Информация о Email отправке"
 msgid "Email preview"
 msgstr "Предварительный просмотр письма"
 
+#: views/dashboard/email-log-meta.twig:3
+msgid "Email subject"
+msgstr "Тема письма"
+
 #: core/includes/back/dashboard-mail-log-meta.php:98
 msgid "Recipient"
 msgstr "Получатель"

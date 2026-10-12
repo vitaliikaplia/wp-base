@@ -325,6 +325,10 @@ msgstr ""
 msgid "Email preview"
 msgstr ""
 
+#: views/dashboard/email-log-meta.twig:3
+msgid "Email subject"
+msgstr ""
+
 #: core/includes/back/dashboard-mail-log-meta.php:98
 msgid "Recipient"
 msgstr ""
