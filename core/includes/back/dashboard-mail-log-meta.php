@@ -74,6 +74,7 @@ add_action('add_meta_boxes', 'add_custom_email_log_meta_box');
 // Render custom fields for the mail log meta box
 function email_log_render_custom_fields($post) {
     $context = Timber::context();
+    $context['subject'] = $post->post_title;
     $context['log_id'] = $post->ID;
     $context['recipient'] = get_post_meta($post->ID, 'recipient', true);
     Timber::render( 'dashboard/email-log-meta.twig', $context );

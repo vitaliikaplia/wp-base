@@ -87,7 +87,7 @@ register_post_type('mail-log', array(
         'exclude_from_search' => true,
         'menu_position' => 88,
         'menu_icon' => 'dashicons-email-alt',
-        'supports' => array('title'),
+        'supports' => false,
         'capabilities' => array(
             'create_posts' => false
         ),

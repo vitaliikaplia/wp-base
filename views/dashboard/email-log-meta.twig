@@ -1,5 +1,9 @@
 <table>
     <tr>
+        <td>{{ __('Email subject', TEXTDOMAIN) }}</td>
+        <td>{{ subject|esc_html }}</td>
+    </tr>
+    <tr>
         <td>{{ __('Recipient', TEXTDOMAIN) }}</td>
         <td>{{ recipient }}</td>
     </tr>
