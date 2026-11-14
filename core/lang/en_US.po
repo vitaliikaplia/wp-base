@@ -1877,3 +1877,138 @@ msgstr ""
 
 msgid "In this section, you can enable resizing and optimization of images while uploading them to the media library. You can specify the formats that will be resized, set the width and height of the resized images, and adjust the quality of the resized images. Additionally, you can enable the conversion of images to the WEBP and AVIF formats, which are modern image formats that provide better compression and quality compared to other formats. Both are optional and independent of each other; AVIF is offered to the browser first and WEBP second."
 msgstr ""
+
+#: core/includes/back/system-abilities.php:39
+msgid "Site theme"
+msgstr ""
+
+#: core/includes/back/system-abilities.php:40
+msgid ""
+"Settings, caches, mail and SMS logs, redirects, icons and maintenance mode "
+"of the site theme."
+msgstr ""
+
+#: core/includes/back/system-abilities.php:104
+#, php-format
+msgid "Unknown language: %s."
+msgstr ""
+
+#: core/includes/back/system-abilities.php:245
+msgid "Must be true or false."
+msgstr ""
+
+#: core/includes/back/system-abilities.php:252
+msgid "Must be a number."
+msgstr ""
+
+#: core/includes/back/system-abilities.php:262
+#, php-format
+msgid "Must be between %1$s and %2$s."
+msgstr ""
+
+#: core/includes/back/system-abilities.php:270
+#, php-format
+msgid "Must be a multiple of %s."
+msgstr ""
+
+#: core/includes/back/system-abilities.php:280
+#, php-format
+msgid "Must be one of: %s."
+msgstr ""
+
+#: core/includes/back/system-abilities.php:288
+#, php-format
+msgid "Must be a list of: %s."
+msgstr ""
+
+#: core/includes/back/system-abilities.php:294
+msgid "Must be an object with url, title and target."
+msgstr ""
+
+#: core/includes/back/system-abilities.php:300
+msgid "Storing raw HTML or JavaScript needs the unfiltered_html capability."
+msgstr ""
+
+#: core/includes/back/system-abilities.php:303
+#: core/includes/back/system-abilities.php:309
+#: core/includes/back/system-abilities.php:315
+msgid "Must be text."
+msgstr ""
+
+#: core/includes/back/system-abilities.php:354
+msgid "No settings to change."
+msgstr ""
+
+#: core/includes/back/system-abilities.php:364
+#, php-format
+msgid "Unknown option: %s."
+msgstr ""
+
+#: core/includes/back/system-abilities.php:522
+msgid "Site status"
+msgstr ""
+
+#: core/includes/back/system-abilities.php:584
+msgid "Theme settings"
+msgstr ""
+
+#: core/includes/back/system-abilities.php:617
+msgid "Update theme settings"
+msgstr ""
+
+#: core/includes/back/system-abilities.php:638
+msgid "Maintenance mode"
+msgstr ""
+
+#: core/includes/back/system-abilities.php:678
+msgid "Clear theme caches"
+msgstr ""
+
+#: core/includes/back/system-abilities.php:698
+msgid "Post not found."
+msgstr ""
+
+#: core/includes/back/system-abilities.php:718
+msgid "Regenerate WEBP / AVIF images"
+msgstr ""
+
+#: core/includes/back/system-abilities.php:733
+msgid "Mail and SMS log"
+msgstr ""
+
+#: core/includes/back/system-abilities.php:752
+msgid "Log entry not found."
+msgstr ""
+
+#: core/includes/back/system-abilities.php:797
+msgid "Send a test message"
+msgstr ""
+
+#: core/includes/back/system-abilities.php:888
+msgid "Save a redirect rule"
+msgstr ""
+
+#: core/includes/back/system-abilities.php:913
+#: core/includes/back/system-abilities.php:964
+msgid "Redirect rule not found."
+msgstr ""
+
+#: core/includes/back/system-abilities.php:951
+msgid "Delete a redirect rule"
+msgstr ""
+
+#: core/includes/back/system-abilities.php:968
+msgid "The redirect rule is already in the trash."
+msgstr ""
+
+#: core/includes/back/system-abilities.php:972
+msgid "The redirect rule could not be moved to the trash."
+msgstr ""
+
+#: core/includes/back/system-abilities.php:1015
+msgid "Import icons"
+msgstr ""
+
+#: core/includes/back/system-abilities.php:1062
+msgid "Delete icons"
+msgstr ""

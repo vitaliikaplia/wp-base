@@ -1907,6 +1907,141 @@ msgstr "Готово"
 msgid "In this section, you can enable resizing and optimization of images while uploading them to the media library. You can specify the formats that will be resized, set the width and height of the resized images, and adjust the quality of the resized images. Additionally, you can enable the conversion of images to the WEBP and AVIF formats, which are modern image formats that provide better compression and quality compared to other formats. Both are optional and independent of each other; AVIF is offered to the browser first and WEBP second."
 msgstr "В этом разделе можно включить изменение размера и оптимизацию изображений при загрузке в медиабиблиотеку. Вы можете указать форматы, которые будут изменены, задать ширину и высоту, а также настроить качество. Кроме того, можно включить конвертацию изображений в форматы WEBP и AVIF — современные форматы, дающие лучшее сжатие и качество по сравнению с другими. Оба опциональны и независимы друг от друга; браузеру AVIF предлагается первым, WEBP — вторым."
 
+#: core/includes/back/system-abilities.php:39
+msgid "Site theme"
+msgstr "Тема сайта"
+
+#: core/includes/back/system-abilities.php:40
+msgid ""
+"Settings, caches, mail and SMS logs, redirects, icons and maintenance mode "
+"of the site theme."
+msgstr "Настройки, кэши, журналы почты и SMS, перенаправления, значки и режим обслуживания темы сайта."
+
+#: core/includes/back/system-abilities.php:104
+#, php-format
+msgid "Unknown language: %s."
+msgstr "Неизвестный язык: %s."
+
+#: core/includes/back/system-abilities.php:245
+msgid "Must be true or false."
+msgstr "Должно быть true или false."
+
+#: core/includes/back/system-abilities.php:252
+msgid "Must be a number."
+msgstr "Должно быть числом."
+
+#: core/includes/back/system-abilities.php:262
+#, php-format
+msgid "Must be between %1$s and %2$s."
+msgstr "Должно быть от %1$s до %2$s."
+
+#: core/includes/back/system-abilities.php:270
+#, php-format
+msgid "Must be a multiple of %s."
+msgstr "Должно быть кратным %s."
+
+#: core/includes/back/system-abilities.php:280
+#, php-format
+msgid "Must be one of: %s."
+msgstr "Должно быть одним из: %s."
+
+#: core/includes/back/system-abilities.php:288
+#, php-format
+msgid "Must be a list of: %s."
+msgstr "Должно быть списком из: %s."
+
+#: core/includes/back/system-abilities.php:294
+msgid "Must be an object with url, title and target."
+msgstr "Должно быть объектом с url, title и target."
+
+#: core/includes/back/system-abilities.php:300
+msgid "Storing raw HTML or JavaScript needs the unfiltered_html capability."
+msgstr "Чтобы сохранить HTML или JavaScript без фильтрации, нужно право unfiltered_html."
+
+#: core/includes/back/system-abilities.php:303
+#: core/includes/back/system-abilities.php:309
+#: core/includes/back/system-abilities.php:315
+msgid "Must be text."
+msgstr "Должно быть текстом."
+
+#: core/includes/back/system-abilities.php:354
+msgid "No settings to change."
+msgstr "Нет настроек для изменения."
+
+#: core/includes/back/system-abilities.php:364
+#, php-format
+msgid "Unknown option: %s."
+msgstr "Неизвестная опция: %s."
+
+#: core/includes/back/system-abilities.php:522
+msgid "Site status"
+msgstr "Состояние сайта"
+
+#: core/includes/back/system-abilities.php:584
+msgid "Theme settings"
+msgstr "Настройки темы"
+
+#: core/includes/back/system-abilities.php:617
+msgid "Update theme settings"
+msgstr "Изменить настройки темы"
+
+#: core/includes/back/system-abilities.php:638
+msgid "Maintenance mode"
+msgstr "Режим обслуживания"
+
+#: core/includes/back/system-abilities.php:678
+msgid "Clear theme caches"
+msgstr "Очистить кэши темы"
+
+#: core/includes/back/system-abilities.php:698
+msgid "Post not found."
+msgstr "Запись не найдена."
+
+#: core/includes/back/system-abilities.php:718
+msgid "Regenerate WEBP / AVIF images"
+msgstr "Перегенерировать изображения WEBP / AVIF"
+
+#: core/includes/back/system-abilities.php:733
+msgid "Mail and SMS log"
+msgstr "Журнал почты и SMS"
+
+#: core/includes/back/system-abilities.php:752
+msgid "Log entry not found."
+msgstr "Запись журнала не найдена."
+
+#: core/includes/back/system-abilities.php:797
+msgid "Send a test message"
+msgstr "Отправить тестовое сообщение"
+
+#: core/includes/back/system-abilities.php:888
+msgid "Save a redirect rule"
+msgstr "Сохранить правило перенаправления"
+
+#: core/includes/back/system-abilities.php:913
+#: core/includes/back/system-abilities.php:964
+msgid "Redirect rule not found."
+msgstr "Правило перенаправления не найдено."
+
+#: core/includes/back/system-abilities.php:951
+msgid "Delete a redirect rule"
+msgstr "Удалить правило перенаправления"
+
+#: core/includes/back/system-abilities.php:968
+msgid "The redirect rule is already in the trash."
+msgstr "Правило перенаправления уже в корзине."
+
+#: core/includes/back/system-abilities.php:972
+msgid "The redirect rule could not be moved to the trash."
+msgstr "Не удалось переместить правило перенаправления в корзину."
+
+#: core/includes/back/system-abilities.php:1015
+msgid "Import icons"
+msgstr "Импортировать значки"
+
+#: core/includes/back/system-abilities.php:1062
+msgid "Delete icons"
+msgstr "Удалить значки"
+
 #~ msgid "Link"
 #~ msgstr "Ссылка"
 
