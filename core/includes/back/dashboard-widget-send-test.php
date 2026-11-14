@@ -150,16 +150,25 @@ function send_test_result_html($result){
     return $html . '</div>';
 }
 
-/** shared: run the requested test send and return the result array (reads $_POST) */
-function send_test_run(){
+/**
+ * shared: run the requested test send and return the result array.
+ *
+ * Without arguments it reads the widget form ($_POST); the wp-base/send-test
+ * ability passes the same keys (channel, email, phone, message) as an array.
+ */
+function send_test_run($args = null){
 
-    $channel = isset($_POST['channel']) ? sanitize_key($_POST['channel']) : '';
+    if($args === null){
+        $args = wp_unslash($_POST);
+    }
+
+    $channel = isset($args['channel']) ? sanitize_key($args['channel']) : '';
     $result  = array('ok' => false, 'channel' => $channel, 'label' => '', 'message' => '', 'response' => '');
 
     if($channel === 'email'){
 
         $result['label'] = __('Email', TEXTDOMAIN);
-        $email = isset($_POST['email']) ? sanitize_email(wp_unslash($_POST['email'])) : '';
+        $email = isset($args['email']) ? sanitize_email($args['email']) : '';
 
         if(!is_email($email)){
             $result['message'] = __('Invalid email address.', TEXTDOMAIN);
@@ -193,8 +202,8 @@ function send_test_run(){
     } elseif($channel === 'sms'){
 
         $result['label'] = __('SMS', TEXTDOMAIN);
-        $phone   = isset($_POST['phone'])   ? sanitize_text_field(wp_unslash($_POST['phone']))   : '';
-        $message = isset($_POST['message']) ? sanitize_text_field(wp_unslash($_POST['message'])) : '';
+        $phone   = isset($args['phone'])   ? sanitize_text_field($args['phone'])   : '';
+        $message = isset($args['message']) ? sanitize_text_field($args['message']) : '';
 
         if(!$phone || !$message){
             $result['message'] = __('Phone and message are required.', TEXTDOMAIN);
@@ -212,7 +221,7 @@ function send_test_run(){
     } elseif($channel === 'telegram'){
 
         $result['label'] = __('Telegram', TEXTDOMAIN);
-        $message = isset($_POST['message']) ? sanitize_text_field(wp_unslash($_POST['message'])) : '';
+        $message = isset($args['message']) ? sanitize_text_field($args['message']) : '';
 
         if(!$message){
             $result['message'] = __('Message is required.', TEXTDOMAIN);

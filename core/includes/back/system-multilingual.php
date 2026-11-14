@@ -145,6 +145,59 @@ function theme_language_slugs(){
 }
 
 /**
+ * Names of the rows a localized option (`'localize' => true`) can live in for
+ * one language, the preferred one first.
+ *
+ * WP-LOC keeps the default language in the plain row and every other language
+ * in `{option}_{code}` — or the older `{option}_{slug}` — and routes saves there
+ * only on admin screens. Code that writes outside wp-admin (an AI agent through
+ * MCP, WP-CLI, cron) has to address the row itself.
+ */
+function theme_localized_option_names($option, $language){
+
+    if(!theme_is_multilingual() || !$language || $language === theme_default_language()){
+        return array($option);
+    }
+
+    $code = class_exists('WP_LOC_DB') ? WP_LOC_DB::to_db_language_code($language) : '';
+
+    return array_values(array_unique(array_filter(array(
+        $code ? $option . '_' . $code : '',
+        $option . '_' . $language,
+    ))));
+
+}
+
+/**
+ * Read a localized option for one language without WP-LOC's fallback.
+ *
+ * @return array [bool exists, mixed value] — a missing translation is reported
+ *               as such instead of silently returning the default language.
+ */
+function theme_get_localized_option($option, $language){
+
+    foreach(theme_localized_option_names($option, $language) as $name){
+        $value = class_exists('WP_LOC_Options') ? WP_LOC_Options::get_unfiltered_option($name) : array(true, get_option($name));
+
+        if(!empty($value[0])){
+            return array(true, $value[1]);
+        }
+    }
+
+    return array(false, null);
+
+}
+
+/** Write a localized option for one language into the row WP-LOC reads. */
+function theme_update_localized_option($option, $language, $value){
+
+    $names = theme_localized_option_names($option, $language);
+
+    return update_option($names[0], $value);
+
+}
+
+/**
  * Translate a post/attachment/term ID into another language.
  *
  * @param int         $element_id   Post, attachment or term_taxonomy_id.

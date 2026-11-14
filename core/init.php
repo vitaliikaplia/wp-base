@@ -162,11 +162,20 @@ if(is_array($includedAjax) && $includedAjax){
 }
 
 /** maintenance mode */
+function maintenance_mode_die(){
+    wp_die('<h1>'.get_option( 'maintenance_mode_title' ).'</h1><p>'.get_option( 'maintenance_mode_text' ).'</p>');
+}
 if(get_option('enable_maintenance_mode')){
     global $pagenow;
     // WP-CLI — не відвідувач: без цього під час обслуговування не працює жодна команда (і wp_cli у Simple MCP)
     if(!is_admin() && !is_user_logged_in() && $pagenow != "wp-login.php" && !(defined('WP_CLI') && WP_CLI)){
-        wp_die('<h1>'.get_option( 'maintenance_mode_title' ).'</h1><p>'.get_option( 'maintenance_mode_text' ).'</p>');
+        if(is_simple_mcp_request()){
+            // Simple MCP відповідає на do_parse_request з пріоритетом 0 і завершує запит;
+            // усе, що він не взяв, далі отримує сторінку обслуговування (див. system-simple-mcp.php)
+            add_filter('do_parse_request', 'maintenance_mode_die', 1);
+        } else {
+            maintenance_mode_die();
+        }
     }
 }
 

@@ -78,6 +78,93 @@ function clear_redirect_rules_cache() {
     delete_theme_transient_all_languages('redirect_rules');
 }
 
+/** Protocol the stored URLs are normalized to — the one of the current request. */
+function redirect_rules_protocol() {
+    return isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
+}
+
+/**
+ * Normalize and validate one rule — the single set of checks behind the edit
+ * screen and the wp-base/save-redirect ability.
+ *
+ * @param int $post_id The rule being edited (excluded from the conflict check), 0 for a new one.
+ * @return array|WP_Error ['old_url', 'new_url', 'code'], or the reason with the
+ *                        normalized values as error data.
+ */
+function validate_redirect_rule($old_url, $new_url, $code, $post_id = 0) {
+
+    $protocol = redirect_rules_protocol();
+    $old_url = esc_url_raw($old_url);
+    // fix current protocol in old_url link
+    $old_url = str_replace(['https://', 'http://'], $protocol.'://', $old_url);
+    $new_url = esc_url_raw($new_url);
+    // fix current protocol in new_url link
+    $new_url_fixed = str_replace(['https://', 'http://'], $protocol.'://', $new_url);
+    $rule = array('old_url' => $old_url, 'new_url' => $new_url, 'code' => absint($code));
+
+    if (!$old_url || !$new_url || $old_url === $new_url_fixed) {
+        return new WP_Error('invalid_redirect_rule', __('Invalid redirect rule: Old URL and New URL must be different and not empty.', TEXTDOMAIN), $rule);
+    }
+
+    $existing_rules = new WP_Query([
+        'post_type' => 'redirect-rules',
+        'post__not_in' => $post_id ? [(int) $post_id] : [],
+        // ті самі статуси, що й список у wp-admin, — і поза адмінкою (агент через MCP)
+        'post_status' => ['publish', 'future', 'draft', 'pending', 'private'],
+        'suppress_filters' => false, // Let the multilingual plugin filter by current language
+        'fields' => 'ids',
+        'meta_query' => [
+            [
+                'key' => 'old_url',
+                'value' => $old_url,
+                'compare' => '='
+            ]
+        ]
+    ]);
+
+    if ($existing_rules->found_posts > 0) {
+        return new WP_Error('redirect_rule_conflict', __('Conflict detected: A redirect rule with this Old URL already exists.', TEXTDOMAIN), $rule);
+    }
+
+    if (strpos($old_url, BLOGINFO_JUST_DOMAIN) === false) {
+        return new WP_Error('redirect_rule_foreign_domain', __('Invalid redirect rule: Old URL must contain the current WordPress domain.', TEXTDOMAIN), $rule);
+    }
+
+    return $rule;
+
+}
+
+/** Store a validated rule on its post, title it "old -> new" and drop the cache. */
+function apply_redirect_rule($post_id, $rule) {
+
+    delete_transient('redirect_rules_error_' . $post_id);
+
+    update_post_meta($post_id, 'old_url', $rule['old_url']);
+    update_post_meta($post_id, 'new_url', $rule['new_url']);
+    update_post_meta($post_id, 'code', $rule['code']);
+
+    $protocol = redirect_rules_protocol();
+
+    // Тимчасово відключаємо хук, щоб уникнути рекурсії
+    remove_action('save_post', 'save_redirect_rules');
+
+    $old_url_display = urldecode(str_replace($protocol.'://', '', $rule['old_url']));
+    $new_url_display = urldecode(str_replace($protocol.'://', '', $rule['new_url']));
+
+    $post_update = array(
+        'ID'         => $post_id,
+        'post_title' => $old_url_display . ' -> ' . $new_url_display
+    );
+    wp_update_post( $post_update );
+
+    // Знову підключаємо хук
+    add_action('save_post', 'save_redirect_rules');
+
+    // Очищаємо кеш
+    clear_redirect_rules_cache();
+
+}
+
 /**
  * Reject an invalid rule without destroying it.
  *
@@ -139,66 +226,20 @@ function save_redirect_rules($post_id) {
         return;
     }
 
-    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
-    $old_url = esc_url_raw($_POST['old_url']);
-    // fix current protocol in old_url link
-    $old_url = str_replace(['https://', 'http://'], $protocol.'://', $old_url);
-    $new_url = esc_url_raw($_POST['new_url']);
-    // fix current protocol in new_url link
-    $new_url_fixed = str_replace(['https://', 'http://'], $protocol.'://', $new_url);
-    $code = absint($_POST['code']);
-
-    if (!$old_url || !$new_url || $old_url === $new_url_fixed) {
-        reject_redirect_rule($post_id, __('Invalid redirect rule: Old URL and New URL must be different and not empty.', TEXTDOMAIN), $old_url, $new_url, $code);
-        return;
-    }
-
-    $existing_rules = new WP_Query([
-        'post_type' => 'redirect-rules',
-        'post__not_in' => [$post_id],
-        'suppress_filters' => false, // Let the multilingual plugin filter by current language
-        'meta_query' => [
-            [
-                'key' => 'old_url',
-                'value' => $old_url,
-                'compare' => '='
-            ]
-        ]
-    ]);
-
-    if ($existing_rules->found_posts > 0) {
-        reject_redirect_rule($post_id, __('Conflict detected: A redirect rule with this Old URL already exists.', TEXTDOMAIN), $old_url, $new_url, $code);
-        return;
-    }
-
-    if (strpos($old_url, BLOGINFO_JUST_DOMAIN) === false) {
-        reject_redirect_rule($post_id, __('Invalid redirect rule: Old URL must contain the current WordPress domain.', TEXTDOMAIN), $old_url, $new_url, $code);
-        return;
-    }
-
-    delete_transient('redirect_rules_error_' . $post_id);
-
-    update_post_meta($post_id, 'old_url', $old_url);
-    update_post_meta($post_id, 'new_url', $new_url);
-    update_post_meta($post_id, 'code', $code);
-
-    // Тимчасово відключаємо хук, щоб уникнути рекурсії
-    remove_action('save_post', 'save_redirect_rules');
-
-    $old_url_display = urldecode(str_replace($protocol.'://', '', $old_url));
-    $new_url_display = urldecode(str_replace($protocol.'://', '', $new_url));
-
-    $post_update = array(
-        'ID'         => $post_id,
-        'post_title' => $old_url_display . ' -> ' . $new_url_display
+    $rule = validate_redirect_rule(
+        isset($_POST['old_url']) ? $_POST['old_url'] : '',
+        isset($_POST['new_url']) ? $_POST['new_url'] : '',
+        isset($_POST['code']) ? $_POST['code'] : 301,
+        $post_id
     );
-    wp_update_post( $post_update );
 
-    // Знову підключаємо хук
-    add_action('save_post', 'save_redirect_rules');
+    if (is_wp_error($rule)) {
+        $typed = $rule->get_error_data();
+        reject_redirect_rule($post_id, $rule->get_error_message(), $typed['old_url'], $typed['new_url'], $typed['code']);
+        return;
+    }
 
-    // Очищаємо кеш
-    clear_redirect_rules_cache();
+    apply_redirect_rule($post_id, $rule);
 
 }
 

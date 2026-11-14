@@ -112,6 +112,50 @@ function regenerate_images_batch($format, $offset){
 
 }
 
+/**
+ * One checked regeneration batch — shared by the dashboard button and the
+ * wp-base/regenerate-images ability.
+ *
+ * @return array|WP_Error Batch report with the offset to resume from, or why
+ *                        it cannot run (HTTP status in the error data).
+ */
+function regenerate_images_run($format, $offset){
+
+    if(!in_array($format, array('webp', 'avif'), true)){
+        return new WP_Error('unknown_format', __('Unknown image format.', TEXTDOMAIN), array('status' => 400));
+    }
+
+    // Regenerating a format that is switched off would write files nothing ever
+    // reads, so the tool follows the same toggles as the upload hooks.
+    $enabled = $format === 'avif' ? get_option('enable_avif_convert') : get_option('enable_webp_convert');
+
+    if(!$enabled){
+        return new WP_Error('format_disabled', __('This image format is disabled in the settings.', TEXTDOMAIN), array('status' => 400));
+    }
+
+    if(!class_exists('Imagick')){
+        return new WP_Error('no_imagick', __('Imagick is not available on this server.', TEXTDOMAIN), array('status' => 500));
+    }
+
+    $offset = max(0, (int) $offset);
+    $total  = regenerate_images_total();
+
+    $stat = regenerate_images_batch($format, $offset);
+    $next = $offset + $stat['processed'];
+
+    return array(
+        'offset'    => $next,
+        'total'     => $total,
+        'processed' => $stat['processed'],
+        'converted' => $stat['converted'],
+        'skipped'   => $stat['skipped'],
+        'bytes'     => $stat['bytes'],
+        'errors'    => $stat['errors'],
+        'done'      => ($stat['processed'] === 0 || $next >= $total),
+    );
+
+}
+
 /** AJAX: one regeneration batch. */
 function ajax_regenerate_images(){
 
@@ -123,46 +167,19 @@ function ajax_regenerate_images(){
 
     check_ajax_referer('regenerate_images', 'nonce');
 
-    $format = isset($_POST['format']) ? sanitize_key($_POST['format']) : '';
+    $result = regenerate_images_run(
+        isset($_POST['format']) ? sanitize_key($_POST['format']) : '',
+        isset($_POST['offset']) ? $_POST['offset'] : 0
+    );
 
-    if(!in_array($format, array('webp', 'avif'), true)){
+    if(is_wp_error($result)){
+        $data = $result->get_error_data();
         wp_send_json_error(array(
-            'message' => __('Unknown image format.', TEXTDOMAIN),
-        ), 400);
+            'message' => $result->get_error_message(),
+        ), isset($data['status']) ? $data['status'] : 400);
     }
 
-    // Regenerating a format that is switched off would write files nothing ever
-    // reads, so the tool follows the same toggles as the upload hooks.
-    $enabled = $format === 'avif' ? get_option('enable_avif_convert') : get_option('enable_webp_convert');
-
-    if(!$enabled){
-        wp_send_json_error(array(
-            'message' => __('This image format is disabled in the settings.', TEXTDOMAIN),
-        ), 400);
-    }
-
-    if(!class_exists('Imagick')){
-        wp_send_json_error(array(
-            'message' => __('Imagick is not available on this server.', TEXTDOMAIN),
-        ), 500);
-    }
-
-    $offset = isset($_POST['offset']) ? max(0, (int) $_POST['offset']) : 0;
-    $total  = regenerate_images_total();
-
-    $stat = regenerate_images_batch($format, $offset);
-    $next = $offset + $stat['processed'];
-
-    wp_send_json_success(array(
-        'offset'    => $next,
-        'total'     => $total,
-        'processed' => $stat['processed'],
-        'converted' => $stat['converted'],
-        'skipped'   => $stat['skipped'],
-        'bytes'     => $stat['bytes'],
-        'errors'    => $stat['errors'],
-        'done'      => ($stat['processed'] === 0 || $next >= $total),
-    ));
+    wp_send_json_success($result);
 
 }
 add_action('wp_ajax_regenerate_images', 'ajax_regenerate_images');
