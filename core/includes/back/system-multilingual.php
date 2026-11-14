@@ -127,6 +127,24 @@ function theme_languages(){
 }
 
 /**
+ * Slugs of every active language (`ua`, `en`, …), the default one first.
+ * A single-language site gets the one value theme_current_language() returns.
+ */
+function theme_language_slugs(){
+
+    if(class_exists('WP_LOC_Languages')){
+        $slugs = array_keys(WP_LOC_Languages::get_active_languages());
+
+        if($slugs){
+            return array_values(array_unique(array_merge(array(theme_default_language()), $slugs)));
+        }
+    }
+
+    return array(theme_current_language());
+
+}
+
+/**
  * Translate a post/attachment/term ID into another language.
  *
  * @param int         $element_id   Post, attachment or term_taxonomy_id.

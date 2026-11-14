@@ -75,7 +75,7 @@ function render_redirect_rules_metabox($post) {
 }
 
 function clear_redirect_rules_cache() {
-    delete_transient('redirect_rules' . LANG_SUFFIX);
+    delete_theme_transient_all_languages('redirect_rules');
 }
 
 /**

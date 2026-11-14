@@ -164,7 +164,8 @@ if(is_array($includedAjax) && $includedAjax){
 /** maintenance mode */
 if(get_option('enable_maintenance_mode')){
     global $pagenow;
-    if(!is_admin() && !is_user_logged_in() && $pagenow != "wp-login.php"){
+    // WP-CLI — не відвідувач: без цього під час обслуговування не працює жодна команда (і wp_cli у Simple MCP)
+    if(!is_admin() && !is_user_logged_in() && $pagenow != "wp-login.php" && !(defined('WP_CLI') && WP_CLI)){
         wp_die('<h1>'.get_option( 'maintenance_mode_title' ).'</h1><p>'.get_option( 'maintenance_mode_text' ).'</p>');
     }
 }
